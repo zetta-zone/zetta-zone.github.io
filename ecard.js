@@ -55,12 +55,9 @@ function generateCardHtml(item, number) {
 
 
 
-  
 
 
-    
-
-    // 7. СБОРКА ШАБЛОНА СТРОКАМИ
+    // 8. СБОРКА ШАБЛОНА СТРОКАМИ
     var html = '';
     html += '<div class="' + cardClasses + '" data-id="' + (item.id || 'site') + '" data-site="' + (item.id || 'site') + '">';
     html += '    <div class="ecard-top-line"></div>';
@@ -106,7 +103,7 @@ async function initSite() {
   try {
     const res = await fetch("https://script.google.com/macros/s/AKfycbw5Q28tRp6B1kcTOhC6_RAHL8Lf3fEcj16FO8xNjb_9jOKirnLcWSLUri-mi5CA6jtZ/exec");
     const items = await res.json();
-
+	console.log("ДАННЫЕ ИЗ ТАБЛИЦЫ:", items);
   
 
     const sortedByDateItems = items.reverse();
