@@ -975,17 +975,51 @@ html, body { overflow-x: hidden; }
 }
 
 /* Mobile hamburger menu */
-.nav-toggle{
-  display:none;
+.nav-toggle {
+  display: none; /* По умолчанию скрыта на компьютерах */
   width: 42px;
   height: 42px;
   border-radius: 12px;
   border: 1px solid rgba(255,255,255,0.08);
   background: rgba(10,14,18,0.6);
   color: rgba(255,255,255,0.88);
-  cursor:pointer;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
 }
-.nav-toggle:active{ transform: translateY(1px); }
+
+.nav-toggle:active { 
+  transform: translateY(1px); 
+}
+
+/* Включаем кнопку на мобильных экранах (меньше 768px) */
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: flex; /* Показываем бургер на мобилках */
+  }
+
+  /* Скрываем обычные ссылки, чтобы они не кашеварились в шапке */
+  .nav-links {
+    display: none; 
+    flex-direction: column;
+    position: absolute;
+    top: 70px; /* Подстройте под высоту вашей шапки */
+    left: 0;
+    width: 100%;
+    background: rgb(10, 14, 18);
+    padding: 20px;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    z-index: 999;
+  }
+
+  /* Класс, который наш JS будет добавлять при клике для открытия меню */
+  .nav-links.open {
+    display: flex;
+  }
+}
+
 
 @media (max-width: 900px){
   header .nav-inner{ gap: 10px; }
@@ -1490,3 +1524,227 @@ mix-blend-mode:screen;opacity:.9}
 .footer-links a{color:rgba(221,230,240,0.8);text-decoration:none;border-bottom:1px dotted rgba(255,255,255,0.18);}
 .footer-links a:hover{color:var(--accent);border-bottom-color:rgba(0,245,160,0.35);}
 .footer-note{font-size:11px;line-height:1.4;color:rgba(221,230,240,0.55);}
+
+
+/* ==========================================================================
+   MINI SLIDER COMPONENT
+   ========================================================================== */
+.mini-slider {
+  position: relative; 
+  width: 100%; 
+  max-width: min(520px, 100%); 
+  margin-left: auto;
+  border-radius: 18px; 
+  padding: 18px 18px 14px;
+  background: linear-gradient(135deg, rgba(5, 25, 35, 0.78), rgba(8, 40, 60, 0.60));
+  border: 1px solid rgba(255,255,255,0.08); 
+  box-shadow: 0 18px 60px rgba(0,0,0,0.38);
+  overflow: hidden; 
+  z-index: 1;
+}
+.ms-viewport { 
+  position: relative; 
+  overflow: hidden; 
+  border-radius: 14px; 
+}
+.ms-track { 
+  display: flex; 
+  transition: transform 450ms cubic-bezier(.2,.9,.2,1); 
+  will-change: transform; 
+}
+.ms-slide {
+  min-width: 100%; 
+  display: flex; 
+  align-items: center; 
+  gap: 14px; 
+  padding: 16px 14px;
+  background: rgba(255,255,255,0.04); 
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px; 
+  backdrop-filter: blur(10px);
+}
+.ms-icon {
+  width: 52px; 
+  height: 52px; 
+  border-radius: 14px; 
+  display: flex; 
+  align-items: center;
+  justify-content: center; 
+  font-size: 22px; 
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.22); 
+  background: var(--card); 
+  overflow: hidden;
+}
+.ms-icon img { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+}
+.ms-copy { 
+  flex: 1; 
+  min-width: 0; 
+}
+.ms-title { 
+  font-family: 'Cabinet Grotesk', sans-serif; 
+  font-weight: 800; 
+  letter-spacing: -0.4px; 
+  color: var(--text); 
+}
+.ms-sub { 
+  font-size: 11px; 
+  color: var(--muted); 
+  margin-top: 2px; 
+}
+.ms-link { 
+  display: inline-flex; 
+  gap: 6px; 
+  align-items: center; 
+  margin-top: 8px; 
+  font-size: 12px; 
+  color: var(--accent); 
+  text-decoration: none; 
+  font-weight: 700; 
+}
+.ms-link:hover { 
+  text-decoration: underline; 
+}
+.ms-nav {
+  position: absolute; 
+  top: 50%; 
+  transform: translateY(-60%); 
+  width: 34px; 
+  height: 34px;
+  border-radius: 12px; 
+  border: 1px solid rgba(255,255,255,0.10); 
+  background: rgba(0,0,0,0.22);
+  color: rgba(255,255,255,0.85); 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  cursor: pointer; 
+  z-index: 3; 
+  user-select: none;
+}
+.ms-prev { left: 12px; } 
+.ms-next { right: 12px; }
+.ms-nav:hover { 
+  background: rgba(0,0,0,0.42); 
+  color: var(--accent); 
+}
+
+crypto-slider {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  margin-left: auto;
+}
+
+.nav-inner--bottom {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  width: 100%;
+}
+
+.nav-links--bottom {
+  grid-column: 2;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.nav-inner--bottom .nav-socials {
+  grid-column: 3;
+  justify-self: end;
+  display: flex;
+  gap: 10px;
+}
+
+/* ── EARNING APPS EXTRA STYLES ── */
+.ea-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;
+  padding:4px 12px;border-radius:20px;
+  background:rgba(0,245,160,0.10);border:1px solid rgba(0,245,160,0.22);
+  color:var(--accent);margin-bottom:8px;
+}
+.ea-badge.gold{background:rgba(245,200,66,0.12);border-color:rgba(245,200,66,0.3);color:var(--gold);}
+.ea-badge.blue{background:rgba(0,191,255,0.10);border-color:rgba(0,191,255,0.25);color:var(--accent2);}
+.ea-intro-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:var(--border);border:1px solid var(--border);
+  border-radius:var(--r);overflow:hidden;margin:24px 0 40px;
+}
+.ea-intro-item{
+  background:var(--surface);padding:22px 18px;text-align:center;
+}
+.ea-intro-item:hover{background:var(--card);}
+.ea-intro-icon{font-size:26px;margin-bottom:8px;}
+.ea-intro-val{
+  font-family:'Cabinet Grotesk',sans-serif;font-size:22px;font-weight:900;
+  letter-spacing:-0.5px;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:4px;
+}
+.ea-intro-lbl{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(221,230,240,0.7);}
+@media(max-width:600px){
+  .ea-intro-grid{grid-template-columns:1fr 1fr;}
+  .ea-intro-item:last-child{grid-column:span 2;}
+}
+
+/* ─── SECTION DIVIDER ────────────────────────────────────── */
+.section-sep {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 16px 0 32px;
+  color: rgba(221,230,240,0.82);
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.section-sep::before, .section-sep::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* Позволяет кастомному тегу растягиваться на всю ширину сайта */
+main-header {
+  display: block;
+  width: 100%;
+}
+
+/* Базовые стили для десктопной версии (на компьютерах) */
+header {
+  width: 100%;
+  background: #0a0e12; /* Подстройте под цвет вашего сайта */
+}
+
+header .nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px; /* Ограничение ширины по центру */
+  margin: 0 auto;
+  padding: 15px 20px;
+}
+
+/* На компьютерах ссылки должны стоять в ряд и быть видимыми */
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+}
+
+.nav-link.active {
+  color: #fff;
+  font-weight: bold;
+}
