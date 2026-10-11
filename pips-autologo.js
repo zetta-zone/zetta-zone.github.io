@@ -34,9 +34,10 @@
 									var img = iconEl.querySelector("img.brand-logo");
 									if(!img) return;
 									var providers = [
-									  "https://logo.clearbit.com/" + host,
-									  "https://www.google.com/s2/favicons?domain=" + host + "&sz=128"
-									];
+										  "https://icons.duckduckgo.com/ip3/" + host + ".ico",
+										  "https://www.google.com/s2/favicons?domain=" + host + "&sz=128",
+										  "https://icons.google.com/favicon?domain=" + host + "&sz=128"
+										];
 									var idx = 0;
 									img.loading = "lazy";
 									img.decoding = "async";
