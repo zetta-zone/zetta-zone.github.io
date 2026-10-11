@@ -103,38 +103,22 @@ async function initSite() {
   try {
     const res = await fetch("https://script.google.com/macros/s/AKfycbw5Q28tRp6B1kcTOhC6_RAHL8Lf3fEcj16FO8xNjb_9jOKirnLcWSLUri-mi5CA6jtZ/exec");
     const items = await res.json();
-	console.log("ДАННЫЕ ИЗ ТАБЛИЦЫ:", items);
-  
 
     const sortedByDateItems = items.reverse();
-    const sectionCounters = {};
+    let counter = 0;
+
+    // Всегда в одну секцию:
+    var targetGrid = document.querySelector("#list .card-grid");
+    if (!targetGrid) return;
 
     sortedByDateItems.forEach(item => {
       if (!item) return;
-      
-      var rawSection = item.section || item.Section || item["Секция"] || "claim";
-      var sectionId = String(rawSection).replace(/[\r\n]/g, '').trim().toLowerCase();
-      
-      if (item.id) {
-          item.id = String(item.id).replace(/[\r\n]/g, '').trim();
-      }
-      
-      var targetGrid = document.querySelector("#" + sectionId + " .card-grid, #" + sectionId + " .card-grid-inner");
-      
-     
-
-      if (targetGrid) {
-        if (!sectionCounters[sectionId]) {
-          sectionCounters[sectionId] = 0;
-        }
-        sectionCounters[sectionId]++;
-
-        targetGrid.innerHTML += generateCardHtml(item, sectionCounters[sectionId]);
-      }
+      counter++;
+      targetGrid.innerHTML += generateCardHtml(item, counter);
     });
 
   } catch (err) {
-    console.error("Ошибка初始化 сайта:", err);
+    console.error("Ошибка инициализации сайта:", err);
   }
 }
 
