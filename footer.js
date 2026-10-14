@@ -121,30 +121,51 @@ class SiteFooter extends HTMLElement {
             start();
         })();
 
-            // 5. мобильное меню
-            (function(){
-            var links = document.querySelector('.nav-links');
-            if(!links) return;
-            if(window.innerWidth <= 900){
-                links.style.display = 'none';
+        // 4. Мобильное меню (гамбургер)
+        document.addEventListener('DOMContentLoaded', function(){
+        var links = document.querySelector('.nav-links');
+        var btn = document.getElementById('navToggle');
+        if(!links || !btn) return;
+
+        function isMobile(){ return window.innerWidth <= 900; }
+
+        function hideMenu(){
+            if(isMobile()) links.style.display = 'none';
+        }
+
+        function showMenu(){
+            if(isMobile()) links.style.display = 'flex';
+        }
+
+        // При загрузке — скрыть на мобильном
+        hideMenu();
+
+        // Клик по бургеру
+        btn.addEventListener('click', function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            if(links.style.display === 'flex'){
+            hideMenu();
+            } else {
+            showMenu();
             }
-            var btn = document.getElementById('navToggle');
-            if(!btn) return;
-            btn.addEventListener('click', function(e){
-                e.stopPropagation();
-                if(links.style.display === 'none' || links.style.display === ''){
-                links.style.display = 'flex';
-                } else {
-                links.style.display = 'none';
-                }
-            });
-            document.addEventListener('click', function(e){
-                if(links.style.display === 'flex' && !e.target.closest('header')){
-                links.style.display = 'none';
-                }
-            });
-            })();
- 
+        });
+
+        // Клик по ссылке — закрыть
+        links.querySelectorAll('a').forEach(function(a){
+            a.addEventListener('click', hideMenu);
+        });
+
+        // Клик мимо — закрыть
+        document.addEventListener('click', function(e){
+            if(links.style.display === 'flex' && !e.target.closest('header')){
+            hideMenu();
+            }
+        });
+
+        // При ресайзе
+        window.addEventListener('resize', hideMenu);
+        });
 
 
         // 5. Кнопка "Вверх" (Back to top)
