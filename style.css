@@ -964,15 +964,15 @@ html, body { overflow-x: hidden; }
   .hero-split{
     display:flex;
     flex-direction:column;
-    gap: 16px;
-    padding-top: 18px;
+    gap: 10px;
+    padding-top: 10px;
   }
   .hero-right{ justify-content:flex-start; }
-  .hero-title{ font-size: clamp(40px, 10vw, 64px); line-height: 0.95; }
-  .hero-sub{ max-width: 55ch; }
+  .hero-title{ font-size: 24px; line-height: 1.1; }
+  .hero-sub{ max-width: 100%; font-size: 13px; }
   .mini-slider{ max-width: 100%; }
-  .mini-slider .slide{ padding: 18px 16px; }
-}
+  .mini-slider .slide{ padding: 10px 12px; font-size: 12px; }
+}   
 
 /* Mobile hamburger menu */
 .nav-toggle {
