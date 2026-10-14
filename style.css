@@ -964,15 +964,16 @@ html, body { overflow-x: hidden; }
   .hero-split{
     display:flex;
     flex-direction:column;
-    gap: 10px;
-    padding-top: 10px;
+    gap: 8px;
+    padding-top: 8px;
+    padding-bottom: 8px;
   }
   .hero-right{ justify-content:flex-start; }
-  .hero-title{ font-size: 24px; line-height: 1.1; }
-  .hero-sub{ max-width: 100%; font-size: 13px; }
+  .hero-title{ font-size: 22px; line-height: 1.1; }
+  .hero-sub{ max-width: 100%; font-size: 12px; }
   .mini-slider{ max-width: 100%; }
-  .mini-slider .slide{ padding: 10px 12px; font-size: 12px; }
-}   
+  .mini-slider .slide{ padding: 8px 10px; font-size: 11px; }
+}
 
 /* Mobile hamburger menu */
 .nav-toggle {
