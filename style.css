@@ -111,7 +111,6 @@ header {
 }
 
 .nav-links {
-  display: flex;
   align-items: center;
   gap: 2px;
   overflow-x: auto;
