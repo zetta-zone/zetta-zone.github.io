@@ -47,38 +47,22 @@ class SiteHeader extends HTMLElement {
         });
     }
 
-   initToggleMenu() {
-    const toggleBtn = this.querySelector('#navToggle');
-    const links = this.querySelector('.nav-links');
-    if (!toggleBtn || !links) return;
+    initToggleMenu() {
+        const toggleBtn = this.querySelector('#navToggle');
+        if (!toggleBtn) return;
 
-    toggleBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const isHidden = links.style.display === 'none' || getComputedStyle(links).display === 'none';
-        links.style.display = isHidden ? 'flex' : 'none';
-        toggleBtn.textContent = isHidden ? '✕' : '☰';
-    });
-
-    links.querySelectorAll('a').forEach(a => {
-        a.addEventListener('click', () => {
-            if(window.innerWidth <= 900){
-                links.style.display = 'none';
+        toggleBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.body.classList.toggle('nav-open');
+            
+            if (document.body.classList.contains('nav-open')) {
+                toggleBtn.textContent = '✕';
+            } else {
                 toggleBtn.textContent = '☰';
             }
         });
-    });
-
-    document.addEventListener('click', (e) => {
-        if(getComputedStyle(links).display === 'flex' && !e.target.closest('header')){
-            links.style.display = 'none';
-            toggleBtn.textContent = '☰';
-        }
-    });
-}   
-
-   
-   
+    }
+}
 
 // Регистрируем компонент, только если он ещё не был зарегистрирован
 if (!customElements.get('main-header')) {

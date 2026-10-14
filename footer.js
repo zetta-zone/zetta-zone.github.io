@@ -122,51 +122,26 @@ class SiteFooter extends HTMLElement {
         })();
 
         // 4. Мобильное меню (гамбургер)
-        document.addEventListener('DOMContentLoaded', function(){
-        var links = document.querySelector('.nav-links');
-        var btn = document.getElementById('navToggle');
-        if(!links || !btn) return;
-
-        function isMobile(){ return window.innerWidth <= 900; }
-
-        function hideMenu(){
-            if(isMobile()) links.style.display = 'none';
-        }
-
-        function showMenu(){
-            if(isMobile()) links.style.display = 'flex';
-        }
-
-        // При загрузке — скрыть на мобильном
-        hideMenu();
-
-        // Клик по бургеру
-        btn.addEventListener('click', function(e){
-            e.preventDefault();
-            e.stopPropagation();
-            if(links.style.display === 'flex'){
-            hideMenu();
-            } else {
-            showMenu();
-            }
-        });
-
-        // Клик по ссылке — закрыть
-        links.querySelectorAll('a').forEach(function(a){
-            a.addEventListener('click', hideMenu);
-        });
-
-        // Клик мимо — закрыть
-        document.addEventListener('click', function(e){
-            if(links.style.display === 'flex' && !e.target.closest('header')){
-            hideMenu();
-            }
-        });
-
-        // При ресайзе
-        window.addEventListener('resize', hideMenu);
-        });
-
+        (function(){
+            const btn = document.getElementById('navToggle');
+            if(!btn) return;
+            
+            const links = document.querySelectorAll('.nav-links a');
+            
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                document.body.classList.toggle('nav-open');
+            });
+            
+            links.forEach(a => a.addEventListener('click', () => document.body.classList.remove('nav-open')));
+            
+            // Закрытие при тапе мимо меню
+            document.addEventListener('click', (e) => {
+                if(!document.body.classList.contains('nav-open')) return;
+                const nav = document.querySelector('header');
+                if(nav && !nav.contains(e.target)) document.body.classList.remove('nav-open');
+            });
+        })();
 
         // 5. Кнопка "Вверх" (Back to top)
         (function(){
