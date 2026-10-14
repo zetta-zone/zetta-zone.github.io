@@ -121,50 +121,30 @@ class SiteFooter extends HTMLElement {
             start();
         })();
 
-        // 4. Мобильное меню (гамбургер)
-        (function(){
-            const btn = document.getElementById('navToggle');
-            if(!btn) return;
-            
-            const links = document.querySelectorAll('.nav-links a');
-            
-                        btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                var links = document.querySelector('.nav-links');
-                var body = document.body;
-                body.classList.toggle('nav-open');
-                if(body.classList.contains('nav-open')){
-                    links.style.display = 'flex';
-                } else {
-                    links.style.display = 'none';
-                }
-                });   
-
-
-            links.forEach(a => a.addEventListener('click', () => document.body.classList.remove('nav-open')));
-            
-            // Закрытие при тапе мимо меню
-            document.addEventListener('click', (e) => {
-                if(!document.body.classList.contains('nav-open')) return;
-                const nav = document.querySelector('header');
-                if(nav && !nav.contains(e.target)) document.body.classList.remove('nav-open');
-            });
-        })();
-
-            // Скрыть меню на мобильных при загрузке
+            // 5. мобильное меню
             (function(){
-            function checkMobile(){
-                var links = document.querySelector('.nav-links');
-                if(!links) return;
-                if(window.innerWidth <= 900){
+            var links = document.querySelector('.nav-links');
+            if(!links) return;
+            if(window.innerWidth <= 900){
                 links.style.display = 'none';
-                } else {
-                links.style.display = '';
-                }
             }
-            window.addEventListener('resize', checkMobile);
-            checkMobile();
-            })();   
+            var btn = document.getElementById('navToggle');
+            if(!btn) return;
+            btn.addEventListener('click', function(e){
+                e.stopPropagation();
+                if(links.style.display === 'none' || links.style.display === ''){
+                links.style.display = 'flex';
+                } else {
+                links.style.display = 'none';
+                }
+            });
+            document.addEventListener('click', function(e){
+                if(links.style.display === 'flex' && !e.target.closest('header')){
+                links.style.display = 'none';
+                }
+            });
+            })();
+ 
 
 
         // 5. Кнопка "Вверх" (Back to top)
