@@ -47,45 +47,38 @@ class SiteHeader extends HTMLElement {
         });
     }
 
-    initToggleMenu() {
+   initToggleMenu() {
     const toggleBtn = this.querySelector('#navToggle');
     const links = this.querySelector('.nav-links');
     if (!toggleBtn || !links) return;
 
-    function isMobile(){ return window.innerWidth <= 900; }
-
-    // При загрузке — скрыть на мобильном
-    if(isMobile()) links.style.display = 'none';
-
     toggleBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        if(links.style.display === 'flex'){
-            links.style.display = 'none';
-            toggleBtn.textContent = '☰';
-        } else {
-            links.style.display = 'flex';
-            toggleBtn.textContent = '✕';
-        }
+        e.stopPropagation();
+        const isHidden = links.style.display === 'none' || getComputedStyle(links).display === 'none';
+        links.style.display = isHidden ? 'flex' : 'none';
+        toggleBtn.textContent = isHidden ? '✕' : '☰';
     });
 
-    // Клик по ссылке — закрыть
     links.querySelectorAll('a').forEach(a => {
         a.addEventListener('click', () => {
-            if(isMobile()){
+            if(window.innerWidth <= 900){
                 links.style.display = 'none';
                 toggleBtn.textContent = '☰';
             }
         });
     });
 
-    // Клик мимо — закрыть
     document.addEventListener('click', (e) => {
-        if(links.style.display === 'flex' && !e.target.closest('header')){
+        if(getComputedStyle(links).display === 'flex' && !e.target.closest('header')){
             links.style.display = 'none';
             toggleBtn.textContent = '☰';
         }
     });
 }   
+
+   
+   
 
 // Регистрируем компонент, только если он ещё не был зарегистрирован
 if (!customElements.get('main-header')) {
