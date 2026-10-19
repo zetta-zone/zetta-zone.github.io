@@ -64,6 +64,21 @@ class SiteHeader extends HTMLElement {
     }
 }
 
+    // Функция страховки для автоматической подмены сломанных иконок проектов на логотипы крипты или эмодзи
+    function handleIconError(imgElement, backupUrl) {
+      if (!imgElement.dataset.fallbackTriggered) {
+        imgElement.dataset.fallbackTriggered = "true";
+        imgElement.src = backupUrl; // Шаг 2: Если домен не отдал иконку, ставим логотип крипты
+      } else {
+        imgElement.style.display = "none"; // Шаг 3: Если и крипто-сайт упал, скрываем картинку
+        const emojiNode = imgElement.parentNode.querySelector('.emoji');
+        if (emojiNode) {
+          emojiNode.style.display = "inline-block"; // Показываем аварийный эмодзи из генератора
+        }
+      }
+    }
+
+
 // Регистрируем компонент, только если он ещё не был зарегистрирован
 if (!customElements.get('main-header')) {
     customElements.define('main-header', SiteHeader);
