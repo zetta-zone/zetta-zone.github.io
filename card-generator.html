@@ -14,8 +14,6 @@
     label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 13px; color: #aeafb8; }
     input[type="text"], select { width: 100%; padding: 10px; border: 1px solid #2a2d3d; background: #11121a; color: #fff; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
     input[type="text"]:focus, select:focus { border-color: #007bff; outline: none; }
-    .checkbox-group { display: flex; align-items: center; gap: 8px; margin: 15px 0; }
-    .checkbox-group input { width: 16px; height: 16px; cursor: pointer; }
     .features-list-input { background: #11121a; padding: 15px; border-radius: 6px; border: 1px solid #2a2d3d; }
     .features-list-input input { margin-bottom: 8px; }
     .features-list-input input:last-child { margin-bottom: 0; }
@@ -59,9 +57,15 @@
     <input type="text" id="site-emoji" placeholder="например: 💥">
   </div>
 
-  <div class="checkbox-group">
-    <input type="checkbox" id="is-featured" checked>
-    <label for="is-featured" style="margin-bottom:0; cursor:pointer;">Выводить бадж «★ TOP» (добавляет класс featured)</label>
+  <!-- БЛОК ВЫБОРА БАДЖА (Добавлен вариант HOT) -->
+  <div class="form-group">
+    <label for="badge-type">Выбор баджа (Badge type)</label>
+    <select id="badge-type">
+      <option value="none">No badge (Обычная карточка)</option>
+      <option value="top" selected>★ TOP (Добавляет класс featured)</option>
+      <option value="new">🔥 NEW (Добавляет класс new-pick)</option>
+      <option value="hot">🔥 HOT (Добавляет класс hot-pick)</option>
+    </select>
   </div>
 
   <div class="form-group">
@@ -120,7 +124,7 @@ function generateCard() {
   const name = document.getElementById('site-name').value || 'Name';
   const type = document.getElementById('site-type').value || 'Description';
   const emoji = document.getElementById('site-emoji').value || '⭐';
-  const isFeatured = document.getElementById('is-featured').checked;
+  const badgeType = document.getElementById('badge-type').value;
   const pillText = document.getElementById('pill-text').value || '';
   const hasFaucetPay = document.getElementById('has-faucetpay').value === 'yes';
   const wBadge = document.getElementById('withdraw-badge').value || 'Crypto';
@@ -137,14 +141,25 @@ function generateCard() {
   }
   if(featHtml) featHtml = `\t\t\t\t\t<div class="feat-list">\n${featHtml}\t\t\t\t\t</div>\n`;
 
-  // Настройка классов и топ-баджа
-  const cardClass = isFeatured ? "ecard top-pick featured" : "ecard";
-  const badgeHtml = isFeatured ? `\t\t\t<div class="top-badge">★ TOP</div>\n` : '';
+  // Логика обработки всех типов баджей
+  let cardClass = "ecard";
+  let badgeHtml = "";
+
+  if (badgeType === "top") {
+    cardClass = "ecard top-pick featured";
+    badgeHtml = `\t\t\t<div class="top-badge">★ TOP</div>\n`;
+  } else if (badgeType === "new") {
+    cardClass = "ecard new-pick";
+    badgeHtml = `\t\t\t<div class="top-badge new-badge">🔥 NEW</div>\n`;
+  } else if (badgeType === "hot") {
+    cardClass = "ecard hot-pick";
+    badgeHtml = `\t\t\t<div class="top-badge hot-badge">🔥 HOT</div>\n`;
+  }
 
   // Плашка верификации
   const pillHtml = pillText ? `\t\t\t\t<div class="feature-pill">\n\t\t\t\t\t\t<div class="fp-check">✓</div>\n\t\t\t\t\t\t<div class="fp-text">${pillText}</div>\n\t\t\t\t</div>\n` : '';
 
-  // Логика FaucetPay в withdraw-row (полностью исправлен синтаксис)
+  // Логика FaucetPay в withdraw-row
   let withdrawContent = '';
   if (hasFaucetPay) {
     withdrawContent = `<a class="w-badge" data-btn="withdraw_faucetpay" data-site="${id}" data-track="click" href="https://faucetpay.io" rel="noopener" target="_blank">FaucetPay</a> <span class="w-badge">${wBadge}</span>`;
@@ -190,3 +205,4 @@ function copyCode() {
 
 </body>
 </html>
+
