@@ -144,7 +144,7 @@ function generateCard() {
   // Плашка верификации
   const pillHtml = pillText ? `\t\t\t\t<div class="feature-pill">\n\t\t\t\t\t\t<div class="fp-check">✓</div>\n\t\t\t\t\t\t<div class="fp-text">${pillText}</div>\n\t\t\t\t</div>\n` : '';
 
-  // Логика FaucetPay в withdraw-row
+  // Логика FaucetPay в withdraw-row (полностью исправлен синтаксис)
   let withdrawContent = '';
   if (hasFaucetPay) {
     withdrawContent = `<a class="w-badge" data-btn="withdraw_faucetpay" data-site="${id}" data-track="click" href="https://faucetpay.io" rel="noopener" target="_blank">FaucetPay</a> <span class="w-badge">${wBadge}</span>`;
@@ -154,7 +154,7 @@ function generateCard() {
 
   const commentName = name.charAt(0).toUpperCase() + name.slice(1);
 
-  // Сборка точной структуры под ваш шаблон (класс ecard-icon теперь чистый, без c1/c2)
+  // Сборка точной структуры под ваш шаблон
   const resultHtml = `<!-- ${commentName} Begin -->
 \t<div class="${cardClass}" data-id="${id}" data-site="${id}">
 \t\t<div class="ecard-top-line"></div>
@@ -190,4 +190,3 @@ function copyCode() {
 
 </body>
 </html>
-
