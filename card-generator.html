@@ -149,12 +149,13 @@ function generateCard() {
     cardClass = "ecard top-pick featured";
     badgeHtml = `\t\t\t<div class="top-badge">★ TOP</div>\n`;
   } else if (badgeType === "new") {
-    cardClass = "ecard new-pick";
+    cardClass = "ecard new-pick featured"; // Добавили featured, чтобы зеленая линия тоже горела всегда!
     badgeHtml = `\t\t\t<div class="top-badge new-badge">🔥 NEW</div>\n`;
   } else if (badgeType === "hot") {
-    cardClass = "ecard hot-pick";
+    cardClass = "ecard hot-pick featured"; // Добавили featured, чтобы красная линия горела постоянно!
     badgeHtml = `\t\t\t<div class="top-badge hot-badge">🔥 HOT</div>\n`;
   }
+
 
   // Плашка верификации
   const pillHtml = pillText ? `\t\t\t\t<div class="feature-pill">\n\t\t\t\t\t\t<div class="fp-check">✓</div>\n\t\t\t\t\t\t<div class="fp-text">${pillText}</div>\n\t\t\t\t</div>\n` : '';
