@@ -64,26 +64,7 @@ class SiteHeader extends HTMLElement {
     }
 }
 
-    /function handleIconError(imgElement, ticker, emoji) {
-  // Шаг 1: Если упал домен, ставим оригинальную иконку крипты
-  if (!imgElement.dataset.fallbackTriggered) {
-    imgElement.dataset.fallbackTriggered = "true";
-    imgElement.src = `https://github.io{ticker}.svg`;
-  } else {
-    // Шаг 2: Если упал и крипто-сайт, скрываем картинку и создаем/показываем эмодзи
-    imgElement.style.display = "none";
-    
-    // Проверяем, нет ли уже созданного эмодзи, чтобы не дублировать
-    let emojiNode = imgElement.parentNode.querySelector('.emoji');
-    if (!emojiNode) {
-      emojiNode = document.createElement('span');
-      emojiNode.className = 'emoji';
-      emojiNode.innerText = emoji;
-      imgElement.parentNode.appendChild(emojiNode);
-    }
-    emojiNode.style.display = "inline-block";
-  }
-}
+
 
 
 // Регистрируем компонент, только если он ещё не был зарегистрирован
