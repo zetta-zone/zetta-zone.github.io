@@ -177,7 +177,7 @@ document.getElementById('genBtn').onclick = function() {
 <div class="${cardClass}" data-id="${id}" data-site="${id}">
     <div class="ecard-top-line"></div>
     <div class="ecard-head">
-        <div class="ecard-icon"><img src="" onerror="handleIconError(this, '${ticker}', '${emoji}')" alt="${ticker}" class="brand-logo" loading="lazy"/></div>
+        <div class="ecard-icon"><div class="ecard-icon"><img src="" data-ticker="${ticker}" data-emoji="${emoji}" alt="${ticker}" class="brand-logo" loading="lazy"/></div>
         <div class="ecard-meta">
             <div class="ecard-name">${name}</div>
             <div class="ecard-type">${type}</div>
