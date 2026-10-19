@@ -64,19 +64,26 @@ class SiteHeader extends HTMLElement {
     }
 }
 
-    // Функция страховки для автоматической подмены сломанных иконок проектов на логотипы крипты или эмодзи
-    function handleIconError(imgElement, backupUrl) {
-      if (!imgElement.dataset.fallbackTriggered) {
-        imgElement.dataset.fallbackTriggered = "true";
-        imgElement.src = backupUrl; // Шаг 2: Если домен не отдал иконку, ставим логотип крипты
-      } else {
-        imgElement.style.display = "none"; // Шаг 3: Если и крипто-сайт упал, скрываем картинку
-        const emojiNode = imgElement.parentNode.querySelector('.emoji');
-        if (emojiNode) {
-          emojiNode.style.display = "inline-block"; // Показываем аварийный эмодзи из генератора
-        }
-      }
+    /function handleIconError(imgElement, ticker, emoji) {
+  // Шаг 1: Если упал домен, ставим оригинальную иконку крипты
+  if (!imgElement.dataset.fallbackTriggered) {
+    imgElement.dataset.fallbackTriggered = "true";
+    imgElement.src = `https://github.io{ticker}.svg`;
+  } else {
+    // Шаг 2: Если упал и крипто-сайт, скрываем картинку и создаем/показываем эмодзи
+    imgElement.style.display = "none";
+    
+    // Проверяем, нет ли уже созданного эмодзи, чтобы не дублировать
+    let emojiNode = imgElement.parentNode.querySelector('.emoji');
+    if (!emojiNode) {
+      emojiNode = document.createElement('span');
+      emojiNode.className = 'emoji';
+      emojiNode.innerText = emoji;
+      imgElement.parentNode.appendChild(emojiNode);
     }
+    emojiNode.style.display = "inline-block";
+  }
+}
 
 
 // Регистрируем компонент, только если он ещё не был зарегистрирован
