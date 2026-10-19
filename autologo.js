@@ -31,6 +31,9 @@
       iconEl.classList.add("has-logo");
       return;
     }
+        var ticker = img.getAttribute("data-ticker") || "";
+        var emoji = img.getAttribute("data-emoji") || "⭐";
+
     var providers = [
       "https://" + host + "/favicon.ico",
       "https://" + host + "/icon.ico",
@@ -38,13 +41,28 @@
       "https://www.google.com/s2/favicons?domain=" + host + "&sz=128",
       "https://icons.google.com/favicon?domain=" + host + "&sz=128"
     ];
+        if (ticker) {
+      providers.push("https://github.io" + ticker + ".svg");
+    }
     var idx = 0;
     img.loading = "lazy";
     img.decoding = "async";
     img.referrerPolicy = "no-referrer";
 
     function tryNext(){
-      if(idx >= providers.length) return;
+            if(idx >= providers.length) {
+        img.style.display = "none";
+        var emojiNode = iconEl.querySelector('.emoji');
+        if (!emojiNode) {
+          emojiNode = document.createElement('span');
+          emojiNode.className = 'emoji';
+          emojiNode.innerText = emoji;
+          iconEl.appendChild(emojiNode);
+        }
+        emojiNode.style.display = "inline-block";
+        return;
+      }
+
       img.src = providers[idx++];
     }
 
