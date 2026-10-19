@@ -54,15 +54,9 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="form-group">
-      <label for="site-emoji">Эмодзи иконки</label>
-      <input type="text" id="site-emoji" placeholder="например: 💥">
-    </div>
-    <div class="form-group">
-      <label for="icon-color">Цвет фона иконки (класс c1, c2 и т.д.)</label>
-      <input type="text" id="icon-color" value="c1" placeholder="например: c1">
-    </div>
+  <div class="form-group">
+    <label for="site-emoji">Эмодзи иконки</label>
+    <input type="text" id="site-emoji" placeholder="например: 💥">
   </div>
 
   <div class="checkbox-group">
@@ -126,7 +120,6 @@ function generateCard() {
   const name = document.getElementById('site-name').value || 'Name';
   const type = document.getElementById('site-type').value || 'Description';
   const emoji = document.getElementById('site-emoji').value || '⭐';
-  const cColor = document.getElementById('icon-color').value || 'c1';
   const isFeatured = document.getElementById('is-featured').checked;
   const pillText = document.getElementById('pill-text').value || '';
   const hasFaucetPay = document.getElementById('has-faucetpay').value === 'yes';
@@ -151,22 +144,22 @@ function generateCard() {
   // Плашка верификации
   const pillHtml = pillText ? `\t\t\t\t<div class="feature-pill">\n\t\t\t\t\t\t<div class="fp-check">✓</div>\n\t\t\t\t\t\t<div class="fp-text">${pillText}</div>\n\t\t\t\t</div>\n` : '';
 
-  // АВТОМАТИЧЕСКАЯ ГЕНЕРАЦИЯ ССЫЛКИ FAUCETPAY С ВАШИМ ID
+  // Логика FaucetPay в withdraw-row
   let withdrawContent = '';
   if (hasFaucetPay) {
-    withdrawContent = `<a class="w-badge" data-btn="withdraw_faucetpay" data-site="${id}" data-track="click" href="https://faucetpay.io/r/9771657" rel="noopener" target="_blank">FaucetPay</a> <span class="w-badge">${wBadge}</span>`;
+    withdrawContent = `<a class="w-badge" data-btn="withdraw_faucetpay" data-site="${id}" data-track="click" href="https://faucetpay.io" rel="noopener" target="_blank">FaucetPay</a> <span class="w-badge">${wBadge}</span>`;
   } else {
     withdrawContent = `<span class="w-badge">${wBadge}</span>`;
   }
 
   const commentName = name.charAt(0).toUpperCase() + name.slice(1);
 
-  // Сборка точной структуры под ваш шаблон
+  // Сборка точной структуры под ваш шаблон (класс ecard-icon теперь чистый, без c1/c2)
   const resultHtml = `<!-- ${commentName} Begin -->
 \t<div class="${cardClass}" data-id="${id}" data-site="${id}">
 \t\t<div class="ecard-top-line"></div>
 \t\t<div class="ecard-head">
-\t\t\t<div class="ecard-icon ${cColor}"><img alt="" class="brand-logo" loading="lazy"/><span class="emoji">${emoji}</span></div>
+\t\t\t<div class="ecard-icon"><img alt="" class="brand-logo" loading="lazy"/><span class="emoji">${emoji}</span></div>
 \t\t\t<div class="ecard-meta">
 \t\t\t\t<div class="ecard-name">${name}</div>
 \t\t\t\t<div class="ecard-type">${type}</div>
@@ -197,3 +190,4 @@ function copyCode() {
 
 </body>
 </html>
+
