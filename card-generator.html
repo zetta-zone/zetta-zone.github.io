@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -22,7 +24,7 @@
     button { background: #007bff; color: #fff; border: none; padding: 12px 20px; font-size: 15px; font-weight: 600; border-radius: 6px; cursor: pointer; width: 100%; transition: background 0.2s; margin-top: 10px; }
     button:hover { background: #0056b3; }
     .result-box { margin-top: 25px; display: none; }
-    textarea.code-output { font-family: "Courier New", Courier, monospace; width: 100%; background: #0b0c10; color: #a9ffb4; padding: 15px; height: 250px; border: 1px solid #2a2d3d; border-radius: 6px; box-sizing: border-box; font-size: 13px; resize: vertical; }
+    textarea.code-output { font-family: "Courier New", Courier, monospace; width: 100%; background: #0b0c10; color: #a9ffb4; padding: 15px; height: 280px; border: 1px solid #2a2d3d; border-radius: 6px; box-sizing: border-box; font-size: 13px; resize: vertical; }
     .copy-btn { background: #28a745; margin-top: 10px; }
     .copy-btn:hover { background: #218838; }
   </style>
@@ -34,8 +36,8 @@
   
   <div class="row">
     <div class="form-group">
-      <label for="site-id">ID сайта (латиницей, для data-site и комментариев)</label>
-      <input type="text" id="site-id" placeholder="например: rollercoin">
+      <label for="site-id">ID сайта (для data-site, data-id и комментариев)</label>
+      <input type="text" id="site-id" placeholder="например: firefaucet">
     </div>
     <div class="form-group">
       <label for="site-rank">Ранг (номер)</label>
@@ -46,18 +48,18 @@
   <div class="row">
     <div class="form-group">
       <label for="site-name">Название проекта</label>
-      <input type="text" id="site-name" placeholder="например: RollerCoin">
+      <input type="text" id="site-name" placeholder="например: FireFaucet">
     </div>
     <div class="form-group">
       <label for="site-type">Подзаголовок / Тип</label>
-      <input type="text" id="site-type" placeholder="например: The Best Play2Earn Game">
+      <input type="text" id="site-type" placeholder="например: Automatic HourlyFaucet">
     </div>
   </div>
 
   <div class="row">
     <div class="form-group">
       <label for="site-emoji">Эмодзи иконки</label>
-      <input type="text" id="site-emoji" placeholder="например: ⛏️">
+      <input type="text" id="site-emoji" placeholder="например: 💥">
     </div>
     <div class="form-group">
       <label for="icon-color">Цвет фона иконки (класс c1, c2 и т.д.)</label>
@@ -67,12 +69,12 @@
 
   <div class="checkbox-group">
     <input type="checkbox" id="is-featured" checked>
-    <label Floyd for="is-featured" style="margin-bottom:0; cursor:pointer;">Выводить бадж «★ TOP» (добавляет класс featured)</label>
+    <label for="is-featured" style="margin-bottom:0; cursor:pointer;">Выводить бадж «★ TOP» (добавляет класс featured)</label>
   </div>
 
   <div class="form-group">
     <label for="pill-text">Текст в плашке проверки (Feature Pill)</label>
-    <input type="text" id="pill-text" placeholder="например: ⛏️ Play, Win, and Earn Free Crypto...">
+    <input type="text" id="pill-text" placeholder="например: Earn crypto and gift cards by completing simple tasks...">
   </div>
 
   <div class="form-group">
@@ -85,20 +87,28 @@
     </div>
   </div>
 
+  <div class="form-group">
+    <label for="has-faucetpay">Поддержка FaucetPay?</label>
+    <select id="has-faucetpay">
+      <option value="no">No</option>
+      <option value="yes">Yes (автоматически добавит вашу реф. ссылку)</option>
+    </select>
+  </div>
+
   <div class="row">
     <div class="form-group">
-      <label for="withdraw-badge">Куда вывод (Withdraw badge)</label>
+      <label for="withdraw-badge">Куда вывод основного баланса (стандартная плашка)</label>
       <input type="text" id="withdraw-badge" value="Crypto" placeholder="например: Crypto">
     </div>
     <div class="form-group">
-      <label for="btn-url">Реферальная ссылка</label>
+      <label for="btn-url">Основная реферальная ссылка проекта</label>
       <input type="text" id="btn-url" placeholder="https://...">
     </div>
   </div>
 
   <div class="form-group">
-    <label for="btn-text">Текст на кнопке</label>
-    <input type="text" id="btn-text" value="Get Free Satochi →" placeholder="Get Free Satochi →">
+    <label for="btn-text">Текст на главной кнопке</label>
+    <input type="text" id="btn-text" value="Start Auto Claim" placeholder="Start Auto Claim">
   </div>
 
   <button onclick="generateCard()">Сгенерировать HTML-код карточки</button>
@@ -121,6 +131,7 @@ function generateCard() {
   const cColor = document.getElementById('icon-color').value || 'c1';
   const isFeatured = document.getElementById('is-featured').checked;
   const pillText = document.getElementById('pill-text').value || '';
+  const hasFaucetPay = document.getElementById('has-faucetpay').value === 'yes';
   const wBadge = document.getElementById('withdraw-badge').value || 'Crypto';
   const url = document.getElementById('btn-url').value || '#';
   const btnText = document.getElementById('btn-text').value || 'Get Started →';
@@ -130,41 +141,47 @@ function generateCard() {
   for(let i=1; i<=4; i++) {
     const val = document.getElementById('feat-'+i).value;
     if(val.trim() !== '') {
-      featHtml += `\t\t\t\t\t\t<div class="feat-item">${val}</div>\n`;
+      featHtml += `\t\t\t\t<div class="feat-item">${val}</div>\n`;
     }
   }
   if(featHtml) featHtml = `\t\t\t\t\t<div class="feat-list">\n${featHtml}\t\t\t\t\t</div>\n`;
 
-  // Обработка топ-баджа и классов
+  // Настройка классов и топ-баджа
   const cardClass = isFeatured ? "ecard top-pick featured" : "ecard";
   const badgeHtml = isFeatured ? `\t\t\t<div class="top-badge">★ TOP</div>\n` : '';
 
-  // Плашка проверки
-  const pillHtml = pillText ? `\t\t\t\t<div class="feature-pill">\n\t\t\t\t\t<div class="fp-check">✓</div>\n\t\t\t\t\t\t<div class="fp-text">${pillText}</div>\n\t\t\t\t</div>\n` : '';
+  // Плашка верификации
+  const pillHtml = pillText ? `\t\t\t\t<div class="feature-pill">\n\t\t\t\t\t\t<div class="fp-check">✓</div>\n\t\t\t\t\t\t<div class="fp-text">${pillText}</div>\n\t\t\t\t</div>\n` : '';
 
-  // Формируем финальное имя комментария Capitalize
+  // АВТОМАТИЧЕСКАЯ ГЕНЕРАЦИЯ ССЫЛКИ FAUCETPAY С ВАШИМ ID
+  let withdrawContent = '';
+  if (hasFaucetPay) {
+    withdrawContent = `<a class="w-badge" data-btn="withdraw_faucetpay" data-site="${id}" data-track="click" href="https://faucetpay.io/r/9771657" rel="noopener" target="_blank">FaucetPay</a> <span class="w-badge">${wBadge}</span>`;
+  } else {
+    withdrawContent = `<span class="w-badge">${wBadge}</span>`;
+  }
+
   const commentName = name.charAt(0).toUpperCase() + name.slice(1);
 
-  // Сборка точной структуры
+  // Сборка точной структуры под ваш шаблон
   const resultHtml = `<!-- ${commentName} Begin -->
-\t<div class="${cardClass}" data-site="${id}">
+\t<div class="${cardClass}" data-id="${id}" data-site="${id}">
 \t\t<div class="ecard-top-line"></div>
 \t\t<div class="ecard-head">
-\t\t\t<div class="ecard-icon ${cColor}"><img alt="" class="brand-logo" loading="lazy"/>
-\t\t\t<span class="emoji">${emoji}</span></div>
+\t\t\t<div class="ecard-icon ${cColor}"><img alt="" class="brand-logo" loading="lazy"/><span class="emoji">${emoji}</span></div>
 \t\t\t<div class="ecard-meta">
 \t\t\t\t<div class="ecard-name">${name}</div>
 \t\t\t\t<div class="ecard-type">${type}</div>
 \t\t\t</div>
 \t\t\t\t<div class="ecard-rank">${rank}</div>
 \t\t</div>
-${badgeHtml}${pillHtml}${featHtml}\t\t\t\t\t<div class="withdraw-row">
-\t\t\t\t\t\t<span class="w-label">Withdraw to</span>
-\t\t\t\t\t\t<span class="w-badge">${wBadge}</span>
-\t\t\t\t\t</div>
-\t\t\t\t\t<div class="ecard-actions">
+${badgeHtml}${pillHtml}${featHtml}\t\t\t\t<div class="withdraw-row">
+\t\t\t\t\t<span class="w-label">Withdraw to</span>
+\t\t\t\t\t${withdrawContent}
+\t\t\t\t</div>
+\t\t\t\t<div class="ecard-actions">
 \t\t\t\t\t<a class="btn btn-earn" data-btn="earn" data-site="${id}" data-track="click" href="${url}" rel="noopener" target="_blank">${btnText}</a>
-\t\t\t\t\t</div>
+\t\t\t\t</div>
 \t</div>
 <!-- ${commentName} End -->`;
 
