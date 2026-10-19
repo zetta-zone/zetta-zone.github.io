@@ -53,6 +53,11 @@
   </div>
 
   <div class="form-group">
+    <label for="site-emoji">Эмодзи иконки (Покажется, если картинка домена и крипты не найдутся)</label>
+    <input type="text" id="site-emoji" placeholder="например: 💥">
+  </div>
+
+  <div class="form-group">
     <label for="crypto-ticker">Резервная монета (Если уникальный логотип проекта не будет найден)</label>
     <select id="crypto-ticker">
       <option value="btc">Bitcoin (BTC)</option>
@@ -130,7 +135,6 @@
 function extractDomain(url) {
   try {
     let hostname = new URL(url).hostname;
-    // Убираем www. если есть
     return hostname.replace('www.', '');
   } catch (e) {
     return '';
@@ -142,6 +146,7 @@ function generateCard() {
   const rank = document.getElementById('site-rank').value || '#01';
   const name = document.getElementById('site-name').value || 'Name';
   const type = document.getElementById('site-type').value || 'Description';
+  const emoji = document.getElementById('site-emoji').value || '⭐';
   const ticker = document.getElementById('crypto-ticker').value;
   const badgeType = document.getElementById('badge-type').value;
   const pillText = document.getElementById('pill-text').value || '';
@@ -186,19 +191,19 @@ function generateCard() {
     withdrawContent = `<span class="w-badge">${wBadge}</span>`;
   }
 
-  // АВТОМАТИЧЕСКИЙ ВЫВОД ДОМЕНА ИЗ ВАШЕЙ РЕФЕРАЛЬНОЙ ССЫЛКИ
+  // Ссылки на иконки
   const domain = extractDomain(url);
   const backupCryptoUrl = `https://github.io{ticker}.svg`;
   const primaryDomainUrl = domain ? `https://${domain}/favicon.ico` : backupCryptoUrl;
 
   const commentName = name.charAt(0).toUpperCase() + name.slice(1);
 
-  // Сборка структуры с готовым src домена и страховкой onerror
+  // Сборка структуры с вызовом единой глобальной JS функции handleIconError()
   const resultHtml = `<!-- ${commentName} Begin -->
 \t<div class="${cardClass}" data-id="${id}" data-site="${id}">
 \t\t<div class="ecard-top-line"></div>
 \t\t<div class="ecard-head">
-\t\t\t<div class="ecard-icon"><img src="${primaryDomainUrl}" onerror="this.onerror=null; this.src='${backupCryptoUrl}';" alt="${ticker}" class="brand-logo" loading="lazy"/></div>
+\t\t\t<div class="ecard-icon"><img src="${primaryDomainUrl}" onerror="if(typeof handleIconError==='function'){handleIconError(this, '${backupCryptoUrl}')}else{this.src='${backupCryptoUrl}'}" alt="${ticker}" class="brand-logo" loading="lazy"/><span class="emoji" style="display:none;">${emoji}</span></div>
 \t\t\t<div class="ecard-meta">
 \t\t\t\t<div class="ecard-name">${name}</div>
 \t\t\t\t<div class="ecard-type">${type}</div>
@@ -215,17 +220,3 @@ ${badgeHtml}${pillHtml}${featHtml}\t\t\t\t<div class="withdraw-row">
 \t</div>
 <!-- ${commentName} End -->`;
 
-  document.getElementById('codeOutput').value = resultHtml;
-  document.getElementById('resultBox').style.display = 'block';
-}
-
-function copyCode() {
-  const copyText = document.getElementById('codeOutput');
-  copyText.select();
-  document.execCommand('copy');
-  alert('Код успешно скопирован в буфер обмена!');
-}
-</script>
-
-</body>
-</html>
