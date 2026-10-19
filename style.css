@@ -893,6 +893,36 @@ footer a:hover { opacity: 1; }
   margin-top:-8px;
 }
 
+/* ─── NEW PICK BADGE ─────────────────────────────────────── */
+.new-pick {
+  border-color: rgba(52, 211, 153, 0.22) !important; /* Полупрозрачная мятная рамка */
+  box-shadow: 0 18px 60px rgba(0,0,0,0.55), 0 0 0 1px rgba(52, 211, 153, 0.08);
+}
+.new-pick .ecard-top-line {
+  background: linear-gradient(90deg, transparent, #10b981, transparent) !important; /* Мятная линия сверху */
+}
+.new-badge {
+  border-color: rgba(52, 211, 153, 0.35) !important;
+  background: rgba(52, 211, 153, 0.12) !important;
+  color: rgba(209, 250, 229, 0.95) !important;
+}
+
+/* ─── HOT PICK BADGE ─────────────────────────────────────── */
+.hot-pick {
+  border-color: rgba(239, 68, 68, 0.22) !important; /* Полупрозрачная красная рамка */
+  box-shadow: 0 18px 60px rgba(0,0,0,0.55), 0 0 0 1px rgba(239, 68, 68, 0.08);
+}
+.hot-pick .ecard-top-line {
+  background: linear-gradient(90deg, transparent, #ef4444, transparent) !important; /* Красная линия сверху */
+}
+.hot-badge {
+  border-color: rgba(239, 68, 68, 0.35) !important;
+  background: rgba(239, 68, 68, 0.12) !important;
+  color: rgba(254, 226, 226, 0.95) !important;
+}
+
+
+
 
 /* ─── RESPONSIVE ─────────────────────────────────────────── */
 @media (max-width: 768px) {
