@@ -32,7 +32,7 @@
   
   <div class="row">
     <div class="form-group">
-      <label for="site-id">ID сайта (для data-site, data-id и комментариев)</label>
+      <label for="site-id">ID сайта (для data-site и data-id)</label>
       <input type="text" id="site-id" placeholder="например: firefaucet">
     </div>
     <div class="form-group">
@@ -53,11 +53,20 @@
   </div>
 
   <div class="form-group">
-    <label for="site-emoji">Эмодзи иконки</label>
-    <input type="text" id="site-emoji" placeholder="например: 💥">
+    <label for="crypto-ticker">Резервная монета (Если уникальный логотип проекта не будет найден)</label>
+    <select id="crypto-ticker">
+      <option value="btc">Bitcoin (BTC)</option>
+      <option value="ltc">Litecoin (LTC)</option>
+      <option value="sol">Solana (SOL)</option>
+      <option value="pol">Polygon (POL)</option>
+      <option value="eth">Ethereum (ETH)</option>
+      <option value="usdt">Tether (USDT)</option>
+      <option value="trx">TRON (TRX)</option>
+      <option value="doge">Dogecoin (DOGE)</option>
+      <option value="bnb">BNB</option>
+    </select>
   </div>
 
-  <!-- БЛОК ВЫБОРА БАДЖА (Добавлен вариант HOT) -->
   <div class="form-group">
     <label for="badge-type">Выбор баджа (Badge type)</label>
     <select id="badge-type">
@@ -70,7 +79,7 @@
 
   <div class="form-group">
     <label for="pill-text">Текст в плашке проверки (Feature Pill)</label>
-    <input type="text" id="pill-text" placeholder="например: Earn crypto and gift cards by completing simple tasks...">
+    <input type="text" id="pill-text" placeholder="например: Earn crypto by completing simple tasks...">
   </div>
 
   <div class="form-group">
@@ -98,7 +107,7 @@
     </div>
     <div class="form-group">
       <label for="btn-url">Основная реферальная ссылка проекта</label>
-      <input type="text" id="btn-url" placeholder="https://...">
+      <input type="text" id="btn-url" placeholder="https://firefaucet.win">
     </div>
   </div>
 
@@ -118,12 +127,22 @@
 </div>
 
 <script>
+function extractDomain(url) {
+  try {
+    let hostname = new URL(url).hostname;
+    // Убираем www. если есть
+    return hostname.replace('www.', '');
+  } catch (e) {
+    return '';
+  }
+}
+
 function generateCard() {
   const id = document.getElementById('site-id').value || 'site';
   const rank = document.getElementById('site-rank').value || '#01';
   const name = document.getElementById('site-name').value || 'Name';
   const type = document.getElementById('site-type').value || 'Description';
-  const emoji = document.getElementById('site-emoji').value || '⭐';
+  const ticker = document.getElementById('crypto-ticker').value;
   const badgeType = document.getElementById('badge-type').value;
   const pillText = document.getElementById('pill-text').value || '';
   const hasFaucetPay = document.getElementById('has-faucetpay').value === 'yes';
@@ -141,7 +160,7 @@ function generateCard() {
   }
   if(featHtml) featHtml = `\t\t\t\t\t<div class="feat-list">\n${featHtml}\t\t\t\t\t</div>\n`;
 
-  // Логика обработки всех типов баджей
+  // Логика обработки типов баджей
   let cardClass = "ecard";
   let badgeHtml = "";
 
@@ -149,13 +168,12 @@ function generateCard() {
     cardClass = "ecard top-pick featured";
     badgeHtml = `\t\t\t<div class="top-badge">★ TOP</div>\n`;
   } else if (badgeType === "new") {
-    cardClass = "ecard new-pick featured"; // Добавили featured, чтобы зеленая линия тоже горела всегда!
+    cardClass = "ecard new-pick featured";
     badgeHtml = `\t\t\t<div class="top-badge new-badge">🔥 NEW</div>\n`;
   } else if (badgeType === "hot") {
-    cardClass = "ecard hot-pick featured"; // Добавили featured, чтобы красная линия горела постоянно!
+    cardClass = "ecard hot-pick featured";
     badgeHtml = `\t\t\t<div class="top-badge hot-badge">🔥 HOT</div>\n`;
   }
-
 
   // Плашка верификации
   const pillHtml = pillText ? `\t\t\t\t<div class="feature-pill">\n\t\t\t\t\t\t<div class="fp-check">✓</div>\n\t\t\t\t\t\t<div class="fp-text">${pillText}</div>\n\t\t\t\t</div>\n` : '';
@@ -168,14 +186,19 @@ function generateCard() {
     withdrawContent = `<span class="w-badge">${wBadge}</span>`;
   }
 
+  // АВТОМАТИЧЕСКИЙ ВЫВОД ДОМЕНА ИЗ ВАШЕЙ РЕФЕРАЛЬНОЙ ССЫЛКИ
+  const domain = extractDomain(url);
+  const backupCryptoUrl = `https://github.io{ticker}.svg`;
+  const primaryDomainUrl = domain ? `https://${domain}/favicon.ico` : backupCryptoUrl;
+
   const commentName = name.charAt(0).toUpperCase() + name.slice(1);
 
-  // Сборка точной структуры под ваш шаблон
+  // Сборка структуры с готовым src домена и страховкой onerror
   const resultHtml = `<!-- ${commentName} Begin -->
 \t<div class="${cardClass}" data-id="${id}" data-site="${id}">
 \t\t<div class="ecard-top-line"></div>
 \t\t<div class="ecard-head">
-\t\t\t<div class="ecard-icon"><img alt="" class="brand-logo" loading="lazy"/><span class="emoji">${emoji}</span></div>
+\t\t\t<div class="ecard-icon"><img src="${primaryDomainUrl}" onerror="this.onerror=null; this.src='${backupCryptoUrl}';" alt="${ticker}" class="brand-logo" loading="lazy"/></div>
 \t\t\t<div class="ecard-meta">
 \t\t\t\t<div class="ecard-name">${name}</div>
 \t\t\t\t<div class="ecard-type">${type}</div>
@@ -206,4 +229,3 @@ function copyCode() {
 
 </body>
 </html>
-
