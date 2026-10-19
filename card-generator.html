@@ -115,10 +115,8 @@
     <input type="text" id="btn-text" value="Start Auto Claim">
   </div>
 
-  <!-- Кнопка генерации -->
   <button id="genBtn">Сгенерировать HTML</button>
 
-  <!-- Блок с кодом ТЕПЕРЬ ВИДЕН ВСЕГДА -->
   <div class="result-box">
     <label>Готовый чистый код (появится здесь):</label>
     <textarea id="codeOutput" readonly placeholder="Заполните форму и нажмите кнопку выше..."></textarea>
@@ -127,7 +125,6 @@
 </div>
 
 <script>
-// Назначаем события кнопкам напрямую без инлайн-атрибутов, чтобы CloudCannon не ругался
 document.getElementById('genBtn').onclick = function() {
   const id = document.getElementById('site-id').value || 'site';
   const rank = document.getElementById('site-rank').value || '#01';
@@ -161,27 +158,28 @@ document.getElementById('genBtn').onclick = function() {
   try { domain = new URL(url).hostname.replace('www.', ''); } catch(e) {}
   const primaryDomainUrl = domain ? 'https://' + domain + '/favicon.ico' : 'https://github.io' + ticker + '.svg';
 
+  // Строка генерации полностью исправлена и очищена от мусорных переносов
   const resultHtml = '<!-- ' + name + ' Begin -->\n' +
-\t'<div class="' + cardClass + '" data-id="' + id + '" data-site="' + id + '">\n' +
-\t\t'\t<div class="ecard-top-line"></div>\n' +
-\t\t'\t<div class="ecard-head">\n' +
-\t\t'\t\t<div class="ecard-icon"><img src="' + primaryDomainUrl + '" onerror="handleIconError(this, \'' + ticker + '\', \'' + emoji + '\')" alt="' + ticker + '" class="brand-logo" loading="lazy"/></div>\n' +
-\t\t'\t\t<div class="ecard-meta">\n' +
-\t\t'\t\t\t<div class="ecard-name">' + name + '</div>\n' +
-\t\t'\t\t\t<div class="ecard-type">' + type + '</div>\n' +
-\t\t'\t\t</div>\n' +
-\t\t'\t\t\t<div class="ecard-rank">' + rank + '</div>\n' +
-\t\t'\t</div>\n' +
-badgeHtml + pillHtml + featHtml +
-\t\t'\t\t\t\t<div class="withdraw-row">\n' +
-\t\t'\t\t\t\t\t<span class="w-label">Withdraw to</span>\n' +
-\t\t'\t\t\t\t\t' + withdrawContent + '\n' +
-\t\t'\t\t\t\t</div>\n' +
-\t\t'\t\t\t\t<div class="ecard-actions">\n' +
-\t\t'\t\t\t\t\t<a class="btn btn-earn" data-btn="earn" data-site="' + id + '" data-track="click" href="' + url + '" rel="noopener" target="_blank">' + btnText + '</a>\n' +
-\t\t'\t\t\t\t</div>\n' +
-\t'</div>\n' +
-'<!-- ' + name + ' End -->';
+  '<div class="' + cardClass + '" data-id="' + id + '" data-site="' + id + '">\n' +
+  '\t<div class="ecard-top-line"></div>\n' +
+  '\t<div class="ecard-head">\n' +
+  '\t\t<div class="ecard-icon"><img src="' + primaryDomainUrl + '" onerror="handleIconError(this, \'' + ticker + '\', \'' + emoji + '\')" alt="' + ticker + '" class="brand-logo" loading="lazy"/></div>\n' +
+  '\t\t<div class="ecard-meta">\n' +
+  '\t\t\t<div class="ecard-name">' + name + '</div>\n' +
+  '\t\t\t<div class="ecard-type">' + type + '</div>\n' +
+  '\t\t</div>\n' +
+  '\t\t<div class="ecard-rank">' + rank + '</div>\n' +
+  '\t</div>\n' +
+  badgeHtml + pillHtml + featHtml +
+  '\t<div class="withdraw-row">\n' +
+  '\t\t<span class="w-label">Withdraw to</span>\n' +
+  '\t\t' + withdrawContent + '\n' +
+  '\t</div>\n' +
+  '\t<div class="ecard-actions">\n' +
+  '\t\t<a class="btn btn-earn" data-btn="earn" data-site="' + id + '" data-track="click" href="' + url + '" rel="noopener" target="_blank">' + btnText + '</a>\n' +
+  '\t</div>\n' +
+  '</div>\n' +
+  '<!-- ' + name + ' End -->';
 
   document.getElementById('codeOutput').value = resultHtml;
 };
