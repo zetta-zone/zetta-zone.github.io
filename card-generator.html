@@ -11,9 +11,9 @@
     label { font-size: 13px; color: #aeafb8; margin-bottom: 6px; font-weight: 600; }
     input, select { padding: 10px; border: 1px solid #2a2d3d; background: #11121a; color: #fff; border-radius: 6px; font-size: 14px; }
     .features-input input { margin-bottom: 6px; width: 96%; }
-    button { background: #007bff; color: #fff; border: none; padding: 12px; font-size: 15px; font-weight: 600; border-radius: 6px; cursor: pointer; width: 100%; }
+    button { background: #007bff; color: #fff; border: none; padding: 12px; font-size: 15px; font-weight: 600; border-radius: 6px; cursor: pointer; width: 100%; margin-bottom: 15px; }
     button:hover { background: #0056b3; }
-    .result-box { margin-top: 25px; display: none; }
+    .result-box { margin-top: 25px; border-top: 1px solid #2a2d3d; padding-top: 20px; }
     textarea { width: 96%; background: #0b0c10; color: #a9ffb4; padding: 12px; height: 220px; border: 1px solid #2a2d3d; border-radius: 6px; font-family: monospace; font-size: 13px; }
     .copy-btn { background: #28a745; margin-top: 10px; }
   </style>
@@ -115,17 +115,20 @@
     <input type="text" id="btn-text" value="Start Auto Claim">
   </div>
 
-  <button onclick="generateCard()">Сгенерировать HTML</button>
+  <!-- Кнопка генерации -->
+  <button id="genBtn">Сгенерировать HTML</button>
 
-  <div class="result-box" id="resultBox">
-    <label>Готовый чистый код:</label>
-    <textarea id="codeOutput" readonly></textarea>
-    <button class="copy-btn" onclick="copyCode()">Скопировать</button>
+  <!-- Блок с кодом ТЕПЕРЬ ВИДЕН ВСЕГДА -->
+  <div class="result-box">
+    <label>Готовый чистый код (появится здесь):</label>
+    <textarea id="codeOutput" readonly placeholder="Заполните форму и нажмите кнопку выше..."></textarea>
+    <button class="copy-btn" id="copyBtn">Скопировать код</button>
   </div>
 </div>
 
 <script>
-function generateCard() {
+// Назначаем события кнопкам напрямую без инлайн-атрибутов, чтобы CloudCannon не ругался
+document.getElementById('genBtn').onclick = function() {
   const id = document.getElementById('site-id').value || 'site';
   const rank = document.getElementById('site-rank').value || '#01';
   const name = document.getElementById('site-name').value || 'Name';
@@ -142,53 +145,53 @@ function generateCard() {
   let featHtml = '';
   for(let i=1; i<=4; i++) {
     const val = document.getElementById('feat-'+i).value;
-    if(val.trim() !== '') featHtml += `\t\t\t\t<div class="feat-item">${val}</div>\n`;
+    if(val.trim() !== '') featHtml += '\t\t\t\t<div class="feat-item">' + val + '</div>\n';
   }
-  if(featHtml) featHtml = `\t\t\t\t\t<div class="feat-list">\n${featHtml}\t\t\t\t\t</div>\n`;
+  if(featHtml) featHtml = '\t\t\t\t\t<div class="feat-list">\n' + featHtml + '\t\t\t\t\t</div>\n';
 
   let cardClass = "ecard", badgeHtml = "";
-  if (badgeType === "top") { cardClass = "ecard top-pick featured"; badgeHtml = `\t\t\t<div class="top-badge">★ TOP</div>\n`; }
-  else if (badgeType === "new") { cardClass = "ecard new-pick featured"; badgeHtml = `\t\t\t<div class="top-badge new-badge">🔥 NEW</div>\n`; }
-  else if (badgeType === "hot") { cardClass = "ecard hot-pick featured"; badgeHtml = `\t\t\t<div class="top-badge hot-badge">🔥 HOT</div>\n`; }
+  if (badgeType === "top") { cardClass = "ecard top-pick featured"; badgeHtml = '\t\t\t<div class="top-badge">★ TOP</div>\n'; }
+  else if (badgeType === "new") { cardClass = "ecard new-pick featured"; badgeHtml = '\t\t\t<div class="top-badge new-badge">🔥 NEW</div>\n'; }
+  else if (badgeType === "hot") { cardClass = "ecard hot-pick featured"; badgeHtml = '\t\t\t<div class="top-badge hot-badge">🔥 HOT</div>\n'; }
 
-  const pillHtml = pillText ? `\t\t\t\t<div class="feature-pill">\n\t\t\t\t\t\t<div class="fp-check">✓</div>\n\t\t\t\t\t\t<div class="fp-text">${pillText}</div>\n\t\t\t\t</div>\n` : '';
-  const withdrawContent = hasFaucetPay ? `<a class="w-badge" data-btn="withdraw_faucetpay" data-site="${id}" data-track="click" href="https://faucetpay.io" rel="noopener" target="_blank">FaucetPay</a> <span class="w-badge">${wBadge}</span>` : `<span class="w-badge">${wBadge}</span>`;
+  const pillHtml = pillText ? '\t\t\t\t<div class="feature-pill">\n\t\t\t\t\t\t<div class="fp-check">✓</div>\n\t\t\t\t\t\t<div class="fp-text">' + pillText + '</div>\n\t\t\t\t</div>\n' : '';
+  const withdrawContent = hasFaucetPay ? '<a class="w-badge" data-btn="withdraw_faucetpay" data-site="' + id + '" data-track="click" href="https://faucetpay.io" rel="noopener" target="_blank">FaucetPay</a> <span class="w-badge">' + wBadge + '</span>' : '<span class="w-badge">' + wBadge + '</span>';
 
   let domain = '';
   try { domain = new URL(url).hostname.replace('www.', ''); } catch(e) {}
-  const primaryDomainUrl = domain ? `https://${domain}/favicon.ico` : `https://github.io{ticker}.svg`;
+  const primaryDomainUrl = domain ? 'https://' + domain + '/favicon.ico' : 'https://github.io' + ticker + '.svg';
 
-  const resultHtml = `<!-- ${name} Begin -->
-\t<div class="${cardClass}" data-id="${id}" data-site="${id}">
-\t\t<div class="ecard-top-line"></div>
-\t\t<div class="ecard-head">
-\t\t\t<div class="ecard-icon"><img src="${primaryDomainUrl}" onerror="handleIconError(this, '${ticker}', '${emoji}')" alt="${ticker}" class="brand-logo" loading="lazy"/></div>
-\t\t\t<div class="ecard-meta">
-\t\t\t\t<div class="ecard-name">${name}</div>
-\t\t\t\t<div class="ecard-type">${type}</div>
-\t\t\t</div>
-\t\t\t\t<div class="ecard-rank">${rank}</div>
-\t\t</div>
-${badgeHtml}${pillHtml}${featHtml}\t\t\t\t<div class="withdraw-row">
-\t\t\t\t\t<span class="w-label">Withdraw to</span>
-\t\t\t\t\t${withdrawContent}
-\t\t\t\t</div>
-\t\t\t\t<div class="ecard-actions">
-\t\t\t\t\t<a class="btn btn-earn" data-btn="earn" data-site="${id}" data-track="click" href="${url}" rel="noopener" target="_blank">${btnText}</a>
-\t\t\t\t</div>
-\t</div>
-<!-- ${name} End -->`;
+  const resultHtml = '<!-- ' + name + ' Begin -->\n' +
+\t'<div class="' + cardClass + '" data-id="' + id + '" data-site="' + id + '">\n' +
+\t\t'\t<div class="ecard-top-line"></div>\n' +
+\t\t'\t<div class="ecard-head">\n' +
+\t\t'\t\t<div class="ecard-icon"><img src="' + primaryDomainUrl + '" onerror="handleIconError(this, \'' + ticker + '\', \'' + emoji + '\')" alt="' + ticker + '" class="brand-logo" loading="lazy"/></div>\n' +
+\t\t'\t\t<div class="ecard-meta">\n' +
+\t\t'\t\t\t<div class="ecard-name">' + name + '</div>\n' +
+\t\t'\t\t\t<div class="ecard-type">' + type + '</div>\n' +
+\t\t'\t\t</div>\n' +
+\t\t'\t\t\t<div class="ecard-rank">' + rank + '</div>\n' +
+\t\t'\t</div>\n' +
+badgeHtml + pillHtml + featHtml +
+\t\t'\t\t\t\t<div class="withdraw-row">\n' +
+\t\t'\t\t\t\t\t<span class="w-label">Withdraw to</span>\n' +
+\t\t'\t\t\t\t\t' + withdrawContent + '\n' +
+\t\t'\t\t\t\t</div>\n' +
+\t\t'\t\t\t\t<div class="ecard-actions">\n' +
+\t\t'\t\t\t\t\t<a class="btn btn-earn" data-btn="earn" data-site="' + id + '" data-track="click" href="' + url + '" rel="noopener" target="_blank">' + btnText + '</a>\n' +
+\t\t'\t\t\t\t</div>\n' +
+\t'</div>\n' +
+'<!-- ' + name + ' End -->';
 
   document.getElementById('codeOutput').value = resultHtml;
-  document.getElementById('resultBox').style.display = 'block';
-}
+};
 
-function copyCode() {
+document.getElementById('copyBtn').onclick = function() {
   const copyText = document.getElementById('codeOutput');
   copyText.select();
   document.execCommand('copy');
   alert('Код успешно скопирован в буфер обмена!');
-}
+};
 </script>
 </body>
 </html>
