@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Генератор игровых карточек</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #0f111a; padding: 40px 20px; color: #f8f8f2; }
+    .form-container { max-width: 700px; margin: 0 auto; background: #1a1c28; padding: 30px; border-radius: 12px; box-shadow: 0 4px 25px rgba(0,0,0,0.3); border: 1px solid #2a2d3d; }
+    h2 { margin-top: 0; color: #fff; border-bottom: 1px solid #2a2d3d; padding-bottom: 10px; }
+    .row { display: flex; gap: 15px; }
+    .row .form-group { flex: 1; }
+    .form-group { margin-bottom: 18px; }
+    label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 13px; color: #aeafb8; }
+    input[type="text"], select { width: 100%; padding: 10px; border: 1px solid #2a2d3d; background: #11121a; color: #fff; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
+    input[type="text"]:focus, select:focus { border-color: #007bff; outline: none; }
+    .checkbox-group { display: flex; align-items: center; gap: 8px; margin: 15px 0; }
+    .checkbox-group input { width: 16px; height: 16px; cursor: pointer; }
+    .features-list-input { background: #11121a; padding: 15px; border-radius: 6px; border: 1px solid #2a2d3d; }
+    .features-list-input input { margin-bottom: 8px; }
+    .features-list-input input:last-child { margin-bottom: 0; }
+    button { background: #007bff; color: #fff; border: none; padding: 12px 20px; font-size: 15px; font-weight: 600; border-radius: 6px; cursor: pointer; width: 100%; transition: background 0.2s; margin-top: 10px; }
+    button:hover { background: #0056b3; }
+    .result-box { margin-top: 25px; display: none; }
+    textarea.code-output { font-family: "Courier New", Courier, monospace; width: 100%; background: #0b0c10; color: #a9ffb4; padding: 15px; height: 250px; border: 1px solid #2a2d3d; border-radius: 6px; box-sizing: border-box; font-size: 13px; resize: vertical; }
+    .copy-btn { background: #28a745; margin-top: 10px; }
+    .copy-btn:hover { background: #218838; }
+  </style>
+</head>
+<body>
+
+<div class="form-container">
+  <h2>Добавление карточки проекта</h2>
+  
+  <div class="row">
+    <div class="form-group">
+      <label for="site-id">ID сайта (латиницей, для data-site и комментариев)</label>
+      <input type="text" id="site-id" placeholder="например: rollercoin">
+    </div>
+    <div class="form-group">
+      <label for="site-rank">Ранг (номер)</label>
+      <input type="text" id="site-rank" placeholder="например: #01">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group">
+      <label for="site-name">Название проекта</label>
+      <input type="text" id="site-name" placeholder="например: RollerCoin">
+    </div>
+    <div class="form-group">
+      <label for="site-type">Подзаголовок / Тип</label>
+      <input type="text" id="site-type" placeholder="например: The Best Play2Earn Game">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group">
+      <label for="site-emoji">Эмодзи иконки</label>
+      <input type="text" id="site-emoji" placeholder="например: ⛏️">
+    </div>
+    <div class="form-group">
+      <label for="icon-color">Цвет фона иконки (класс c1, c2 и т.д.)</label>
+      <input type="text" id="icon-color" value="c1" placeholder="например: c1">
+    </div>
+  </div>
+
+  <div class="checkbox-group">
+    <input type="checkbox" id="is-featured" checked>
+    <label Floyd for="is-featured" style="margin-bottom:0; cursor:pointer;">Выводить бадж «★ TOP» (добавляет класс featured)</label>
+  </div>
+
+  <div class="form-group">
+    <label for="pill-text">Текст в плашке проверки (Feature Pill)</label>
+    <input type="text" id="pill-text" placeholder="например: ⛏️ Play, Win, and Earn Free Crypto...">
+  </div>
+
+  <div class="form-group">
+    <label>Список преимуществ (Feat List — до 4 пунктов)</label>
+    <div class="features-list-input">
+      <input type="text" id="feat-1" placeholder="Пункт 1">
+      <input type="text" id="feat-2" placeholder="Пункт 2">
+      <input type="text" id="feat-3" placeholder="Пункт 3">
+      <input type="text" id="feat-4" placeholder="Пункт 4">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group">
+      <label for="withdraw-badge">Куда вывод (Withdraw badge)</label>
+      <input type="text" id="withdraw-badge" value="Crypto" placeholder="например: Crypto">
+    </div>
+    <div class="form-group">
+      <label for="btn-url">Реферальная ссылка</label>
+      <input type="text" id="btn-url" placeholder="https://...">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="btn-text">Текст на кнопке</label>
+    <input type="text" id="btn-text" value="Get Free Satochi →" placeholder="Get Free Satochi →">
+  </div>
+
+  <button onclick="generateCard()">Сгенерировать HTML-код карточки</button>
+
+  <!-- Блок вывода -->
+  <div class="result-box" id="resultBox">
+    <label>Готовый чистый код для вставки на сайт:</label>
+    <textarea class="code-output" id="codeOutput" readonly></textarea>
+    <button class="copy-btn" onclick="copyCode()">Скопировать в буфер</button>
+  </div>
+</div>
+
+<script>
+function generateCard() {
+  const id = document.getElementById('site-id').value || 'site';
+  const rank = document.getElementById('site-rank').value || '#01';
+  const name = document.getElementById('site-name').value || 'Name';
+  const type = document.getElementById('site-type').value || 'Description';
+  const emoji = document.getElementById('site-emoji').value || '⭐';
+  const cColor = document.getElementById('icon-color').value || 'c1';
+  const isFeatured = document.getElementById('is-featured').checked;
+  const pillText = document.getElementById('pill-text').value || '';
+  const wBadge = document.getElementById('withdraw-badge').value || 'Crypto';
+  const url = document.getElementById('btn-url').value || '#';
+  const btnText = document.getElementById('btn-text').value || 'Get Started →';
+
+  // Собираем фичи
+  let featHtml = '';
+  for(let i=1; i<=4; i++) {
+    const val = document.getElementById('feat-'+i).value;
+    if(val.trim() !== '') {
+      featHtml += `\t\t\t\t\t\t<div class="feat-item">${val}</div>\n`;
+    }
+  }
+  if(featHtml) featHtml = `\t\t\t\t\t<div class="feat-list">\n${featHtml}\t\t\t\t\t</div>\n`;
+
+  // Обработка топ-баджа и классов
+  const cardClass = isFeatured ? "ecard top-pick featured" : "ecard";
+  const badgeHtml = isFeatured ? `\t\t\t<div class="top-badge">★ TOP</div>\n` : '';
+
+  // Плашка проверки
+  const pillHtml = pillText ? `\t\t\t\t<div class="feature-pill">\n\t\t\t\t\t<div class="fp-check">✓</div>\n\t\t\t\t\t\t<div class="fp-text">${pillText}</div>\n\t\t\t\t</div>\n` : '';
+
+  // Формируем финальное имя комментария Capitalize
+  const commentName = name.charAt(0).toUpperCase() + name.slice(1);
+
+  // Сборка точной структуры
+  const resultHtml = `<!-- ${commentName} Begin -->
+\t<div class="${cardClass}" data-site="${id}">
+\t\t<div class="ecard-top-line"></div>
+\t\t<div class="ecard-head">
+\t\t\t<div class="ecard-icon ${cColor}"><img alt="" class="brand-logo" loading="lazy"/>
+\t\t\t<span class="emoji">${emoji}</span></div>
+\t\t\t<div class="ecard-meta">
+\t\t\t\t<div class="ecard-name">${name}</div>
+\t\t\t\t<div class="ecard-type">${type}</div>
+\t\t\t</div>
+\t\t\t\t<div class="ecard-rank">${rank}</div>
+\t\t</div>
+${badgeHtml}${pillHtml}${featHtml}\t\t\t\t\t<div class="withdraw-row">
+\t\t\t\t\t\t<span class="w-label">Withdraw to</span>
+\t\t\t\t\t\t<span class="w-badge">${wBadge}</span>
+\t\t\t\t\t</div>
+\t\t\t\t\t<div class="ecard-actions">
+\t\t\t\t\t<a class="btn btn-earn" data-btn="earn" data-site="${id}" data-track="click" href="${url}" rel="noopener" target="_blank">${btnText}</a>
+\t\t\t\t\t</div>
+\t</div>
+<!-- ${commentName} End -->`;
+
+  document.getElementById('codeOutput').value = resultHtml;
+  document.getElementById('resultBox').style.display = 'block';
+}
+
+function copyCode() {
+  const copyText = document.getElementById('codeOutput');
+  copyText.select();
+  document.execCommand('copy');
+  alert('Код успешно скопирован в буфер обмена!');
+}
+</script>
+
+</body>
+</html>
