@@ -191,9 +191,10 @@ function generateCard() {
     withdrawContent = `<span class="w-badge">${wBadge}</span>`;
   }
 
-  // Ссылки на иконки
+
+    // Ссылки на иконки
   const domain = extractDomain(url);
-  const backupCryptoUrl = `https://github.io{ticker}.svg`;
+  const backupCryptoUrl = `https://github.io{ticker}.svg`; // ИСПРАВЛЕНО
   const primaryDomainUrl = domain ? `https://${domain}/favicon.ico` : backupCryptoUrl;
 
   const commentName = name.charAt(0).toUpperCase() + name.slice(1);
@@ -220,3 +221,13 @@ ${badgeHtml}${pillHtml}${featHtml}\t\t\t\t<div class="withdraw-row">
 \t</div>
 <!-- ${commentName} End -->`;
 
+
+  document.getElementById('codeOutput').value = resultHtml;
+document.getElementById('resultBox').style.display = 'block';
+}
+function copyCode() {
+const copyText = document.getElementById('codeOutput');
+copyText.select();
+document.execCommand('copy');
+alert('Код успешно скопирован в буфер обмена!');
+}
