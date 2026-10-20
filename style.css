@@ -1852,4 +1852,19 @@ header .nav-inner {
   }
 }
 
+/* ТЕСТ: проверяем, применяются ли новые мобильные стили */
+@media (max-width: 900px) {
+  body.nav-open .nav-links {
+    background: red !important;
+    padding: 4px !important;
+    gap: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    justify-content: flex-start !important;
+  }
 
+  body.nav-open .nav-links .nav-link {
+    min-height: 48px !important;
+    font-size: 16px !important;
+  }
+}
