@@ -50,6 +50,7 @@ body {
   z-index: 0;
 }
 
+
 .bg-glow-1 {
   position: fixed;
   top: -300px; left: -200px;
@@ -1860,3 +1861,48 @@ header .nav-inner {
 }
   
 
+
+.ecard.with-side-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 160px;
+  gap: 18px;
+  align-items: start;
+}
+
+.ecard-main {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.ecard-side-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-self: center;
+}
+
+.ecard-side-actions .btn {
+  width: 100%;
+  min-height: 42px;
+}
+
+.ecard-banner img {
+  display: block;
+  width: 100%;
+  max-width: 728px;
+  height: auto;
+}
+
+@media (max-width: 700px) {
+  .ecard.with-side-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .ecard-side-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+  }
+}
