@@ -27,11 +27,7 @@ class SiteFooter extends HTMLElement {
     }
 
     initSiteScripts() {
-        
-
-
-
-        
+         
         // 1. Анимация карточек при скролле (Stagger animation) с защитой от отсутствия элементов
         const cards = document.querySelectorAll('.ecard, .fcard');
         if (cards.length > 0) {
