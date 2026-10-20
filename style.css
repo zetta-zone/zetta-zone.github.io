@@ -994,24 +994,19 @@ html, body { overflow-x: hidden; }
 /* prevent any accidental horizontal scroll from cards */
 .ecard, .mini-slider, .slide, .card-grid { min-width: 0; }
 
-/* Mobile layout: text first, slider second, no sideways scroll */
-@media (max-width: 820px){
-  .hero-split{
-    display:flex;
-    flex-direction:column;
-    gap: 16px;
-    padding-top: 18px;
-  }
-  .hero-right{ justify-content:flex-start; }
-  .hero-title{ font-size: clamp(40px, 10vw, 64px); line-height: 0.95; }
-  .hero-sub{ max-width: 55ch; }
-  .mini-slider{ max-width: 100%; }
-  .mini-slider .slide{ padding: 18px 16px; }
+/* Базовые переменные и стили */
+:root {
+  --accent: #32d3c7;
+  --accent2: #6aa3ff;
 }
 
-/* Mobile hamburger menu */
+.btn-earn { 
+  filter: saturate(0.9); 
+}
+
+/* Кнопка гамбургера (по умолчанию скрыта на ПК) */
 .nav-toggle {
-  display: none; /* По умолчанию скрыта на компьютерах */
+  display: none; 
   width: 42px;
   height: 42px;
   border-radius: 12px;
@@ -1028,62 +1023,73 @@ html, body { overflow-x: hidden; }
   transform: translateY(1px); 
 }
 
-/* Включаем кнопку на мобильных экранах (меньше 768px) */
-@media (max-width: 768px) {
-  .nav-toggle {
-    display: flex; /* Показываем бургер на мобилках */
-  }
 
-  /* Скрываем обычные ссылки, чтобы они не кашеварились в шапке */
-  .nav-links {
+/* === АДАПТИВ ДЛЯ ЭКРАНОВ МЕНЬШЕ 900px === */
+@media (max-width: 900px) {
+  /* Шапка и навигация */
+  header .nav-inner { 
+    gap: 10px; 
+  }
+  
+  .nav-toggle { 
+    display: inline-flex; 
+    margin-left: auto; 
+  }
+  
+  .nav-socials { 
     display: none; 
+  }
+
+  /* Выпадающее мобильное меню */
+  .nav-links {
+    display: none; /* Скрыто по умолчанию */
     flex-direction: column;
-    position: absolute;
-    top: 70px; /* Подстройте под высоту вашей шапки */
-    left: 0;
-    width: 100%;
-    background: rgb(10, 14, 18);
-    padding: 20px;
-    box-sizing: border-box;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    z-index: 999;
-  }
-
-  /* Класс, который наш JS будет добавлять при клике для открытия меню */
-  .nav-links.open {
-    display: flex;
-  }
-}
-
-
-@media (max-width: 900px){
-  header .nav-inner{ gap: 10px; }
-  .nav-links{
     position: fixed;
     top: 64px;
     left: 14px;
     right: 14px;
-    display: none;
-    flex-direction: column;
-    padding: 12px;
+    padding: 16px;
     border-radius: 16px;
     background: rgba(8,12,16,0.92);
     border: 1px solid rgba(255,255,255,0.10);
     backdrop-filter: blur(14px);
+    box-sizing: border-box;
     z-index: 999;
   }
-  body.nav-open .nav-links{ display:flex; }
-  .nav-socials{ display:none; }
-  .nav-toggle{ display:inline-flex; align-items:center; justify-content:center; margin-left:auto; }
+
+  /* Состояние открытия меню (поддерживает оба варианта JS-логики) */
+  .nav-links.open,
+  body.nav-open .nav-links { 
+    display: flex; 
+  }
 }
 
-/* soften accents slightly */
-:root{
-  --accent: #32d3c7;
-  --accent2: #6aa3ff;
-}
-.btn-earn{ filter: saturate(0.9); }
 
+/* === АДАПТИВ ДЛЯ ЭКРАНОВ МЕНЬШЕ 820px (Hero секция) === */
+@media (max-width: 820px) {
+  .hero-split {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 18px;
+  }
+  .hero-right { 
+    justify-content: flex-start; 
+  }
+  .hero-title { 
+    font-size: clamp(40px, 10vw, 64px); 
+    line-height: 0.95; 
+  }
+  .hero-sub { 
+    max-width: 55ch; 
+  }
+  .mini-slider { 
+    max-width: 100%; 
+  }
+  .mini-slider .slide { 
+    padding: 18px 16px; 
+  }
+}
 
 /* ─── BACK TO TOP (FLOATING) ───────────────────────────── */
 #backToTop{
