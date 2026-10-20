@@ -505,18 +505,21 @@ header {
 }
 
 /* ─── EARNING CARD ──────────────────────────────────────── */
+/* Карточка: повторные поздние .ecard-правила сведены сюда. Сохранены итоговые размеры, цвета, отступы и flex-раскладка. */
 .ecard {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--r);
+  background: #111;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
   padding: 20px;
-  transition: all 0.25s;
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: 14px;
   animation: fadeUp 0.4s ease both;
+  max-width: 970px;
+  margin: 0 auto 8px;
 }
 
 .ecard::after {
@@ -531,9 +534,9 @@ header {
 
 .ecard:hover {
   background: var(--card-hover);
-  border-color: rgba(0,245,160,0.18);
+  border-color: rgba(255,255,255,0.15);
   transform: translateY(-3px);
-  box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,245,160,0.06);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.4);
 }
 .ecard:hover::after { opacity: 1; }
 
@@ -1116,16 +1119,13 @@ html, body { overflow-x: hidden; }
 
 
 
-/* FIX: ensure card overlays don't block clicks */
-.ecard{position:relative;}
-.ecard::before,.ecard::after{pointer-events:none; z-index:0;}
+/* Базовый .ecard уже описан выше; здесь оставлены только правила слоёв для кликабельности. */`r`n.ecard::before,.ecard::after{pointer-events:none; z-index:0;}
 .ecard > *{position:relative; z-index:1;}
 
 
 
 /* ─── LOGO AUTO LOAD ───────────────────────────────────── */
-.ecard-icon{position:relative; overflow:hidden}
-.ecard-icon .brand-logo{width:24px;height:24px;object-fit:contain;display:block;opacity:.95;transform:scale(1);border-radius:6px;filter:drop-shadow(0 6px 10px rgba(0,0,0,.35));}
+`n.ecard-icon { overflow: hidden; }`n.ecard-icon .brand-logo{width:24px;height:24px;object-fit:contain;display:block;opacity:.95;transform:scale(1);border-radius:6px;filter:drop-shadow(0 6px 10px rgba(0,0,0,.35));}
 .ecard-icon .emoji{display:flex;align-items:center;justify-content:center;width:100%;height:100%}
 .ecard-icon.ecard-icon.has-logo .brand-logo{width:24px;height:24px;object-fit:contain;display:block;opacity:.95;transform:scale(1);border-radius:6px;filter:drop-shadow(0 6px 10px rgba(0,0,0,.35));}
 .ecard-icon.has-logo .emoji{display:none}
@@ -1794,99 +1794,50 @@ header .nav-inner {
   font-weight: bold;
 }
 
-/* === ИСПРАВЛЕНИЕ МОБИЛЬНОГО ГАМБУРГЕР-МЕНЮ === */
+/* Мобильное меню: два соседних @media-блока объединены. Правило закрывает меню по умолчанию и открывает по body.nav-open. */
 @media (max-width: 900px) {
-
-  /* По умолчанию скрываем ссылки мобильного меню */
-  .nav-links {
-    display: none;
-  }
-
-  /* Показываем меню только тогда, когда оно открыто */
-  /* JavaScript добавляет класс nav-open к элементу body */
-  body.nav-open .nav-links {
-    display: flex;
-  }
-
-}
-
-
-/* === КОМПАКТНОЕ МОБИЛЬНОЕ МЕНЮ === */
-@media (max-width: 900px) {
-
-  /* Контейнер меню: не растягиваем на лишнюю высоту */
   .nav-links {
     display: none;
     position: fixed;
-
     top: 70px;
     left: 14px;
     right: 14px;
-
-    /* Высота зависит от количества ссылок */
     height: auto;
     max-height: calc(100dvh - 90px);
     overflow-y: auto;
-
-    /* Компактные отступы внутри контейнера */
     padding: 8px;
     gap: 2px;
-
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
-
     box-sizing: border-box;
     border-radius: 14px;
   }
 
-  /* Показываем меню при открытии */
-  body.nav-open .nav-links {
+  body.nav-open .nav-links { display: flex; }
+
+  .nav-links .nav-link {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 10px 14px;
+    font-size: 14px;
+    line-height: 1.3;
+    text-align: center;
+    box-sizing: border-box;
   }
-
-/* Делаем ссылки крупнее и удобнее для пальца */
-.nav-links .nav-link {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  min-height: 44px;
-  padding: 10px 14px;
-
-  font-size: 14px;
-  line-height: 1.3;
-  text-align: center;
-  box-sizing: border-box;
-}
-  
-    /* === Баннер-карточки === */
-.ecard {
-  margin: 0 0 8px;
-  border-radius: 14px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.08);
-  background: rgba(255,255,255,0.02);
-  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
 }
 
-.ecard {
-  max-width: 970px;
-  margin: 0 auto 8px;
-}
+/* Исправлено: выше закрыт @media мобильного меню; карточки и секции ниже работают на всех ширинах. */
 
-
-.ecard:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgba(0,0,0,0.4);
-  border-color: rgba(255,255,255,0.15);
-}
-
+/* Стили баннер-карточки: поздние повторные .ecard-блоки объединены в базовое правило выше. */
 .ecard-banner {
   display: block;
   width: 100%;
   text-decoration: none;
   line-height: 0;
+  grid-column: 1 / -1;
 }
 
 .ecard-banner picture {
@@ -1894,22 +1845,23 @@ header .nav-inner {
   width: 100%;
 }
 
-.ecard {
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.08);
-  background: #111;
-}
-
+/* Два одинаковых правила картинки объединены. Оставлена исходная высота 90px и pixelated; на телефоне ниже — 60px. */
 .ecard-banner img {
   width: 100% !important;
   height: 90px !important;
   object-fit: cover;
   object-position: center;
   display: block;
-}   
+  image-rendering: pixelated;
+}
 
-/* === Заголовки секций === */
+@media (max-width: 480px) {
+  .ecard-banner img { height: 60px !important; }
+}
+
+.ecard[data-id="solfarmer"] img { object-fit: fill; }
+
+/* Заголовки секций: эти значения намеренно переопределяют базовые размеры выше. */
 .section-header {
   margin: 32px 0 12px;
   padding: 0 4px;
@@ -1922,9 +1874,7 @@ header .nav-inner {
   line-height: 1.4;
 }
 
-.section-title span {
-  color: #4ade80;
-}
+.section-title span { color: #4ade80; }
 
 .section-desc {
   font-size: 0.85rem;
@@ -1932,7 +1882,7 @@ header .nav-inner {
   margin-top: 4px;
 }
 
-/* === Разделитель === */
+/* Это отдельная версия разделителя; сохранена как визуальное переопределение базового .section-sep. */
 .section-sep {
   text-align: center;
   font-size: 0.7rem;
@@ -1955,73 +1905,9 @@ header .nav-inner {
 }
 
 .section-sep::before { left: 0; }
-.section-sep::after { right: 0; }   
+.section-sep::after { right: 0; }
 
-.ecard-banner img {
-  width: 100% !important;
-  height: 90px !important;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-  image-rendering: pixelated;
-}
-
-@media (max-width: 480px) {
-  .ecard-banner img {
-    height: 60px !important;
-  }
-}
-.ecard[data-id="solfarmer"] img {
-  object-fit: fill;
-}
-
-
-.ecard.with-side-actions {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 160px;
-  gap: 18px;
-  align-items: start;
-}
-
-.ecard-main {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  min-width: 0;
-}
-
-.ecard-side-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-self: center;
-}
-
-.ecard-side-actions .btn {
-  width: 100%;
-  min-height: 42px;
-}
-
-.ecard-banner img {
-  display: block;
-  width: 100%;
-  max-width: 728px;
-  height: auto;
-}
-
-@media (max-width: 700px) {
-  .ecard.with-side-actions {
-    grid-template-columns: 1fr;
-  }
-
-  .ecard-side-actions {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    width: 100%;
-  }
-}
-
-
+/* Одна версия раскладки боковых кнопок вместо двух повторённых блоков. Баннер занимает всю нижнюю строку. */
 .ecard.with-side-actions {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 160px;
@@ -2047,25 +1933,17 @@ header .nav-inner {
 
 .ecard-side-actions .btn {
   width: 100%;
-}
-
-.ecard-banner {
-  grid-column: 1 / -1;
+  min-height: 42px;
 }
 
 @media (max-width: 700px) {
-  .ecard.with-side-actions {
-    grid-template-columns: 1fr;
-  }
-
+  .ecard.with-side-actions { grid-template-columns: 1fr; }
   .ecard-side-actions,
-  .ecard-banner {
-    grid-column: 1;
-  }
-
+  .ecard-banner { grid-column: 1; }
   .ecard-side-actions {
     grid-row: auto;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
   }
 }
