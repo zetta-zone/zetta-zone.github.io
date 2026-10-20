@@ -11,6 +11,7 @@ class SiteHeader extends HTMLElement {
                         <a class="nav-link" data-btn="earning_apps" data-site="nav" data-track="click" href="/earning-apps/index.html">Earning Apps</a>
                         <a class="nav-link" href="/play-earn/index.html">Play &amp; Earn</a>
                         <a class="nav-link" href="/more-ways-to-earn/index.html">More Ways to Earn</a>
+                        <a class="nav-link" href="/best/index.html">Best</a>
                         <a class="nav-link" href="/contact/index.html">Contact</a>
                     </div>
                     <button aria-label="Open menu" class="nav-toggle" id="navToggle">☰</button>
