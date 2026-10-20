@@ -13,7 +13,99 @@
     <script src="../header.js" defer></script>
 	<script src="../slider.js" defer></script> <!-- Вот он -->
     <script src="../footer.js" defer></script>
-	 
+<style>
+	/* Стили баннер-карточки: поздние повторные .ecard-блоки объединены в базовое правило выше. */
+.ecard-banner {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  line-height: 0;
+  grid-column: 1 / -1;
+}
+
+.ecard-banner picture {
+  display: block;
+  width: 100%;
+}
+
+/* Два одинаковых правила картинки объединены. Оставлена исходная высота 90px и pixelated; на телефоне ниже — 60px. */
+.ecard-banner img {
+  width: 100% !important;
+  height: 90px !important;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  image-rendering: pixelated;
+}
+
+@media (max-width: 480px) {
+  .ecard-banner img { height: 60px !important; }
+}
+
+.ecard[data-id="solfarmer"] img { object-fit: fill; }
+
+/* Заголовки секций: эти значения намеренно переопределяют базовые размеры выше. */
+.section-header {
+  margin: 32px 0 12px;
+  padding: 0 4px;
+}
+
+.section-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.4;
+}
+
+.section-title span { color: #4ade80; }
+
+.section-desc {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.5);
+  margin-top: 4px;
+}
+
+/* Это отдельная версия разделителя; сохранена как визуальное переопределение базового .section-sep. */
+.section-sep {
+  text-align: center;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  margin: 28px 0 0;
+  position: relative;
+}
+
+.section-sep::before,
+.section-sep::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: calc(50% - 80px);
+  height: 1px;
+  background: rgba(255,255,255,0.08);
+}
+
+.section-sep::before { left: 0; }
+.section-sep::after { right: 0; }
+
+
+/* Карточка делится на левую часть с описанием и правую с информацией и кнопками. */
+.ecard.with-side-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 220px;
+  gap: 18px;
+  align-items: start;
+}
+
+/* На телефоне складываем обе части карточки друг под другом. */
+@media (max-width: 700px) {
+  .ecard.with-side-actions {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
 </head>
 <body>
 <!-- Background layers -->
