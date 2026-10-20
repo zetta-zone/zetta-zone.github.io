@@ -48,17 +48,37 @@ class SiteHeader extends HTMLElement {
 
     initToggleMenu() {
         const toggleBtn = this.querySelector('#navToggle');
+        const nav = this.querySelector('header');
+        const links = this.querySelectorAll('.nav-links a');
         if (!toggleBtn) return;
 
+        const closeMenu = () => {
+            document.body.classList.remove('nav-open');
+            toggleBtn.textContent = '☰';
+            toggleBtn.setAttribute('aria-label', 'Open menu');
+            toggleBtn.setAttribute('aria-expanded', 'false');
+        };
+
+        const syncMenuState = () => {
+            const isOpen = document.body.classList.contains('nav-open');
+            toggleBtn.textContent = isOpen ? '✕' : '☰';
+            toggleBtn.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+            toggleBtn.setAttribute('aria-expanded', String(isOpen));
+        };
+
+        toggleBtn.setAttribute('aria-expanded', 'false');
         toggleBtn.addEventListener('click', (e) => {
             e.preventDefault();
+            e.stopPropagation();
             document.body.classList.toggle('nav-open');
-            
-            if (document.body.classList.contains('nav-open')) {
-                toggleBtn.textContent = '✕';
-            } else {
-                toggleBtn.textContent = '☰';
-            }
+            syncMenuState();
+        });
+
+        links.forEach(link => link.addEventListener('click', closeMenu));
+
+        document.addEventListener('click', (e) => {
+            if (!document.body.classList.contains('nav-open')) return;
+            if (nav && !nav.contains(e.target)) closeMenu();
         });
     }
 }

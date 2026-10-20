@@ -117,27 +117,7 @@ class SiteFooter extends HTMLElement {
             start();
         })();
 
-        // 4. Мобильное меню (гамбургер)
-        (function(){
-            const btn = document.getElementById('navToggle');
-            if(!btn) return;
-            
-            const links = document.querySelectorAll('.nav-links a');
-            
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                document.body.classList.toggle('nav-open');
-            });
-            
-            links.forEach(a => a.addEventListener('click', () => document.body.classList.remove('nav-open')));
-            
-            // Закрытие при тапе мимо меню
-            document.addEventListener('click', (e) => {
-                if(!document.body.classList.contains('nav-open')) return;
-                const nav = document.querySelector('header');
-                if(nav && !nav.contains(e.target)) document.body.classList.remove('nav-open');
-            });
-        })();
+        // Мобильное меню управляется только в header.js.
 
         // 5. Кнопка "Вверх" (Back to top)
         (function(){
