@@ -92,70 +92,48 @@
 .section-sep::before { left: 0; }
 .section-sep::after { right: 0; }
 
-
-/* Карточка делится на левую часть с описанием и правую с информацией и кнопками. */
-.with-side-actions {
+/* Только область под зелёным блоком делится на список слева и информацию справа. */
+.ecard-large-card .ecard-large-details {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 220px;
   gap: 18px;
   align-items: start;
 }
 
-/* На телефоне складываем обе части карточки друг под другом. */
-@media (max-width: 700px) {
-  .with-side-actions {
-    grid-template-columns: 1fr;
-  }
-}
-		/* Большая карточка: основная часть слева, информация и кнопки справа. */
-.ecard.ecard-large-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 220px;
-  gap: 18px;
-  align-items: start;
-}
-
-/* Основная часть большой карточки занимает левую колонку. */
-.ecard-large-main {
-  grid-column: 1;
-  align-self: start;
+/* Список возможностей и валюты остаются слева. */
+.ecard-large-card .ecard-large-list {
   min-width: 0;
 }
 
-/* Дополнительная информация и кнопки занимают правую колонку. */
-.ecard-large-aside {
-  grid-column: 2;
-  align-self: start;
+/* Информация и кнопки располагаются справа от списка. */
+.ecard-large-card .ecard-large-aside {
   display: flex;
   flex-direction: column;
   gap: 10px;
   min-width: 0;
 }
 
-/* Кнопки растягиваются на ширину правой колонки. */
-.ecard-large-aside .btn {
+/* Кнопки занимают ширину правого блока. */
+.ecard-large-card .ecard-large-aside .btn {
   width: 100%;
   min-height: 42px;
   box-sizing: border-box;
 }
 
-/* Баннер под обеими колонками; он должен быть прямым потомком .ecard. */
-.ecard.ecard-large-layout > .ecard-banner {
-  grid-column: 1 / -1;
+/* Баннер остаётся под обеими колонками, если он прямой потомок большой карточки. */
+.ecard-large-card > .ecard-banner {
+  display: block;
+  width: 100%;
 }
 
-/* На узком экране содержимое большой карточки складывается в одну колонку. */
+/* На телефоне список и правый блок складываются друг под друга. */
 @media (max-width: 700px) {
-  .ecard.ecard-large-layout {
+  .ecard-large-card .ecard-large-details {
     grid-template-columns: 1fr;
   }
-
-  .ecard-large-main,
-  .ecard-large-aside,
-  .ecard.ecard-large-layout > .ecard-banner {
-    grid-column: 1;
-  }
 }
+
+		
 </style>
 	
 </head>
