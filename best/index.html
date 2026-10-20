@@ -230,6 +230,33 @@
   line-height: 1.35;
   opacity: 0.65;
 }
+/* Растягиваем заголовок, чтобы HOT оказался у правого края карточки. */
+.ecard-large-card .ecard-head {
+  width: 100%;
+}
+
+.ecard-large-card .ecard-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Серый подзаголовок слева, HOT напротив него справа. */
+.ecard-large-card .ecard-large-subtitle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 12px;
+}
+
+/* Бейдж остаётся в строке, а не позиционируется относительно карточки. */
+.ecard-large-card .ecard-large-subtitle-row .top-badge {
+  position: static;
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+		
 </style>
 	
 </head>
