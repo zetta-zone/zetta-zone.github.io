@@ -184,7 +184,17 @@
   min-height: 42px;
   box-sizing: border-box;
 }
+/* Выравниваем HOT над зелёным блоком, справа. */
+.ecard-large-card .ecard-large-badge-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 6px;
+}
 
+/* В этой строке бейдж располагается в обычном потоке, а не у края карточки. */
+.ecard-large-card .ecard-large-badge-row .top-badge {
+  position: static;
+}
 
 
 
