@@ -1677,6 +1677,13 @@ crypto-slider {
   margin-left: auto;
 }
 
+main-slider {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  margin-left: auto;
+}
+
 .nav-inner--bottom {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
