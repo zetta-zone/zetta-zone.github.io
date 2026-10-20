@@ -926,9 +926,6 @@ footer a:hover { opacity: 1; }
   color: rgba(254, 226, 226, 0.95) !important;
 }
 
-
-
-
 /* ─── RESPONSIVE ─────────────────────────────────────────── */
 @media (max-width: 768px) {
   .stats-bar { grid-template-columns: repeat(2, 1fr); }
@@ -1022,7 +1019,6 @@ html, body { overflow-x: hidden; }
 .nav-toggle:active { 
   transform: translateY(1px); 
 }
-
 
 /* === АДАПТИВ ДЛЯ ЭКРАНОВ МЕНЬШЕ 900px === */
 @media (max-width: 900px) {
