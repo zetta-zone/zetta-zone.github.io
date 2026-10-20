@@ -132,7 +132,13 @@
     grid-template-columns: 1fr;
   }
 }
-
+/* Список и правая информация располагаются в двух колонках. */
+.ecard-large-card .ecard-large-details {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 220px;
+  gap: 18px;
+  align-items: start;
+}
 		
 </style>
 	
@@ -306,78 +312,68 @@
 <!-- Большая карточка -->
 <div class="ecard hot-pick featured ecard-large-card" data-site="limercoin">
   <div class="ecard-top-line"></div>
+	  <div class="ecard-head">
+	    <div class="ecard-icon c1">
+	      <img alt="" class="brand-logo" loading="lazy">
+	      <span class="emoji">⛏️</span>
+	    </div>
+	    <div class="ecard-meta">
+	      <div class="section-title">
+	        The Second Choice After Rollercoin Is:
+	        <span>Limercoin.com</span>
+	      </div>
+	      <div class="section-desc">Build your mining empire and earn crypto!</div>
+	    </div>
+	  </div>
 
-  <div class="ecard-head">
-    <div class="ecard-icon c1">
-      <img alt="" class="brand-logo" loading="lazy">
-      <span class="emoji">⛏️</span>
-    </div>
-
-    <div class="ecard-meta">
-      <div class="section-title">
-        The Second Choice After Rollercoin Is:
-        <span>Limercoin.com</span>
-      </div>
-      <div class="section-desc">Build your mining empire and earn crypto!</div>
-    </div>
-  </div>
-
-  <div class="top-badge hot-badge">🔥 HOT</div>
-
+	  <div class="top-badge hot-badge">🔥 HOT</div>
   <!-- Зелёный блок остаётся над списком и правой информацией. -->
+	<div class="feature-pill"><div class="fp-check">✓</div><div class="fp-text">
+	      ⛏️ Limercoin is a mining simulator game where you build your space,
+	      manage mining operations and mine cryptocurrency.</div>
+	  </div>
 
-	<div class="feature-pill">
-   
-		<div class="fp-check">✓</div>
- 
-		<div class="fp-text">
-      ⛏️ Limercoin is a mining simulator game where you build your space,
-      manage mining operations and mine cryptocurrency.
-    </div>
-  </div>
+		  <!-- Список слева, информация и кнопки справа. -->
+		  <div class="ecard-large-details">
+		    <div class="ecard-large-list">
+		      <div class="feat-list">
+		        <div class="feat-item">Your own personal space for mining</div>
+		        <div class="feat-item">Big variety of miners</div>
+		        <div class="feat-item">Play games to increase power</div>
+		        <div class="feat-item">Mine different cryptocurrencies</div>
+		        <div class="feat-item">Craft and merge miners</div>
+		        <div class="feat-item">Increase mining power and get rewards!</div>
+		        <div class="feat-item">Launched in 2023</div>
+		        <div class="feat-item">Rewards every 10 minutes</div>
+		      </div>
 
-  <!-- Список слева, информация и кнопки справа. -->
-  <div class="ecard-large-details">
-    <div class="ecard-large-list">
-      <div class="feat-list">
-        <div class="feat-item">Your own personal space for mining</div>
-        <div class="feat-item">Big variety of miners</div>
-        <div class="feat-item">Play games to increase power</div>
-        <div class="feat-item">Mine different cryptocurrencies</div>
-        <div class="feat-item">Craft and merge miners</div>
-        <div class="feat-item">Increase mining power and get rewards!</div>
-        <div class="feat-item">Launched in 2023</div>
-        <div class="feat-item">Rewards every 10 minutes</div>
-      </div>
-
-      <div class="withdraw-row">
-        <span class="w-label">Withdraw to</span>
-        <span class="w-badge">Crypto</span>
-        <img src="https://rollercoin.com/static/img/wallet/btc.svg?v=1.13" alt="BTC" width="28" height="28">
-        <img src="https://rollercoin.com/static/img/wallet/doge.svg?v=1.13" alt="DOGE" width="28" height="28">
-        <img src="https://rollercoin.com/static/img/wallet/ltc.svg?v=1.13" alt="LTC" width="28" height="28">
-        <img src="https://rollercoin.com/static/img/wallet/sol.svg?v=1.13" alt="SOL" width="28" height="28">
-      </div>
-    </div>
+			      <div class="withdraw-row">
+			        <span class="w-label">Withdraw to</span>
+			        <span class="w-badge">Crypto</span>
+			        <img src="https://rollercoin.com/static/img/wallet/btc.svg?v=1.13" alt="BTC" width="28" height="28">
+			        <img src="https://rollercoin.com/static/img/wallet/doge.svg?v=1.13" alt="DOGE" width="28" height="28">
+			        <img src="https://rollercoin.com/static/img/wallet/ltc.svg?v=1.13" alt="LTC" width="28" height="28">
+			        <img src="https://rollercoin.com/static/img/wallet/sol.svg?v=1.13" alt="SOL" width="28" height="28">
+			      </div>
+			    </div>
 
     <div class="ecard-large-aside">
-      <div class="ecard-large-note">
-        <strong>Начни играть бесплатно</strong>
-        <p>Создавай майнеров, выполняй задания и получай награды.</p>
-      </div>
+	      <div class="ecard-large-note">
+	        <strong>Начни играть бесплатно</strong>
+	        <p>Создавай майнеров, выполняй задания и получай награды.</p>
+	      </div>
+			      <a class="btn btn-earn"
+			         href="https://limercoin.com/?ref=ryxpgvt3"
+			         target="_blank" rel="noopener noreferrer">
+			        Play now ↗
+			      </a>
 
-      <a class="btn btn-earn"
-         href="https://limercoin.com/?ref=ryxpgvt3"
-         target="_blank" rel="noopener noreferrer">
-        Play now ↗
-      </a>
-
-      <a class="btn btn-ghost"
-         href="https://limercoin.com/?ref=ryxpgvt3"
-         target="_blank" rel="noopener noreferrer">
-        Visit site
-      </a>
-    </div>
+			      <a class="btn btn-ghost"
+			         href="https://limercoin.com/?ref=ryxpgvt3"
+			         target="_blank" rel="noopener noreferrer">
+			        Visit site
+			      </a>
+ 	   </div>
 	  
   </div>
 
