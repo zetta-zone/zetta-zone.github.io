@@ -197,7 +197,24 @@
 }
 
 
+/* Серый подзаголовок слева, бейдж HOT напротив него справа. */
+.ecard-large-card .ecard-large-subtitle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
 
+/* Бейдж занимает место в строке и не позиционируется относительно карточки. */
+.ecard-large-card .ecard-large-subtitle-row .top-badge {
+  position: static;
+  flex: 0 0 auto;
+}
+
+/* Убираем верхний отступ описания внутри общей строки. */
+.ecard-large-card .ecard-large-subtitle-row .section-desc {
+  margin-top: 4px;
+}
 		
 </style>
 	
