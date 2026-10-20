@@ -196,7 +196,22 @@
   position: static;
 }
 
+/* Информация занимает всю ширину правого блока. */
+.ecard-large-card .ecard-large-note {
+  grid-column: 1 / -1;
+}
 
+/* Две первые кнопки располагаются рядом. */
+.ecard-large-card .ecard-large-aside .btn {
+  width: 100%;
+  min-height: 42px;
+  box-sizing: border-box;
+}
+
+/* Кнопка покупки криптовалюты занимает всю строку. */
+.ecard-large-card .ecard-large-aside .ecard-large-buy-button {
+  grid-column: 1 / -1;
+}
 
 		
 </style>
