@@ -191,29 +191,50 @@
   margin-bottom: 6px;
 }
 
-/* В этой строке бейдж располагается в обычном потоке, а не у края карточки. */
-.ecard-large-card .ecard-large-badge-row .top-badge {
-  position: static;
+/* Три небольших предложения идут отдельными блоками справа от списка. */
+.ecard-large-card .ecard-large-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-self: start;
+  min-width: 0;
 }
 
-/* Информация занимает всю ширину правого блока. */
-.ecard-large-card .ecard-large-note {
-  grid-column: 1 / -1;
+/* Каждый блок объединяет короткое описание и свою кнопку. */
+.ecard-large-card .ecard-large-option {
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.025);
 }
 
-/* Две первые кнопки располагаются рядом. */
-.ecard-large-card .ecard-large-aside .btn {
+/* Заголовок предложения делаем компактным. */
+.ecard-large-card .ecard-large-option strong {
+  display: block;
+  font-size: 0.82rem;
+  line-height: 1.3;
+}
+
+/* Описание короче и меньше заголовка. */
+.ecard-large-card .ecard-large-option p {
+  margin: 4px 0 8px;
+  font-size: 0.72rem;
+  line-height: 1.4;
+}
+
+/* Кнопка занимает ширину своего блока. */
+.ecard-large-card .ecard-large-option .btn {
   width: 100%;
-  min-height: 42px;
+  min-height: 36px;
   box-sizing: border-box;
 }
 
-/* Кнопка покупки криптовалюты занимает всю строку. */
-.ecard-large-card .ecard-large-aside .ecard-large-buy-button {
-  grid-column: 1 / -1;
+/* Уточнение про условия показываем мелко под предложениями. */
+.ecard-large-card .ecard-large-disclaimer {
+  font-size: 0.65rem;
+  line-height: 1.35;
+  opacity: 0.65;
 }
-
-		
 </style>
 	
 </head>
