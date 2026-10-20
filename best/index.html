@@ -13,7 +13,9 @@
     <script src="../header.js" defer></script>
 	<script src="../slider.js" defer></script> <!-- Вот он -->
     <script src="../footer.js" defer></script>
-<style>
+
+	
+	<style>
 	/* Стили баннер-карточки: поздние повторные .ecard-блоки объединены в базовое правило выше. */
 .ecard-banner {
   display: block;
@@ -92,7 +94,7 @@
 
 
 /* Карточка делится на левую часть с описанием и правую с информацией и кнопками. */
-.ecard.with-side-actions {
+.with-side-actions {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 220px;
   gap: 18px;
@@ -101,11 +103,61 @@
 
 /* На телефоне складываем обе части карточки друг под другом. */
 @media (max-width: 700px) {
-  .ecard.with-side-actions {
+  .with-side-actions {
     grid-template-columns: 1fr;
   }
 }
+		/* Большая карточка: основная часть слева, информация и кнопки справа. */
+.ecard.ecard-large-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 220px;
+  gap: 18px;
+  align-items: start;
+}
+
+/* Основная часть большой карточки занимает левую колонку. */
+.ecard-large-main {
+  grid-column: 1;
+  align-self: start;
+  min-width: 0;
+}
+
+/* Дополнительная информация и кнопки занимают правую колонку. */
+.ecard-large-aside {
+  grid-column: 2;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+/* Кнопки растягиваются на ширину правой колонки. */
+.ecard-large-aside .btn {
+  width: 100%;
+  min-height: 42px;
+  box-sizing: border-box;
+}
+
+/* Баннер под обеими колонками; он должен быть прямым потомком .ecard. */
+.ecard.ecard-large-layout > .ecard-banner {
+  grid-column: 1 / -1;
+}
+
+/* На узком экране содержимое большой карточки складывается в одну колонку. */
+@media (max-width: 700px) {
+  .ecard.ecard-large-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .ecard-large-main,
+  .ecard-large-aside,
+  .ecard.ecard-large-layout > .ecard-banner {
+    grid-column: 1;
+  }
+}
 </style>
+	
 </head>
 <body>
 <!-- Background layers -->
