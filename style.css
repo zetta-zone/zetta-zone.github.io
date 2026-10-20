@@ -1786,6 +1786,7 @@ header .nav-inner {
   font-weight: bold;
 }
 
+/* === ИСПРАВЛЕНИЕ МОБИЛЬНОГО ГАМБУРГЕР-МЕНЮ === */
 @media (max-width: 900px) {
   .nav-links {
     display: none;
