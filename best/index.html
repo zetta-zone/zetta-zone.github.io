@@ -139,7 +139,19 @@
   gap: 18px;
   align-items: start;
 }
-		
+		/* Название большой карточки и HOT стоят в одной строке, как название и ранг. */
+.ecard-large-card .ecard-large-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* В этой строке бейдж располагается рядом с названием, а не поверх карточки. */
+.ecard-large-card .ecard-large-title-row .top-badge {
+  position: static;
+  flex: 0 0 auto;
+}
 </style>
 	
 </head>
