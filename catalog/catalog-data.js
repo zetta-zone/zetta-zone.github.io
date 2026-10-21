@@ -147,7 +147,7 @@ window.CATALOG_DATA = [
     "platform": "Веб",
     "risk": "Есть внутриигровые покупки",
     "riskTone": "yellow",
-    "verified": true,
+    "verified": false,
     "features": [
       "Мини-игры",
       "Ежедневные и еженедельные задания",
