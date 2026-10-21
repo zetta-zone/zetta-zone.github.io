@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+	<!DOCTYPE html>
 <html lang="en">
 <head>
 	<!-- Google tag (gtag.js) -->
@@ -12,177 +12,558 @@
 </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zetta | Play & Earn Games</title>
-     <link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@400;500;700;800;900&amp;family=JetBrains+Mono:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
+    <title>Zetta | — Play 2; Earn</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@400;500;700;800;900&amp;family=JetBrains+Mono:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
    
     <!-- Подключаем твой общий файл стилей -->
     <link rel="stylesheet" href="../style.css"> 
 
     <!-- Подключаем скрипты шапки и подвала -->
     <script src="../header.js" defer></script>
-    <script src="../slider.js" defer></script> 
+	<script src="../slider.js" defer></script> <!-- Вот он -->
     <script src="../footer.js" defer></script>
-</head>
 
+	
+<style>
+/* Баннер — отдельная ссылка на всю ширину карточки. */
+.ecard-banner {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  line-height: 0;
+}
+
+.ecard-banner picture {
+  display: block;
+  width: 100%;
+}
+
+/* Размер баннера на компьютере. */
+.ecard-banner img {
+  display: block;
+  width: 100% !important;
+  height: 90px !important;
+  object-fit: cover;
+  object-position: center;
+  image-rendering: pixelated;
+}
+
+/* На телефоне делаем баннер ниже. */
+@media (max-width: 480px) {
+  .ecard-banner img {
+    height: 60px !important;
+  }
+}
+
+.ecard[data-id="solfarmer"] img {
+  object-fit: fill;
+}
+
+/* Отступы заголовка секции. */
+.section-header {
+  margin: 32px 0 12px;
+  padding: 0 4px;
+}
+
+/* Общий вид заголовков карточек и секций. */
+.section-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.4;
+}
+
+.section-title span {
+  color: #4ade80;
+}
+
+/* Серый текст под заголовком. */
+.section-desc {
+  margin-top: 4px;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Разделитель между секциями. */
+.section-sep {
+  position: relative;
+  margin: 28px 0 0;
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.section-sep::before,
+.section-sep::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: calc(50% - 80px);
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.section-sep::before {
+  left: 0;
+}
+
+.section-sep::after {
+  right: 0;
+}
+
+/* Большая карточка сохраняет вертикальный порядок своих частей. */
+.ecard.ecard-large-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* Заголовок растягивается по ширине карточки. */
+.ecard.ecard-large-card > .ecard-head {
+  display: flex;
+  width: 100%;
+}
+
+/* Текст заголовка занимает оставшееся место после логотипа. */
+.ecard.ecard-large-card .ecard-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Подзаголовок слева, маленький HOT напротив него справа. */
+.ecard.ecard-large-card .ecard-large-subtitle-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.ecard.ecard-large-card .ecard-large-subtitle-row .section-desc {
+  flex: 1;
+  min-width: 0;
+}
+
+/* HOT остаётся компактным бейджем, а не растягивается полосой. */
+.ecard.ecard-large-card .ecard-large-subtitle-row .top-badge {
+  position: static;
+  display: inline-flex;
+  width: max-content;
+  max-width: max-content;
+  flex: 0 0 auto;
+  margin: 4px 0 0 auto;
+}
+
+/* Под зелёным блоком список слева, три предложения справа. */
+.ecard.ecard-large-card .ecard-large-details {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.9fr) minmax(0, 1.6fr);
+  gap: 18px;
+  align-items: start;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Список остаётся в левой колонке. */
+.ecard.ecard-large-card .ecard-large-list {
+  min-width: 0;
+}
+
+/* Пункты списка стоят вертикально и имеют удобный интервал. */
+.ecard.ecard-large-card .feat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ecard.ecard-large-card .feat-item {
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+/* Три предложения располагаются в один ряд справа от списка. */
+.ecard.ecard-large-card .ecard-large-aside {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  min-width: 0;
+}
+
+/* У каждого предложения своя компактная рамка. */
+.ecard.ecard-large-card .ecard-large-option {
+  min-width: 0;
+  padding: 9px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+/* Заголовок предложения. */
+.ecard.ecard-large-card .ecard-large-option strong {
+  display: block;
+  font-size: 0.78rem;
+  line-height: 1.3;
+}
+
+/* Короткое описание предложения. */
+.ecard.ecard-large-card .ecard-large-option p {
+  margin: 4px 0 8px;
+  font-size: 0.68rem;
+  line-height: 1.4;
+}
+
+/* Кнопка компактная и не растягивается на всю карточку. */
+.ecard.ecard-large-card .ecard-large-option .btn {
+  display: inline-flex;
+  width: auto;
+  max-width: 100%;
+  min-height: 34px;
+  padding: 0 10px;
+  box-sizing: border-box;
+  font-size: 0.62rem;
+  white-space: normal;
+}
+
+/* Примечание под предложениями занимает всю ширину их ряда. */
+.ecard.ecard-large-card .ecard-large-disclaimer {
+  grid-column: 1 / -1;
+  font-size: 0.65rem;
+  line-height: 1.35;
+  opacity: 0.65;
+}
+
+/* Строка валют и баннер идут после списка и предложений в порядке HTML. */
+.ecard.ecard-large-card > .withdraw-row,
+.ecard.ecard-large-card > .ecard-banner {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* На узком экране предложения переходят под список, но остаются в ряд. */
+@media (max-width: 800px) {
+  .ecard.ecard-large-card .ecard-large-details {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* На телефоне предложения складываются столбиком, чтобы текст не сжимался. */
+@media (max-width: 560px) {
+  .ecard.ecard-large-card .ecard-large-aside {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Ссылка в заголовке сохраняет бирюзовый цвет и не подчёркивается. */
+.ecard-large-card .section-title a {
+  color: #4ade80;
+  text-decoration: none;
+}
+
+/* При наведении показываем, что название кликабельное. */
+.ecard-large-card .section-title a:hover {
+  text-decoration: underline;
+}		
+</style>
+	
+</head>
 <body>
 <!-- Background layers -->
 <div class="bg-noise"></div><div class="bg-grid"></div><div class="bg-glow-1"></div><div class="bg-glow-2"></div>
-  
     <!-- Шапка сайта встанет сюда автоматически с неоновым логотипом ZETTA -->
     <main-header></main-header>
-
-   	<!-- ── MAIN ──────────────────────────────────────────────── -->
+        <!-- ── MAIN ──────────────────────────────────────────────── -->
 <main id="top">
-        <!-- Заголовок секции -->
-      <!-- HERO -->
-<section class="hero hero-split">
-<div class="hero-left">
-<div class="hero-eyebrow">Live &amp; updated daily</div>
+       <!-- HERO -->
+<section>
+<div class="hero" style="padding:44px 0 8px;">
+<div class="hero-eyebrow">📱 Mobile &amp; Desktop Apps</div>
 <h1>
-<div class="line-1">Free Spins.</div>
-<div class="line-2">Real Crypto Wins.</div>
+<span class="line-1">Best Play2Earn </span><br/>
+<span class="line-2">&amp; Offerwall WebSites</span>
 </h1>
-<p class="hero-sub">Claim free spins, welcome bonuses, and daily drops at the top crypto casinos — plus reward games on the side. 18+ where applicable. Play responsibly.</p>
-<div class="hero-cta-row">
-<a class="btn btn-earn" href="/index.html">Explore Top Websites →</a>
-<a class="btn btn-ghost" href="/claim-multiply/index.html">Hourly Faucets</a>
+<p class="hero-sub">Get up to $5 free just for signing up — then earn up to $225 per offer via apps, surveys, games &amp; microtasks. All legit, all paying.</p>
+</div>
+
+<!-- INTRO STATS -->
+<div class="ea-intro-grid">
+<div class="ea-intro-item">
+<div class="ea-intro-icon">💰</div>
+<div class="ea-intro-val">$225</div>
+<div class="ea-intro-lbl">Max per offer</div>
+</div>
+<div class="ea-intro-item">
+<div class="ea-intro-icon">🎁</div>
+<div class="ea-intro-val">$5</div>
+<div class="ea-intro-lbl">Free signup bonus</div>
+</div>
+<div class="ea-intro-item">
+<div class="ea-intro-icon">⚡</div>
+<div class="ea-intro-val">Instant</div>
+<div class="ea-intro-lbl">Withdrawal speed</div>
 </div>
 </div>
-    					<div class="hero-right">
-					<main-slider></main-slider>
-				</div>
-</section>
+
 <div class="hero-divider"></div>
-         
-        <!-- Сетка с карточками игр -->
-
-        <!-- PLAY & EARN -->
-<section id="play">
-<div class="section-header">
-<div>
-<div class="section-title">Play &amp; Earn <span>Games</span></div>
-<div class="section-desc">Reward platforms centered on games, quests, and free gift mechanics.</div>
-</div>
-</div>
-<div class="card-grid">
-<!-- Gamehag Begin-->
-<div class="ecard" data-site="gamehag"><div class="ecard-top-line"></div>
-<div class="ecard-head"><div class="ecard-icon c12"><img alt="" class="brand-logo" loading="lazy"/><span class="emoji">🕹️</span></div>
-<div class="ecard-meta"><div class="ecard-name">Gamehag</div><div class="ecard-type">Games &amp; Rewards</div></div>
-<div class="ecard-rank">#01</div></div><div class="feature-pill"><div class="fp-check">✓</div>
-<div class="fp-text">🎮 Earn gift cards &amp; crypto from gaming — complete quests, collect Soul Gems, claim rewards</div></div>
-<div class="feat-list">
-<div class="feat-item">Gaming quests + soul gem rewards</div>
-<div class="feat-item">Redeem for gift cards, crypto &amp; more</div>
-</div>
-<div class="withdraw-row"><span class="w-label">Withdraw to</span><span class="w-badge">Gift Cards</span><span class="w-badge">Wallet</span></div>
-
-
-<div class="ecard-actions">
-<a class="btn btn-earn" data-btn="earn" data-site="gamehag" data-track="click" href="https://gamehag.com/r/2NPC34QU" rel="noopener" target="_blank">Play Now ↗</a></div>
-</div>
-<!-- Gamehag End---->
-
-
-
-<!--EarnLab Begin---->
-<div class="ecard" data-site="earnlab">
-    <div class="ecard-top-line"></div>
-        <div class="ecard-head">
-            <div class="ecard-icon c12"><img alt="" class="brand-logo" loading="lazy"/><span class="emoji">🎁</span>
-            </div>
-        <div class="ecard-meta">
-            <div class="ecard-name">EarnLab</div>
-            <div class="ecard-type">Free Gift Games</div>
-        </div>
-            <div class="ecard-rank">#02</div>
-        </div>
-<div class="feature-pill"><div class="fp-check">✓</div><div class="fp-text">🎁 Unlock free gift rewards from games — game-style bonuses, prize hunts &amp; daily drops</div>
-</div>
-<div class="feat-list">
-<div class="feat-item">Game tasks + prize reward system</div>
-<div class="feat-item">Free gift cards &amp; crypto prizes</div>
-</div>
-<div class="withdraw-row"><span class="w-label">Withdraw to</span><span class="w-badge">Wallet</span></div>
-<div class="ecard-actions">
-<a class="btn btn-earn" data-btn="earn" data-site="earnlab" data-track="click" href="https://earnlab.com/games/diksy" rel="noopener" target="_blank">Play Now ↗</a>
-</div>
-</div>
-<!--EarnLab End---->
-<!--CLASH.GG Begin---->
-<div class="ecard" data-site="clash">
-        <div class="ecard-top-line"></div>
-            <div class="ecard-head">
-                <div class="ecard-icon c12"><img alt="" class="brand-logo" loading="lazy"/><span class="emoji">🎁</span>
-                </div>
-                <div class="ecard-meta">
-                    <div class="ecard-name">CLashGG</div>
-                    <div class="ecard-type">Free Gift Games</div>
-                </div>
-                <div class="ecard-rank">#03</div>
-            </div>
-    <div class="feature-pill"><div class="fp-check">✓</div>
-    <div class="fp-text">🎁 Unlock free gift rewards from games — game-style bonuses, prize hunts &amp; daily drops</div>
-    </div>
-    <div class="feat-list">
-    <div class="feat-item">Game tasks + prize reward system</div>
-    <div class="feat-item">Free gift cards &amp; crypto prizes</div>
-    </div>
-    <div class="withdraw-row"><span class="w-label">Withdraw to</span><span class="w-badge">Wallet</span></div>
-    <div class="ecard-actions">
-    <a class="btn btn-earn" data-btn="earn" data-site="clash" data-track="click" href="https://clash.gg/r/DIKSY" rel="noopener" target="_blank">Play Now ↗</a>
-    </div>
-</div>
-<!--CLASH.GGEnd---->
-<!--RUSTCLASH.COM Begin---->
-<div class="ecard" data-site="RUSTCLASH"><div class="ecard-top-line"></div>
-<div class="ecard-head"><div class="ecard-icon c12"><img alt="" class="brand-logo" loading="lazy"/><span class="emoji">🎁</span></div>
-<div class="ecard-meta"><div class="ecard-name">RustClash</div>
-<div class="ecard-type">Free Gift Games</div></div>
-<div class="ecard-rank">#04</div></div>
-<div class="feature-pill"><div class="fp-check">✓</div>
-<div class="fp-text">🎁 Unlock free gift rewards from games — game-style bonuses, prize hunts &amp; daily drops</div>
-</div>
-<div class="feat-list">
-<div class="feat-item">Game tasks + prize reward system</div>
-<div class="feat-item">Free gift cards &amp; crypto prizes</div>
-</div>
-<div class="withdraw-row"><span class="w-label">Withdraw to</span><span class="w-badge">Wallet</span></div>
-<div class="ecard-actions">
-<a class="btn btn-earn" data-btn="earn" data-site="earnlab" data-track="click" href="https://rustclash.com/r/DIKSY" rel="noopener" target="_blank">Play Now ↗</a>
-</div>
-</div>
-<!--RUSTCLASH.COM  End---->
-
-<!--ACEbet Begin---->
-<div class="ecard" data-site="acebet"><div class="ecard-top-line"></div>
-<div class="ecard-head">
-    <div class="ecard-icon c12"><img alt="" class="brand-logo" loading="lazy"/><span class="emoji">🎁</span>
-    </div>
-<div class="ecard-meta"><div class="ecard-name">AceBet</div><div class="ecard-type">Free Gift Games</div></div>
-<div class="ecard-rank">#02</div>
-</div>
-<div class="feature-pill"><div class="fp-check">✓</div><div class="fp-text">🎁 Unlock free gift rewards from games — game-style bonuses, prize hunts &amp; daily drops</div>
-</div>
-<div class="feat-list">
-<div class="feat-item">Game tasks + prize reward system</div>
-<div class="feat-item">Free gift cards &amp; crypto prizes</div>
-</div>
-<div class="withdraw-row"><span class="w-label">Withdraw to</span><span class="w-badge">Wallet</span></div>
-<div class="ecard-actions">
-<a class="btn btn-earn" data-btn="earn" data-site="acebet" data-track="click" href="https://acebet.co/welcome/r/diksy" rel="noopener" target="_blank">Play Now ↗</a>
-</div>
-</div>
-<!--Acebet End---->
-</div>
 </section>
-    </main>
 
-    <!-- Подвал сайта встанет сюда автоматически и запустит скрипты иконок -->
+<!-- TOP play2earn games -->
+<section id="play2earn -games">
+<div class="section-header">
+	<div>
+		<div class="section-title">Top <span>Play2Earn Games</span></div>
+		<div class="section-desc">Highest-paying play2earn websitesites — complete task, surveys &amp; games for real cash or crypto.</div>
+	</div>
+</div>
+<section id="banners">
+			<!-- RollerCoin Begin -->
+<div class="ecard hot-pick featured ecard-large-card"  data-site="rollercoin">
+		<div class="ecard-top-line"></div>
+					<div class="ecard-head">
+						<div class="ecard-icon c1"> <img alt="" class="brand-logo" src="https://www.google.com/s2/favicons?domain=rollercoin.com&sz=128" loading="lazy"/><span class="emoji">⛏️</span></div>			
+											<div class="ecard-meta">
+												  <div class="section-title">The Best Play2Earn Game : <a href="https://rollercoin.com/?r=mmkldfup" target="_blank" rel="noopener noreferrer"> <span> Rollercoin.com</span>  </a></div> 
+													<div class="ecard-large-subtitle-row"><div class="section-desc">⛏️ Play, Win, and Earn Free Crypto with the Top Play2Earn game!</div><div class="top-badge hot-badge">🔥 HOT</div></div>
+											</div> 
+							</div>
+					
+									
+									<div class="feature-pill">
+										<div class="fp-check">✓</div>
+											<div class="fp-text">⛏️ Rollercoin is a free-to-play crypto mining game. Unlock new rooms, complete quests, strategically buy high-performance miners, and construct the ultimate mining farm. Feel the rush of anticipation as you compete for real crypto rewards from the pulsating reward pool. The world of bitcoin mining game awaits, and fortune favors the bold!</div>
+									</div>
+										
+								<!-- Список слева, информация и кнопки справа. -->
+									 <div class="ecard-large-details">
+												<div class="ecard-large-list">
+													<div class="feat-list">
+														<div class="feat-item">Build the best mining farm and get rewards</div>
+														<div class="feat-item">Start playing thrilling games</div>
+														<div class="feat-item">Explore the vibrant Marketplace</div>
+														<div class="feat-item">Join events and complete quests</div>
+														<div class="feat-item">Craft and merge miners</div>
+														<div class="feat-item">Increase mining power and get rewards!</div>
+														<div class="feat-item">Launched since 2018</div>
+														<div class="feat-item">Rewards every 10 min</div>
+														<div class="feat-item">Trusted by 5,600,000 players Worldwide </div>
+													  	 
+													</div>   
+												</div>
+									</div>
+								
+									
+									
+									<div class="crypto-row"></div>
+													<div class="withdraw-row">
+																		<span class="w-label">Withdraw to</span>
+																		<span class="w-badge">Crypto</span> 
+														  <img src="https://rollercoin.com/static/img/wallet/xrp.svg?v=1.13" alt="XRP" width="28" height="28">
+														  <img src="https://rollercoin.com/static/img/wallet/algo.svg?v=1.13" alt="ALGO" width="28" height="28">
+														  <img src="https://rollercoin.com/static/img/wallet/trx.svg?v=1.13" alt="TRX" width="28" height="28">
+														  <img src="https://rollercoin.com/static/img/wallet/doge.svg?v=1.13" alt="DOGE" width="28" height="28">
+														  <img src="https://rollercoin.com/static/img/wallet/btc.svg?v=1.13" alt="BTC" width="28" height="28">
+														  <img src="https://rollercoin.com/static/img/wallet/eth.svg?v=1.13" alt="ETH" width="28" height="28">
+														  <img src="https://rollercoin.com/static/img/wallet/bnb.svg?v=1.13" alt="BNB" width="28" height="28">
+														  <img src="https://rollercoin.com/static/img/wallet/busd.svg?v=1.13" alt="BUSD" width="28" height="28">
+														  <img src="https://rollercoin.com/static/img/wallet/ton.svg?v=1.13" alt="TON" width="28" height="28">
+														  <img src="https://rollercoin.com/static/img/wallet/matic.svg?v=1.13" alt="MATIC" width="28" height="28">
+														  <img src="https://rollercoin.com/static/img/wallet/sol.svg?v=1.13" alt="SOL" width="28" height="28">
+														  <img src="https://rollercoin.com/static/img/wallet/usdt.svg?v=1.13" alt="USDT" width="28" height="28">
+														  <img src="https://rollercoin.com/static/img/wallet/wfloki.svg?v=1.13" alt="WFLOKI" width="28" height="28">
+														  <img src="https://rollercoin.com/static/img/wallet/wpepe.svg?v=1.13" alt="WPEPE" width="28" height="28">
+														  <img src="https://rollercoin.com/static/img/wallet/wshib.svg?v=1.13" alt="WSHIB" width="28" height="28">
+															  <img src="https://rollercoin.com/static/img/wallet/ltc.svg?v=1.13" alt="LTC" width="28" height="28">
+													</div>
+														 <div class="ecard" data-id="rollercoin" data-site="rollercoin">
+															  <a href="https://rollercoin.com/?r=mmkldfup" target="_blank" rel="noopener noreferrer" class="ecard-banner">
+																	<picture>
+																	  <source media="(max-width: 480px)" srcset="https://static.rollercoin.com/static/img/ref/gen3/w460h90.gif">
+																	  <img src="https://static.rollercoin.com/static/img/ref/gen3/w728h90.gif" alt="Rollercoin">
+																	</picture>
+															  </a>
+														  </div>	
+											<div class="ecard-large-aside">
+													<div class="ecard-large-option">
+													  <strong>Deposit with NC Wallet</strong>
+													  <p>Zero-fee transfers on supported networks.</p>
+													 <a class="btn btn-ghost"  href="https://nc-wallet.com/invite/HK2NO1TV?lang=ru"
+														 target="_blank" rel="noopener noreferrer">NC Wallet ↗</a>
+													</div>
+
+														<div class="ecard-large-option">
+														  <strong>Pay with Wallet Connect</strong>
+														  <p>Your Can Connect OKx Wallet with RC accaunt.</p>
+														  <a class="btn btn-ghost" href="https://web3.okx.com/join/DIKSCOIN	"
+															 target="_blank" rel="noopener noreferrer">Conect OKX Wallet ↗</a>
+														</div>
+
+															<div class="ecard-large-option">
+																  <strong>Buy crypto with OKx</strong>
+																  <p>Use a card or bank transfer on OKX.</p>
+																 <a class="btn btn-ghost" href="https://my.okx.com/ru-eu/join/KAWCK6Z5"
+																	target="_blank" rel="noopener noreferrer">Buy crypto ↗</a>
+															</div>
+													
+											</div>
+	
+				</div>
+		
+<!-- RollerCoin End -->
+  <div class="section-sep">Top Earning Websites</div>
+									
+<div class="section-header"></div>
+
+			<!-- LImercoin  Begin-->
+			<div class="ecard hot-pick featured ecard-large-card" data-site="limercoin">
+				<div class="ecard-top-line"></div>
+								<div class="ecard-head">
+										<div class="ecard-icon c1">
+											<img alt="" class="brand-logo" loading="lazy" decoding="async" referrerpolicy="no-referrer" src="https://icons.duckduckgo.com/ip3/limercoin.com.ico"><span class="emoji">⛏️</span>
+										</div>
+											<div class="ecard-meta">
+													<div class="section-title">The Second Choice After Rollercoin Is : <a href="https://limercoin.com/?ref=ryxpgvt3" target="_blank" rel="noopener noreferrer">  <span>Limercoin.com</span></a> </div>
+														<div class="ecard-large-subtitle-row">
+															<div class="section-desc">Build your mining empire and earn crypto!</div>
+															<div class="top-badge hot-badge">🔥 HOT</div>
+														</div>
+											</div>
+								</div>
+							
+							<!-- Зелёный блок остаётся над списком и правой информацией. -->
+								<div class="feature-pill">
+									<div class="fp-check">✓</div><div class="fp-text">⛏️ Limercoin is a mining simulator game where you build your space,manage mining operations and mine cryptocurrency.</div>
+								</div>
+								
+									  <!-- Список слева, информация и кнопки справа. -->
+									 <div class="ecard-large-details">
+									  
+												<div class="ecard-large-list">
+											
+														  <div class="feat-list">
+																	<div class="feat-item">Your own personal space for mining</div>
+																	<div class="feat-item">Big variety of miners</div>
+																	<div class="feat-item">Play games to increase power</div>
+																	<div class="feat-item">Mine different cryptocurrencies</div>
+																	<div class="feat-item">Craft and merge miners</div>
+																	<div class="feat-item">Increase mining power and get rewards!</div>
+																	<div class="feat-item">Launched in 2023</div>
+																	<div class="feat-item">Rewards every 10 minutes</div>
+														  </div>   
+												</div>
+										  
+											<div class="ecard-large-aside">
+											
+													<div class="ecard-large-option">
+													  <strong>Deposit with NC Wallet</strong>
+													  <p>Zero-fee transfers on supported networks.</p>
+													  <a class="btn btn-ghost" href="https://nc-wallet.com/invite/HK2NO1TV?lang=ru"
+														 target="_blank" rel="noopener noreferrer">NC Wallet ↗</a>
+													</div>
+
+														<div class="ecard-large-option">
+														  <strong>Pay with Wallet Connect</strong>
+														  <p>Your Can Connect OKx Wallet with RC accaunt.</p>
+														  <a class="btn btn-ghost" href="https://web3.okx.com/join/DIKSCOIN	"
+															 target="_blank" rel="noopener noreferrer">Conect OKX Wallet ↗</a>
+														</div>
+
+															<div class="ecard-large-option">
+																  <strong>Buy crypto with</strong>
+																  <p>Use a card or bank transfer on OKX.</p>
+																  <a class="btn btn-ghost" href="https://my.okx.com/ru-eu/join/KAWCK6Z5"
+																	target="_blank" rel="noopener noreferrer">Buy crypto at OKx.com ↗</a>
+															</div>
+													
+											</div>
+										  
+									</div>
+									
+									<!-- Эта строка остаётся сразу над баннером. -->		
+										<div class="withdraw-row">
+											<span class="w-label">Withdraw to</span>
+											<span class="w-badge">Crypto</span>
+											<img src="https://limercoin.com/static/img/coins/btc_icon.svg" alt="BTC" width="28" height="28">
+											<img src="https://limercoin.com/static/img/coins/doge_icon.svg" alt="DOGE" width="28" height="28">
+											<img src="https://limercoin.com/static/img/coins/ltc_icon.svg" alt="LTC" width="28" height="28">
+											<img src="https://limercoin.com/static/img/coins/sol_icon.svg" alt="SOL" width="28" height="28">
+									 </div>
+									  
+								  <!-- Баннер — отдельный блок под списком и кнопками. -->
+								  <a class="ecard-banner" href="https://limercoin.com/?ref=ryxpgvt3" target="_blank" rel="noopener noreferrer">
+											<picture><source media="(max-width: 480px)" srcset="https://static.limercoin.com/promo/v1/dark/320x50.png">
+											<img src="https://static.limercoin.com/promo/v1/dark/728x90.png" alt="Limercoin"></picture> 
+								  </a>
+		
+			</div>
+				<!-- limerCoin End -->
+
+	
+  <!-- SimpleBits -->
+  <div class="section-header"><div>
+    <div class="section-title">Top Microtask & Offerwall Apps & <span>SimpleBits.io</span></div>
+    <div class="section-desc">Highest-paying offer sites — complete apps, surveys & games for real cash or crypto.</div>
+  </div>
+  </div>
+  <div class="ecard" data-id="simplebits" data-site="simplebits">
+    <a href="https://simplebits.io/ref/EYjiDha1AhrMMCBFp2Uat" target="_blank" rel="noopener noreferrer" class="ecard-banner">
+      <picture>
+        <source media="(max-width: 480px)" srcset="https://simplebits.io/banners/sb468x60.gif">
+        <img src="https://simplebits.io/banners/sb728x90.gif" alt="SimpleBits">
+      </picture>
+    </a>
+  </div>
+
+  <div class="section-sep">Top Earning Websites</div>
+
+  <!-- Mining Blocks -->
+  <div class="section-header"><div>
+    <div class="section-title">The Best Mining simulator withhout investment :  <span>Mining.blocks</span></div>
+    <div class="section-desc">Virtual mining game — play and earn without investment.</div>
+  </div>
+  </div>
+  <div class="ecard" data-id="miningblocks" data-site="miningblocks">
+    <a href="https://miningblocks.club/?Referral=146326" target="_blank" rel="noopener noreferrer" class="ecard-banner">
+      <picture>
+        <source media="(max-width: 480px)" srcset="https://miningblocks.club/pageAssets/img/BannerPromocionalHorizontal.gif">
+        <img src="https://miningblocks.club/pageAssets/img/BannerPromocionalHorizontal.gif" alt="Mining Blocks">
+      </picture>
+    </a>
+  </div>
+
+  <div class="section-sep">Top Earning Websites</div>
+
+  <!-- SolFarmer -->
+    
+  <div class="section-header">
+	<div>
+		<div class="section-title">SolFarmer — web idle-mining-simulator on Solana blockchain : <span>SolFarmer.io</span></div>
+		<div class="section-desc"> SolFarm is an idle/strategy mining game where you build a cryptocurrency mining operation, place miners, merge them into more powerful units, and earn real SOL (Solana) that you can withdraw to your wallet.</div>
+  	</div>	
+</div>
+ <div class="ecard" data-id="solfarmer" data-site="solfarmer">
+    <a href="https://solfarmer.io/auth?ref=D09FA123" target="_blank" rel="noopener noreferrer" class="ecard-banner">
+      <picture>
+        <source media="(max-width: 480px)" srcset="https://solfarmer.io/banners/mobile-banner-320x50.gif">
+        <source media="(max-width: 728px)" srcset="https://solfarmer.io/banners/leaderboard-728x90.gif">
+        <img src="https://solfarmer.io/banners/billboard-970x250.gif" alt="SolFarmer">
+      </picture>
+    </a>
+	</div>
+  </div>
+<div class="section-sep">Top Earning Websites</div>
+</section>   
+     
+
+
+    </main>
+		<!-- Подвал сайта встанет сюда автоматически и запустит скрипты иконок -->
     <main-footer></main-footer>
-    <button aria-label="Back to top" id="backToTop" title="Back to top">↑</button>
-   
+	
+<button aria-label="Back to top" id="backToTop" title="Back to top">↑</button>
+
  <script src="../ecard.js" defer></script>
-<script id="autologo" src="../autologo.js"></script>
+<script id="pips-autologo" src="../pips-autologo.js" defer></script>
+
 </body>
 </html>
