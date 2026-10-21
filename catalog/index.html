@@ -153,6 +153,7 @@ function render(){let q=$("#search").value.toLowerCase(),sort=$("#sort").value,s
 </div>
 
 <div class="metrics">
+
 		  <div class="metric">
 			<span class="metric-icon" aria-hidden="true">⏱️</span>
 			<div class="metric-copy"><b>Раз в час</b><span>Кран</span></div>
@@ -160,17 +161,15 @@ function render(){let q=$("#search").value.toLowerCase(),sort=$("#sort").value,s
 
   <div class="metric">
 					  <span class="metric-icon" style="width:25px;height:25px;overflow:hidden;flex:0 0 25px">
-					  <img class="metric-token-icon"
-						   style="width:23px;height:23px;max-width:23px;max-height:23px;object-fit:contain"
+				
+				<img class="metric-token-icon" width="23" height="23"
+  style="width:23px!important;height:23px!important;max-width:23px;max-height:23px;object-fit:contain;display:block"
 						   src="${p.id === 'rollercoin' ? './icons/rlt.svg' : 'https://miningblocks.club/pageAssets/img/criptos/block.png'}"
 						   alt="${p.id === 'rollercoin' ? 'RLT' : 'Blocks'}">
 					</span>
-  
-  	
-		
 			<div class="metric-copy">
 			
-			  <b>${p.inGameCurrency || "—"}</b><span>Своя валюта</span>
+				  <b>${p.inGameCurrency || "—"}</b><span>Своя валюта</span>
 			</div>
 			
  </div>
