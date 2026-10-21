@@ -257,10 +257,11 @@ const list = a => Array.isArray(a) && a.length
   
  
   
-  <span class="profile-unknown">Ссылка FaucetPay добавится позже</span>`}</p>
-  <div class="profile-fact">
-  <b>Минимум</b><span>${text(p.minWithdraw)}</span>
+<p>${p.faucetpayReferralUrl&&/^https?:\/\//i.test(p.faucetpayReferralUrl)?`<a class="referral-link" href="${esc(p.faucetpayReferralUrl)}" target="_blank" rel="noopener">
+  Моя ссылка FaucetPay ↗</a>`:`<span class="profile-unknown">Ссылка FaucetPay добавится позже</span>`}</p>
+  <div class="profile-fact"><b>Минимум</b><span>${text(p.minWithdraw)}</span>
   </div>
+  
   
   <div class="profile-fact">
   
