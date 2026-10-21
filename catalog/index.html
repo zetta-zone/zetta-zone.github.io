@@ -200,14 +200,18 @@ const coinIcons = (a, p) => {
       BTC: "btc", ETH: "eth", DOGE: "doge", BNB: "bnb",
       POL: "matic", SOL: "sol", TRX: "trx", XRP: "xrp",
       LTC: "ltc", ALGO: "algo", BUSD: "busd", TON: "ton",
-      USDT: "usdt", wFLOKI: "floki", wPEPE: "pepe", wSHIB: "shib"
+      USDT: "usdt", FLOKI: "floki", PEPE: "pepe", SHIB: "shib"
     };
 
     return `<div class="coin-icons rollercoin-coins">${a.map(x => {
       const slug = icons[x];
       return `<span class="rc-coin" title="${esc(x)}">${
         slug
-          ? `<img src="https://static.rollercoin.com/static/img/icons/currencies/${slug}.svg?v=1.13" alt="${esc(x)}">`
+          ? `<img src="${x === 'wFLOKI'
+  ? 'https://rollercoin.com/static/img/wallet/wfloki.svg?v=1.13'
+  : x === 'wPEPE'
+    ? 'https://rollercoin.com/static/img/wallet/wpepe.svg?v=1.13'
+    : 'https://static.rollercoin.com/static/img/icons/currencies/' + slug + '.svg?v=1.13'}" alt="${esc(x)}">`
           : `<b>${esc(x)}</b>`
       }</span>`;
     }).join("")}</div>`;
