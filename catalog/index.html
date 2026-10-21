@@ -145,7 +145,11 @@ function render(){let q=$("#search").value.toLowerCase(),sort=$("#sort").value,s
 <div class="subtitle">${p.sub}</div>
 </div><button class="fav" data-fav="${p.id}" aria-label="Избранное">${saved.has(p.id)?"♥":"♡"}</button></div>
 <div class="tags"><span class="tag">${p.cat}</span><span class="tag ${p.verified?"green":"red"}">${p.verified?"✓ Выплаты проверены":"! Выплаты не проверены"}</span>${riskBadge(p)}</div>
-<p class="desc">${p.d}</p><div class="card-rating"><div class="card-rating-info"><span class="stars">★</span>${p.r>0?`<b class="rating">${p.r.toFixed(1)}</b>`:`<span class="mut">—</span>`}<span class="rating-count">(${p.ratingSource||((Number(p.reviews)||0)+" оценок")})</span></div>
+<p class="desc">${p.d}</p>
+<div class="card-rating">
+<div class="card-rating-info">
+<span class="stars">★</span>${p.r>0?`<b class="rating">${p.r.toFixed(1)}</b>`:`<span class="mut">—</span>`}<span class="rating-count">(${p.ratingSource||((Number(p.reviews)||0)+" оценок")})</span>
+</div>
 </div>
 
 <div class="metrics">
@@ -165,9 +169,11 @@ function render(){let q=$("#search").value.toLowerCase(),sort=$("#sort").value,s
   </div>
   <div class="metric">
     <span class="metric-icon" aria-hidden="true">🎁</span>
-    <div class="metric-copy"><b>Возможности</b><span>Бонусы · крафт · пулы</span></div>
+    <div class="metric-copy"><b>Возможности</b><span>Бонусы · крафт · пулы</span>
+    </div>
   </div>
 </div>
+
   <label class="comparecheck"><input type="checkbox" data-pick="${p.id}" ${chosen.has(p.id)?"checked":""}> Добавить к сравнению</label><div class="cardfoot"><button class="btn" data-detail="${p.id}">Подробнее</button>${(p.registrationUrl||p.referralUrl)?`<a class="btn primary referral-cta" href="${esc(p.registrationUrl||p.referralUrl)}" target="_blank" rel="noopener">${esc(p.referralCta||"Перейти к регистрации")}</a>`:`<button class="btn primary referral-cta" type="button" disabled title="Ссылка пока не добавлена">${esc(p.referralCta||"Ссылка пока не добавлена")}</button>`}</div></article>`).join(""):`<div class="empty">Ничего не найдено — попробуй изменить фильтры.</div>`;$("#savedN").textContent=saved.size;updateCompare()}
 function updateCompare(){$("#compN").textContent=chosen.size+"/3";$("#compNames").textContent=[...chosen].map(id=>data.find(p=>p.id===id)?.n).join(" · ")||"Выбери 2–3 проекта";$("#comparebar").classList.toggle("show",chosen.size>0);$("#compareBtn").disabled=chosen.size<2}
 function openModal(s){$("#modal").innerHTML=s;$("#backdrop").classList.add("open")}function close(){$("#backdrop").classList.remove("open")}
