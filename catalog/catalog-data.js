@@ -177,7 +177,8 @@ window.CATALOG_DATA = [
     "daysOnline": "2018",
     "daysOnlineLabel": "ГОД ЗАПУСКА",
     "usersCount": "5,6 млн+",
-    "paymentsCount": "Общее число не указано",
+    "paymentsCount": "94 BTC",
+    "paymentsCountLabel": "НАМАЙНЕНО",
     "faucetpay": "Не подтверждено",
     "minWithdraw": "Зависит от валюты и сети",
     "withdrawalMethods": "Криптокошелёк; актуальные сети и пороги уточнить",
@@ -189,8 +190,8 @@ window.CATALOG_DATA = [
     "platforms": [
       "Веб"
     ],
-    "communities": [],
-    "communityLinks": {},
+    "communities": ["Discord", "Telegram-бот"],
+    "communityLinks": {"Discord": "https://discord.com/invite/EDyWFmN", "Telegram-бот": "https://t.me/rollertap_bot?start=1993292119"}
     "faucetpayReferralUrl": "",
     "inGameCurrency": "RLT (RollerToken)",
     "earningTypes": [
@@ -217,7 +218,7 @@ window.CATALOG_DATA = [
       },
       {
         "title": "Multi-mining",
-        "text": "Мощность можно распределять между криптовалютами. Официальная страница перечисляет BTC, ETH, DOGE, MATIC, BNB и RLT; доступность монет нужно сверять в аккаунте."
+        "text": "В список добавлены криптовалюты из присланного снимка игры: BTC, ETH, DOGE, BNB, POL, SOL, TRX, XRP, LTC, ALGO, BUSD, TON, USDT, wFLOKI, wPEPE и wSHIB. Доступность майнинга отдельных монет зависит от лиги и может меняться — список стоит сверять в игре."
       },
       {
         "title": "RLT и предметы",
@@ -232,21 +233,31 @@ window.CATALOG_DATA = [
       "BTC",
       "ETH",
       "DOGE",
-      "MATIC",
       "BNB",
-      "RLT"
+      "POL",
+      "SOL",
+      "TRX",
+      "XRP",
+      "LTC",
+      "ALGO",
+      "BUSD",
+      "TON",
+      "USDT",
+      "wFLOKI",
+      "wPEPE",
+      "wSHIB"
     ],
     "source": "https://rollercoin.com/",
     "checkedAt": "Официальный сайт и справка RollerCoin; актуальные условия вывода нужно проверить",
     "url": "https://rollercoin.com/",
-    "referralUrl": "",
+    "referralUrl": "https://rollercoin.com/?r=mmkldfup",
     "riskLevel": "medium",
     "riskDetails": "Начать можно бесплатно, но доступны внутриигровые покупки. Перед тратами стоит проверить стоимость, условия и влияние предметов на прогресс.",
     "verificationDetails": "Публичная статистика сайта показывает недавние выводы, но личная проверка выплат для каталога ещё не проводилась.",
     "referralBonus": "1 000 сатоши за регистрацию",
     "referralCta": "Получить 1 000 сатоши за регистрацию",
     "ratingSource": "Feefo",
-    "coinLabel": "Доступные для майнинга валюты:",
-    "registrationUrl": "https://rollercoin.com/"
+    "coinLabel": "Криптовалюты (доступность зависит от лиги):",
+    "registrationUrl": "https://rollercoin.com/?r=mmkldfup"
   }
 ];
