@@ -12,7 +12,7 @@ class SiteFooter extends HTMLElement {
                             <a class="footer-btn" data-btn="earning-apps" data-site="footer" data-track="click" href="/earning-apps/index.html">Earning Apps</a>
                             <a class="footer-btn" data-btn="more_ways_to_earn" data-site="footer" data-track="click" href="/more-ways-to-earn/index.html">Opportunities</a>
                             <a class="footer-btn" data-btn="play-earn" data-site="footer" data-track="click" href="/play-earn/index.html">Play &amp; Earn</a>
-                             <a class="footer-btn" data-btn="cotalog" data-site="footer" data-track="click" href="/cotalog/index.html">Cotalog</a>
+                             <a class="footer-btn" data-btn="cotalog" data-site="footer" data-track="click" href="/catalog/index.html">Catalog</a>
                             <a class="footer-btn" data-btn="contact" data-site="footer" data-track="click" href="/contact/index.html">Contact</a>
                         </div>
                     </div>
