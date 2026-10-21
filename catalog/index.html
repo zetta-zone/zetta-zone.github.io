@@ -147,8 +147,12 @@ function details(id){
 
 const coinIcons=(a,p)=>Array.isArray(a)&&a.length?(p.id==='rollercoin'?`
 <div class="coin-icons rollercoin-coins" aria-label="Криптовалюты RollerCoin">
-  ${a.map(x=>{const
-  icons={XRP:"xrp",ALGO:"algo",TRX:"trx",BTC:"btc",ETH:"eth",DOGE:"doge",MATIC:"matic",POL:"matic",BNB:"bnb",SOL:"sol",SHIB:"shib",LTC:"ltc"};const
+  ${a.map(x=>{const icons = {
+  BTC: "btc", ETH: "eth", DOGE: "doge", BNB: "bnb",
+  POL: "matic", SOL: "sol", TRX: "trx", XRP: "xrp",
+  LTC: "ltc", ALGO: "algo", BUSD: "busd", TON: "ton",
+  USDT: "usdt", wFLOKI: "floki", wPEPE: "pepe", wSHIB: "shib"
+};const
   slug=icons[x];return `<span class="rc-coin" title="${esc(x)}"
     >${slug?`<img
       src="https://static.rollercoin.com/static/img/icons/currencies/${slug}.svg?v=1.13"
