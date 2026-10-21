@@ -191,7 +191,7 @@ window.CATALOG_DATA = [
       "Веб"
     ],
     "communities": ["Discord", "Telegram-бот"],
-    "communityLinks": {"Discord": "https://discord.com/invite/EDyWFmN", "Telegram-бот": "https://t.me/rollertap_bot?start=1993292119"}
+    "communityLinks": {"Discord": "https://discord.com/invite/EDyWFmN", "Telegram-бот": "https://t.me/rollertap_bot?start=1993292119"},
     "faucetpayReferralUrl": "",
     "inGameCurrency": "RLT (RollerToken)",
     "earningTypes": [
