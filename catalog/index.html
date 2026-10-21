@@ -245,7 +245,26 @@ const list = a => Array.isArray(a) && a.length
   <section class="profile-item accent-cyan"><h3 class="section-heading"><span class="section-heading-icon icon-opportunity" aria-hidden="true">✦</span>Возможности</h3>${list(functions)}</section>
     <section class="profile-item pros-cons"><h3 class="section-heading"><span class="section-heading-icon icon-balance" aria-hidden="true">⚖️</span>Плюсы и минусы</h3><div class="pros-cons-part positive"><h4><span class="section-heading-icon icon-plus" aria-hidden="true">＋</span>Плюсы</h4>${list(p.pros)}</div><div class="pros-cons-divider"></div><div class="pros-cons-part negative"><h4><span class="section-heading-icon icon-minus" aria-hidden="true">−</span>Минусы</h4>${list(p.cons)}</div></section>
   <section class="profile-item"><h3>Механики и условия</h3><div class="profile-fact"><b>Майнеры</b><span>${text(p.miners)}</span></div><div class="profile-fact"><b>Крафт</b><span>${text(p.craft)}</span></div><div class="profile-fact"><b>Merge</b><span>${text(p.merge)}</span></div><div class="profile-fact"><b>Пулы</b><span>${text(p.pools)}</span></div><div class="profile-fact"><b>Рынок игроков</b><span>${text(p.marketplace)}</span></div></section>
-  <section class="profile-item"><h3>Вывод средств</h3><div class="profile-fact"><b>FaucetPay</b><span>${text(p.faucetpay)}</span></div><p>${p.faucetpayReferralUrl&&/^https?:\/\//i.test(p.faucetpayReferralUrl)?`<a class="referral-link" href="${esc(p.faucetpayReferralUrl)}" target="_blank" rel="noopener">Моя ссылка FaucetPay ↗</a>`:`<span class="profile-unknown">Ссылка FaucetPay добавится позже</span>`}</p><div class="profile-fact"><b>Минимум</b><span>${text(p.minWithdraw)}</span></div><div class="profile-fact"><b>Способ вывода</b><span>${text(p.withdrawalMethods)}</span></div><p><b>${esc(p.coinLabel||"Можно майнить и выводить:")}</b></p>${coinIcons(p.coins,p)}<div class="profile-fact"><b>Дополнительная валюта вывода</b><span><span class="withdrawal-token">₮ USDT</span></span></div><p class="profile-status">Очень быстрый вывод через FaucetPay.</p></section>
+  <section class="profile-item">
+  <h3>Вывод средств</h3>
+  
+  <div class="profile-fact">
+  <b>FaucetPay</b>
+  <span>${text(p.faucetpay)}</span>
+  
+  </div>
+  <p>${p.faucetpayReferralUrl&&/^https?:\/\//i.test(p.faucetpayReferralUrl)?`
+  <a class="referral-link" href="${esc(p.faucetpayReferralUrl)}" target="_blank" rel="noopener"> FaucetPay ↗
+  </a>`:`
+  <span class="profile-unknown">Ссылка FaucetPay добавится позже</span>`}</p>
+  <div class="profile-fact"><b>Минимум</b><span>${text(p.minWithdraw)}</span>
+  </div>
+  <div class="profile-fact">
+  <b>Способ вывода</b>
+  <span>${text(p.withdrawalMethods)}</span>
+  </div>
+  <p><b>${esc(p.coinLabel||"Можно майнить и выводить:")}</b>
+  </p>${coinIcons(p.coins,p)}<div class="profile-fact"><b>Дополнительная валюта вывода</b><span><span class="withdrawal-token">₮ USDT</span></span></div><p class="profile-status">Очень быстрый вывод через FaucetPay.</p></section>
   <section class="profile-item profile-wide"><h3>Источник и проверка</h3><p><b>Источник:</b> ${source}</p><p><b>Источник данных:</b> ${text(p.checkedAt)}</p><p><b>Дата запуска:</b> ${text(p.launchDate)}</p><p><b>Статус:</b> ${p.verified?'Пользователь подтвердил успешные выводы и выплаты':'Черновик · проверьте данные перед публикацией'}</p></section>
    <section class="profile-item profile-wide risk-details ${esc(p.riskLevel||'')}"><h3>Риск и результат проверки</h3><div class="profile-fact"><b>Уровень риска</b>${riskBadge(p)}</div><p>${text(p.riskDetails)}</p><p><b>Выплаты:</b> ${text(p.verificationDetails|| (p.verified?'Проверены':'Не проверены'))}</p></section>
  </div>
