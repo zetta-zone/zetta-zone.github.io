@@ -183,34 +183,34 @@ function details(id){
  const text=v=>v?esc(v):'<span class="profile-unknown">Не указано</span>';
  const tags=a=>Array.isArray(a)&&a.length?`<div class="profile-tags">${a.map(x=>`<span class="profile-tag">${esc(x)}</span>`).join("")}</div>`:'<p class="profile-unknown">Не указано</p>';
 
-const coinIcons=(a,p)=>Array.isArray(a)&&a.length?(p.id==='rollercoin'?`
-<div class="coin-icons rollercoin-coins" aria-label="Криптовалюты RollerCoin">
-  ${a.map(x=>{const icons = {
-  BTC: "btc", ETH: "eth", DOGE: "doge", BNB: "bnb",
-  POL: "matic", SOL: "sol", TRX: "trx", XRP: "xrp",
-  LTC: "ltc", ALGO: "algo", BUSD: "busd", TON: "ton",
-  USDT: "usdt", wFLOKI: "floki", wPEPE: "pepe", wSHIB: "shib"
-};const
-  slug=icons[x];return `<span class="rc-coin" title="${esc(x)}"
-    >${slug?`<img
-      src="https://static.rollercoin.com/static/img/icons/currencies/${slug}.svg?v=1.13"
-      alt="${esc(x)}"
-      loading="lazy"
-    />`:`<b>${esc(x)}</b>`}</span
-  >`}).join("")}
-</div>
-`:`
-<div class="coin-icons" aria-label="Криптовалюты">
-  ${a.map(x=>`<img
-    class="coin-image"
-    src="https://miningblocks.club/pageAssets/img/criptos/${esc(x.toLowerCase())}.png"
-    alt="${esc(x)}"
-    title="${esc(x)}"
-    loading="lazy"
-  />`).join("")}
-</div>
+const coinIcons = (a, p) => {
+  if (!Array.isArray(a) || !a.length) {
+    return `<p class="profile-unknown">Не указано</p>`;
+  }
 
- 
+  if (p.id === "rollercoin") {
+    const icons = {
+      BTC: "btc", ETH: "eth", DOGE: "doge", BNB: "bnb",
+      POL: "matic", SOL: "sol", TRX: "trx", XRP: "xrp",
+      LTC: "ltc", ALGO: "algo", BUSD: "busd", TON: "ton",
+      USDT: "usdt", wFLOKI: "floki", wPEPE: "pepe", wSHIB: "shib"
+    };
+
+    return `<div class="coin-icons rollercoin-coins">${a.map(x => {
+      const slug = icons[x];
+      return `<span class="rc-coin" title="${esc(x)}">${
+        slug
+          ? `<img src="https://static.rollercoin.com/static/img/icons/currencies/${slug}.svg?v=1.13" alt="${esc(x)}">`
+          : `<b>${esc(x)}</b>`
+      }</span>`;
+    }).join("")}</div>`;
+  }
+
+  return `<div class="coin-icons">${a.map(x =>
+    `<img class="coin-image" src="https://miningblocks.club/pageAssets/img/criptos/${esc(x.toLowerCase())}.png" alt="${esc(x)}">`
+  ).join("")}</div>`;
+};
+
 const list = a => Array.isArray(a) && a.length
   ? `<ul>${a.map(x => `<li>${esc(x)}</li>`).join("")}</ul>`
   : `<p class="profile-unknown">Пока не добавлено</p>`;
