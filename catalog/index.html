@@ -212,15 +212,9 @@ const coinIcons=(a,p)=>Array.isArray(a)&&a.length?(p.id==='rollercoin'?`
 
 `:<p class="profile-unknown">Пока не добавлено</p>`;
  
- const list=a=>Array.isArray(a)&&a.length?`
-<ul>
-  ${a.map(x=>`
-  <li>${esc(x)}</li>
-  `).join("")}
-</ul>
-`:'
-<p class="profile-unknown">Пока не добавлено</p>
-';
+const list = a => Array.isArray(a) && a.length
+  ? `<ul>${a.map(x => `<li>${esc(x)}</li>`).join("")}</ul>`
+  : `<p class="profile-unknown">Пока не добавлено</p>`;
 
  const platformIconUrls={"Android":"https://productionassets.rollercoin.com/main-app/62c229986d3afe4488e026e2ed1a84f0/assets/img/6pSJf71QQ1vm0tCqWNPCj.svg","Андроид":"https://productionassets.rollercoin.com/main-app/62c229986d3afe4488e026e2ed1a84f0/assets/img/6pSJf71QQ1vm0tCqWNPCj.svg","iOS":"https://productionassets.rollercoin.com/main-app/62c229986d3afe4488e026e2ed1a84f0/assets/img/D1BzArQVmxWZ-AaPf0VKBj.svg"};
  const platformIcons=a=>`<div class="platform-icons">${(Array.isArray(a)?a:[]).map(name=>{const url=platformIconUrls[name]||platformIconUrls[name.toLowerCase()];return url?`<span class="platform-icon-wrap active" title="${esc(name)}"><img class="platform-icon" src="${url}" alt="${esc(name)}"></span>`:''}).join('')}</div>`; const source=p.source&&/^https?:\/\//i.test(p.source)?`<a class="profile-source" href="${esc(p.source)}" target="_blank" rel="noopener">${esc(p.source)}</a>`:'<span class="profile-unknown">Не указан</span>';
