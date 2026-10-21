@@ -153,26 +153,33 @@ function render(){let q=$("#search").value.toLowerCase(),sort=$("#sort").value,s
 </div>
 
 <div class="metrics">
+		  <div class="metric">
+			<span class="metric-icon" aria-hidden="true">⏱️</span>
+			<div class="metric-copy"><b>Раз в час</b><span>Кран</span></div>
+		  </div>
+
   <div class="metric">
-    <span class="metric-icon" aria-hidden="true">⏱️</span>
-    <div class="metric-copy"><b>Раз в час</b><span>Кран</span></div>
-  </div>
-  <div class="metric">
-    <span class="metric-icon">
-    
-      <img class="metric-token-icon"
-        src="${p.id === 'rollercoin' ? './icons/rlt.svg' : 'https://miningblocks.club/pageAssets/img/criptos/block.png'}"
-        alt="${p.id === 'rollercoin' ? 'RLT' : 'Blocks'}">
-    </span>
-    <div class="metric-copy">
-      <b>${p.inGameCurrency || "—"}</b><span>Своя валюта</span>
-    </div>
-  </div>
-  <div class="metric">
-    <span class="metric-icon" aria-hidden="true">🎁</span>
-    <div class="metric-copy"><b>Возможности</b><span>Бонусы · крафт · пулы</span>
-    </div>
-  </div>
+					  <span class="metric-icon" style="width:25px;height:25px;overflow:hidden;flex:0 0 25px">
+					  <img class="metric-token-icon"
+						   style="width:23px;height:23px;max-width:23px;max-height:23px;object-fit:contain"
+						   src="${p.id === 'rollercoin' ? './icons/rlt.svg' : 'https://miningblocks.club/pageAssets/img/criptos/block.png'}"
+						   alt="${p.id === 'rollercoin' ? 'RLT' : 'Blocks'}">
+					</span>
+  
+  	
+		
+			<div class="metric-copy">
+			
+			  <b>${p.inGameCurrency || "—"}</b><span>Своя валюта</span>
+			</div>
+			
+ </div>
+ 
+		  <div class="metric">
+			<span class="metric-icon" aria-hidden="true">🎁</span>
+			<div class="metric-copy"><b>Возможности</b><span>Бонусы · крафт · пулы</span>
+			</div>
+		  </div>
 </div>
 
   <label class="comparecheck"><input type="checkbox" data-pick="${p.id}" ${chosen.has(p.id)?"checked":""}> Добавить к сравнению</label><div class="cardfoot"><button class="btn" data-detail="${p.id}">Подробнее</button>${(p.registrationUrl||p.referralUrl)?`<a class="btn primary referral-cta" href="${esc(p.registrationUrl||p.referralUrl)}" target="_blank" rel="noopener">${esc(p.referralCta||"Перейти к регистрации")}</a>`:`<button class="btn primary referral-cta" type="button" disabled title="Ссылка пока не добавлена">${esc(p.referralCta||"Ссылка пока не добавлена")}</button>`}</div></article>`).join(""):`<div class="empty">Ничего не найдено — попробуй изменить фильтры.</div>`;$("#savedN").textContent=saved.size;updateCompare()}
