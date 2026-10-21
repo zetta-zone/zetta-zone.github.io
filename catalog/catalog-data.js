@@ -191,7 +191,7 @@ window.CATALOG_DATA = [
       "Веб"
     ],
     "communities": ["Discord", "Telegram-бот"],
-    "communityLinks": {"Discord": "https://discord.com/invite/EDyWFmN", "Telegram-бот": "https://t.me/rollertap_bot?start=1993292119"},
+    "communityLinks": {"Discord": "https://discord.com/invite/EDyWFmN", "Telegram-бот": "https://t.me/rollertap_bot?start=1993292119"}
     "faucetpayReferralUrl": "",
     "inGameCurrency": "RLT (RollerToken)",
     "earningTypes": [
@@ -252,7 +252,7 @@ window.CATALOG_DATA = [
     "url": "https://rollercoin.com/",
     "referralUrl": "https://rollercoin.com/?r=mmkldfup",
     "riskLevel": "medium",
-    "riskDetails": "Начать можно бесплатно, но доступны внутриигровые покупки. Перед тратами стоит проверить стоимость, условия и влияние предметов на прогресс.",
+    "riskDetails": "Начать можно бесплатно, но доступны внутриигровые покупки. Перед тратами стоит проверить стоимость, условия и влияние предметов на прогресс. Есть риск потратить деньги но не догстичьжелаемого результата.",
     "verificationDetails": "Публичная статистика сайта показывает недавние выводы, но личная проверка выплат для каталога ещё не проводилась.",
     "referralBonus": "1 000 сатоши за регистрацию",
     "referralCta": "Получить 1 000 сатоши за регистрацию",
