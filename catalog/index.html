@@ -249,21 +249,29 @@ const list = a => Array.isArray(a) && a.length
   <h3>Вывод средств</h3>
   
   <div class="profile-fact">
+  
   <b>FaucetPay</b>
   <span>${text(p.faucetpay)}</span>
   
   </div>
+  
   <p>${p.faucetpayReferralUrl&&/^https?:\/\//i.test(p.faucetpayReferralUrl)?`
   <a class="referral-link" href="${esc(p.faucetpayReferralUrl)}" target="_blank" rel="noopener"> FaucetPay ↗
   </a>`:`
+  
   <span class="profile-unknown">Ссылка FaucetPay добавится позже</span>`}</p>
-  <div class="profile-fact"><b>Минимум</b><span>${text(p.minWithdraw)}</span>
-  </div>
   <div class="profile-fact">
+  <b>Минимум</b><span>${text(p.minWithdraw)}</span>
+  </div>
+  
+  <div class="profile-fact">
+  
   <b>Способ вывода</b>
+  
   <span>${text(p.withdrawalMethods)}</span>
   </div>
-  <p><b>${esc(p.coinLabel||"Можно майнить и выводить:")}</b>
+  <p>
+  <b>${esc(p.coinLabel||"Можно майнить и выводить:")}</b>
   </p>${coinIcons(p.coins,p)}<div class="profile-fact"><b>Дополнительная валюта вывода</b><span><span class="withdrawal-token">₮ USDT</span></span></div><p class="profile-status">Очень быстрый вывод через FaucetPay.</p></section>
   <section class="profile-item profile-wide"><h3>Источник и проверка</h3><p><b>Источник:</b> ${source}</p><p><b>Источник данных:</b> ${text(p.checkedAt)}</p><p><b>Дата запуска:</b> ${text(p.launchDate)}</p><p><b>Статус:</b> ${p.verified?'Пользователь подтвердил успешные выводы и выплаты':'Черновик · проверьте данные перед публикацией'}</p></section>
    <section class="profile-item profile-wide risk-details ${esc(p.riskLevel||'')}"><h3>Риск и результат проверки</h3><div class="profile-fact"><b>Уровень риска</b>${riskBadge(p)}</div><p>${text(p.riskDetails)}</p><p><b>Выплаты:</b> ${text(p.verificationDetails|| (p.verified?'Проверены':'Не проверены'))}</p></section>
