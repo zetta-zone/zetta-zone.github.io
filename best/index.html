@@ -15,7 +15,6 @@
     <script src="../footer.js" defer></script>
 
 	
-	<style>
 <style>
 /* Баннер — отдельная ссылка на всю ширину карточки. */
 .ecard-banner {
@@ -246,9 +245,17 @@
     grid-template-columns: 1fr;
   }
 }
-</style>
 
-		
+/* Ссылка в заголовке сохраняет бирюзовый цвет и не подчёркивается. */
+.ecard-large-card .section-title a {
+  color: #4ade80;
+  text-decoration: none;
+}
+
+/* При наведении показываем, что название кликабельное. */
+.ecard-large-card .section-title a:hover {
+  text-decoration: underline;
+}		
 </style>
 	
 </head>
