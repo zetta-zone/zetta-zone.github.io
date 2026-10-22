@@ -99,9 +99,12 @@ const available = new Set(platforms.map(x => String(x).toLowerCase()));
       	// Filter, sort, and render the catalog cards.
 function render(){let q=$("#search").value.toLowerCase(),sort=$("#sort").value,st=$("#status").value,ad=$("#adFilter").value;
                   let arr=all().filter(p=> (cat==="Все"||(cat==="FaucetPay"?p.faucetpay==="Да":p.cat===cat))&&(!q||(p.n+" "+p.d+" "+p.cat+" "+p.sub+" "+p.faucetpay).toLowerCase().includes(q))&&(st==="all"||(st==="verified"?p.verified:!p.verified))
-                        &&(!onlySaved||saved.has(p.id))
-                        
-&&(!onlySaved||saved.has(p.id))&&(ad==="all"||(ad==="unknown"? !["low","medium","high"].includes(p.adLevel):p.adLevel===ad)));
+                                    &&(!onlySaved||saved.has(p.id))
+            &&(ad==="all"||(ad==="unknown"
+              ? !["low","medium","high"].includes(p.adLevel)
+              : p.adLevel===ad)
+            )
+          );
 
                   
                   if(sort==="rating")arr.sort((a,b)=>b.r-a.r);if(sort==="name")arr.sort((a,b)=>a.n.localeCompare(b.n));
