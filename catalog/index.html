@@ -1236,6 +1236,26 @@
 .platform-badge{position:relative;display:grid;place-items:center;min-width:25px;height:25px;padding:0 4px;border:1px solid #52617a;border-radius:7px;font-size:14px}
 .platform-badge.inactive{opacity:.3;filter:grayscale(1)}
 .platform-badge.inactive::after{content:"";position:absolute;left:1px;right:1px;top:50%;height:2px;background:#ff6b7a;transform:rotate(-45deg)}
+.support-badge {
+  display: inline-flex;
+  padding: 4px 9px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.support-badge.is-supported {
+  color: #45d6a1;
+  background: rgba(69, 214, 161, 0.12);
+  border: 1px solid rgba(69, 214, 161, 0.35);
+}
+
+.support-badge.is-unsupported {
+  color: #ff8585;
+  background: rgba(255, 133, 133, 0.12);
+  border: 1px solid rgba(255, 133, 133, 0.35);
+}
       
     </style>
     <style>
@@ -1588,9 +1608,12 @@ const available = new Set(platforms.map(x => String(x).toLowerCase()));
        <div class="profile-tags">${a.map(x=>`<span class="profile-tag">${esc(x)}</span>`).join("")}</div>`:'<p class="profile-unknown">Не указано</p>';
 
 const paymentStatusRow = (name, supported) =>
-  `<div class="profile-fact"><b>${name}</b><span>${
-    supported ? "Поддерживается" : "Не поддерживается"
-  }</span></div>`;
+  `<div class="profile-fact">
+    <b>${name}</b>
+    <span class="support-badge ${supported ? "is-supported" : "is-unsupported"}">
+      ${supported ? "✓ Поддерживается" : "✕ Не поддерживается"}
+    </span>
+  </div>`;
 
 const paymentLink = (name, url) =>
     /^https?:\/\//i.test(url || "")
