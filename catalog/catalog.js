@@ -303,7 +303,20 @@ ${paymentRows}
       // Optional JSONP feed for a catalog published from Google Sheets.
       function loadSheetCatalog(){
        if(!window.CATALOG_FEED_URL)return;
-       window.zettazoneCatalogLoaded=function(payload){if(!payload||!Array.isArray(payload.items))return;data=payload.items;render()};
+            
+       window.zettazoneCatalogLoaded = function(payload) {
+  if (!payload || !Array.isArray(payload.items)) return;
+
+  // Пустой ответ таблицы не должен удалять ручные карточки.
+  if (payload.items.length === 0) {
+    render();
+    return;
+  }
+
+  // Пока не заменяем каталог данными с неизвестной структурой.
+  console.log("Получены карточки из Google Sheets:", payload.items);
+};
+            
        const script=document.createElement("script");
        script.src=window.CATALOG_FEED_URL+(window.CATALOG_FEED_URL.includes("?")?"&":"?")+"callback=zettazoneCatalogLoaded&_="+Date.now();
        script.onerror=()=>toast("Не удалось загрузить карточки из таблицы.");
