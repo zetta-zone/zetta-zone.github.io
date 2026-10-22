@@ -52,17 +52,27 @@
           <input
             class="field"
             id="search"
-            placeholder="⌕ Поиск по названию и описанию…"
-          /><select class="field" id="sort">
+            placeholder="⌕ Поиск по названию и описанию…"/>
+          <select class="field" id="sort">
             <option value="featured">Рекомендуемые</option>
             <option value="rating">По оценке каталога</option>
             <option value="name">По названию</option>
             <option value="reviews">По оценкам</option></select
-          ><select class="field" id="status">
+          >
+          <select class="field" id="status">
             <option value="all">Любой статус</option>
             <option value="verified">Проверенные</option>
             <option value="unverified">Не проверенные</option>
           </select>
+          
+          <select class="field" id="adFilter">
+            <option value="all">Реклама: любой уровень</option>
+            <option value="low">🟢 Реклама не мешает</option>
+            <option value="medium">🟡 Много рекламы</option>
+            <option value="high">🔴 Агрессивная реклама</option>
+            <option value="unknown">❔ Не проверена</option>
+          </select>
+
         </div>
         <div class="chips" id="chips">
           <button class="chip active" data-cat="Все">Все проекты</button
