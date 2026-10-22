@@ -1636,7 +1636,16 @@ const available = new Set(platforms.map(x => String(x).toLowerCase()));
        <div class="subtitle">${text(p.sub)}</div>${platformBadges(p)}
        <div class="profile-rating">
        <span class="profile-rating-star">★</span>
-       <b>${p.r>0?p.r.toFixed(1):"—"} / 5</b><span>${p.ratingSource||"Оценка каталога"}</span></div></div><div class="site-metrics"><div class="site-metric"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><rect x="4" y="6" width="24" height="22" rx="2"/><path d="M10 3v7M22 3v7M4 13h24M10 18h4M18 18h4M10 23h4"/></svg><div class="site-metric-copy"><b>${text(p.daysOnline)}</b><span>${text(p.daysOnlineLabel||"ДНЕЙ РАБОТАЕТ")}</span></div></div><div class="site-metric"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><circle cx="16" cy="9" r="7"/><path d="M3 28c0-6.7 5.8-11 13-11s13 4.3 13 11v2H3z"/></svg><div class="site-metric-copy">${platformIcons(p.platforms||[p.platform])}<b>${text(p.usersCount)}</b><span>ПОЛЬЗОВАТЕЛЕЙ</span></div></div><div class="site-metric"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="m5 17 8 8L28 8"/></svg><div class="site-metric-copy"><b>${text(p.paymentsCount)}</b><span>${text(p.paymentsCountLabel||"ВЫПЛАТ")}</span></div></div></div><button class="close" data-close aria-label="Закрыть">×</button></div>
+       <b>${p.r>0?p.r.toFixed(1):"—"} / 5</b><span>${p.ratingSource||"Оценка каталога"}</span></div></div>
+       <div class="site-metrics">
+       <div class="site-metric">
+       <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><rect x="4" y="6" width="24" height="22" rx="2"/>
+       <path d="M10 3v7M22 3v7M4 13h24M10 18h4M18 18h4M10 23h4"/></svg>
+       <div class="site-metric-copy"><b>${text(p.daysOnline)}</b><span>${text(p.daysOnlineLabel||"ДНЕЙ РАБОТАЕТ")}</span>
+       
+       </div></div><div class="site-metric"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><circle cx="16" cy="9" r="7"/><path d="M3 28c0-6.7 5.8-11 13-11s13 4.3 13 11v2H3z"/></svg>
+       
+       <div class="site-metric-copy"><b>${text(p.usersCount)}</b><span>ПОЛЬЗОВАТЕЛЕЙ</span></div></div><div class="site-metric"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="m5 17 8 8L28 8"/></svg><div class="site-metric-copy"><b>${text(p.paymentsCount)}</b><span>${text(p.paymentsCountLabel||"ВЫПЛАТ")}</span></div></div></div><button class="close" data-close aria-label="Закрыть">×</button></div>
        <p>${text(p.d)}</p>
        <section class="profile-item profile-wide accent-cyan"><h3 class="economy-heading"><span class="economy-mark" aria-hidden="true">🎮</span><span>Игровая экономика и бонусы</span></h3><div class="special-grid">${(p.specialFeatures||[]).map(feature=>{const badge=specialFeatureIcon(feature.title);return `<div class="special-card"><h4><span class="special-icon" style="--feature-color:${badge.color}" aria-hidden="true">${badge.icon}</span><span>${esc(feature.title)}</span></h4><p>${esc(feature.text)}</p></div>`}).join('')}</div></section>
        <div class="profile-grid">
