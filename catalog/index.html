@@ -1679,7 +1679,13 @@ const available = new Set(platforms.map(x => String(x).toLowerCase()));
         <div class="profile-fact">
 
         <b>Способ вывода</b>
-
+<div class="profile-fact">
+  <b>Реферальные ссылки</b>
+  <span>
+    ${p.faucetpayReferralUrl ? `<a class="referral-link" href="${esc(p.faucetpayReferralUrl)}" target="_blank" rel="noopener">FaucetPay ↗</a>` : ""}
+    ${p.directWalletReferralUrl ? ` · <a class="referral-link" href="${esc(p.directWalletReferralUrl)}" target="_blank" rel="noopener">Direct Wallet ↗</a>` : ""}
+  </span>
+</div>
         <span>${text(p.withdrawalMethods)}</span>
         </div>
         <p>
