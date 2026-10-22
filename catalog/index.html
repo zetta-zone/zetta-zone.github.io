@@ -1226,6 +1226,12 @@
           padding: 0 3px;
         }
       }
+  /* иконки для вебплатформ у приложений */
+      .platform-badges{display:flex;gap:6px;margin-top:6px}
+.platform-badge{position:relative;display:grid;place-items:center;min-width:25px;height:25px;padding:0 4px;border:1px solid #52617a;border-radius:7px;font-size:14px}
+.platform-badge.inactive{opacity:.3;filter:grayscale(1)}
+.platform-badge.inactive::after{content:"";position:absolute;left:1px;right:1px;top:50%;height:2px;background:#ff6b7a;transform:rotate(-45deg)}
+      
     </style>
     <style>
       .profile-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0}.profile-item{border:1px solid #ffffff12;background:#ffffff06;border-radius:12px;padding:12px;min-width:0}.profile-item h3{font-size:13px;margin:0 0 8px}.profile-item p{font-size:12px;color:#c5ccdc;margin:6px 0}.profile-item b{color:#f4f6ff}.profile-item ul{padding-left:18px;margin:6px 0}.profile-item li{font-size:12px;color:#c5ccdc;margin:3px 0}.profile-tags{display:flex;gap:6px;flex-wrap:wrap}.profile-tag{font-size:11px;padding:4px 8px;border-radius:99px;border:1px solid #ffffff1c;color:#d7dcef}.profile-unknown{color:#8f99b0}.profile-source{overflow-wrap:anywhere}.profile-wide{grid-column:1/-1}@media(max-width:640px){.profile-grid{grid-template-columns:1fr}}
@@ -1524,6 +1530,7 @@ function platformBadges(p) {
       <div>
       <div class="name">${p.n}</div>
       <div class="subtitle">${p.sub}</div>
+      ${platformBadges(p)}
       </div><button class="fav" data-fav="${p.id}" aria-label="Избранное">${saved.has(p.id)?"♥":"♡"}</button></div>
       <div class="tags"><span class="tag">${p.cat}</span><span class="tag ${p.verified?"green":"red"}">${p.verified?"✓ Выплаты проверены":"! Выплаты не проверены"}</span>${riskBadge(p)}</div>
       <p class="desc">${p.d}</p>
