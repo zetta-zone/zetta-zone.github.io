@@ -141,7 +141,7 @@ window.CATALOG_DATA = [
     "r": 4.6,
     "reviews": 0,
     "fee": "Минимум зависит от валюты и сети — уточнить",
-    "platform": "Веб", "Android"
+    "platform": "Веб", "Android",
     "risk": "Есть внутриигровые покупки",
     "riskTone": "yellow",
     "verified": true,
