@@ -55,7 +55,7 @@ window.CATALOG_DATA = [
     "merge": "Нет, но крафтить можно майнеры всех уровней",
     "pools": "Есть; можно также иметь свой пул",
     "marketplace": "Есть",
-    "platforms": ["Веб", "Android"],
+    "platforms": "Веб",
     
     "communities": [
       "Discord",
@@ -185,7 +185,7 @@ window.CATALOG_DATA = [
     "pools": "Игровые лиги и общий пул наград",
     "marketplace": "Есть",
     "platforms": [
-      "Веб"
+      "Веб" , "Android"
     ],
     "communities": ["X", "Discord", "YouTube", "Telegram","Telegram-бот"],
     "communityLinks": {"Discord": "https://discord.com/invite/EDyWFmN", "Telegram-бот": "https://t.me/rollertap_bot?start=1993292119"},
