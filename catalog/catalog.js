@@ -98,9 +98,7 @@ const available = new Set(platforms.map(x => String(x).toLowerCase()));
 
       	// Filter, sort, and render the catalog cards.
 function render(){let q=$("#search").value.toLowerCase(),sort=$("#sort").value,st=$("#status").value,ad=$("#adFilter").value;
-             
-                  let arr=all().filter(p=> 
-                     
+                   
 let arr = all().filter(p => {
   const categoryMatch =
     cat === "Все" ||
@@ -125,7 +123,6 @@ let arr = all().filter(p => {
 
   return categoryMatch && searchMatch && statusMatch && savedMatch && adMatch;
 });
-
 
                   
                   if(sort==="rating")arr.sort((a,b)=>b.r-a.r);if(sort==="name")arr.sort((a,b)=>a.n.localeCompare(b.n));
