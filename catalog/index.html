@@ -1586,14 +1586,14 @@ const available = new Set(platforms.map(x => String(x).toLowerCase()));
     
         const tags=a=>Array.isArray(a)&&a.length?`
        <div class="profile-tags">${a.map(x=>`<span class="profile-tag">${esc(x)}</span>`).join("")}</div>`:'<p class="profile-unknown">Не указано</p>';
-        
+
 const paymentStatusRow = (name, supported) =>
   `<div class="profile-fact"><b>${name}</b><span>${
     supported ? "Поддерживается" : "Не поддерживается"
   }</span></div>`;
 
 const paymentLink = (name, url) =>
-  /^https?:\/\//i.test(url || "")
+    /^https?:\/\//i.test(url || "")
     ? `<a class="referral-link" href="${esc(url)}" target="_blank" rel="noopener">${name} ↗</a>`
     : name;
 
