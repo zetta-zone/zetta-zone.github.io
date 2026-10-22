@@ -235,15 +235,20 @@ function communityBadge(name, p) {
       cls: "community-telegram",
       svg: '<path d="M4 11 20 5l-4 15-4-5-4-2 8-6-10 5z" fill="currentColor"/>'
     }
+	telegramBot: {
+		  cls: "community-telegram-bot",
+		  svg: '<path d="M12 3a2 2 0 0 0-2 2v1H7a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V9a3 3 0 0 0-3-3h-3V5a2 2 0 0 0-2-2zm-4 8h2v2H8zm6 0h2v2h-2zm-5 4h6v2H9z" fill="currentColor"/>'
+		},
   };
 
-  const aliases = {
-    x: ["X", "Twitter", "x"],
-    twitter: ["Twitter", "X", "twitter"],
-    discord: ["Discord", "discord"],
-    youtube: ["YouTube", "Youtube", "youtube"],
-    telegram: ["Telegram", "telegram"]
-  };
+ const aliases = {
+  x: ["X", "Twitter", "x"],
+  twitter: ["Twitter", "X", "twitter"],
+  discord: ["Discord", "discord"],
+  youtube: ["YouTube", "Youtube", "youtube"],
+  telegram: ["Telegram", "telegram"],
+  telegramBot: ["Telegram-бот", "Телеграм-бот", "Telegram bot"]
+};
 
   const links = p.communityLinks || {};
   const possibleKeys = aliases[normalized] || [key];
