@@ -183,11 +183,10 @@ window.CATALOG_DATA = [
     "paymentsCountLabel": "НАМАЙНЕНО",
     "minWithdraw": "Зависит от валюты и сети",
     "faucetpaySupported": false,
-    "faucetpayReferralUrl": "https://faucetpay.io/r/9771657",
+    "faucetpayReferralUrl": "",
     "directWalletSupported": true,
     "directWalletReferralUrl": "https://web3.okx.com/join/DIKSCOIN",
-    "withdrawalMethods":  "Direct Wallet", "Любой Криптокошелёк",
-
+    "withdrawalMethods":  "Direct Wallet и Любой Криптокошелёк",
     "miners": "Есть; дают постоянную мощность",
     "craft": "Есть",
     "merge": "Есть",
