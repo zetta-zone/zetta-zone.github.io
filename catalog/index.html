@@ -1686,7 +1686,11 @@ const available = new Set(platforms.map(x => String(x).toLowerCase()));
     ${p.directWalletReferralUrl ? ` · <a class="referral-link" href="${esc(p.directWalletReferralUrl)}" target="_blank" rel="noopener">Direct Wallet ↗</a>` : ""}
   </span>
 </div>
-        <span>${text(p.withdrawalMethods)}</span>
+      <span>${p.faucetpay === "Да"
+  ? (p.faucetpayReferralUrl && /^https?:\/\//i.test(p.faucetpayReferralUrl)
+    ? `<a class="referral-link" href="${esc(p.faucetpayReferralUrl)}" target="_blank" rel="noopener">FaucetPay ↗</a>`
+    : "FaucetPay")
+  : ""}${p.faucetpay === "Да" && p.withdrawalMethods ? " и " : ""}${text(p.withdrawalMethods)}</span>
         </div>
         <p>
         <b>${esc(p.coinLabel||"Можно майнить и выводить:")}</b>
