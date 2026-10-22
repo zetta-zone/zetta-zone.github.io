@@ -1583,19 +1583,21 @@ const available = new Set(platforms.map(x => String(x).toLowerCase()));
       function details(id){
        let p=all().find(x=>x.id===id);if(!p)return;
        const text=v=>v?esc(v):'<span class="profile-unknown">Не указано</span>';
-      const paymentLinks = [
-  ["FaucetPay", p.faucetpaySupported, p.faucetpayReferralUrl],
-  ["Direct Wallet", p.directWalletSupported, p.directWalletReferralUrl]
-].map(([name, supported, url]) =>
-  !supported
-    ? `${name} — не поддерживается`
-    : /^https?:\/\//i.test(url || "")
-      ? `<a class="referral-link" href="${esc(url)}" target="_blank" rel="noopener">${name} ↗</a>`
-      : `${name} — ссылка не добавлена`
-).join(" · ");
+    
         const tags=a=>Array.isArray(a)&&a.length?`
        <div class="profile-tags">${a.map(x=>`<span class="profile-tag">${esc(x)}</span>`).join("")}</div>`:'<p class="profile-unknown">Не указано</p>';
+const payoutRow = (name, supported, url) =>
+  `<div class="profile-fact"><b>${name}</b><span>${
+    !supported
+      ? "Не поддерживается"
+      : /^https?:\/\//i.test(url || "")
+        ? `<a class="referral-link" href="${esc(url)}" target="_blank" rel="noopener">Реферальная ссылка ↗</a>`
+        : "Ссылка не указана"
+  }</span></div>`;
 
+const paymentLinks =
+  payoutRow("FaucetPay", p.faucetpaySupported, p.faucetpayReferralUrl) +
+  payoutRow("Direct Wallet", p.directWalletSupported, p.directWalletReferralUrl);
       const coinIcons = (a, p) => {
         if (!Array.isArray(a) || !a.length) {
           return `<p class="profile-unknown">Не указано</p>`;
