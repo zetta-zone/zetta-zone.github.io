@@ -98,8 +98,14 @@ const available = new Set(platforms.map(x => String(x).toLowerCase()));
 
       	// Filter, sort, and render the catalog cards.
 function render(){let q=$("#search").value.toLowerCase(),sort=$("#sort").value,st=$("#status").value,ad=$("#adFilter").value;
-                  let arr=all().filter(p=> (cat==="Все"||(cat==="FaucetPay"?p.faucetpay==="Да":p.cat===cat))&&(!q||(p.n+" "+p.d+" "+p.cat+" "+p.sub+" "+p.faucetpay).toLowerCase().includes(q))&&(st==="all"||(st==="verified"?p.verified:!p.verified))   &&(!onlySaved||saved.has(p.id))
-&&(ad==="all"||(ad==="unknown"? !["low","medium","high"].includes(p.adLevel):p.adLevel===ad))    ;if(sort==="rating")arr.sort((a,b)=>b.r-a.r);if(sort==="name")arr.sort((a,b)=>a.n.localeCompare(b.n));if(sort==="reviews")arr.sort((a,b)=>b.reviews-a.reviews);$("#count").textContent=arr.length;$("#grid").innerHTML=arr.length?arr.map(p=>`
+                  let arr=all().filter(p=> (cat==="Все"||(cat==="FaucetPay"?p.faucetpay==="Да":p.cat===cat))&&(!q||(p.n+" "+p.d+" "+p.cat+" "+p.sub+" "+p.faucetpay).toLowerCase().includes(q))&&(st==="all"||(st==="verified"?p.verified:!p.verified))
+                        &&(!onlySaved||saved.has(p.id))
+                        
+&&(!onlySaved||saved.has(p.id))&&(ad==="all"||(ad==="unknown"? !["low","medium","high"].includes(p.adLevel):p.adLevel===ad)));
+
+                  
+                  if(sort==="rating")arr.sort((a,b)=>b.r-a.r);if(sort==="name")arr.sort((a,b)=>a.n.localeCompare(b.n));
+                  if(sort==="reviews")arr.sort((a,b)=>b.reviews-a.reviews);$("#count").textContent=arr.length;$("#grid").innerHTML=arr.length?arr.map(p=>`
       <article class="card" style="--card-accent:${esc(p.brandAccent||"#8b7cff")};--card-wash:${esc(p.brandTint||"#171d2e")}">
       <div class="top">
       <div class="logo ${p.tone}">${p.logoUrl?`<img src="${esc(p.logoUrl)}" alt="${esc(p.n)}" loading="lazy">`:`<span class="rc-mark" aria-label="${esc(p.n)}">${esc(p.s||p.n.slice(0,1))}</span>`}</div>
@@ -166,8 +172,11 @@ function render(){let q=$("#search").value.toLowerCase(),sort=$("#sort").value,s
 
         <label class="comparecheck"><input type="checkbox" data-pick="${p.id}" ${chosen.has(p.id)?"checked":""}> Добавить к сравнению</label>
         <div class="cardfoot">
-        <button class="btn" data-detail="${p.id}">Подробнее</button>${(p.registrationUrl||p.referralUrl)?`<a class="btn primary referral-cta" href="${esc(p.registrationUrl||p.referralUrl)}" target="_blank" rel="noopener">${esc(p.referralCta||"Перейти к регистрации")}</a>`:`<button class="btn primary referral-cta" type="button" disabled title="Ссылка пока не добавлена">${esc(p.referralCta||"Ссылка пока не добавлена")}</button>`}</div></article>`).join(""):`<div class="empty">Ничего не найдено — попробуй изменить фильтры.</div>`;$("#savedN").textContent=saved.size;updateCompare()}
-      // Keep comparison selection and its sticky toolbar in sync.
+        <button class="btn" data-detail="${p.id}">Подробнее</button>${(p.registrationUrl||p.referralUrl)?`<a class="btn primary referral-cta" href="${esc(p.registrationUrl||p.referralUrl)}" target="_blank" rel="noopener">${esc(p.referralCta||"Перейти к регистрации")}</a>
+        `:`<button class="btn primary referral-cta" type="button" disabled title="Ссылка пока не добавлена">${esc(p.referralCta||"Ссылка пока не добавлена")}</button>`}</div>
+        </article>`).join(""):`<div class="empty">Ничего не найдено — попробуй изменить фильтры.</div>`;$("#savedN").textContent=saved.size;updateCompare()}
+   
+// Keep comparison selection and its sticky toolbar in sync.
       function updateCompare(){$("#compN").textContent=chosen.size+"/3";$("#compNames").textContent=[...chosen].map(id=>data.find(p=>p.id===id)?.n).join(" · ")||"Выбери 2–3 проекта";$("#comparebar").classList.toggle("show",chosen.size>0);$("#compareBtn").disabled=chosen.size<2}
       // Modal lifecycle and detail-card rendering.
       function openModal(s){$("#modal").innerHTML=s;$("#backdrop").classList.add("open")}function close(){$("#backdrop").classList.remove("open")}
