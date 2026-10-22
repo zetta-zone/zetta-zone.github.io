@@ -1587,8 +1587,7 @@ const available = new Set(platforms.map(x => String(x).toLowerCase()));
         const tags=a=>Array.isArray(a)&&a.length?`
        <div class="profile-tags">${a.map(x=>`<span class="profile-tag">${esc(x)}</span>`).join("")}</div>`:'<p class="profile-unknown">Не указано</p>';
         
-const payoutRow = (name, supported, url) =>
- const paymentStatusRow = (name, supported) =>
+const paymentStatusRow = (name, supported) =>
   `<div class="profile-fact"><b>${name}</b><span>${
     supported ? "Поддерживается" : "Не поддерживается"
   }</span></div>`;
@@ -1611,7 +1610,7 @@ const paymentRows =
   paymentStatusRow("FaucetPay", p.faucetpaySupported) +
   paymentStatusRow("Direct Wallet", p.directWalletSupported) +
   withdrawalRow;
-  payoutRow("Direct Wallet", p.directWalletSupported, p.directWalletReferralUrl);
+        
       const coinIcons = (a, p) => {
         if (!Array.isArray(a) || !a.length) {
           return `<p class="profile-unknown">Не указано</p>`;
