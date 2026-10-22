@@ -162,7 +162,9 @@ function render(){let q=$("#search").value.toLowerCase(),sort=$("#sort").value,s
       		  </div>
       </div>
 
-        <label class="comparecheck"><input type="checkbox" data-pick="${p.id}" ${chosen.has(p.id)?"checked":""}> Добавить к сравнению</label><div class="cardfoot"><button class="btn" data-detail="${p.id}">Подробнее</button>${(p.registrationUrl||p.referralUrl)?`<a class="btn primary referral-cta" href="${esc(p.registrationUrl||p.referralUrl)}" target="_blank" rel="noopener">${esc(p.referralCta||"Перейти к регистрации")}</a>`:`<button class="btn primary referral-cta" type="button" disabled title="Ссылка пока не добавлена">${esc(p.referralCta||"Ссылка пока не добавлена")}</button>`}</div></article>`).join(""):`<div class="empty">Ничего не найдено — попробуй изменить фильтры.</div>`;$("#savedN").textContent=saved.size;updateCompare()}
+        <label class="comparecheck"><input type="checkbox" data-pick="${p.id}" ${chosen.has(p.id)?"checked":""}> Добавить к сравнению</label>
+        <div class="cardfoot">
+        <button class="btn" data-detail="${p.id}">Подробнее</button>${(p.registrationUrl||p.referralUrl)?`<a class="btn primary referral-cta" href="${esc(p.registrationUrl||p.referralUrl)}" target="_blank" rel="noopener">${esc(p.referralCta||"Перейти к регистрации")}</a>`:`<button class="btn primary referral-cta" type="button" disabled title="Ссылка пока не добавлена">${esc(p.referralCta||"Ссылка пока не добавлена")}</button>`}</div></article>`).join(""):`<div class="empty">Ничего не найдено — попробуй изменить фильтры.</div>`;$("#savedN").textContent=saved.size;updateCompare()}
       // Keep comparison selection and its sticky toolbar in sync.
       function updateCompare(){$("#compN").textContent=chosen.size+"/3";$("#compNames").textContent=[...chosen].map(id=>data.find(p=>p.id===id)?.n).join(" · ")||"Выбери 2–3 проекта";$("#comparebar").classList.toggle("show",chosen.size>0);$("#compareBtn").disabled=chosen.size<2}
       // Modal lifecycle and detail-card rendering.
@@ -269,7 +271,12 @@ const paymentRows =
        
        <div class="site-metric-copy"><b>${text(p.usersCount)}</b><span>ПОЛЬЗОВАТЕЛЕЙ</span></div></div><div class="site-metric"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="m5 17 8 8L28 8"/></svg><div class="site-metric-copy"><b>${text(p.paymentsCount)}</b><span>${text(p.paymentsCountLabel||"ВЫПЛАТ")}</span></div></div></div><button class="close" data-close aria-label="Закрыть">×</button></div>
        <p>${text(p.d)}</p>
-       <section class="profile-item profile-wide accent-cyan"><h3 class="economy-heading"><span class="economy-mark" aria-hidden="true">🎮</span><span>Игровая экономика и бонусы</span></h3><div class="special-grid">${(p.specialFeatures||[]).map(feature=>{const badge=specialFeatureIcon(feature.title);return `<div class="special-card"><h4><span class="special-icon" style="--feature-color:${badge.color}" aria-hidden="true">${badge.icon}</span><span>${esc(feature.title)}</span></h4><p>${esc(feature.text)}</p></div>`}).join('')}</div></section>
+       <section class="profile-item profile-wide accent-cyan"><h3 class="economy-heading">
+       <span class="economy-mark" aria-hidden="true">🎮</span>
+       <span>Игровая экономика и бонусы</span></h3>
+       <div class="special-grid">${(p.specialFeatures||[]).map(feature=>{const badge=specialFeatureIcon(feature.title);return `<div class="special-card">
+       <h4><span class="special-icon" style="--feature-color:${badge.color}" aria-hidden="true">${badge.icon}</span><span>${esc(feature.title)}</span></h4><p>${esc(feature.text)}</p>
+       </div>`}).join('')}</div></section>
        <div class="profile-grid">
         <section class="profile-item accent-cyan"><h3 class="section-heading"><span class="section-heading-icon icon-opportunity" aria-hidden="true">✦</span>Возможности</h3>${list(functions)}</section>
           <section class="profile-item pros-cons"><h3 class="section-heading"><span class="section-heading-icon icon-balance" aria-hidden="true">⚖️</span>Плюсы и минусы</h3><div class="pros-cons-part positive"><h4><span class="section-heading-icon icon-plus" aria-hidden="true">＋</span>Плюсы</h4>${list(p.pros)}</div><div class="pros-cons-divider"></div><div class="pros-cons-part negative"><h4><span class="section-heading-icon icon-minus" aria-hidden="true">−</span>Минусы</h4>${list(p.cons)}</div></section>
@@ -295,16 +302,37 @@ ${paymentRows}
 
   <div class="profile-fact">
     <b>Дополнительная валюта вывода</b>
-    <span><span class="withdrawal-token">₮ USDT</span></span>
+    <span>
+    <span class="withdrawal-token">₮ USDT</span>
+    </span>
   </div>
 
   <!-- Дополнительное примечание о выводе можно добавить при необходимости. -->
 </section>
 
         
-        <section class="profile-item profile-wide"><h3>Источник и проверка</h3><p><b>Источник:</b> ${source}</p><p><b>Источник данных:</b> ${text(p.checkedAt)}</p><p><b>Дата запуска:</b> ${text(p.launchDate)}</p><p><b>Статус:</b> ${p.verified?'Пользователь подтвердил успешные выводы и выплаты':'Черновик · проверьте данные перед публикацией'}</p></section>
-         <section class="profile-item profile-wide risk-details ${esc(p.riskLevel||'')}"><h3>Риск и результат проверки</h3><div class="profile-fact"><b>Уровень риска</b>${riskBadge(p)}</div><p>${text(p.riskDetails)}</p><p><b>Выплаты:</b> ${text(p.verificationDetails|| (p.verified?'Проверены':'Не проверены'))}</p></section>
-       </div>
+       <section class="profile-item profile-wide"><h3>Источник и проверка</h3><p><b>Источник:</b> ${source}</p><p><b>Источник данных:</b> ${text(p.checkedAt)}</p>
+        <p><b>Дата запуска:</b> ${text(p.launchDate)}</p>
+        <p><b>Статус:</b> ${p.verified?'Пользователь подтвердил успешные выводы и выплаты':'Черновик · проверьте данные перед публикацией'}</p>
+        </section>
+         <section class="profile-item profile-wide risk-details ${esc(p.riskLevel||'')}"><h3>Риск и результат проверки</h3>
+      
+<div class="profile-fact"><b>Уровень риска</b>${riskBadge(p)}</div>
+<div class="profile-fact"><b>Навязчивость рекламы</b>${(() => {
+  const labels = {
+    low: ["🟢 Реклама не мешает", "green"],
+    medium: ["🟡 Много рекламы", "yellow"],
+    high: ["🔴 Агрессивная реклама", "red"],
+    unknown: ["❔ Реклама не проверена", ""]
+  };
+  const item = labels[p.adLevel] || labels.unknown;
+  return `<span class="tag ${item[1]}">${item[0]}</span>`;
+})()}</div>
+<p>${text(p.riskDetails)}</p>
+
+         ${text(p.riskDetails)}</p><p><b>Выплаты:</b> ${text(p.verificationDetails|| (p.verified?'Проверены':'Не проверены'))}</p>
+         </section>
+ </div>
 
 
         <section class="profile-item profile-wide accent-cyan rate-project"><h3>${p.ratingSource?"Внешняя оценка":"Оценка ZETTA-ZONE"}</h3><div class="card-rating-info"><span class="stars">★</span>${p.r>0?`<b class="rating">${p.r.toFixed(1)}</b>`:`<span class="mut">—</span>`}<span class="rating-count">(${Number(p.reviews)||0} оценок)</span></div><p>${p.ratingNote?esc(p.ratingNote):"Пояснение к оценке можно добавить позже."}</p><p class="profile-status">Оценка каталога выставляется вручную; общую оценку пользователей подключим отдельно.</p></section> <div class="actions">
