@@ -31,12 +31,9 @@
       iconEl.classList.add("has-logo");
       return;
     }
-<<<<<<< Updated upstream
         var ticker = img.getAttribute("data-ticker") || "";
         var emoji = img.getAttribute("data-emoji") || "⭐";
 
-=======
->>>>>>> Stashed changes
     var providers = [
       "https://" + host + "/favicon.ico",
       "https://" + host + "/icon.ico",
@@ -44,19 +41,15 @@
       "https://www.google.com/s2/favicons?domain=" + host + "&sz=128",
       "https://icons.google.com/favicon?domain=" + host + "&sz=128"
     ];
-<<<<<<< Updated upstream
         if (ticker) {
       providers.push("https://github.io" + ticker + ".svg");
     }
-=======
->>>>>>> Stashed changes
     var idx = 0;
     img.loading = "lazy";
     img.decoding = "async";
     img.referrerPolicy = "no-referrer";
 
     function tryNext(){
-<<<<<<< Updated upstream
             if(idx >= providers.length) {
         img.style.display = "none";
         var emojiNode = iconEl.querySelector('.emoji');
@@ -70,9 +63,6 @@
         return;
       }
 
-=======
-      if(idx >= providers.length) return;
->>>>>>> Stashed changes
       img.src = providers[idx++];
     }
 
