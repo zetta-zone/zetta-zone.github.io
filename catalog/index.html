@@ -1574,6 +1574,7 @@ const available = new Set(platforms.map(x => String(x).toLowerCase()));
       function updateCompare(){$("#compN").textContent=chosen.size+"/3";$("#compNames").textContent=[...chosen].map(id=>data.find(p=>p.id===id)?.n).join(" · ")||"Выбери 2–3 проекта";$("#comparebar").classList.toggle("show",chosen.size>0);$("#compareBtn").disabled=chosen.size<2}
       function openModal(s){$("#modal").innerHTML=s;$("#backdrop").classList.add("open")}function close(){$("#backdrop").classList.remove("open")}
       function specialFeatureIcon(title){const t=String(title||"").toLowerCase();if(/ежеднев|лояльност|частот|награ|вход/.test(t))return {icon:"⏱️",color:"#48c8ed"};if(/регистрац|реферал|стартов|бонус/.test(t))return {icon:"🎁",color:"#f6c85f"};if(/токен|короб|задан/.test(t))return {icon:"📦",color:"#ff8b67"};if(/майнер|мощност|энерг/.test(t))return {icon:"⚡",color:"#f7d35b"};if(/валют|blocks|rlt|предмет/.test(t))return {icon:"🪙",color:"#b88bff"};if(/подар/.test(t))return {icon:"🎉",color:"#f278ae"};if(/multi|мульти/.test(t))return {icon:"⛏️",color:"#4bd5a3"};if(/крафт|merge|маркет/.test(t))return {icon:"🧰",color:"#9b8cff"};return {icon:"✨",color:"#8b7cff"}}
+      
       function details(id){
        let p=all().find(x=>x.id===id);if(!p)return;
        const text=v=>v?esc(v):'<span class="profile-unknown">Не указано</span>';
@@ -1629,7 +1630,9 @@ const available = new Set(platforms.map(x => String(x).toLowerCase()));
        const functions=[...(p.earningTypes||[]),isPresent(p.miners)?'Майнеры':'',isPresent(p.craft)?'Крафт майнеров':'',isPresent(p.marketplace)?'Рынок игроков — покупка и продажа майнеров':''].filter(Boolean);
        const available=[...(p.pros||[]),isPresent(p.miners)?'Виртуальные майнеры':'',isPresent(p.craft)?'Крафт майнеров':'',/свой пул|собственн/i.test(p.pools||'')?'Можно создать свой пул':'',isPresent(p.marketplace)?'Есть рынок игроков':''].filter(Boolean);
        openModal(`<div class="modalhead"><div>
-       <div class="eyebrow">${esc(p.cat)}</div><h2 id="mt">${p.logoUrl?`<img class="detail-logo" src="${esc(p.logoUrl)}" alt="${esc(p.n)}">`:`<span class="detail-logo detail-logo-fallback" role="img" aria-label="${esc(p.n)}">${esc(p.s||p.n.slice(0,1))}</span>`}${esc(p.n)}</h2>
+       <div class="eyebrow">${esc(p.cat)}</div>
+       <h2 id="mt">${p.logoUrl?`<img class="detail-logo" src="${esc(p.logoUrl)}" alt="${esc(p.n)}">`:`<span class="detail-logo detail-logo-fallback" role="img" aria-label="${esc(p.n)}">${esc(p.s||p.n.slice(0,1))}</span>
+       `}${esc(p.n)}</h2>
        <div class="subtitle">${text(p.sub)}</div>${platformBadges(p)}
        <div class="profile-rating">
        <span class="profile-rating-star">★</span>
