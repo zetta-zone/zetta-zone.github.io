@@ -49,7 +49,7 @@ window.CATALOG_DATA = [
     "usersCount": "154 868",
     "paymentsCount": "168 515",
     "minWithdraw": "10 у.е. в любой криптовалюте",
-    "withdrawalMethods": "FaucetPay и Direct Wallet",
+   "withdrawalMethods": "Direct Wallet",
     "miners": "Есть",
     "craft": "Есть",
     "merge": "Нет, но крафтить можно майнеры всех уровней",
