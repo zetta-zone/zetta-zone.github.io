@@ -188,7 +188,7 @@ window.CATALOG_DATA = [
     "platforms": [
       "Веб"
     ],
-    "communities": ["Discord", "Telegram-бот"],
+    "communities": ["X", "Discord", "YouTube", "Telegram","Telegram-бот"],
     "communityLinks": {"Discord": "https://discord.com/invite/EDyWFmN", "Telegram-бот": "https://t.me/rollertap_bot?start=1993292119"},
     "faucetpayReferralUrl": "",
     "inGameCurrency": "RLT (RollerToken)",
