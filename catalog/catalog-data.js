@@ -55,9 +55,8 @@ window.CATALOG_DATA = [
     "merge": "Нет, но крафтить можно майнеры всех уровней",
     "pools": "Есть; можно также иметь свой пул",
     "marketplace": "Есть",
-    "platforms": [
-      "Веб"
-    ],
+    "platforms": ["Веб", "Android"],
+    
     "communities": [
       "Discord",
       "Telegram",
