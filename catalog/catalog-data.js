@@ -53,7 +53,7 @@ window.CATALOG_DATA = [
     "faucetpayReferralUrl": "https://faucetpay.io/r/9771657",
     "directWalletSupported": false,
     "directWalletReferralUrl": "",
-    "withdrawalMethods": "Любой криптокошелек",
+    "withdrawalMethods": " или Любой криптокошелек",
     "miners": "Есть",
     "craft": "Есть",
     "merge": "Нет, но крафтить можно майнеры всех уровней",
