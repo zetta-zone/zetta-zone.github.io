@@ -97,7 +97,8 @@ const available = new Set(platforms.map(x => String(x).toLowerCase()));
 
 
       	// Filter, sort, and render the catalog cards.
-function render(){let q=$("#search").value.toLowerCase(),sort=$("#sort").value,st=$("#status").value;let arr=all().filter(p=>(cat==="Все"||(cat==="FaucetPay"?p.faucetpay==="Да":p.cat===cat))&&(!q||(p.n+" "+p.d+" "+p.cat+" "+p.sub+" "+p.faucetpay).toLowerCase().includes(q))&&(st==="all"||(st==="verified"?p.verified:!p.verified))&&(!onlySaved||saved.has(p.id)));if(sort==="rating")arr.sort((a,b)=>b.r-a.r);if(sort==="name")arr.sort((a,b)=>a.n.localeCompare(b.n));if(sort==="reviews")arr.sort((a,b)=>b.reviews-a.reviews);$("#count").textContent=arr.length;$("#grid").innerHTML=arr.length?arr.map(p=>`
+function render(){let q=$("#search").value.toLowerCase(),sort=$("#sort").value,st=$("#status").value,ad=$("#adFilter").value;
+                  let arr=all().filter(p=>(cat==="Все"||(cat==="FaucetPay"?p.faucetpay==="Да":p.cat===cat))&&(!q||(p.n+" "+p.d+" "+p.cat+" "+p.sub+" "+p.faucetpay).toLowerCase().includes(q))&&(st==="all"||(st==="verified"?p.verified:!p.verified))&&(!onlySaved||saved.has(p.id)));if(sort==="rating")arr.sort((a,b)=>b.r-a.r);if(sort==="name")arr.sort((a,b)=>a.n.localeCompare(b.n));if(sort==="reviews")arr.sort((a,b)=>b.reviews-a.reviews);$("#count").textContent=arr.length;$("#grid").innerHTML=arr.length?arr.map(p=>`
       <article class="card" style="--card-accent:${esc(p.brandAccent||"#8b7cff")};--card-wash:${esc(p.brandTint||"#171d2e")}">
       <div class="top">
       <div class="logo ${p.tone}">${p.logoUrl?`<img src="${esc(p.logoUrl)}" alt="${esc(p.n)}" loading="lazy">`:`<span class="rc-mark" aria-label="${esc(p.n)}">${esc(p.s||p.n.slice(0,1))}</span>`}</div>
