@@ -1583,7 +1583,17 @@ const available = new Set(platforms.map(x => String(x).toLowerCase()));
       function details(id){
        let p=all().find(x=>x.id===id);if(!p)return;
        const text=v=>v?esc(v):'<span class="profile-unknown">Не указано</span>';
-       const tags=a=>Array.isArray(a)&&a.length?`
+      const paymentLinks = [
+  ["FaucetPay", p.faucetpaySupported, p.faucetpayReferralUrl],
+  ["Direct Wallet", p.directWalletSupported, p.directWalletReferralUrl]
+].map(([name, supported, url]) =>
+  !supported
+    ? `${name} — не поддерживается`
+    : /^https?:\/\//i.test(url || "")
+      ? `<a class="referral-link" href="${esc(url)}" target="_blank" rel="noopener">${name} ↗</a>`
+      : `${name} — ссылка не добавлена`
+).join(" · ");
+        const tags=a=>Array.isArray(a)&&a.length?`
        <div class="profile-tags">${a.map(x=>`<span class="profile-tag">${esc(x)}</span>`).join("")}</div>`:'<p class="profile-unknown">Не указано</p>';
 
       const coinIcons = (a, p) => {
@@ -1658,40 +1668,23 @@ const available = new Set(platforms.map(x => String(x).toLowerCase()));
           <section class="profile-item pros-cons"><h3 class="section-heading"><span class="section-heading-icon icon-balance" aria-hidden="true">⚖️</span>Плюсы и минусы</h3><div class="pros-cons-part positive"><h4><span class="section-heading-icon icon-plus" aria-hidden="true">＋</span>Плюсы</h4>${list(p.pros)}</div><div class="pros-cons-divider"></div><div class="pros-cons-part negative"><h4><span class="section-heading-icon icon-minus" aria-hidden="true">−</span>Минусы</h4>${list(p.cons)}</div></section>
         <section class="profile-item"><h3>Механики и условия</h3><div class="profile-fact"><b>Майнеры</b><span>${text(p.miners)}</span></div><div class="profile-fact"><b>Крафт</b><span>${text(p.craft)}</span></div><div class="profile-fact"><b>Merge</b><span>${text(p.merge)}</span></div><div class="profile-fact"><b>Пулы</b><span>${text(p.pools)}</span></div><div class="profile-fact"><b>Рынок игроков</b><span>${text(p.marketplace)}</span></div></section>
         <section class="profile-item">
+      
         <h3>Вывод средств</h3>
 
-        <div class="profile-fact">
-
-        <b>FaucetPay</b>
-
-        <span>${text(p.faucetpay)}</span>
-
-        </div>
 
 
 
-      <p>${p.faucetpayReferralUrl&&/^https?:\/\//i.test(p.faucetpayReferralUrl)?`<a class="referral-link" href="${esc(p.faucetpayReferralUrl)}" target="_blank" rel="noopener">
-        Моя ссылка FaucetPay ↗</a>`:`<span class="profile-unknown">Ссылка FaucetPay добавится позже</span>`}</p>
         <div class="profile-fact"><b>Минимум</b><span>${text(p.minWithdraw)}</span>
         </div>
 
 
         <div class="profile-fact">
 
-        <b>Способ вывода</b>
+
 <div class="profile-fact">
-  <b>Реферальные ссылки</b>
-  <span>
-    ${p.faucetpayReferralUrl ? `<a class="referral-link" href="${esc(p.faucetpayReferralUrl)}" target="_blank" rel="noopener">FaucetPay ↗</a>` : ""}
-    ${p.directWalletReferralUrl ? ` · <a class="referral-link" href="${esc(p.directWalletReferralUrl)}" target="_blank" rel="noopener">Direct Wallet ↗</a>` : ""}
-  </span>
+  <b>Способ вывода</b>
+  <span>${paymentLinks}</span>
 </div>
-      <span>${p.faucetpay === "Да"
-  ? (p.faucetpayReferralUrl && /^https?:\/\//i.test(p.faucetpayReferralUrl)
-    ? `<a class="referral-link" href="${esc(p.faucetpayReferralUrl)}" target="_blank" rel="noopener">FaucetPay ↗</a>`
-    : "FaucetPay")
-  : ""}${p.faucetpay === "Да" && p.withdrawalMethods ? " и " : ""}${text(p.withdrawalMethods)}</span>
-        </div>
         <p>
         <b>${esc(p.coinLabel||"Можно майнить и выводить:")}</b>
         </p>${coinIcons(p.coins,p)}<div class="profile-fact"><b>Дополнительная валюта вывода</b><span><span class="withdrawal-token">₮ USDT</span></span></div><p class="profile-status">Очень быстрый вывод через FaucetPay.</p></section>
