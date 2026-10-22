@@ -52,8 +52,8 @@ window.CATALOG_DATA = [
     "faucetpaySupported": true,
     "faucetpayReferralUrl": "https://faucetpay.io/r/9771657",
     "directWalletSupported": false,
-    "directWalletReferralUrl": "https://web3.okx.com/join/DIKSCOIN",
-    "withdrawalMethods": "FaucetPay", "Любой криптокошелек"
+    "directWalletReferralUrl": "",
+    "withdrawalMethods": "FaucetPay и Любой криптокошелек"
     "miners": "Есть",
     "craft": "Есть",
     "merge": "Нет, но крафтить можно майнеры всех уровней",
