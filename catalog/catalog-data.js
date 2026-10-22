@@ -186,7 +186,7 @@ window.CATALOG_DATA = [
     "faucetpayReferralUrl": "",
     "directWalletSupported": true,
     "directWalletReferralUrl": "https://web3.okx.com/join/DIKSCOIN",
-    "withdrawalMethods":  "Direct Wallet и Любой Криптокошелёк",
+    "withdrawalMethods":  " Любой Криптокошелёк",
     "miners": "Есть; дают постоянную мощность",
     "craft": "Есть",
     "merge": "Есть",
