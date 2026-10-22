@@ -300,28 +300,62 @@ ${paymentRows}
       $("#chips").addEventListener("click",e=>{let c=e.target.closest("[data-cat]");if(!c)return;cat=c.dataset.cat;$("#chips").querySelectorAll(".chip").forEach(x=>x.classList.toggle("active",x===c));render()});
       $("#reset").addEventListener("click",()=>{$("#search").value="";$("#sort").value="featured";$("#status").value="all";cat="Все";onlySaved=false;$("#chips").querySelectorAll(".chip").forEach(x=>x.classList.toggle("active",x.dataset.cat==="Все"));render()});
       function showSaved(){onlySaved=!onlySaved;$("#savedBtn").classList.toggle("primary",onlySaved);render();$("#catalog").scrollIntoView({behavior:"smooth"})}$("#savedBtn").addEventListener("click",showSaved);$("#communitySaved").addEventListener("click",()=>{onlySaved=true;render();$("#catalog").scrollIntoView({behavior:"smooth"})});$("#startCompare").addEventListener("click",()=>{toast("Отметь чекбоксы у 2–3 карточек");$("#catalog").scrollIntoView({behavior:"smooth"})});$("#clear").addEventListener("click",()=>{chosen.clear();render()});$("#compareBtn").addEventListener("click",compareModal);
-      // Optional JSONP feed for a catalog published from Google Sheets.
-      function loadSheetCatalog(){
-       if(!window.CATALOG_FEED_URL)return;
-            
-       window.zettazoneCatalogLoaded = function(payload) {
-  if (!payload || !Array.isArray(payload.items)) return;
+ 
 
-  // Пустой ответ таблицы не должен удалять ручные карточки.
-  if (payload.items.length === 0) {
-    render();
-    return;
-  }
+      // Загружаем карточки из Google Sheets, сохраняя ручные карточки.
+      function loadSheetCatalog() {
+        if (!window.CATALOG_FEED_URL) return;
 
-  // Пока не заменяем каталог данными с неизвестной структурой.
-  console.log("Получены карточки из Google Sheets:", payload.items);
-};
-            
-       const script=document.createElement("script");
-       script.src=window.CATALOG_FEED_URL+(window.CATALOG_FEED_URL.includes("?")?"&":"?")+"callback=zettazoneCatalogLoaded&_="+Date.now();
-       script.onerror=()=>toast("Не удалось загрузить карточки из таблицы.");
-       document.head.appendChild(script);
+        const manualData = Array.isArray(window.CATALOG_DATA)
+          ? window.CATALOG_DATA
+          : [];
+
+        window.zettazoneCatalogLoaded = function(payload) {
+          if (!payload || !Array.isArray(payload.items)) {
+            data = manualData;
+            render();
+            return;
+          }
+
+          const merged = new Map();
+
+          // Сначала добавляем карточки, созданные вручную.
+          manualData.forEach(p => {
+            if (p && p.id) merged.set(p.id, p);
+          });
+
+          // Затем добавляем одобренные карточки из таблицы.
+          payload.items.forEach(p => {
+            if (
+              p &&
+              p.id &&
+              p.n &&
+              p.url &&
+              /^https?:\/\//i.test(p.url) &&
+              !merged.has(p.id)
+            ) {
+              merged.set(p.id, p);
+            }
+          });
+
+          data = [...merged.values()];
+          render();
+        };
+
+        const script = document.createElement("script");
+        script.src =
+          window.CATALOG_FEED_URL +
+          (window.CATALOG_FEED_URL.includes("?") ? "&" : "?") +
+          "callback=zettazoneCatalogLoaded&_=" + Date.now();
+
+        script.onerror = () => {
+          toast("Не удалось загрузить карточки из таблицы.");
+        };
+
+        document.head.appendChild(script);
       }
-      render();loadSheetCatalog();
+
+      render();
+      loadSheetCatalog();
 
 
