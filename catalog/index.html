@@ -1586,17 +1586,31 @@ const available = new Set(platforms.map(x => String(x).toLowerCase()));
     
         const tags=a=>Array.isArray(a)&&a.length?`
        <div class="profile-tags">${a.map(x=>`<span class="profile-tag">${esc(x)}</span>`).join("")}</div>`:'<p class="profile-unknown">Не указано</p>';
+        
 const payoutRow = (name, supported, url) =>
+ const paymentStatusRow = (name, supported) =>
   `<div class="profile-fact"><b>${name}</b><span>${
-    !supported
-      ? "Не поддерживается"
-      : /^https?:\/\//i.test(url || "")
-        ? `<a class="referral-link" href="${esc(url)}" target="_blank" rel="noopener">Реферальная ссылка ↗</a>`
-        : "Ссылка не указана"
+    supported ? "Поддерживается" : "Не поддерживается"
   }</span></div>`;
 
-const paymentLinks =
-  payoutRow("FaucetPay", p.faucetpaySupported, p.faucetpayReferralUrl) +
+const paymentLink = (name, url) =>
+  /^https?:\/\//i.test(url || "")
+    ? `<a class="referral-link" href="${esc(url)}" target="_blank" rel="noopener">${name} ↗</a>`
+    : name;
+
+const withdrawalRow = `<div class="profile-fact">
+  <b>Способ вывода</b>
+  <span>${[
+    p.faucetpaySupported ? paymentLink("FaucetPay", p.faucetpayReferralUrl) : "",
+    p.directWalletSupported ? paymentLink("Direct Wallet", p.directWalletReferralUrl) : "",
+    p.withdrawalMethods ? esc(p.withdrawalMethods) : ""
+  ].filter(Boolean).join(" · ") || "Не указано"}</span>
+</div>`;
+
+const paymentRows =
+  paymentStatusRow("FaucetPay", p.faucetpaySupported) +
+  paymentStatusRow("Direct Wallet", p.directWalletSupported) +
+  withdrawalRow;
   payoutRow("Direct Wallet", p.directWalletSupported, p.directWalletReferralUrl);
       const coinIcons = (a, p) => {
         if (!Array.isArray(a) || !a.length) {
@@ -1668,7 +1682,12 @@ const paymentLinks =
        <div class="profile-grid">
         <section class="profile-item accent-cyan"><h3 class="section-heading"><span class="section-heading-icon icon-opportunity" aria-hidden="true">✦</span>Возможности</h3>${list(functions)}</section>
           <section class="profile-item pros-cons"><h3 class="section-heading"><span class="section-heading-icon icon-balance" aria-hidden="true">⚖️</span>Плюсы и минусы</h3><div class="pros-cons-part positive"><h4><span class="section-heading-icon icon-plus" aria-hidden="true">＋</span>Плюсы</h4>${list(p.pros)}</div><div class="pros-cons-divider"></div><div class="pros-cons-part negative"><h4><span class="section-heading-icon icon-minus" aria-hidden="true">−</span>Минусы</h4>${list(p.cons)}</div></section>
-        <section class="profile-item"><h3>Механики и условия</h3><div class="profile-fact"><b>Майнеры</b><span>${text(p.miners)}</span></div><div class="profile-fact"><b>Крафт</b><span>${text(p.craft)}</span></div><div class="profile-fact"><b>Merge</b><span>${text(p.merge)}</span></div><div class="profile-fact"><b>Пулы</b><span>${text(p.pools)}</span></div><div class="profile-fact"><b>Рынок игроков</b><span>${text(p.marketplace)}</span></div></section>
+        <section class="profile-item"><h3>Механики и условия</h3>
+        <div class="profile-fact"><b>Майнеры</b><span>${text(p.miners)}</span></div>
+        <div class="profile-fact"><b>Крафт</b><span>${text(p.craft)}</span></div>
+        <div class="profile-fact"><b>Merge</b><span>${text(p.merge)}</span></div>
+        <div class="profile-fact"><b>Пулы</b><span>${text(p.pools)}</span></div>
+        <div class="profile-fact"><b>Рынок игроков</b><span>${text(p.marketplace)}</span></div></section>
       
 <section class="profile-item">
   <h3>Вывод средств</h3>
@@ -1678,10 +1697,7 @@ const paymentLinks =
     <span>${text(p.minWithdraw)}</span>
   </div>
 
-  <div class="profile-fact">
-<p><b>Способы вывода</b></p>
-${paymentLinks}
-  </div>
+${paymentRows}
 
   <p><b>${esc(p.coinLabel || "Можно майнить и выводить:")}</b></p>
   ${coinIcons(p.coins, p)}
