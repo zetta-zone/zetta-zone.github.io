@@ -1511,7 +1511,8 @@
       }
 
 function platformBadges(p) {
-  const available = new Set((p.platforms || []).map(x => String(x).toLowerCase()));
+  const platforms = Array.isArray(p.platforms) ? p.platforms : [p.platforms || p.platform || ""];
+const available = new Set(platforms.map(x => String(x).toLowerCase()));
   const items = [
     ["web", "🌐", available.has("web") || available.has("веб")],
     ["ios", "iOS", available.has("ios")],
