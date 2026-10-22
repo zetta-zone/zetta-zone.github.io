@@ -453,20 +453,28 @@
         gap: 2px;
         min-width: 0;
       }
-      .metric-copy b {
-        font-size: 11px;
-        line-height: 1.25;
-        color: #eef1fb;
-        white-space: normal;
-        overflow-wrap: anywhere;
-      }
-      .metric-copy span {
-        font-size: 9px;
-        color: var(--muted);
-        line-height: 1.2;
-        letter-spacing: 0.35px;
-        text-transform: uppercase;
-      }
+  .metric-copy b {
+  display: block;
+  min-height: 2.5em;
+  font-size: 10px;
+  line-height: 1.25;
+  color: #eef1fb;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: none;
+}
+
+.metric-copy span {
+  font-size: 9px;
+  color: var(--muted);
+  line-height: 1.2;
+  letter-spacing: 0.35px;
+  text-transform: uppercase;
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: none;
+}
       .card-rating {
         display: flex;
         align-items: center;
