@@ -61,7 +61,6 @@ window.CATALOG_DATA = [
     "marketplace": "Есть",
     "resale": "Можно продавать майнеры и инвентарь",
     "platforms": "Веб",
-    
     "communities": [
       "Discord",
       "Telegram",
@@ -72,7 +71,6 @@ window.CATALOG_DATA = [
       "Telegram": "",
       "Telegram-бот": "https://t.me/Mininhblocksmining_BOT"
     },
-    "faucetpayReferralUrl": "https://faucetpay.io/r/9771657",
     "inGameCurrency": "Blocks",
     "earningTypes": [
       "Кран — раз в час",
@@ -130,7 +128,32 @@ window.CATALOG_DATA = [
     "riskLevel": "low",
     "riskDetails": "Денежные вложения не требуются. По подтверждению пользователя, внести депозит нельзя; пользователь также подтвердил, что выводы проходят и выплаты приходят.",
     "verificationDetails": "Пользователь лично проверил вывод и подтвердил получение выплат.",
-    "referralCta": "🎁 Получить стартового майнера, место и электростанцию"
+    "referralCta": "🎁 Получить стартового майнера, место и электростанцию",
+    "editorialRatings": {
+      "design": null,
+      "usability": null,
+      "earningMethods": null,
+      "earningDifficulty": null,
+      "withdrawal": null,
+      "accountSecurity": null,
+      "profitability": null,
+      "riskReliability": null,
+      "accessibility": null,
+      "engagement": null
+    },
+    "editorialComments": {
+      "design": "",
+      "usability": "",
+      "earningMethods": "",
+      "earningDifficulty": "",
+      "withdrawal": "",
+      "accountSecurity": "",
+      "profitability": "",
+      "riskReliability": "",
+      "accessibility": "",
+      "engagement": ""
+    },
+    "ratingCheckedAt": ""
   },
   {
     "id": "rollercoin",
@@ -146,8 +169,11 @@ window.CATALOG_DATA = [
     "r": 4.6,
     "reviews": 0,
     "fee": "Минимум зависит от валюты и сети — уточнить",
-   "platform": "Веб",
-"platforms": ["Веб", "Android"],
+    "platform": "Веб",
+    "platforms": [
+      "Веб",
+      "Android"
+    ],
     "risk": "Есть внутриигровые покупки",
     "riskTone": "yellow",
     "verified": true,
@@ -187,18 +213,23 @@ window.CATALOG_DATA = [
     "faucetpayReferralUrl": "",
     "directWalletSupported": true,
     "directWalletReferralUrl": "https://web3.okx.com/join/DIKSCOIN",
-    "withdrawalMethods":  " или Любой Криптокошелёк",
+    "withdrawalMethods": " или Любой Криптокошелёк",
     "miners": "Есть; дают постоянную мощность",
     "craft": "Есть",
     "merge": "Есть",
     "pools": "Игровые лиги и общий пул наград",
     "marketplace": "Есть",
-    "platforms": [
-      "Веб" , "Android"
+    "communities": [
+      "X",
+      "Discord",
+      "YouTube",
+      "Telegram",
+      "Telegram-бот"
     ],
-    "communities": ["X", "Discord", "YouTube", "Telegram","Telegram-бот"],
-    "communityLinks": {"Discord": "https://discord.com/invite/EDyWFmN", "Telegram-бот": "https://t.me/rollertap_bot?start=1993292119"},
-    "faucetpayReferralUrl": "",
+    "communityLinks": {
+      "Discord": "https://discord.com/invite/EDyWFmN",
+      "Telegram-бот": "https://t.me/rollertap_bot?start=1993292119"
+    },
     "inGameCurrency": "RLT (RollerToken)",
     "earningTypes": [
       "Мини-игры — временная мощность",
@@ -264,6 +295,31 @@ window.CATALOG_DATA = [
     "referralCta": "Получить 1 000 сатоши за регистрацию",
     "ratingSource": "Feefo",
     "coinLabel": "Криптовалюты (доступность зависит от лиги):",
-    "registrationUrl": "https://rollercoin.com/?r=mmkldfup"
+    "registrationUrl": "https://rollercoin.com/?r=mmkldfup",
+    "editorialRatings": {
+      "design": null,
+      "usability": null,
+      "earningMethods": null,
+      "earningDifficulty": null,
+      "withdrawal": null,
+      "accountSecurity": null,
+      "profitability": null,
+      "riskReliability": null,
+      "accessibility": null,
+      "engagement": null
+    },
+    "editorialComments": {
+      "design": "",
+      "usability": "",
+      "earningMethods": "",
+      "earningDifficulty": "",
+      "withdrawal": "",
+      "accountSecurity": "",
+      "profitability": "",
+      "riskReliability": "",
+      "accessibility": "",
+      "engagement": ""
+    },
+    "ratingCheckedAt": ""
   }
 ];

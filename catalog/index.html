@@ -55,9 +55,21 @@
             placeholder="⌕ Поиск по названию и описанию…"/>
           <select class="field" id="sort">
             <option value="featured">Рекомендуемые</option>
-            <option value="rating">По оценке каталога</option>
+            <option value="rating">По внешней оценке</option>
+            <option value="editorial:overall">По общей оценке ZETTA-ZONE</option>
+            <option value="editorial:design">По дизайну</option>
+            <option value="editorial:usability">По удобству</option>
+            <option value="editorial:earningMethods">По возможностям заработка</option>
+            <option value="editorial:earningDifficulty">По простоте заработка</option>
+            <option value="editorial:withdrawal">По выводу средств</option>
+            <option value="editorial:accountSecurity">По безопасности аккаунта</option>
+            <option value="editorial:profitability">По доходности</option>
+            <option value="editorial:riskReliability">По надёжности и низкому риску</option>
+            <option value="editorial:accessibility">По доступности</option>
+            <option value="editorial:engagement">По интересности</option>
+            <option value="community">🏆 По симпатиям посетителей</option>
             <option value="name">По названию</option>
-            <option value="reviews">По оценкам</option></select
+            <option value="reviews">По количеству оценок</option></select
           >
           <select class="field" id="status">
             <option value="all">Любой статус</option>
@@ -87,8 +99,7 @@
         </div>
         <div class="grid" id="grid"></div>
         <p class="note">
-          Предпросмотр по черновику из таблицы. Оценок сообщества пока нет; дату
-          запуска и валюту минимального вывода нужно уточнить.
+          Сортируй проекты по общей оценке ZETTA-ZONE, любому из 10 критериев или «Призу зрительских симпатий». Не выставленные оценки автоматически остаются в конце списка.
         </p>
       </section>
       <div class="comparebar" id="comparebar">

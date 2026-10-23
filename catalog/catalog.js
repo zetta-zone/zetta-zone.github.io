@@ -7,6 +7,35 @@ let data=window.CATALOG_DATA;
       function esc(x){return String(x).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}function toast(t){$("#toast").textContent=t;$("#toast").classList.add("show");setTimeout(()=>$("#toast").classList.remove("show"),2200)}
       function all(){return data.map(p=>({...p}))}
       function riskBadge(p){const labels={low:["Риск: низкий","green"],medium:["Риск: средний","yellow"],high:["Риск: высокий","red"]};const [label,color]=labels[p.riskLevel]||["Риск: не оценён",""];return `<span class="tag ${color}">${label}</span>`}
+      const EDITORIAL_CRITERIA = [
+        {key:"design",name:"Дизайн и интерфейс",desc:"Оформление, читаемость, структура и визуальное качество."},
+        {key:"usability",name:"Удобство использования",desc:"Регистрация, навигация, понятность и простота действий."},
+        {key:"earningMethods",name:"Возможности заработка",desc:"Разнообразие способов заработка и возможность работать без рефералов."},
+        {key:"earningDifficulty",name:"Сложность заработка",desc:"Время, усилия, регулярные действия и сложность достижения вывода."},
+        {key:"withdrawal",name:"Пополнение и вывод средств",desc:"Минимум вывода, комиссии, скорость, способы и проверенный опыт выплат."},
+        {key:"accountSecurity",name:"Безопасность аккаунта",desc:"Пароль, подтверждение email, 2FA, защита входа и восстановление доступа."},
+        {key:"profitability",name:"Доходность и окупаемость",desc:"Фактический доход, расходы, вложения и реалистичность окупаемости."},
+        {key:"riskReliability",name:"Риски и надёжность",desc:"Прозрачность правил, история работы, обязательства и риск потери средств."},
+        {key:"accessibility",name:"Доступность и совместимость",desc:"Мобильная версия, приложения, языки и ограничения по странам."},
+        {key:"engagement",name:"Интерес и вовлечённость",desc:"Насколько интересно проводить время, разнообразие и отсутствие рутины."}
+      ];
+      function editorialScore(p, key="overall") {
+        const ratings = p.editorialRatings || {};
+        const values = EDITORIAL_CRITERIA.map(c => Number(ratings[c.key])).filter(n => Number.isFinite(n) && n >= 1 && n <= 5);
+        if (key !== "overall") { const n = Number(ratings[key]); return Number.isFinite(n) && n >= 1 && n <= 5 ? n : null; }
+        return values.length >= 6 ? values.reduce((a,b)=>a+b,0)/values.length : null;
+      }
+      function starsText(score) { return score == null ? "Не проверено" : `★ ${Number(score).toFixed(1)}/5`; }
+      function editorialMarkup(p) {
+        const overall = editorialScore(p);
+        const checked = p.ratingCheckedAt ? ` · Проверено: ${esc(p.ratingCheckedAt)}` : "";
+        const rows = EDITORIAL_CRITERIA.map(c => {
+          const score = editorialScore(p,c.key);
+          const comment = (p.editorialComments || {})[c.key];
+          return `<div class="editorial-row"><div class="editorial-row-head"><b>${c.name}</b><span class="editorial-score ${score == null ? "is-empty" : ""}">${score == null ? "Не проверено" : "★".repeat(score)+"☆".repeat(5-score)+` <em>${score}/5</em>`}</span></div><p class="editorial-criterion-desc">Что оценивается: ${esc(c.desc)}</p>${comment ? `<p class="editorial-comment"><b>Комментарий автора:</b> ${esc(comment)}</p>` : `<p class="editorial-comment is-empty">Комментарий автора пока не добавлен.</p>`}</div>`;
+        }).join("");
+        return `<details class="editorial-details"><summary><span>Оценка ZETTA-ZONE</span><strong>${overall == null ? "В процессе проверки" : `★ ${overall.toFixed(1)}/5`}</strong><small>10 критериев${checked}</small></summary><div class="editorial-body"><p class="editorial-explain">Оценка автора и комментарии. Пустые оценки не учитываются в общем балле.</p>${rows}</div></details>`;
+      }
 
       // Shared Supabase community ratings (one vote per browser identity and project).
       const communityRatings = new Map();
@@ -61,7 +90,7 @@ let data=window.CATALOG_DATA;
         const r = communityRatings.get(String(p.id)) || {sum:0,count:0,mine:0};
         const avg = r.count ? (r.sum / r.count).toFixed(1) : "—";
         const stars = [1,2,3,4,5].map(n => `<button type="button" class="community-star ${r.mine >= n ? "selected" : ""}" data-community-rate="${n}" data-project-id="${esc(p.id)}" aria-label="Оценить на ${n} из 5" title="${n} из 5" ${r.mine ? "disabled" : ""}>★</button>`).join("");
-        return `<div class="community-rating"><div class="community-rating-summary"><strong>★ ${avg}</strong><span>${r.count} ${r.count===1?"голос":r.count>=2&&r.count<=4?"голоса":"голосов"}</span></div><div class="community-rating-vote"><span>${r.mine ? "Твоя оценка:" : "Оцени:"}</span>${stars}</div></div>`;
+        return `<div class="community-rating"><div class="community-rating-summary"><strong>🏆 Приз зрительских симпатий · ★ ${avg}</strong><span>${r.count} ${r.count===1?"голос":r.count>=2&&r.count<=4?"голоса":"голосов"}</span></div><div class="community-rating-vote"><span>${r.mine ? "Твоя оценка:" : "Оцени проект:"}</span>${stars}</div></div>`;
       }
 
 
@@ -182,8 +211,13 @@ let arr = all().filter(p => {
 });
 
                   
-                  if(sort==="rating")arr.sort((a,b)=>b.r-a.r);if(sort==="name")arr.sort((a,b)=>a.n.localeCompare(b.n));
-                  if(sort==="reviews")arr.sort((a,b)=>b.reviews-a.reviews);$("#count").textContent=arr.length;$("#grid").innerHTML=arr.length?arr.map(p=>`
+                  const missingLast = (a,b,scoreFn) => { const av=scoreFn(a),bv=scoreFn(b); if(av==null&&bv==null)return 0; if(av==null)return 1; if(bv==null)return -1; return bv-av; };
+                  if(sort==="rating")arr.sort((a,b)=>missingLast(a,b,p=>Number(p.r)>0?Number(p.r):null));
+                  if(sort==="name")arr.sort((a,b)=>a.n.localeCompare(b.n));
+                  if(sort==="reviews")arr.sort((a,b)=>(Number(b.reviews)||0)-(Number(a.reviews)||0));
+                  if(sort==="community")arr.sort((a,b)=>missingLast(a,b,p=>{const r=communityRatings.get(String(p.id));return r&&r.count?r.sum/r.count:null}));
+                  if(sort.startsWith("editorial:")){const key=sort.split(":")[1];arr.sort((a,b)=>missingLast(a,b,p=>editorialScore(p,key)));}
+                  $("#count").textContent=arr.length;$("#grid").innerHTML=arr.length?arr.map(p=>`
       <article class="card" style="--card-accent:${esc(p.brandAccent||"#8b7cff")};--card-wash:${esc(p.brandTint||"#171d2e")}">
       <div class="top">
       <div class="logo ${p.tone}">${p.logoUrl?`<img src="${esc(p.logoUrl)}" alt="${esc(p.n)}" loading="lazy">`:`<span class="rc-mark" aria-label="${esc(p.n)}">${esc(p.s||p.n.slice(0,1))}</span>`}</div>
@@ -219,6 +253,7 @@ let arr = all().filter(p => {
       </div>
       </div>
       ${communityRatingMarkup(p)}
+      ${editorialMarkup(p)}
 
       <div class="metrics">
 
@@ -435,9 +470,9 @@ ${paymentRows}
       $("#grid").addEventListener("click",e=>{const rate=e.target.closest("[data-community-rate]");if(rate){submitCommunityRating(rate.dataset.projectId,Number(rate.dataset.communityRate),rate);return}let f=e.target.closest("[data-fav]");if(f){saved.has(f.dataset.fav)?saved.delete(f.dataset.fav):saved.add(f.dataset.fav);writeStore("zz2saved",[...saved]);render();toast(saved.has(f.dataset.fav)?"В избранном ♥":"Удалено из избранного");return}let d=e.target.closest("[data-detail]");if(d){details(d.dataset.detail);return}if(e.target.closest("[data-go]"))toast("Ссылка на сайт для этого демо-проекта не задана.")});
       $("#grid").addEventListener("change",e=>{let c=e.target.closest("[data-pick]");if(!c)return;if(c.checked){if(chosen.size>=3){c.checked=false;toast("Максимум 3 проекта");return}chosen.add(c.dataset.pick)}else chosen.delete(c.dataset.pick);updateCompare()});
       $("#modal").addEventListener("click",e=>{if(e.target.closest("[data-close]")){close();return}let copy=e.target.closest("[data-copy-ref]");if(copy){const project=data.find(x=>x.id===copy.dataset.copyRef);if(project?.referralUrl){const box=document.createElement("textarea");box.value=project.referralUrl;box.style.position="fixed";box.style.opacity="0";document.body.appendChild(box);box.select();const ok=document.execCommand("copy");box.remove();toast(ok?"Реферальная ссылка скопирована":"Не удалось скопировать ссылку")}return}let p=e.target.closest("[data-pickmodal]");if(p){if(!chosen.has(p.dataset.pickmodal)){if(chosen.size>=3){toast("Максимум 3 проекта");return}chosen.add(p.dataset.pickmodal)}close();render();toast("Добавлено к сравнению")}});
-      $("#backdrop").addEventListener("click",e=>{if(e.target.id==="backdrop")close()});document.addEventListener("keydown",e=>{if(e.key==="Escape")close()});$("#search").addEventListener("input",render);$("#sort").addEventListener("change",render);$("#status").addEventListener("change",render);
+      $("#backdrop").addEventListener("click",e=>{if(e.target.id==="backdrop")close()});document.addEventListener("keydown",e=>{if(e.key==="Escape")close()});$("#search").addEventListener("input",render);$("#sort").addEventListener("change",render);$("#status").addEventListener("change",render);$("#adFilter").addEventListener("change",render);
       $("#chips").addEventListener("click",e=>{let c=e.target.closest("[data-cat]");if(!c)return;cat=c.dataset.cat;$("#chips").querySelectorAll(".chip").forEach(x=>x.classList.toggle("active",x===c));render()});
-      $("#reset").addEventListener("click",()=>{$("#search").value="";$("#sort").value="featured";$("#status").value="all";cat="Все";onlySaved=false;$("#chips").querySelectorAll(".chip").forEach(x=>x.classList.toggle("active",x.dataset.cat==="Все"));render()});
+      $("#reset").addEventListener("click",()=>{$("#search").value="";$("#sort").value="featured";$("#status").value="all";$("#adFilter").value="all";cat="Все";onlySaved=false;$("#chips").querySelectorAll(".chip").forEach(x=>x.classList.toggle("active",x.dataset.cat==="Все"));render()});
       function showSaved(){onlySaved=!onlySaved;$("#savedBtn").classList.toggle("primary",onlySaved);render();$("#catalog").scrollIntoView({behavior:"smooth"})}$("#savedBtn").addEventListener("click",showSaved);$("#communitySaved").addEventListener("click",()=>{onlySaved=true;render();$("#catalog").scrollIntoView({behavior:"smooth"})});$("#startCompare").addEventListener("click",()=>{toast("Отметь чекбоксы у 2–3 карточек");$("#catalog").scrollIntoView({behavior:"smooth"})});$("#clear").addEventListener("click",()=>{chosen.clear();render()});$("#compareBtn").addEventListener("click",compareModal);
  
 
