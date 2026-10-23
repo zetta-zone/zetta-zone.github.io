@@ -11,4 +11,4 @@ window.ZETTA_SUPABASE_URL = 'https://gqupbsvaeqenavgyoksh.supabase.co';
 window.ZETTA_SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_H6trIkPnWf3gvCgfCr-PNw_PRVJtjIp';
 
 // UUID единственной авторской учётной записи Supabase Auth. Заполни после создания пользователя.
-window.ZETTA_EDITOR_AUTHOR_ID = 'ВСТАВЬТЕ-UUID-АВТОРА';
+window.ZETTA_EDITOR_AUTHOR_ID = '74e2f73e-6fa1-41ab-bfe7-f0f2f81ac44d';
