@@ -1651,3 +1651,69 @@
 .hero .eyebrow{display:flex;align-items:center;gap:10px;}
 .hero .eyebrow::before{content:"";width:25px;height:2px;background:var(--accent);}
 @media(max-width:580px){.brand{gap:7px;}.brand-mark{width:29px;height:29px;border-radius:9px;font-size:18px;}.brand-copy{font-size:11px;gap:2px;}.brand-copy small{font-size:7px;letter-spacing:1px;}}
+
+/* The same compact rating strip on phones, tablets and desktop cards. */
+#catalog .card-ratings-row {
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.65fr) minmax(0,1fr);
+  align-items:center;gap:4px;width:100%;margin:0;padding:8px 0 2px;
+  border-top:1px solid #ffffff12;
+}
+#catalog .card-ratings-row > .community-rating,
+#catalog .card-ratings-row > .card-rating,
+#catalog .card-ratings-row > .editorial-compact {
+  border:0;background:none;box-shadow:none;border-radius:0;margin:0;padding:0;
+  width:auto;min-width:0;max-width:none;min-height:20px;gap:4px;
+}
+#catalog .card-ratings-row > .community-rating {
+  display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;justify-content:flex-start;
+  grid-column:1;grid-row:1;
+}
+#catalog .card-ratings-row .community-rating-summary,
+#catalog .card-ratings-row .community-rating-summary strong {display:contents;}
+#catalog .card-ratings-row .community-rating-vote {
+  display:flex;align-items:center;flex-wrap:nowrap;order:0;margin:0;gap:0;height:20px;line-height:20px;
+}
+#catalog .card-ratings-row .community-rating-vote .community-star {
+  font-family:Arial,sans-serif;font-size:12px!important;line-height:20px;padding:0!important;letter-spacing:0;
+}
+#catalog .card-ratings-row .community-score-value {
+  order:1;align-self:center;white-space:nowrap;font-size:10px;font-weight:750;line-height:20px;color:#f5c95e;
+}
+#catalog .card-ratings-row > .community-rating::after {content:"🏆";order:2;font-size:11px;line-height:20px;}
+#catalog .card-ratings-row .community-rating-vote > span,
+#catalog .card-ratings-row .community-label-full,
+#catalog .card-ratings-row .community-label-mobile,
+#catalog .card-ratings-row .community-score-star,
+#catalog .card-ratings-row .community-count-full,
+#catalog .card-ratings-row .community-count-mobile,
+#catalog .card-ratings-row .mobile-vote-hint,
+#catalog .card-ratings-row .editorial-compact-star,
+#catalog .card-ratings-row .editorial-compact-trophy,
+#catalog .card-ratings-row .editorial-name-full,
+#catalog .card-ratings-row .editorial-name-mobile,
+#catalog .card-ratings-row .mobile-editorial-hint,
+#catalog .card-ratings-row .rating-count {display:none;}
+#catalog .card-ratings-row > .card-rating {
+  display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;justify-content:center;
+  grid-column:2;grid-row:1;
+}
+#catalog .card-ratings-row .external-source {display:block;max-width:40px;font-size:7px;line-height:10px;color:var(--muted);overflow-wrap:anywhere;}
+#catalog .card-ratings-row .card-rating-info {display:flex;align-items:center;flex-wrap:nowrap;gap:3px;}
+#catalog .card-ratings-row .card-rating .stars {font-size:12px;}
+#catalog .card-ratings-row .card-rating .rating {font-size:10px;white-space:nowrap;}
+#catalog .card-ratings-row > .editorial-compact,
+#catalog .card-ratings-row > .editorial-compact:not(:first-child) {
+  display:flex;flex-direction:row;align-items:center;justify-content:flex-end;flex-wrap:nowrap;
+  grid-column:3;grid-row:1;padding:0;margin:0;border:0;font-size:10px;
+}
+#catalog .card-ratings-row > .community-rating:not(:first-child) {border:0;padding:0;margin:0;}
+#catalog .card-ratings-row .editorial-mobile-stars {
+  display:block;order:0;position:relative;width:max-content;height:20px;line-height:20px;
+  font-family:Arial,sans-serif;font-size:12px!important;letter-spacing:0;color:#68718a;
+}
+#catalog .card-ratings-row .editorial-mobile-stars > span {
+  display:block;position:absolute;inset:0 auto 0 0;overflow:hidden;white-space:nowrap;line-height:20px;color:#f5c95e;
+}
+#catalog .card-ratings-row .editorial-compact > b {order:1;font-size:10px;line-height:20px;white-space:nowrap;color:#f5c95e;}
+#catalog .card-ratings-row .editorial-compact::after {content:"◆";order:2;font-size:12px;color:var(--accent);}
+
