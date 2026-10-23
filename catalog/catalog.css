@@ -1398,3 +1398,113 @@
 .card-ratings-row>.editorial-compact{width:auto;flex:1 1 150px;min-width:0;margin:0;}
 .card-ratings-row .editorial-compact small{margin-left:auto;}
 @media(max-width:680px){.card-ratings-row{gap:5px;align-items:stretch}.card-ratings-row>.card-rating{flex:0 1 auto;padding:4px 6px}.card-ratings-row>.community-rating{flex:1 1 100%;gap:4px}.card-ratings-row>.editorial-compact{flex:1 1 100%;}.card-ratings-row .community-rating-vote{margin-left:auto}.card-ratings-row .editorial-compact small{font-size:9px}}
+
+/* Phone card layout; full labels and desktop layout stay intact. */
+.category-mobile, .community-label-mobile { display: none; }
+@media (max-width: 580px) {
+  #catalog .card { gap: 6px; }
+  #catalog .top > div:nth-child(2) { min-width: 0; }
+  #catalog .name, #catalog .subtitle { overflow-wrap: anywhere; }
+  #catalog .platform-badges { gap: 4px; margin-top: 4px; flex-wrap: wrap; }
+  #catalog .platform-badge { min-width: 21px; height: 20px; padding: 0 3px; font-size: 10px; border-radius: 5px; }
+  #catalog .category-full, #catalog .community-label-full { display: none; }
+  #catalog .category-mobile, #catalog .community-label-mobile { display: inline; }
+  #catalog .card-ratings-row { flex-wrap: nowrap; gap: 4px; margin: 2px 0; align-items: stretch; }
+  #catalog .card-ratings-row > .card-rating { flex: 0 1 auto; padding: 4px; }
+  #catalog .card-ratings-row > .community-rating { flex: 1 1 0; flex-direction: column; align-items: flex-start; justify-content: center; gap: 3px; padding: 4px; }
+  #catalog .card-ratings-row .community-rating-summary { gap: 3px; font-size: 9px; }
+  #catalog .card-ratings-row .community-rating-summary strong { font-size: 10px; }
+  #catalog .card-ratings-row .community-rating-vote { margin: 0; gap: 0; flex-wrap: nowrap; }
+  #catalog .community-rating-vote > span { display: none; }
+  #catalog .community-rating-vote .community-star { font-size: 16px !important; padding: 3px 2px !important; }
+  #catalog .card-ratings-row > .editorial-compact { flex: 1 1 0; min-height: 0; padding: 4px; gap: 3px; font-size: 10px; }
+  #catalog .card-ratings-row .editorial-compact small { margin-left: 0; font-size: 9px; }
+  #catalog .card-ratings-row .rating-count { font-size: 9px; overflow-wrap: anywhere; }
+}
+
+.platform-macos { display: none; }
+@media (max-width: 580px) { #catalog .platform-macos { display: grid; } }
+
+
+/* Refined phone cards: inline ratings and a single status strip. */
+.mobile-status, .mobile-description, .compare-mobile { display:none; }
+@media(max-width:580px) {
+  #catalog .card { padding:13px; gap:9px; }
+  #catalog .top { align-items:center; gap:11px; }
+  #catalog .logo { width:58px; height:58px; flex:0 0 58px; font-size:27px; border-radius:13px; }
+  #catalog .name { font-size:17px; line-height:1.2; }
+  #catalog .subtitle { font-size:10px; line-height:1.3; margin-top:3px; }
+  #catalog .platform-badges { gap:3px; margin-top:4px; }
+  #catalog .platform-badge { min-width:17px; height:17px; padding:0 2px; font-size:9px; border-radius:4px; }
+  #catalog .card-status-full { display:none; }
+  #catalog .mobile-status { display:flex; align-items:center; gap:6px; flex-wrap:nowrap; min-width:0; }
+  #catalog .mobile-category { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:10px; color:#bdc8de; margin-right:auto; }
+  #catalog .mobile-indicator { display:grid; place-items:center; width:24px; height:21px; flex:0 0 24px; border:1px solid #ffffff24; border-radius:5px; font-size:11px; font-weight:800; color:#9ba6be; background:#ffffff08; }
+  #catalog .mobile-indicator.green { color:#50d6a0; border-color:#50d6a04a; background:#50d6a014; }
+  #catalog .mobile-indicator.yellow { color:#ffc96b; border-color:#ffc96b4a; background:#ffc96b14; }
+  #catalog .mobile-indicator.red { color:#ff8190; border-color:#ff81904a; background:#ff819014; }
+  #catalog .desc-wrap { display:none; }
+  #catalog .mobile-description { display:block; min-width:0; }
+  #catalog .mobile-description p { display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; overflow:hidden; font-size:12px; line-height:1.5; color:#c1c9da; margin:0; }
+  #catalog .mobile-description .read-more-link { font-size:10px; }
+  #catalog .card-ratings-row { gap:10px; align-items:center; margin:0; }
+  #catalog .card-ratings-row > .card-rating,
+  #catalog .card-ratings-row > .community-rating,
+  #catalog .card-ratings-row > .editorial-compact { border:0; background:none; border-radius:0; padding:0; box-shadow:none; }
+  #catalog .card-ratings-row > .community-rating { gap:1px; flex:1 1 0; }
+  #catalog .card-ratings-row > .editorial-compact { flex:0 1 auto; gap:3px; max-width:85px; }
+  #catalog .card-ratings-row .editorial-compact small { font-size:8px; }
+  #catalog .card-ratings-row .editorial-compact-trophy { display:none; }
+  #catalog .community-rating-vote .community-star { font-size:15px!important; padding:2px 1px!important; }
+  #catalog .cardfoot { border-top:1px solid #ffffff12; padding-top:10px; align-items:stretch; }
+  #catalog .compare-desktop { display:none; }
+  #catalog .compare-mobile { display:block; }
+  #catalog .compare-icon-btn { display:flex; border-color:#3a4d63; background:#1c2939; }
+}
+
+#catalog .logo { overflow:hidden; }
+@media(max-width:580px) {
+  .nav { height:48px; gap:8px; }
+  .brand { font-size:12px; letter-spacing:1px; }
+  .nav > .btn { font-size:11px; padding:6px 8px; border-radius:8px; }
+  .hero { display:none; }
+  .hero .eyebrow, .hero > p, .hero .actions, .hero .stats { display:none; }
+  .hero h1 { font-size:24px; line-height:1.15; letter-spacing:-.6px; margin:0; }
+  .hero h1 br { display:none; }
+  #catalog .head { margin:12px 0 8px; align-items:center; }
+  #catalog .head h2 { font-size:18px; }
+  #catalog .head p { display:none; }
+  #catalog .head > .btn { font-size:10px; padding:5px 8px; }
+  #catalog .toolbar { grid-template-columns:repeat(3,minmax(0,1fr)); gap:5px; margin:7px 0; }
+  #catalog .toolbar .field { font-size:10px; padding:7px 4px; border-radius:7px; }
+  #catalog .toolbar input { font-size:12px; padding:8px; }
+  #catalog .chips { gap:5px; padding-bottom:9px; }
+  #catalog .chip { font-size:10px; padding:5px 8px; }
+}
+#catalog .logo [hidden] { display:none; }
+
+.external-source, .editorial-name-mobile, .editorial-mobile-stars, .community-count-mobile {display:none;}
+@media(max-width:580px) {
+  #catalog .subtitle {font-size:11px;}
+  #catalog .mobile-status {gap:4px;}
+  #catalog .mobile-category {border:1px solid #ffffff24;background:#ffffff06;border-radius:5px;padding:3px 5px;font-size:9px;margin-right:0;}
+  #catalog .mobile-indicator {display:inline-flex;justify-content:center;white-space:nowrap;width:auto;flex:0 0 auto;padding:0 4px;font-size:9px;}
+  #catalog .mobile-description p {display:block;overflow:visible;-webkit-line-clamp:unset;font-size:12px;line-height:18px;}
+  #catalog .mobile-description .read-more-link {display:inline;font-size:11px;line-height:18px;}
+  #catalog .card-ratings-row {border-top:1px solid #ffffff12;padding-top:9px;gap:0;align-items:stretch;}
+  #catalog .card-ratings-row > * + * {border-left:1px solid #ffffff16;padding-left:9px;margin-left:9px;}
+  #catalog .card-ratings-row > .card-rating {display:flex;flex-direction:column;justify-content:center;gap:3px;}
+  #catalog .external-source {display:block;color:#9ba6be;font-size:9px;line-height:1.2;}
+  #catalog .card-ratings-row > .community-rating {justify-content:center;}
+  #catalog .community-count-full {display:none;}
+  #catalog .community-count-mobile {display:inline;}
+  #catalog .card-ratings-row .community-rating-summary {flex-wrap:nowrap;white-space:nowrap;}
+  #catalog .card-ratings-row > .editorial-compact {display:grid;grid-template-columns:auto auto;align-content:center;gap:3px 5px;max-width:100px;}
+  #catalog .editorial-compact-star, #catalog .editorial-name-full {display:none;}
+  #catalog .editorial-name-mobile {display:block;font-size:8px;line-height:1.05;font-weight:900;letter-spacing:.5px;color:#cad2e8;}
+  #catalog .editorial-mobile-stars {display:block;grid-column:1/-1;position:relative;color:#68718a;font-size:15px;line-height:19px;letter-spacing:1px;width:max-content;}
+  #catalog .editorial-mobile-stars > span {position:absolute;inset:0 auto 0 0;overflow:hidden;white-space:nowrap;color:#f5c95e;}
+  #catalog .cardfoot > button[data-detail] {background:#243c51;border-color:#47728d;color:#d8f6ff;}
+  #catalog .card-ratings-row > .community-rating:not(:first-child),
+  #catalog .card-ratings-row > .editorial-compact:not(:first-child) {border-left:1px solid #ffffff20;padding-left:9px;}
+}

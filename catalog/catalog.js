@@ -34,7 +34,7 @@ let data=window.CATALOG_DATA;
       }
       function editorialCompactMarkup(p) {
         const overall=editorialScore(p);
-        return `<button type="button" class="editorial-compact" data-editorial-view="${esc(p.id)}" title="Посмотреть оценку ZETTA-ZONE" aria-label="Посмотреть авторскую оценку ${esc(p.n)}"><span class="editorial-compact-star">★</span><b>${overall==null?"—":overall.toFixed(1)+"/5"}</b><span class="editorial-compact-trophy">🏆</span><small>Оценка ZETTA-ZONE</small></button>`;
+        return `<button type="button" class="editorial-compact" data-editorial-view="${esc(p.id)}" title="Посмотреть оценку ZETTA-ZONE" aria-label="Посмотреть авторскую оценку ${esc(p.n)}"><span class="editorial-compact-star">★</span><b>${overall==null?"—":overall.toFixed(1)+"/5"}</b><span class="editorial-compact-trophy">🏆</span><small class="editorial-name-full">Оценка ZETTA-ZONE</small><span class="editorial-name-mobile">ZETTA<br>ZONE</span><span class="editorial-mobile-stars" aria-label="${overall==null?'Оценка не выставлена':overall.toFixed(1)+' из 5'}"><span style="width:${overall==null?0:overall/5*100}%">★★★★★</span>★★★★★</span></button>`;
       }
       function editorialMarkup(p) {
         const overall = editorialScore(p);
@@ -178,7 +178,7 @@ let data=window.CATALOG_DATA;
         const r = communityRatings.get(String(p.id)) || {sum:0,count:0,mine:0};
         const avg = r.count ? (r.sum / r.count).toFixed(1) : "—";
         const stars = [1,2,3,4,5].map(n => `<button type="button" class="community-star ${r.mine >= n ? "selected" : ""}" data-community-rate="${n}" data-project-id="${esc(p.id)}" aria-label="Оценить на ${n} из 5" title="${n} из 5" ${r.mine ? "disabled" : ""}>★</button>`).join("");
-        return `<div class="community-rating"><div class="community-rating-summary"><strong>🏆 Приз зрительских симпатий · ★ ${avg}</strong><span>${r.count} ${r.count===1?"голос":r.count>=2&&r.count<=4?"голоса":"голосов"}</span></div><div class="community-rating-vote"><span>${r.mine ? "Твоя оценка:" : "Оцени проект:"}</span>${stars}</div></div>`;
+        return `<div class="community-rating"><div class="community-rating-summary"><strong><span class="community-label-full">🏆 Приз зрительских симпатий · </span><span class="community-label-mobile" title="Приз зрительских симпатий">🏆 ПЗС </span>★ ${avg}</strong><span class="community-count-mobile">${r.count} г.</span><span class="community-count-full">${r.count} ${r.count===1?"голос":r.count>=2&&r.count<=4?"голоса":"голосов"}</span></div><div class="community-rating-vote"><span>${r.mine ? "Твоя оценка:" : "Оцени проект:"}</span>${stars}</div></div>`;
       }
 
 
@@ -256,15 +256,16 @@ let data=window.CATALOG_DATA;
 
 function platformBadges(p) {
   const platforms = Array.isArray(p.platforms) ? p.platforms : [p.platforms || p.platform || ""];
-const available = new Set(platforms.map(x => String(x).toLowerCase()));
+const available = new Set(platforms.map(x => String(x).trim().toLowerCase()));
   const items = [
     ["web", "🌐", available.has("web") || available.has("веб")],
     ["ios", "iOS", available.has("ios")],
-    ["android", "🤖", available.has("android")]
+    ["android", "🤖", available.has("android")],
+    ["macOS", "⌘", ["macos", "mac os", "os x"].some(name => available.has(name))]
   ];
 
   return `<div class="platform-badges">${items.map(([name, icon, active]) =>
-    `<span class="platform-badge ${active ? "active" : "inactive"}"
+    `<span class="platform-badge ${name === "macOS" ? "platform-macos" : ""} ${active ? "active" : "inactive"}"
       title="${name}${active ? " доступен" : " недоступен"}">${icon}</span>`
   ).join("")}</div>`;
 }
@@ -308,7 +309,7 @@ let arr = all().filter(p => {
                   $("#count").textContent=arr.length;$("#grid").innerHTML=arr.length?arr.map(p=>`
       <article class="card" style="--card-accent:${esc(p.brandAccent||"#8b7cff")};--card-wash:${esc(p.brandTint||"#171d2e")}">
       <div class="top">
-      <div class="logo ${p.tone}">${p.logoUrl?`<img src="${esc(p.logoUrl)}" alt="${esc(p.n)}" loading="lazy">`:`<span class="rc-mark" aria-label="${esc(p.n)}">${esc(p.s||p.n.slice(0,1))}</span>`}</div>
+      <div class="logo ${p.tone}">${p.logoUrl?`<img src="${esc(p.logoUrl)}" alt="${esc(p.n)}" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span hidden aria-hidden="true">${esc(p.s||p.n.slice(0,1))}</span>`:`<span class="rc-mark" aria-label="${esc(p.n)}">${esc(p.s||p.n.slice(0,1))}</span>`}</div>
       <div>
       <div class="name">${p.n}</div>
       <div class="subtitle">${p.sub}</div>
@@ -317,8 +318,8 @@ let arr = all().filter(p => {
       </div>
       
       
-      <div class="tags">
-        <span class="tag">${p.cat}</span>
+      <div class="tags card-status-full">
+        <span class="tag">${p.cat === "Майнинг-симуляторы" ? '<span class="category-full">Майнинг-симуляторы</span><span class="category-mobile">Симуляторы</span>' : esc(p.cat)}</span>
         <span class="tag ${p.verified?"green":"red"}">${p.verified?"✓ Выплаты проверены":"! Выплаты не проверены"}</span>
         ${riskBadge(p)}
         ${(() => {
@@ -334,9 +335,16 @@ let arr = all().filter(p => {
         })()}
       </div>
 
+      <div class="mobile-status" aria-label="Категория и статусы">
+        <span class="mobile-category">${esc(p.cat === "Майнинг-симуляторы" ? "Симуляторы" : p.cat)}</span>
+        <span class="mobile-indicator ${p.verified ? 'green' : 'yellow'}" title="${p.verified ? 'Выплаты проверены' : 'Выплаты не проверены'}" aria-label="${p.verified ? 'Выплаты проверены' : 'Выплаты не проверены'}">${p.verified ? '✓' : '?'} Выплаты</span>
+        <span class="mobile-indicator ${({low:'green',medium:'yellow',high:'red'})[p.riskLevel] || ''}" title="${esc(({low:'Риск: низкий',medium:'Риск: средний',high:'Риск: высокий'})[p.riskLevel] || 'Риск не оценён')}" aria-label="${esc(({low:'Риск: низкий',medium:'Риск: средний',high:'Риск: высокий'})[p.riskLevel] || 'Риск не оценён')}">◇ ${esc(({low:"Низкий",medium:"Средний",high:"Высокий"})[p.riskLevel] || "Риск ?")}</span>
+        <span class="mobile-indicator ${({low:'green',medium:'yellow',high:'red'})[p.adLevel] || ''}" title="${esc(({low:'Реклама не мешает',medium:'Много рекламы',high:'Агрессивная реклама'})[p.adLevel] || 'Реклама не проверена')}" aria-label="${esc(({low:'Реклама не мешает',medium:'Много рекламы',high:'Агрессивная реклама'})[p.adLevel] || 'Реклама не проверена')}">◉ Реклама</span>
+      </div>
+      <div class="mobile-description"><p><span data-mobile-description="${esc(p.d || '')}">${esc(p.d || '')}</span> <button class="read-more-link" type="button" data-detail="${esc(p.id)}">Читать дальше</button></p></div>
       ${descriptionMarkup(p)}
       <div class="card-ratings-row">
-      ${(Number(p.r) > 0 || Number(p.reviews) > 0) ? `<div class="card-rating">
+      ${(Number(p.r) > 0 || Number(p.reviews) > 0) ? `<div class="card-rating"><small class="external-source" title="Внешняя оценка">${esc(p.ratingSource || "Внешняя")}</small>
       <div class="card-rating-info">
       <span class="stars">★</span>${Number(p.r)>0?`<b class="rating">${Number(p.r).toFixed(1)}</b>`:`<span class="mut">Рейтинг не указан</span>`}${Number(p.reviews)>0?`<span class="rating-count">(${Number(p.reviews)} оценок${p.ratingSource?`, ${esc(p.ratingSource)}`:""})</span>`:""}
       </div>
@@ -376,9 +384,9 @@ let arr = all().filter(p => {
       </div>
 
         <div class="cardfoot">
-        <button class="btn" data-detail="${p.id}">Подробнее</button><button class="btn compare-icon-btn" type="button" data-pick-button="${esc(p.id)}" aria-label="Добавить в сравнение" title="Добавить в сравнение">↔</button>${(p.registrationUrl||p.referralUrl)?`<a class="btn primary referral-cta" href="${esc(p.registrationUrl||p.referralUrl)}" target="_blank" rel="noopener">${esc(p.referralCta||"Перейти к регистрации")}</a>
+        <button class="btn" data-detail="${p.id}">Подробнее</button><button class="btn compare-icon-btn" type="button" data-pick-button="${esc(p.id)}" aria-label="Добавить в сравнение" title="Добавить в сравнение"><span class="compare-desktop">↔</span><svg class="compare-mobile" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 7h14m-4-4 4 4-4 4M19 17H5m4-4-4 4 4 4"/></svg></button>${(p.registrationUrl||p.referralUrl)?`<a class="btn primary referral-cta" href="${esc(p.registrationUrl||p.referralUrl)}" target="_blank" rel="noopener">${esc(p.referralCta||"Перейти к регистрации")}</a>
         `:`<button class="btn primary referral-cta" type="button" disabled title="Ссылка пока не добавлена">${esc(p.referralCta||"Ссылка пока не добавлена")}</button>`}</div>
-        </article>`).join(""):`<div class="empty">Ничего не найдено — попробуй изменить фильтры.</div>`;$("#savedN").textContent=saved.size;updateCompare()}
+        </article>`).join(""):`<div class="empty">Ничего не найдено — попробуй изменить фильтры.</div>`;$("#savedN").textContent=saved.size;updateCompare();requestAnimationFrame(fitMobileDescriptions)}
    
 // Keep comparison selection and its sticky toolbar in sync.
       function updateCompare(){$("#compN").textContent=chosen.size+"/3";$("#compNames").textContent=[...chosen].map(id=>data.find(p=>p.id===id)?.n).join(" · ")||"Выбери 2–3 проекта";$("#comparebar").classList.toggle("show",chosen.size>0);$("#compareBtn").disabled=chosen.size<2}
@@ -629,3 +637,21 @@ ensureAuthorControls();
       loadSheetCatalog();
 
 
+
+
+// Keep the continuation link inline on the third visible description line.
+function fitMobileDescriptions() {
+  if (!matchMedia('(max-width:580px)').matches) return;
+  document.querySelectorAll('[data-mobile-description]').forEach(span => {
+    const full=span.dataset.mobileDescription, p=span.parentElement;
+    const limit=parseFloat(getComputedStyle(p).lineHeight)*3+1;
+    span.textContent=full;
+    if(p.scrollHeight<=limit) return;
+    let lo=0,hi=full.length;
+    while(lo<hi){const mid=Math.ceil((lo+hi)/2);span.textContent=full.slice(0,mid).trimEnd()+'…';if(p.scrollHeight<=limit)lo=mid;else hi=mid-1;}
+    const cut=full.slice(0,lo).replace(/\s+\S*$/,'').trimEnd();
+    span.textContent=(cut || full.slice(0,lo))+'…';
+  });
+}
+addEventListener('resize',()=>requestAnimationFrame(fitMobileDescriptions));
+document.fonts.ready.then(fitMobileDescriptions);
