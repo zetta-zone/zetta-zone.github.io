@@ -1369,3 +1369,18 @@
 @media(max-width:680px){.editorial-compact{padding:6px 8px}.editorial-compact small{font-size:10px}.compare-icon-btn{flex-basis:38px!important;min-width:38px;max-width:38px}.cardfoot .compare-icon-btn{min-height:36px}.community-rating{flex-direction:row;align-items:center;flex-wrap:wrap}.community-rating-summary{flex-wrap:wrap}}
 
 .editorial-meta-line{font-size:12px;color:#c8d0e1;margin:8px 0}.editorial-meta-line b{color:#f5c95e}
+
+/* Editorial review UI refinements: compact cards, roomy modal details. */
+.editorial-compact{min-height:34px;padding:5px 8px;gap:5px}
+.editorial-compact small{font-size:10px}
+.editorial-details{margin:10px 0}
+#modal .editorial-details[open] .editorial-body{max-height:none;overflow:visible}
+#modal .editorial-row{padding:10px 0}
+#modal .editorial-edit-form{display:block;margin-top:10px}
+#modal .editorial-edit-form[hidden]{display:none}
+.cardfoot .compare-icon-btn{height:40px;min-height:40px;align-self:center}
+.read-more-link{display:inline;border:0;background:transparent;color:#65d9ff;font:inherit;font-weight:700;padding:0;cursor:pointer;white-space:nowrap}
+.desc-short,.desc-full{line-height:1.55}
+.community-rating{gap:6px;padding:7px 9px}
+.community-rating-summary{font-size:11px;gap:5px}
+@media(max-width:680px){.editorial-compact{margin:5px 0 1px;min-height:30px}.cardfoot .compare-icon-btn{height:36px;min-height:36px}.community-rating{padding:5px 7px}}
