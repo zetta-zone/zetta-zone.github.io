@@ -286,17 +286,7 @@
         gap: 11px;
         align-items: center;
       }
-      .logonew {
-        width: 48px;
-        height: 48px;
-        border-radius: 14px;
-        background: linear-gradient(135deg, #34315c, #203c58);
-        display: grid;
-        place-items: center;
-        font-size: 23px;
-        font-weight: 900;
-        flex-shrink: 0;
-      }
+   
       .logo.green {
         background: linear-gradient(135deg, #1b574b, #203b46);
       }
