@@ -335,6 +335,7 @@ let arr = all().filter(p => {
       </div>
 
       ${descriptionMarkup(p)}
+      <div class="card-ratings-row">
       ${(Number(p.r) > 0 || Number(p.reviews) > 0) ? `<div class="card-rating">
       <div class="card-rating-info">
       <span class="stars">★</span>${Number(p.r)>0?`<b class="rating">${Number(p.r).toFixed(1)}</b>`:`<span class="mut">Рейтинг не указан</span>`}${Number(p.reviews)>0?`<span class="rating-count">(${Number(p.reviews)} оценок${p.ratingSource?`, ${esc(p.ratingSource)}`:""})</span>`:""}
@@ -342,6 +343,7 @@ let arr = all().filter(p => {
       </div>` : ""}
       ${communityRatingMarkup(p)}
       ${editorialCompactMarkup(p)}
+      </div>
       ${editorialEditorMarkup(p)}
 
       <div class="metrics">

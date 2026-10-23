@@ -1384,3 +1384,17 @@
 .community-rating{gap:6px;padding:7px 9px}
 .community-rating-summary{font-size:11px;gap:5px}
 @media(max-width:680px){.editorial-compact{margin:5px 0 1px;min-height:30px}.cardfoot .compare-icon-btn{height:36px;min-height:36px}.community-rating{padding:5px 7px}}
+
+
+/* Единая горизонтальная строка оценок: внешний рейтинг, сообщество и ZETTA-ZONE */
+.card-ratings-row{display:flex;align-items:center;gap:7px;flex-wrap:wrap;width:100%;margin:7px 0 2px;}
+.card-ratings-row>.card-rating{display:flex;align-items:center;flex:0 1 auto;min-width:0;margin:0;padding:5px 8px;border:1px solid #ffffff16;border-radius:9px;background:#ffffff05;}
+.card-ratings-row .card-rating-info{display:flex;align-items:center;gap:5px;flex-wrap:wrap;min-width:0;}
+.card-ratings-row .rating-count{font-size:10px;}
+.card-ratings-row>.community-rating{display:flex;align-items:center;justify-content:flex-start;gap:7px;flex:1 1 220px;min-width:0;width:auto;margin:0;padding:5px 7px;border:1px solid #ffffff16;border-radius:9px;background:#ffffff05;flex-wrap:wrap;}
+.card-ratings-row .community-rating-summary{display:flex;align-items:center;gap:5px;min-width:0;flex-wrap:wrap;}
+.card-ratings-row .community-rating-summary strong{font-size:11px;}
+.card-ratings-row .community-rating-vote{margin-left:auto;}
+.card-ratings-row>.editorial-compact{width:auto;flex:1 1 150px;min-width:0;margin:0;}
+.card-ratings-row .editorial-compact small{margin-left:auto;}
+@media(max-width:680px){.card-ratings-row{gap:5px;align-items:stretch}.card-ratings-row>.card-rating{flex:0 1 auto;padding:4px 6px}.card-ratings-row>.community-rating{flex:1 1 100%;gap:4px}.card-ratings-row>.editorial-compact{flex:1 1 100%;}.card-ratings-row .community-rating-vote{margin-left:auto}.card-ratings-row .editorial-compact small{font-size:9px}}
