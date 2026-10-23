@@ -178,7 +178,7 @@ let data=window.CATALOG_DATA;
         const r = communityRatings.get(String(p.id)) || {sum:0,count:0,mine:0};
         const avg = r.count ? (r.sum / r.count).toFixed(1) : "—";
         const stars = [1,2,3,4,5].map(n => `<button type="button" class="community-star ${r.mine >= n ? "selected" : ""}" data-community-rate="${n}" data-project-id="${esc(p.id)}" aria-label="Оценить на ${n} из 5" title="${n} из 5" ${r.mine ? "disabled" : ""}>★</button>`).join("");
-        return `<div class="community-rating"><div class="community-rating-summary"><strong>🏆 Приз зрительских симпатий · ★ ${avg}</strong><span>${r.count} ${r.count===1?"голос":r.count>=2&&r.count<=4?"голоса":"голосов"}</span></div><div class="community-rating-vote"><span>${r.mine ? "Твоя оценка:" : "Оцени проект:"}</span>${stars}</div></div>`;
+        return `<div class="community-rating"><div class="community-rating-summary"><strong><span class="community-label-full">🏆 Приз зрительских симпатий · </span><span class="community-label-mobile">🏆 </span>★ ${avg}</strong><span>${r.count} ${r.count===1?"голос":r.count>=2&&r.count<=4?"голоса":"голосов"}</span></div><div class="community-rating-vote"><span>${r.mine ? "Твоя оценка:" : "Оцени проект:"}</span>${stars}</div></div>`;
       }
 
 
@@ -256,15 +256,16 @@ let data=window.CATALOG_DATA;
 
 function platformBadges(p) {
   const platforms = Array.isArray(p.platforms) ? p.platforms : [p.platforms || p.platform || ""];
-const available = new Set(platforms.map(x => String(x).toLowerCase()));
+const available = new Set(platforms.map(x => String(x).trim().toLowerCase()));
   const items = [
     ["web", "🌐", available.has("web") || available.has("веб")],
     ["ios", "iOS", available.has("ios")],
-    ["android", "🤖", available.has("android")]
+    ["android", "🤖", available.has("android")],
+    ["macOS", "⌘", ["macos", "mac os", "os x"].some(name => available.has(name))]
   ];
 
   return `<div class="platform-badges">${items.map(([name, icon, active]) =>
-    `<span class="platform-badge ${active ? "active" : "inactive"}"
+    `<span class="platform-badge ${name === "macOS" ? "platform-macos" : ""} ${active ? "active" : "inactive"}"
       title="${name}${active ? " доступен" : " недоступен"}">${icon}</span>`
   ).join("")}</div>`;
 }
@@ -318,7 +319,7 @@ let arr = all().filter(p => {
       
       
       <div class="tags">
-        <span class="tag">${p.cat}</span>
+        <span class="tag">${p.cat === "Майнинг-симуляторы" ? '<span class="category-full">Майнинг-симуляторы</span><span class="category-mobile">Симуляторы</span>' : esc(p.cat)}</span>
         <span class="tag ${p.verified?"green":"red"}">${p.verified?"✓ Выплаты проверены":"! Выплаты не проверены"}</span>
         ${riskBadge(p)}
         ${(() => {
