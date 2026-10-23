@@ -138,25 +138,6 @@
       .brand b {
         color: var(--cyan);
       }
-.brand small {
-    display: block;
-    font-size: 10px;
-    color: var(--muted);
-    letter-spacing: .16em;
-    font-weight: 650;
-}
-.navnew {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 18px;
-    min-height: 70px;
-}
-.wrapnew {
-    width: min(1180px, calc(100% - 32px));
-    margin: auto;
-}
-
       .navlinks {
         display: flex;
         gap: 20px;
