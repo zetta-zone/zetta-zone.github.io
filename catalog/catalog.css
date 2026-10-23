@@ -1735,3 +1735,36 @@
   #catalog .metric-copy span {font-size:8px;}
 }
 
+
+/* Shared card structure on every device. */
+#catalog .card .top{align-items:center;}
+#catalog .card .top>div:nth-child(2){min-width:0;flex:1;}
+#catalog .card .logo{width:var(--card-heading-size,60px);height:var(--card-heading-size,60px);flex:0 0 var(--card-heading-size,60px);align-self:center;}
+#catalog .card .fav{align-self:center;flex:none;}
+#catalog .card-status-full{display:none;}
+#catalog .mobile-status{display:flex;align-items:center;flex-wrap:nowrap;gap:4px;min-width:0;}
+#catalog .mobile-category,#catalog .mobile-indicator{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;font-size:9px;line-height:15px;padding:3px 4px;border:1px solid #ffffff24;border-radius:5px;background:#ffffff06;height:auto;width:auto;}
+#catalog .mobile-category{min-width:0;flex:0 1 auto;overflow:hidden;text-overflow:ellipsis;margin:0;color:#bdc8de;}
+#catalog .mobile-indicator{flex:none;color:#9ba6be;}
+#catalog .mobile-indicator.green{color:#50d6a0;border-color:#50d6a04a;}
+#catalog .mobile-indicator.yellow{color:#ffc96b;border-color:#ffc96b4a;}
+#catalog .mobile-indicator.red{color:#ff8190;border-color:#ff81904a;}
+#catalog .card .metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));order:1;margin:0;gap:0;padding:9px 0;}
+#catalog .card .metric{min-width:0;gap:4px;padding:2px 5px;}
+#catalog .card .metric-copy{min-width:0;}
+#catalog .card .metric-copy b{font-size:10px;overflow-wrap:anywhere;}
+#catalog .card .metric-copy span{font-size:8px;overflow-wrap:anywhere;}
+#catalog .card .metric-icon{font-size:17px;}
+#catalog .card .card-ratings-row{order:2;}
+#catalog .card .editorial-editor{order:3;}
+#catalog .card .cardfoot{order:4;}
+#catalog .card-description-text{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:5;overflow:hidden;line-height:1.5;}
+#catalog .desc-short{min-height:0;}
+#catalog .desc-short[hidden],#catalog .desc-full[hidden],#catalog .read-more-link[hidden]{display:none;}
+/* Same comparison button and selection feedback on every card. */
+#catalog .cardfoot .compare-desktop{display:none;}
+#catalog .cardfoot .compare-mobile{display:block;flex:none;}
+#catalog .cardfoot .compare-icon-btn{display:inline-flex;align-items:center;justify-content:center;flex:0 0 54px!important;min-width:54px;max-width:54px;gap:5px;color:#a9b7cb;border-color:#3a4d63;background:#1c2939;}
+#catalog .cardfoot .compare-icon-btn::after{content:attr(data-tablet-count);font-size:11px;}
+#catalog .cardfoot .compare-icon-btn[data-tablet-selected="true"]{color:#8cecf6;border-color:#56d8e8;background:#143746;}
+#catalog .card .metrics{display:grid!important;}
