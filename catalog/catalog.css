@@ -1629,3 +1629,25 @@
   #catalog .compare-icon-btn[data-tablet-selected="true"] { color:#8cecf6; border-color:#56d8e8; background:#143746; }
 }
 
+
+/* Catalogue filters: search above the three controls near tablet widths. */
+@media(min-width:581px) and (max-width:1280px){
+  #catalog .toolbar{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;}
+  #catalog .toolbar > #search{grid-column:1/-1;}
+  #catalog .toolbar .field{min-width:0;width:100%;font-size:12px;padding:11px 8px;}
+}
+.editorial-panel-tools{display:flex;align-items:end;gap:12px;margin:0 0 14px;}
+.editorial-project-label{display:grid;gap:6px;flex:1;min-width:0;font-size:11px;color:var(--muted);}
+.editorial-project-label .field{width:100%;min-width:0;}
+.editorial-access{flex:none;font-size:17px;padding:9px 12px;color:var(--muted);background:transparent;border-color:#ffffff12;}
+/* Discovery header and hero, using the existing Zetta palette. */
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;}
+.brand-mark{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--cyan));color:#fff;font-size:23px;font-weight:900;}
+.brand-copy{display:grid;gap:4px;font-size:15px;font-weight:900;letter-spacing:1px;}
+.brand-copy small{font-size:9px;letter-spacing:2px;color:var(--muted);}
+.hero{padding-top:62px;padding-bottom:36px;}
+.hero h1{font-size:clamp(36px,5.6vw,64px);line-height:1.06;letter-spacing:-2px;max-width:900px;}
+.hero h1 span{background:linear-gradient(100deg,var(--accent),#4c9eff);background-clip:text;-webkit-background-clip:text;color:transparent;}
+.hero .eyebrow{display:flex;align-items:center;gap:10px;}
+.hero .eyebrow::before{content:"";width:25px;height:2px;background:var(--accent);}
+@media(max-width:580px){.brand{gap:7px;}.brand-mark{width:29px;height:29px;border-radius:9px;font-size:18px;}.brand-copy{font-size:11px;gap:2px;}.brand-copy small{font-size:7px;letter-spacing:1px;}}
