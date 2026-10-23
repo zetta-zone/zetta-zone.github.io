@@ -34,7 +34,7 @@ let data=window.CATALOG_DATA;
       }
       function editorialCompactMarkup(p) {
         const overall=editorialScore(p);
-        return `<button type="button" class="editorial-compact" data-editorial-view="${esc(p.id)}" title="Посмотреть оценку ZETTA-ZONE" aria-label="Посмотреть авторскую оценку ${esc(p.n)}"><span class="editorial-compact-star">★</span><b>${overall==null?"—":overall.toFixed(1)+"/5"}</b><span class="editorial-compact-trophy">🏆</span><small class="editorial-name-full">Оценка ZETTA-ZONE</small><span class="editorial-name-mobile">ZETTA<br>ZONE</span><span class="editorial-mobile-stars" aria-label="${overall==null?'Оценка не выставлена':overall.toFixed(1)+' из 5'}"><span style="width:${overall==null?0:overall/5*100}%">★★★★★</span>★★★★★</span></button>`;
+        return `<button type="button" class="editorial-compact" data-editorial-view="${esc(p.id)}" title="Посмотреть оценку ZETTA-ZONE" aria-label="Посмотреть авторскую оценку ${esc(p.n)}"><span class="editorial-compact-star">★</span><b>${overall==null?"—":overall.toFixed(1)+"/5"}</b><span class="editorial-compact-trophy">🏆</span><small class="editorial-name-full">Оценка ZETTA-ZONE</small><span class="editorial-name-mobile" title="Оценка ZETTA-ZONE">Zetta<br>zone</span><span class="editorial-mobile-stars" aria-label="${overall==null?'Оценка не выставлена':overall.toFixed(1)+' из 5'}"><span style="width:${overall==null?0:overall/5*100}%">★★★★★</span>★★★★★</span><small class="mobile-editorial-hint">Разбор оценки →</small></button>`;
       }
       function editorialMarkup(p) {
         const overall = editorialScore(p);
@@ -178,7 +178,7 @@ let data=window.CATALOG_DATA;
         const r = communityRatings.get(String(p.id)) || {sum:0,count:0,mine:0};
         const avg = r.count ? (r.sum / r.count).toFixed(1) : "—";
         const stars = [1,2,3,4,5].map(n => `<button type="button" class="community-star ${r.mine >= n ? "selected" : ""}" data-community-rate="${n}" data-project-id="${esc(p.id)}" aria-label="Оценить на ${n} из 5" title="${n} из 5" ${r.mine ? "disabled" : ""}>★</button>`).join("");
-        return `<div class="community-rating"><div class="community-rating-summary"><strong><span class="community-label-full">🏆 Приз зрительских симпатий · </span><span class="community-label-mobile" title="Приз зрительских симпатий">🏆 ПЗС </span>★ ${avg}</strong><span class="community-count-mobile">${r.count} г.</span><span class="community-count-full">${r.count} ${r.count===1?"голос":r.count>=2&&r.count<=4?"голоса":"голосов"}</span></div><div class="community-rating-vote"><span>${r.mine ? "Твоя оценка:" : "Оцени проект:"}</span>${stars}</div></div>`;
+        return `<div class="community-rating"><div class="community-rating-summary"><strong><span class="community-label-full">🏆 Приз зрительских симпатий · </span><span class="community-label-mobile" title="Приз зрительских симпатий"><span class="pzs-cup">🏆</span><br>ПЗС</span><span class="community-score-star">★ </span><span class="community-score-value">${avg}</span></strong><span class="community-count-mobile">${r.count} г.</span><span class="community-count-full">${r.count} ${r.count===1?"голос":r.count>=2&&r.count<=4?"голоса":"голосов"}</span></div><div class="community-rating-vote"><span>${r.mine ? "Твоя оценка:" : "Оцени проект:"}</span>${stars}</div><small class="mobile-vote-hint">${r.mine ? "Твоя оценка учтена" : "Нажми на звезду"}</small></div>`;
       }
 
 
