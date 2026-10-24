@@ -157,6 +157,7 @@ window.CATALOG_DATA = [
     "adLevel": "low",
     "ratingCheckNote": ""
   },
+  
   {
     "id": "rollercoin",
     "n": "RollerCoin",
@@ -323,5 +324,138 @@ window.CATALOG_DATA = [
       "engagement": ""
     },
     "ratingCheckedAt": ""
-  }
+  },
+  {
+  "id": "congrinding",
+  "n": "Coingrinding",
+  "cat": "Майнинг-симуляторы",
+  "brandAccent": "#ffed7a",
+  "brandTint": "#25200e",
+  "platforms": [
+    "Веб",
+    "Windows",
+    "macOS"
+  ],
+  "daysOnlineLabel": "ГОД ЗАПУСКА",
+  "paymentsCountLabel": "Мощность Сети",
+  "cardHighlights": [
+    {
+      "type": "registration",
+      "title": "Бонус за регистрацию",
+      "label": "Стартовый майнер в подарок",
+      "icon": "🎁",
+      "linked": true
+    },
+    {
+      "type": "daily",
+      "title": "Ежедневные награды",
+      "label": "Заходи каждый день",
+      "icon": "📅",
+      "linked": true
+    },
+    {
+      "type": "custom",
+      "title": "Сезонный абонемент",
+      "label": "Открывайте премиальные награды",
+      "icon": "💰",
+      "linked": true
+    }
+  ],
+  "sub": "Бесплатные игры про майнинг",
+  "d": "Никакой майнинговой фермы, никакой видеокарты, никаких счетов за электричество. Просто зарегистрируйтесь и получите бесплатный стартовый майнер.",
+  "features": [],
+  "pros": [
+    "Большой выбор вариантов заработка",
+    "Нулевые комиссии при депозите и выводе",
+    "Дневные вознаграждения бесплатные",
+    "Возможность приобретать майнеры за Coin",
+    "Очень дешевый сезонный абонемент"
+  ],
+  "cons": [
+    "Отсутствие приложений Андроид и iOS",
+    "Пополнение баланса только USDT",
+    "Нет создания и слияния майнеров"
+  ],
+  "earningTypes": [
+    "Пассивный майнинг 24/7",
+    "Ежедневные награды за вход в систему",
+    "Смотрите рекламу и зарабатывайте!",
+    "Достижения",
+    "Сезонный абонемент",
+    "P2P-маркетплейс"
+  ],
+  "coins": [
+    "BTC",
+    "LTC",
+    "DOGE",
+    "ETH",
+    "USDT",
+    "XRP",
+    "TRX",
+    "BNB",
+    "SOL",
+    "ETC",
+    "BCH",
+    "ZEC",
+    "ADA",
+    "XMR",
+    "TON"
+  ],
+  "platform": "Веб, Windows, macOS",
+  "verified": false,
+  "faucetpaySupported": true,
+  "directWalletSupported": false,
+  "specialFeatures": [
+    {
+      "title": "Обмен валюты",
+      "text": "Возможность обменять любые монеты используемые в игре между собой"
+    },
+    {
+      "title": "Горячие предложения",
+      "text": "периодически появляються эксклюзивные майнеры по очень низкой цене"
+    },
+    {
+      "title": "Ежедневные награды за вход в систему",
+      "text": "Заходите в игру каждый день в течение 7-дневного цикла. На 7-й день вы получите бесплатного эпического шахтера ."
+    }
+  ],
+  "communityLinks": {},
+  "communities": [],
+  "editorialRatings": {},
+  "editorialComments": {},
+  "r": 0,
+  "reviews": 0,
+  "riskLevel": "unknown",
+  "adLevel": "none",
+  "additionalWithdrawalCurrency": "",
+  "faucetInterval": "",
+  "coinExchange": "yes",
+  "coinExchangeDetails": "Конвертация любой монеты используемой в игре по текущему курсу",
+  "faucetpay": "Да",
+  "riskTone": "",
+  "s": "C",
+  "referralUrl": "https://coingrinding.com/ref/3EE6D963",
+  "url": "https://coingrinding.com/ref/3EE6D963",
+  "referralCta": "  🎁 Получить стартовый майнер ждет вас!",
+  "referralBonus": "Каждый новый аккаунт мгновенно получает бесплатный стартовый риг. Его стоимость составляет примерно 150 H/s, он добывает реальную криптовалюту с первого дня.",
+  "daysOnline": "2026",
+  "usersCount": "13222",
+  "paymentsCount": "81.38 MH/s",
+  "inGameCurrency": "Coin",
+  "miners": "Есть",
+  "craft": "Нет",
+  "merge": "Нет, но можно купить майнеры 1-6 уровня",
+  "pools": "Да, но разом только в одном можно быть",
+  "marketplace": "Есть",
+  "resale": "Только майнеры",
+  "fee": "FaucetPay FREE · 0% fee Instant 1-click send to your FaucetPay account.",
+  "risk": "Есть внутри игровые  покупки",
+  "minWithdraw": "Нету минимума",
+  "faucetpayReferralUrl": "https://faucetpay.io/r/9771657",
+  "withdrawalMethods": "Других вариантов нету",
+  "checkedAt": "",
+  "ratingCheckedAt": "2026-10-24",
+  "source": "https://coingrinding.com/ref/3EE6D963",
+  "riskDetails": "На сайте нети ни одного рекламного баннера. Наличие рекламы в разделе PTC/ADS не идет в счет"
+}
 ];
