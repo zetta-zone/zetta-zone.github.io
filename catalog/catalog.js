@@ -497,7 +497,7 @@ const paymentRows =
        ${editorialMarkup(p)}
        <section class="profile-item profile-wide accent-cyan"><h3 class="economy-heading">
        <span class="economy-mark" aria-hidden="true">🎮</span>
-       <span>Игровая экономика и бонусы</span></h3>
+       <span>Игровая эргономика и бонусы</span></h3>
        <div class="special-grid">${(p.specialFeatures||[]).map(feature=>{const badge=specialFeatureIcon(feature.title);return `<div class="special-card">
        <h4><span class="special-icon" style="--feature-color:${badge.color}" aria-hidden="true">${badge.icon}</span><span>${esc(feature.title)}</span></h4><p>${esc(feature.text)}</p>
        </div>`}).join('')}</div></section>
