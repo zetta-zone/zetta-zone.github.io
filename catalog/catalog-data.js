@@ -436,7 +436,7 @@ window.CATALOG_DATA = [
   "s": "C",
   "referralUrl": "https://coingrinding.com/ref/3EE6D963",
   "url": "https://coingrinding.com/ref/3EE6D963",
-  "referralCta": "  🎁 Получить стартовый майнер ждет вас!",
+  "referralCta": "  🎁 Получить стартовый майнер",
   "referralBonus": "Каждый новый аккаунт мгновенно получает бесплатный стартовый риг. Его стоимость составляет примерно 150 H/s, он добывает реальную криптовалюту с первого дня.",
   "daysOnline": "2026",
   "usersCount": "13222",
