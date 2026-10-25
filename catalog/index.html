@@ -2353,7 +2353,8 @@
 </style><style id="unified-card-ratings">
 #catalog .compact-project .compact-ratings{display:flex;justify-content:space-between;gap:6px;padding:7px 0;}
 #catalog .compact-project .compact-community,#catalog .compact-project .compact-external,#catalog .compact-project .compact-editorial{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:3px;min-width:0;flex:1;}
-#catalog .compact-project .compact-editorial::after,#catalog .compact-project .compact-vote-summary::after{content:none;}
+#catalog .compact-project .compact-editorial::after{content:none;}
+#catalog .compact-project .compact-vote-summary::after{content:"🏆";font-size:10px;}
 #catalog .compact-project .compact-editorial small{display:block;font-size:7px;line-height:1.1;color:#aabbd0;text-align:center;}
 #catalog .compact-project .compact-vote-summary{order:1;}
 #catalog .compact-project .compact-vote-stars{display:flex;gap:0;order:0;}
@@ -3431,7 +3432,7 @@ function compactRatingStars(score){
 function compactRatingValue(score){return score==null?'—/5':Number(score).toFixed(1)+'/5';}
 function compactCommunityRatingMarkup(p){
  const r=communityRatings.get(String(p.id))||{sum:0,count:0,mine:0};const score=r.count?r.sum/r.count:null;
- return '<div class="compact-vote-stars">'+[1,2,3,4,5].map(n=>{const fill=Math.max(0,Math.min(1,(score||0)-n+1))*100;return '<button type="button" data-community-rate="'+n+'" data-project-id="'+esc(p.id)+'" aria-label="Оценить на '+n+' из 5" title="'+n+' из 5" '+(r.mine?'disabled':'')+' style="--star-fill:'+fill+'%">★</button>';}).join('')+'</div><div class="compact-vote-summary"><small>Посетители · '+r.count+'</small><b>'+compactRatingValue(score)+'</b></div>';
+ return '<div class="compact-vote-stars">'+[1,2,3,4,5].map(n=>{const fill=Math.max(0,Math.min(1,(score||0)-n+1))*100;return '<button type="button" data-community-rate="'+n+'" data-project-id="'+esc(p.id)+'" aria-label="Оценить на '+n+' из 5" title="'+n+' из 5" '+(r.mine?'disabled':'')+' style="--star-fill:'+fill+'%">★</button>';}).join('')+'</div><div class="compact-vote-summary" title="Оценка посетителей"><small>Посетители · '+r.count+'</small><b>'+compactRatingValue(score)+'</b></div>';
 }
 function compactCardMarkup(p){
  const external=Number(p.r)>0||Number(p.reviews)>0;
