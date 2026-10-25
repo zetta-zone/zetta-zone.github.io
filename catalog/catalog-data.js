@@ -554,5 +554,176 @@ window.CATALOG_DATA = [
     "presentation": {},
     "currencyIconKey": "",
     "currencyIconUrl": ""
+  },
+  {
+    "id": "limercoin",
+    "n": "Limercoin",
+    "s": "L",
+    "tone": "blue",
+    "brandAccent": "#36b9e8",
+    "brandTint": "#142b3b",
+    "logoUrl": "",
+    "cat": "Майнинг-симуляторы",
+    "sub": "Симулятор майнинга с мини-играми",
+    "d": "Limercoin — браузерный симулятор криптомайнинга. Игроки получают мощность в мини-играх, размещают виртуальные майнеры и распределяют мощность между пулами. Можно одновременно быть в разных Пулах. Есть объединение майнеров, турниры и сундуки с наградами. По реферальной ссылке новичок получает две стойки Basic rack 4. Вывод на адрес криптокошелька проверен пользователем.",
+    "r": 0,
+    "reviews": 0,
+    "fee": " 0,00001 BTC, 1 Doge, 0,01 LTC, 0,01 SOL",
+    "platform": "Веб, macOS, Windows",
+    "platforms": [
+      "Веб",
+      "macOS",
+      "Windows"
+    ],
+    "risk": "Средний",
+    "riskTone": "yellow",
+    "verified": true,
+    "features": [
+      "Мини-игры",
+      "виртуальные майнеры и стойки",
+      "распределение мощности между пулами",
+      "одновременный майнинг LMT и BTC",
+      "объединение майнеров",
+      "сборка из фрагментов",
+      "турниры",
+      "сундуки",
+      "реферальная программа",
+      "Майнеры",
+      "Крафт",
+      "Merge",
+      "Пулы",
+      "Маркетплейс"
+    ],
+    "pros": [
+      "Вывод на криптокошелёк проверен пользователем; по его опыту комиссия заметно ниже, чем в RollerCoin, точная сумма не указана. За регистрацию по реферальной ссылке дают 2 стойки Basic rack 4. Есть несколько способов повышать мощность и распределять её между пулами."
+    ],
+    "cons": [
+      "Мощность мини-игр истекает через 24 часа; награды зависят от доли мощности в пуле. По FAQ вывод обрабатывается вручную, обычно до 5 рабочих дней, иногда дольше. Точные минимум и комиссия требуют уточнения. По мнению пользователя, проект и игровые механики ещё развиваются."
+    ],
+    "launchDate": "2023",
+    "daysOnline": "2023",
+    "daysOnlineLabel": "ГОД ЗАПУСКА",
+    "usersCount": "220733",
+    "paymentsCount": "3.817 Eh/s",
+    "paymentsCountLabel": "МОЩНОСТЬ СЕТИ",
+    "minWithdraw": "0,00001 BTC, 1 Doge, 0,01 LTC, 0,01 SOL",
+    "faucetpaySupported": false,
+    "faucetpayReferralUrl": "",
+    "directWalletSupported": false,
+    "directWalletReferralUrl": "",
+    "withdrawalMethods": " На адрес  любого внешнего криптокошелька. По опыту пользователя вывод работает.",
+    "miners": "Есть",
+    "minerSale": "Нет",
+    "craft": "Есть",
+    "merge": "Есть",
+    "pools": "Есть",
+    "personalPool": "Нет",
+    "marketplace": "Есть",
+    "communities": [
+      "Discord"
+    ],
+    "communityLinks": {
+      "X": "",
+      "Discord": "https://discord.gg/RMDjvwXuG",
+      "Telegram": "",
+      "YouTube": ""
+    },
+    "earningTypes": [
+      "Игры",
+      "Пулы",
+      "Задания",
+      "Offerwalls",
+      "Коробки",
+      "Реферальная система",
+      "Чемпионаты"
+    ],
+    "specialFeatures": [
+      {
+        "title": "Экономика и бонусы",
+        "text": "Бонус новичку: 2 стойки Basic rack 4 появляются в инвентаре после регистрации по реферальной ссылке; майнеры в этот бонус не входят. LMT — внутриигровая валюта для покупки оборудования, BTC можно выводить или обменивать на LMT. Мощность мини-игр действует 24 часа. По FAQ награды за блок распределяются примерно каждые 10 минут пропорционально мощности. Есть турниры, сундуки и сборка майнера из 50 одинаковых фрагментов."
+      }
+    ],
+    "coins": [
+      "BTC",
+      "ETH",
+      "LTC",
+      "SOL",
+      "Doge"
+    ],
+    "source": "https://limercoin.com/?ref=ryxpgvt3",
+    "url": "https://limercoin.com/?ref=ryxpgvt3",
+    "referralUrl": "https://limercoin.com/?ref=ryxpgvt3",
+    "registrationUrl": "https://limercoin.com/?ref=ryxpgvt3",
+    "checkedAt": "2026-10-25",
+    "riskLevel": "medium",
+    "riskDetails": "Уровень риска указан при ручной проверке.",
+    "verificationDetails": "Выплаты подтверждены личным опытом пользователя. FaucetPay отсутствует по его сведениям; подключение Direct Wallet отсуствует,  вывод на обычный адрес криптокошелька. Размер комиссии и минимум вывода не указаны. Продажа майнеров игроками, личные пулы и маркетплейс не проверены. Уровень риска не выбран. Числовые оценки не выставлялись.",
+    "referralBonus": "",
+    "referralCta": "Получить 2 стойки при регистрации",
+    "ratingSource": "",
+    "coinLabel": "Валюты проекта",
+    "inGameCurrency": "LMT",
+    "internalCurrencies": [
+      {
+        "name": "LMT",
+        "iconKey": "",
+        "iconUrl": "./icons/lmt.svg",
+        "purpose": "Покупка внутриигрового оборудования"
+      }
+    ],
+    "primaryCurrency": 0,
+    "currencyCardMode": "primary",
+    "specialFeaturesTitle": "Особенности и бонусы",
+    "resale": "Нет",
+    "cardHighlights": [
+      {
+        "type": "games",
+        "title": "Мини-игры",
+        "label": "Мощность на 24 часа",
+        "icon": "🎮",
+        "linked": false
+      },
+      {
+        "type": "currency",
+        "title": "LMT",
+        "label": "Своя валюта",
+        "icon": "🪙",
+        "linked": true
+      },
+      {
+        "type": "registration",
+        "title": "2 стойки в подарок",
+        "label": "При регистрации",
+        "icon": "🎁",
+        "linked": false
+      }
+    ],
+    "editorialRatings": {},
+    "editorialComments": {},
+    "adLevel": "none",
+    "additionalWithdrawalCurrency": "",
+    "faucetInterval": "",
+    "coinExchange": "unknown",
+    "coinExchangeDetails": "",
+    "presentation": {
+      "cards": {
+        "phone": {
+          "hidden": {},
+          "order": [
+            "heading",
+            "status",
+            "description",
+            "highlights",
+            "ratings",
+            "actions"
+          ],
+          "customBlocks": []
+        }
+      }
+    },
+    "currencyIconKey": "",
+    "currencyIconUrl": "./icons/lmt.svg",
+    "faucetpay": "Нет",
+    "ratingCheckedAt": "2026-10-24"
   }
 ];
