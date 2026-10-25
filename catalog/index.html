@@ -2367,7 +2367,12 @@
 .presentation-extra{border:1px solid #34485e;border-radius:10px;background:#152131;padding:12px;margin:8px 0}.presentation-extra h3{font-size:13px;margin:0 0 6px}.presentation-extra p{font-size:12px;line-height:1.5;margin:0;white-space:pre-wrap}
 .presentation-detail-layout{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.presentation-detail-layout>.presentation-wide{grid-column:1/-1}.presentation-detail-layout>*{min-width:0}.presentation-custom-list>*{grid-column:auto!important;grid-row:auto!important}
 @media(max-width:850px){.presentation-detail-layout{grid-template-columns:minmax(0,1fr)}}
-</style><style>.preview-projects{display:none!important}</style></head>
+</style><style>.detail-currency-value{display:inline-flex;align-items:center;gap:6px}.detail-currency-value img,.detail-currency-value svg{width:23px;height:23px}#modal.detail-redesign .compact-logo.detail-logo{position:relative;display:grid;place-items:center;overflow:hidden}.detail-logo.compact-logo>img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:6px}.detail-logo.compact-logo>span{font-size:30px;font-weight:900}</style><style>
+.detail-currency-value{display:flex;flex-direction:column;align-items:stretch;gap:8px}.internal-currency-item{display:flex;align-items:center;justify-content:flex-end;gap:7px}.internal-currency-item small{display:block;color:#90a8c2;font-size:10px;max-width:260px}.internal-currency-item b{font-size:12px}
+.presentation-extra{border:1px solid #34485e;border-radius:10px;background:#152131;padding:12px;margin:8px 0}.presentation-extra h3{font-size:13px;margin:0 0 6px}.presentation-extra p{font-size:12px;line-height:1.5;margin:0;white-space:pre-wrap}
+.presentation-detail-layout{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.presentation-detail-layout>.presentation-wide{grid-column:1/-1}.presentation-detail-layout>*{min-width:0}.presentation-custom-list>*{grid-column:auto!important;grid-row:auto!important}
+@media(max-width:850px){.presentation-detail-layout{grid-template-columns:minmax(0,1fr)}}
+</style><style>.preview-projects{display:none!important}</style><style id="visitor-rating-label-position">#catalog .compact-project .compact-vote-summary::after{content:none;}#catalog .compact-project .compact-community::before{content:"🏆";order:-1;font-size:10px;flex:none;}</style></head>
   <body>
     <header>
       <div class="wrap nav">
@@ -2794,7 +2799,7 @@ function render(){let q=$("#search").value.toLowerCase(),sort=$("#sort").value,s
 let arr = all().filter(p => {
   const categoryMatch =
     cat === "Все" ||
-    (cat === "FaucetPay" ? (p.faucetpaySupported === true || (p.faucetpaySupported === true || (p.faucetpaySupported === true || (p.faucetpaySupported === true || (p.faucetpaySupported === true || (p.faucetpaySupported === true || (p.faucetpaySupported === true || (p.faucetpaySupported === true || (p.faucetpaySupported === true || (p.faucetpaySupported === true || (p.faucetpaySupported === true || p.faucetpay === "Да"))))))))))) : p.cat === cat);
+    (cat === "FaucetPay" ? (p.faucetpaySupported === true || (p.faucetpaySupported === true || (p.faucetpaySupported === true || (p.faucetpaySupported === true || (p.faucetpaySupported === true || (p.faucetpaySupported === true || (p.faucetpaySupported === true || (p.faucetpaySupported === true || (p.faucetpaySupported === true || (p.faucetpaySupported === true || (p.faucetpaySupported === true || (p.faucetpaySupported === true || p.faucetpay === "Да")))))))))))) : p.cat === cat);
 
   const searchMatch =
     !q ||
@@ -3444,7 +3449,7 @@ function compactCardMarkup(p){
  '<div class="compact-status"><span>'+esc(p.cat==='Майнинг-симуляторы'?'Симуляторы':p.cat)+'</span><span class="'+(p.verified?'good':'pending')+'" title="'+esc(p.verificationDetails||'')+'">'+(p.verified?'✓':'?')+' Выплаты</span><span title="'+esc(p.riskDetails||'')+'">◇ '+esc(({low:'Низкий',medium:'Средний',high:'Высокий'})[p.riskLevel]||'Риск ?')+'</span><span title="Реклама: '+esc(adLabels[p.adLevel]||adLabels.unknown)+'">◉ '+esc(adLabels[p.adLevel]||'Реклама ?')+'</span></div>'+
  '<p class="compact-description"><span data-compact-description="'+esc(p.d||'')+'">'+esc(p.d||'')+'</span> <button data-detail="'+esc(p.id)+'" type="button">Читать далее →</button></p>'+
  '<div class="compact-highlights">'+compactHighlights(p).map(h=>'<div><span class="compact-highlight-icon">'+compactHighlightIcon(h,p)+'</span><span><b>'+esc(h.title||'')+'</b><small>'+esc(h.label||'')+'</small></span></div>').join('')+'</div>'+
- '<div class="compact-ratings '+(external?'has-external':'')+'"><div class="compact-community">'+compactCommunityRatingMarkup(p)+'</div>'+
+ '<div class="compact-ratings '+(external?'has-external':'')+'"><div class="compact-community" title="Оценка посетителей">'+compactCommunityRatingMarkup(p)+'</div>'+
  (external?'<div class="compact-external" title="Внешняя оценка: '+esc(p.ratingSource||'Источник не указан')+'"><small>'+esc(p.ratingSource||'Внешняя')+'</small>'+compactRatingStars(Number(p.r)>0?Number(p.r):null)+'<b>'+compactRatingValue(Number(p.r)>0?Number(p.r):null)+'</b></div>':'')+
  '<button class="compact-editorial" data-editorial-view="'+esc(p.id)+'" title="Разбор авторской оценки"><small>ZETTA-<br>ZONE</small>'+compactRatingStars(score)+'<b>'+compactRatingValue(score)+'</b></button></div>'+
  '<div class="cardfoot"><button class="btn" data-detail="'+esc(p.id)+'">Подробнее</button><button class="btn compact-compare" data-pick-button="'+esc(p.id)+'" aria-label="Добавить в сравнение" aria-pressed="'+chosen.has(p.id)+'" title="Добавить в сравнение">'+sharedCompareIcon()+'</button>'+
@@ -3541,6 +3546,7 @@ render();
 close();
 
 function internalCurrenciesMarkup(p){const values=Array.isArray(p.internalCurrencies)&&p.internalCurrencies.length?p.internalCurrencies:(p.inGameCurrency?[{name:p.inGameCurrency,iconKey:p.currencyIconKey,iconUrl:p.currencyIconUrl}]:[]);return values.length?values.map(c=>'<span class="internal-currency-item">'+currencyIconMarkup({inGameCurrency:c.name,currencyIconKey:c.iconKey,currencyIconUrl:c.iconUrl})+'<span><b>'+esc(c.name)+'</b>'+(c.purpose?'<small>'+esc(c.purpose)+'</small>':'')+'</span></span>').join(''):'<span class="profile-unknown">Не указано</span>';}
+
 
 
 
