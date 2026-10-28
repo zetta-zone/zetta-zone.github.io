@@ -5,7 +5,7 @@ ZETTA-ZONE — RU / EN
 Русский гайд: index.html. Английский: en.html. Папку assets, если есть, переносите целиком.
 GitHub Pages: Settings > Pages > Deploy from a branch > main > / (root) > Save.
 Пример адреса: https://LOGIN.github.io/REPOSITORY/guides/limercoin/
-RU / EN находится сверху. Переключение сохраняет раздел страницы. В английском блоке рекомендаций ссылки ведут на английские гайды.
+RU / EN с цветными флагами находится по центру основной шапки, без отдельной строки. Переключение сохраняет раздел страницы. В английском блоке рекомендаций ссылки ведут на английские гайды.
 Если гайды размещены отдельно, измените два href внутри section id="zz-related" в index.html и en.html.
 Игровые скриншоты и баннеры сохранены в исходном виде; их встроенные надписи не перерисовывались.
 
@@ -13,6 +13,6 @@ ENGLISH
 Extract this ZIP on your computer. Upload the entire limercoin folder into guides/ on your site, alongside the other two project folders. You may use quid/ instead. Upload extracted folders, not ZIP files.
 index.html is Russian; en.html is English. Keep the complete assets folder if included.
 For GitHub Pages select Settings > Pages > Deploy from a branch > main > / (root) > Save.
-The RU / EN bar at the top preserves the current section. English recommendations link to English guides.
+The centred RU / EN flag switch in the main header preserves the current section. English recommendations link to English guides.
 If hosting guides separately, update the two recommendation href values within section id="zz-related" in both HTML files.
 Original game screenshots and banners retain their embedded text.
