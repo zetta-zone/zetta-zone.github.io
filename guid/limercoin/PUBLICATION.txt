@@ -1,9 +1,18 @@
-ZETTA-ZONE — Limercoin
+ZETTA-ZONE — RU / EN
 
-Загрузите содержимое этой папки в корень соответствующего GitHub Pages репозитория либо разместите все три папки рядом на одном сайте.
-Относительные адреса рекомендаций: ../mining-blocks/, ../rollercoin/. Они работают при соседних каталогах limercoin/, mining-blocks/, rollercoin/.
-Для отдельных репозиториев или других адресов измените два href внутри section id="zz-related" в index.html. Найдите комментарий ZETTA-ZONE: related guides START. Нужны адреса гайдов ZETTA-ZONE, а не сайты игр.
-Оригинальные стили, скрипты и ссылки сохранены. Добавлены только изолированные стили zz-related и заключительная секция.
-Тексты опираются на предоставленные гайды; наличие слияния майнеров в Limercoin уточнено пользователем. Его рецепты и расходы не конкретизируются; слияние в Mining Blocks не заявляется.
+РУССКИЙ
+Распакуйте архив на компьютере. Загрузите папку limercoin целиком в guides/ вашего сайта. Все три папки (limercoin, mining-blocks, rollercoin) должны находиться рядом. Подойдёт и общее имя quid/. Не загружайте ZIP вместо распакованных файлов.
+Русский гайд: index.html. Английский: en.html. Папку assets, если есть, переносите целиком.
+GitHub Pages: Settings > Pages > Deploy from a branch > main > / (root) > Save.
+Пример адреса: https://LOGIN.github.io/REPOSITORY/guides/limercoin/
+RU / EN находится сверху. Переключение сохраняет раздел страницы. В английском блоке рекомендаций ссылки ведут на английские гайды.
+Если гайды размещены отдельно, измените два href внутри section id="zz-related" в index.html и en.html.
+Игровые скриншоты и баннеры сохранены в исходном виде; их встроенные надписи не перерисовывались.
 
-Уточнение пользователя: Mining Blocks крафтит майнеры уровней 1–6 без слияния; Limercoin и RollerCoin крафтят майнеры первого уровня с дальнейшим повышением через слияние. Уточнение внесено также в основной раздел о майнерах/крафте.
+ENGLISH
+Extract this ZIP on your computer. Upload the entire limercoin folder into guides/ on your site, alongside the other two project folders. You may use quid/ instead. Upload extracted folders, not ZIP files.
+index.html is Russian; en.html is English. Keep the complete assets folder if included.
+For GitHub Pages select Settings > Pages > Deploy from a branch > main > / (root) > Save.
+The RU / EN bar at the top preserves the current section. English recommendations link to English guides.
+If hosting guides separately, update the two recommendation href values within section id="zz-related" in both HTML files.
+Original game screenshots and banners retain their embedded text.
