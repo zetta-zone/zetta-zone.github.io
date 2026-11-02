@@ -94,4 +94,6 @@ html[data-theme=dark] :is(.feature[aria-expanded=true],.coin-button[aria-pressed
 .section-mode .section-shell>.content-layout{flex:1}
 
 .section-scroll-room{height:0;pointer-events:none;overflow:hidden}
+/* Shared baseline requested for the focused desktop sections. */
+@media(min-width:901px){.section-mode .main-content,.section-mode .reading-aside{min-height:800px}}
 
