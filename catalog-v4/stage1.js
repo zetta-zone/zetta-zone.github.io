@@ -3,8 +3,8 @@ const nav=document.querySelector('.section-nav'),sections=[...document.querySele
 let activeSection=null,catalogY=0;
 const topbar=document.querySelector('.prototype-bar');
 function navTop(){return topbar.getBoundingClientRect().height}
-function resetSections(){document.body.classList.remove('section-mode');activeSection=null;sections.forEach(s=>s.hidden=false);navLinks.forEach(a=>{a.classList.remove('active');a.removeAttribute('aria-current')});document.querySelectorAll('.reading-aside a').forEach(a=>a.removeAttribute('aria-current'))}
-function selectSection(id){const target=document.getElementById(id);if(!sections.includes(target))return;document.body.classList.add('section-mode');activeSection=id;sections.forEach(s=>s.hidden=s!==target);navLinks.forEach(a=>{const yes=a.hash==='#'+id;a.classList.toggle('active',yes);if(yes)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});document.querySelectorAll('.reading-aside a').forEach(a=>a.toggleAttribute('aria-current',a.hash==='#'+id));stickyActions.hidden=false;const shell=document.querySelector('.section-shell');const y=scrollY+shell.getBoundingClientRect().top-navTop();window.scrollTo({top:y,behavior:'instant'})}
+function resetSections(){document.body.classList.remove('section-mode');activeSection=null;if(typeof scrollRoom!=='undefined')scrollRoom.style.height='0px';sections.forEach(s=>s.hidden=false);navLinks.forEach(a=>{a.classList.remove('active');a.removeAttribute('aria-current')});document.querySelectorAll('.reading-aside a').forEach(a=>a.removeAttribute('aria-current'))}
+function selectSection(id){const target=document.getElementById(id);if(!sections.includes(target))return;document.body.classList.add('section-mode');activeSection=id;sections.forEach(s=>s.hidden=s!==target);navLinks.forEach(a=>{const yes=a.hash==='#'+id;a.classList.toggle('active',yes);if(yes)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});document.querySelectorAll('.reading-aside a').forEach(a=>a.toggleAttribute('aria-current',a.hash==='#'+id));stickyActions.hidden=false;updateScrollRoom();const shell=document.querySelector('.section-shell');const y=scrollY+shell.getBoundingClientRect().top-navTop();window.scrollTo({top:y,behavior:'instant'})}
 document.querySelectorAll('.section-nav a,.reading-aside a,.verification').forEach(a=>a.addEventListener('click',e=>{if(a.closest('.section-nav')||activeSection){e.preventDefault();selectSection(a.hash.slice(1))}}));
 nav.setAttribute('aria-label','Выбрать раздел карточки');
 navLinks.forEach((a,i)=>a.addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight','Home','End'].includes(e.key)){e.preventDefault();const next=e.key==='Home'?0:e.key==='End'?navLinks.length-1:(i+(e.key==='ArrowRight'?1:-1)+navLinks.length)%navLinks.length;navLinks[next].focus();selectSection(navLinks[next].hash.slice(1))}}));
@@ -24,9 +24,11 @@ const compact=matchMedia('(max-width:1100px)');
 function placeIdentity(){if(compact.matches)hero.prepend(header);else passport.prepend(header)}
 placeIdentity();compact.addEventListener('change',placeIdentity);
 const layout=document.querySelector('.content-layout');
+const scrollRoom=document.createElement('div');scrollRoom.className='section-scroll-room';scrollRoom.setAttribute('aria-hidden','true');document.body.append(scrollRoom);
+function updateScrollRoom(){if(!activeSection)return;const shell=document.querySelector('.section-shell');const anchor=scrollY+shell.getBoundingClientRect().top-navTop();const baseHeight=document.documentElement.scrollHeight-scrollRoom.offsetHeight;scrollRoom.style.height=Math.max(0,Math.ceil(anchor+innerHeight-baseHeight+2))+'px'}
 const footer=document.querySelector('.card-footer');
-const resizeObserver=new ResizeObserver(()=>{document.documentElement.style.setProperty('--topbar-height',topbar.getBoundingClientRect().height+'px');document.documentElement.style.setProperty('--footer-height',footer.getBoundingClientRect().height+'px')});
-resizeObserver.observe(topbar);resizeObserver.observe(footer);
+const resizeObserver=new ResizeObserver(()=>{document.documentElement.style.setProperty('--topbar-height',topbar.getBoundingClientRect().height+'px');document.documentElement.style.setProperty('--footer-height',footer.getBoundingClientRect().height+'px');updateScrollRoom()});
+resizeObserver.observe(topbar);resizeObserver.observe(footer);resizeObserver.observe(layout);
 // The ordinary view stays a full page; menu selection opens a focused subcard.
 document.body.classList.add('card-open');resetSections();updateScroll();
 
