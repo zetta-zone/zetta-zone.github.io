@@ -76,4 +76,15 @@ html[data-theme=dark] :is(.feature[aria-expanded=true],.coin-button[aria-pressed
 .passport>.overview-metrics>div:first-child{border-left:0}
 .passport>.overview-metrics strong{font-weight:650;line-height:1.4}
 .passport>.overview-metrics span{font-size:9px;line-height:1.6;margin-top:4px}
+/* The focused view has one rounded outline around its menu and contents. */
+.section-shell{display:contents}
+.section-mode .section-shell{display:block;margin:0 28px 24px;border:1px solid var(--line);border-radius:14px;background:var(--paper);box-shadow:0 8px 24px #172c3606}
+.section-mode .section-shell>.section-nav{border:0;border-radius:14px 14px 0 0;padding-left:14px;padding-right:14px}
+.section-mode .section-shell>.content-layout{padding:0 0 0 0;gap:24px}
+.section-mode .main-content{border:0;border-radius:0 0 0 14px;box-shadow:none}
+.section-mode .main-content>.content-section>.section-heading{border-bottom:0;padding-bottom:0}
+.section-mode .reading-aside{padding:28px 20px 24px 0}
+@media(max-width:1100px){.section-mode .section-shell{margin:0 20px 20px}}
+@media(max-width:900px){.section-mode .section-shell>.content-layout{gap:0}.section-mode .reading-aside{padding:0 22px 22px}.section-mode .main-content{border-radius:0}}
+@media(max-width:480px){.section-mode .section-shell{margin:0 12px 16px}.section-mode .section-shell>.section-nav{padding-left:8px;padding-right:8px}.section-mode .reading-aside{padding:0 18px 18px}}
 
