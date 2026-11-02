@@ -110,4 +110,9 @@ html[data-theme=dark] :is(.feature[aria-expanded=true],.coin-button[aria-pressed
 .section-mode .sticky-actions .registration{width:300px;min-height:43px;padding:13px 18px;justify-content:space-between}
 @media(max-width:1200px){.section-mode .section-nav{flex-wrap:wrap}.section-mode .sticky-actions{margin-left:auto}.section-mode .sticky-actions .registration{width:260px}}
 @media(max-width:480px){.section-mode .sticky-actions .registration{width:auto;flex:1;min-width:0}.section-mode .sticky-actions{width:100%}}
+/* Catalog branding belongs only to the initial page opening. */
+:root{--topbar-height:0px}
+.prototype-bar{position:relative;top:auto}
+.reading-project .theme-control{flex:none;font-size:10px;color:var(--muted)}
+@media(max-width:600px){.reading-project{flex-wrap:wrap}.reading-project .identity{flex-basis:calc(100% - 75px)}.reading-project .header-tools{order:1}.reading-project .theme-control{order:2;width:100%;justify-content:flex-end}}
 
