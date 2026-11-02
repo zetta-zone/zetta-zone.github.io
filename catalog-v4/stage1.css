@@ -87,4 +87,9 @@ html[data-theme=dark] :is(.feature[aria-expanded=true],.coin-button[aria-pressed
 @media(max-width:1100px){.section-mode .section-shell{margin:0 20px 20px}}
 @media(max-width:900px){.section-mode .section-shell>.content-layout{gap:0}.section-mode .reading-aside{padding:0 22px 22px}.section-mode .main-content{border-radius:0}}
 @media(max-width:480px){.section-mode .section-shell{margin:0 12px 16px}.section-mode .section-shell>.section-nav{padding-left:8px;padding-right:8px}.section-mode .reading-aside{padding:0 18px 18px}}
+/* Reserve enough reading height so a shorter tab cannot pull the menu down. */
+.section-mode{overflow-anchor:none}
+.section-mode .section-shell{display:flex;flex-direction:column;min-height:calc(100dvh - var(--topbar-height) - var(--footer-height,60px) - 24px)}
+.section-mode .section-shell>.section-nav{flex:none}
+.section-mode .section-shell>.content-layout{flex:1}
 
