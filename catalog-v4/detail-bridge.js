@@ -18,14 +18,13 @@ addEventListener('keydown',e=>{if(e.key==='Escape'&&!document.querySelector('dia
 // Same-page reading links must not insert iframe entries into catalogue history.
 document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(a&&!e.defaultPrevented){const target=document.getElementById(a.getAttribute('href').slice(1));if(target){e.preventDefault();target.scrollIntoView({behavior:'instant',block:'start'})}}});
 
-// Reuse the existing score controls inside the desktop header; restore on mobile.
-const scores=document.querySelector('.ratings'),scoreHome=document.createComment('ratings');scores.before(scoreHome);
+// Keep ratings in the passport; arrange only the desktop header tools.
 const save=document.querySelector('#save'),saveHome=document.createComment('favorite');save.before(saveHome);
 const theme=document.querySelector('.theme-control'),themeHome=document.createComment('theme');theme.before(themeHome);
 const themeButtons=document.createElement('div');themeButtons.className='theme-icons';themeButtons.setAttribute('role','group');themeButtons.setAttribute('aria-label','Тема оформления');
 for(const [mode,label,icon] of [['light','Светлая','☀'],['dark','Тёмная','☾'],['auto','Автоматическая','Авто']]){const b=document.createElement('button');b.type='button';b.textContent=icon;b.dataset.themeMode=mode;b.setAttribute('aria-label',label);b.onclick=()=>{const select=document.querySelector('#theme');select.value=mode;select.dispatchEvent(new Event('change'));refreshThemeButtons()};themeButtons.append(b)}theme.append(themeButtons);
 function refreshThemeButtons(){themeButtons.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.themeMode===document.querySelector('#theme').value)))}
 document.querySelector('#theme').addEventListener('change',refreshThemeButtons);new MutationObserver(refreshThemeButtons).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
-const desktop=matchMedia('(min-width:1101px)');function arrangeHeader(){if(desktop.matches){header.append(scores,save);headerTools.prepend(theme)}else{scoreHome.after(scores);saveHome.after(save);themeHome.after(theme)}refreshThemeButtons()}desktop.addEventListener('change',arrangeHeader);arrangeHeader();
+const desktop=matchMedia('(min-width:1101px)');function arrangeHeader(){if(desktop.matches){header.append(save);headerTools.prepend(theme)}else{saveHome.after(save);themeHome.after(theme)}refreshThemeButtons()}desktop.addEventListener('change',arrangeHeader);arrangeHeader();
 showSlide(slide);sync();
 })();
