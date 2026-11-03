@@ -22,10 +22,9 @@ const hero=document.querySelector('#hero'),passport=document.querySelector('.pas
 const metrics=document.querySelector('.overview-metrics');passport.insertBefore(metrics,passport.querySelector('.ratings'));hero.prepend(document.querySelector('.header-tools'));
 const compact=matchMedia('(max-width:1100px)');
 function placeIdentity(){if(compact.matches){hero.prepend(header);if(!activeSection&&innerWidth<=800)header.append(headerTools)}else{passport.prepend(header);if(!activeSection)hero.prepend(headerTools)}placeMetrics()}
-placeIdentity();compact.addEventListener('change',placeIdentity);addEventListener('resize',placeIdentity);
 const identity=header.querySelector('.identity'),headerTools=document.querySelector('.header-tools'),themeControl=topbar.querySelector('.theme-control');
 function placeMetrics(){if(innerWidth<=800){passport.before(metrics)}else if(innerWidth<=1100){header.after(metrics)}else{passport.querySelector('.platforms').after(metrics)}}
-placeMetrics();
+placeIdentity();compact.addEventListener('change',placeIdentity);addEventListener('resize',placeIdentity);
 const readingHeader=document.createElement('div');readingHeader.className='reading-project-wrap';readingHeader.hidden=true;
 const readingBox=document.createElement('div');readingBox.className='reading-project';readingHeader.append(readingBox);hero.before(readingHeader);
 function setReadingHeader(show){readingHeader.hidden=!show;if(show){readingBox.append(identity,themeControl,headerTools)}else{header.prepend(identity);if(innerWidth<=800)header.append(headerTools);else hero.prepend(headerTools);topbar.append(themeControl)}document.documentElement.style.setProperty('--reading-header-height',show?readingHeader.getBoundingClientRect().height+'px':'0px')}
