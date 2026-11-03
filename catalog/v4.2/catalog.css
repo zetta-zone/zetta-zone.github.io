@@ -59,3 +59,20 @@
 @media(max-width:340px){.description-footer{gap:6px}#results .compact-card .description-footer .compact-ratings{gap:10px}#results .compact-card .description-footer .compact-ratings span{font-size:7px}#results .compact-card .description-footer .compact-ratings strong{font-size:16px}#results .compact-card .read-toggle{font-size:10px}}
 
 @media(min-width:701px){.is-exploring #top-filter{display:inline-flex}}
+
+/* Compact list: small ratings and a narrow vertical pair of actions. */
+#results .project-row{padding:6px 10px;gap:3px}
+#results .project-row .row-header-actions{gap:6px}
+#results .project-row .row-header-actions .compact-ratings span{font-size:7px;line-height:1.2}
+#results .project-row .row-header-actions .compact-ratings strong{font-size:13px;line-height:1.2}
+#results .project-row .project-cta{display:flex;flex-direction:column;width:92px;gap:3px}
+#results .project-row .project-cta>button{width:100%;min-height:30px;height:30px;padding:4px 7px;font-size:10px;line-height:1.2;gap:4px}
+#results .project-row>.row-bottom{align-items:flex-start;gap:10px}
+#results .project-row .read-toggle{min-height:23px}
+#results .project-row .preview-description{font-size:11px;line-height:1.45}
+#results .project-row .project-meta{line-height:1.35;gap:1px 5px}
+#results .project-row .project-meta b{font-size:7px}
+#results .project-row .preview-tools .icon-action{width:32px;height:32px;min-height:32px;font-size:18px}
+#results .project-row>.project-main{align-items:center}
+@media(max-width:340px){#results .project-row{padding:5px 8px}#results .project-row .row-header-actions{gap:4px}#results .project-row .project-cta{width:84px}#results .project-row .project-cta>button{font-size:9px}}
+#results .project-row{padding-top:3px;padding-bottom:3px;gap:1px}
