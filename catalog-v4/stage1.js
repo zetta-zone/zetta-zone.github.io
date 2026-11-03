@@ -24,7 +24,7 @@ const identity=header.querySelector('.identity'),headerTools=document.querySelec
 hero.prepend(header);header.append(metrics,headerTools);
 const readingHeader=document.createElement('div');readingHeader.className='reading-project-wrap';readingHeader.hidden=true;
 const readingBox=document.createElement('div');readingBox.className='reading-project';readingHeader.append(readingBox);hero.before(readingHeader);
-function setReadingHeader(show){readingHeader.hidden=!show;if(show){readingBox.append(identity,themeControl,headerTools)}else{header.prepend(identity);header.append(headerTools);topbar.append(themeControl)}document.documentElement.style.setProperty('--reading-header-height',show?readingHeader.getBoundingClientRect().height+'px':'0px')}
+function setReadingHeader(show){readingHeader.hidden=!show;if(show){readingBox.append(identity,themeControl,headerTools)}else{header.prepend(identity);header.append(headerTools);(matchMedia('(min-width:1101px)').matches?headerTools:topbar).append(themeControl)}document.documentElement.style.setProperty('--reading-header-height',show?readingHeader.getBoundingClientRect().height+'px':'0px')}
 const layout=document.querySelector('.content-layout');
 const shell=document.querySelector('.section-shell');
 const tabStrip=document.createElement('div');tabStrip.className='section-tabs';nav.prepend(tabStrip);navLinks.forEach(link=>tabStrip.append(link));
