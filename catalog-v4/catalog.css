@@ -63,3 +63,5 @@
 @media(max-width:700px){#results .compact-card .project-title{font-size:18px}#results .compact-card .project-logo{width:43px;height:43px;flex-basis:43px}.benefit-icons>span{font-size:9px}#results .compact-card .card-body{padding:14px}}
 @media(max-width:360px){#results .compact-card .project-title{font-size:16px}#results .compact-card .project-main{gap:8px}#results .compact-card .project-logo{width:37px;height:37px;flex-basis:37px;font-size:32px}.preview-platforms{font-size:8px}.benefit-icons{gap:6px 9px}.benefit-icons>span{font-size:8px}}
 #results .compact-card .preview-description{margin-right:0}.preview-platforms{margin-right:0}
+/* Withdrawal currencies sit directly above the actions, without a redundant note. */
+.withdrawal-icons{gap:8px;margin:0;padding:2px 0 0;line-height:1.2}.coin-mini{font-size:8px;gap:3px}.coin-mini b{width:15px;height:15px;font-size:10px}#results .compact-card .card-actions{margin-top:0;padding-top:7px}
