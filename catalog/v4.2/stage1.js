@@ -9,7 +9,7 @@ document.querySelectorAll('.section-nav a,.reading-aside a,.verification').forEa
 nav.setAttribute('aria-label','Выбрать раздел карточки');
 navLinks.forEach((a,i)=>a.addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight','Home','End'].includes(e.key)){e.preventDefault();const next=e.key==='Home'?0:e.key==='End'?navLinks.length-1:(i+(e.key==='ArrowRight'?1:-1)+navLinks.length)%navLinks.length;navLinks[next].focus();selectSection(navLinks[next].hash.slice(1))}}));
 const stickyActions=document.querySelector('.sticky-actions');
-function updateScroll(){const past=document.querySelector('#hero').getBoundingClientRect().bottom<=navTop()+1;stickyActions.hidden=!past;nav.classList.toggle('hero-past',past);if(activeSection&&scrollY<80)resetSections()}
+function updateScroll(){const past=document.querySelector('#hero').getBoundingClientRect().bottom<=navTop()+1;stickyActions.hidden=!past;nav.classList.toggle('hero-past',past);if(activeSection&&scrollY<80&&!matchMedia('(max-width:700px)').matches)resetSections()}
 addEventListener('scroll',updateScroll,{passive:true});addEventListener('resize',updateScroll);
 const originalClose=closeCard;
 closeCard=function(){if(document.referrer){const from=new URL(document.referrer);if(from.origin===location.origin&&/^\/catalog\/?$/.test(from.pathname)&&history.length>1){history.back();return}}originalClose();resetSections();document.body.classList.remove('card-open');window.scrollTo({top:catalogY,behavior:'instant'});document.querySelector('#back-catalog').hidden=true};
@@ -46,7 +46,7 @@ if(tx>x+r)d+=' Q '+x+' '+y+' '+(x+r)+' '+y;else d+=' V '+y;
 d+=' Z';outlinePath.setAttribute('d',d)}
 
 const scrollRoom=document.createElement('div');scrollRoom.className='section-scroll-room';scrollRoom.setAttribute('aria-hidden','true');document.body.append(scrollRoom);
-function updateScrollRoom(){if(!activeSection)return;const shell=document.querySelector('.section-shell');const anchor=scrollY+shell.getBoundingClientRect().top-navTop();const baseHeight=document.documentElement.scrollHeight-scrollRoom.offsetHeight;scrollRoom.style.height=Math.max(0,Math.ceil(anchor+innerHeight-baseHeight+2))+'px'}
+function updateScrollRoom(){if(matchMedia('(max-width:700px)').matches){scrollRoom.style.height='0px';return}if(!activeSection)return;const shell=document.querySelector('.section-shell');const anchor=scrollY+shell.getBoundingClientRect().top-navTop();const baseHeight=document.documentElement.scrollHeight-scrollRoom.offsetHeight;scrollRoom.style.height=Math.max(0,Math.ceil(anchor+innerHeight-baseHeight+2))+'px'}
 const footer=document.querySelector('.card-footer');
 const resizeObserver=new ResizeObserver(()=>{document.documentElement.style.setProperty('--full-nav-height',nav.getBoundingClientRect().height+'px');document.documentElement.style.setProperty('--topbar-height','0px');document.documentElement.style.setProperty('--footer-height',footer.getBoundingClientRect().height+'px');document.documentElement.style.setProperty('--reading-header-height',activeSection?readingHeader.getBoundingClientRect().height+'px':'0px');drawSectionOutline();updateScrollRoom()});
 resizeObserver.observe(topbar);resizeObserver.observe(footer);resizeObserver.observe(layout);resizeObserver.observe(readingHeader);resizeObserver.observe(nav);tabStrip.addEventListener('scroll',drawSectionOutline,{passive:true});
