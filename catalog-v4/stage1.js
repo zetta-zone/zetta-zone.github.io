@@ -37,6 +37,7 @@ const root=shell.getBoundingClientRect(),body=document.querySelector('.main-cont
 const x=body.left-root.left+.5,y=body.top-root.top+.5,right=body.right-root.left-.5,bottom=body.bottom-root.top-.5,r=14;
 const tx=Math.max(x,tab.left-root.left+.5),tr=Math.min(right,tab.right-root.left-.5),ty=tab.top-root.top+.5;
 outline.setAttribute('viewBox','0 0 '+root.width+' '+root.height);outline.setAttribute('width',root.width);outline.setAttribute('height',root.height);
+if(tr<=x||tx>=right){outlinePath.setAttribute('d','M '+(x+r)+' '+y+' H '+(right-r)+' Q '+right+' '+y+' '+right+' '+(y+r)+' V '+(bottom-r)+' Q '+right+' '+bottom+' '+(right-r)+' '+bottom+' H '+(x+r)+' Q '+x+' '+bottom+' '+x+' '+(bottom-r)+' V '+(y+r)+' Q '+x+' '+y+' '+(x+r)+' '+y+' Z');return}
 // A single continuous outline rises around the selected tab, leaving its bottom open.
 const start=tx<=x+r?x: x+r;
 let d='M '+start+' '+y;
