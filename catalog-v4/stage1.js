@@ -17,17 +17,14 @@ document.querySelector('.close-card').onclick=closeCard;
 document.querySelector('#back-catalog').onclick=closeCard;
 document.querySelector('#reopen').onclick=()=>{catalogY=scrollY;document.querySelector('.dossier').hidden=false;document.querySelector('#closed-state').hidden=true;document.querySelector('#compare-tray').hidden=!selected;document.body.classList.add('card-open');document.querySelector('#back-catalog').hidden=false;window.scrollTo({top:0,behavior:'instant'});document.querySelector('.close-card').focus();updateScroll()};
 document.querySelector('.brand').addEventListener('click',e=>{e.preventDefault();resetSections();window.scrollTo({top:0,behavior:'instant'})});
-// Keep project identity together; move the same node above the gallery on narrow screens.
+// Keep the complete header above both hero columns at every width.
 const hero=document.querySelector('#hero'),passport=document.querySelector('.passport'),header=document.querySelector('.project-header');
-const metrics=document.querySelector('.overview-metrics');passport.insertBefore(metrics,passport.querySelector('.ratings'));hero.prepend(document.querySelector('.header-tools'));
-const compact=matchMedia('(max-width:1100px)');
-function placeIdentity(){if(compact.matches){hero.prepend(header);if(!activeSection&&innerWidth<=800)header.append(headerTools)}else{passport.prepend(header);if(!activeSection)hero.prepend(headerTools)}placeMetrics()}
+const metrics=document.querySelector('.overview-metrics');
 const identity=header.querySelector('.identity'),headerTools=document.querySelector('.header-tools'),themeControl=topbar.querySelector('.theme-control');
-function placeMetrics(){if(innerWidth<=800){passport.before(metrics)}else if(innerWidth<=1100){header.after(metrics)}else{passport.querySelector('.platforms').after(metrics)}}
-placeIdentity();compact.addEventListener('change',placeIdentity);addEventListener('resize',placeIdentity);
+hero.prepend(header);header.append(metrics,headerTools);
 const readingHeader=document.createElement('div');readingHeader.className='reading-project-wrap';readingHeader.hidden=true;
 const readingBox=document.createElement('div');readingBox.className='reading-project';readingHeader.append(readingBox);hero.before(readingHeader);
-function setReadingHeader(show){readingHeader.hidden=!show;if(show){readingBox.append(identity,themeControl,headerTools)}else{header.prepend(identity);if(innerWidth<=800)header.append(headerTools);else hero.prepend(headerTools);topbar.append(themeControl)}document.documentElement.style.setProperty('--reading-header-height',show?readingHeader.getBoundingClientRect().height+'px':'0px')}
+function setReadingHeader(show){readingHeader.hidden=!show;if(show){readingBox.append(identity,themeControl,headerTools)}else{header.prepend(identity);header.append(headerTools);topbar.append(themeControl)}document.documentElement.style.setProperty('--reading-header-height',show?readingHeader.getBoundingClientRect().height+'px':'0px')}
 const layout=document.querySelector('.content-layout');
 const shell=document.querySelector('.section-shell');
 const tabStrip=document.createElement('div');tabStrip.className='section-tabs';nav.prepend(tabStrip);navLinks.forEach(link=>tabStrip.append(link));
