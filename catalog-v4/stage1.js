@@ -21,12 +21,14 @@ document.querySelector('.brand').addEventListener('click',e=>{e.preventDefault()
 const hero=document.querySelector('#hero'),passport=document.querySelector('.passport'),header=document.querySelector('.project-header');
 const metrics=document.querySelector('.overview-metrics');passport.insertBefore(metrics,passport.querySelector('.ratings'));hero.prepend(document.querySelector('.header-tools'));
 const compact=matchMedia('(max-width:1100px)');
-function placeIdentity(){if(compact.matches)hero.prepend(header);else passport.prepend(header)}
-placeIdentity();compact.addEventListener('change',placeIdentity);
-const identity=header.querySelector('.identity'),headerTools=hero.querySelector('.header-tools'),themeControl=topbar.querySelector('.theme-control');
+function placeIdentity(){if(compact.matches){hero.prepend(header);if(!activeSection&&innerWidth<=800)header.append(headerTools)}else{passport.prepend(header);if(!activeSection)hero.prepend(headerTools)}placeMetrics()}
+placeIdentity();compact.addEventListener('change',placeIdentity);addEventListener('resize',placeIdentity);
+const identity=header.querySelector('.identity'),headerTools=document.querySelector('.header-tools'),themeControl=topbar.querySelector('.theme-control');
+function placeMetrics(){if(innerWidth<=800){passport.before(metrics)}else if(innerWidth<=1100){header.after(metrics)}else{passport.querySelector('.platforms').after(metrics)}}
+placeMetrics();
 const readingHeader=document.createElement('div');readingHeader.className='reading-project-wrap';readingHeader.hidden=true;
 const readingBox=document.createElement('div');readingBox.className='reading-project';readingHeader.append(readingBox);hero.before(readingHeader);
-function setReadingHeader(show){readingHeader.hidden=!show;if(show){readingBox.append(identity,themeControl,headerTools)}else{header.prepend(identity);hero.prepend(headerTools);topbar.append(themeControl)}document.documentElement.style.setProperty('--reading-header-height',show?readingHeader.getBoundingClientRect().height+'px':'0px')}
+function setReadingHeader(show){readingHeader.hidden=!show;if(show){readingBox.append(identity,themeControl,headerTools)}else{header.prepend(identity);if(innerWidth<=800)header.append(headerTools);else hero.prepend(headerTools);topbar.append(themeControl)}document.documentElement.style.setProperty('--reading-header-height',show?readingHeader.getBoundingClientRect().height+'px':'0px')}
 const layout=document.querySelector('.content-layout');
 const shell=document.querySelector('.section-shell');
 const tabStrip=document.createElement('div');tabStrip.className='section-tabs';nav.prepend(tabStrip);navLinks.forEach(link=>tabStrip.append(link));
