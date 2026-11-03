@@ -37,3 +37,11 @@
 /* Agreed default: two equally wide entries in either view. */
 #results.cards,#results.list{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
 @media(max-width:850px){#results.cards,#results.list{grid-template-columns:minmax(0,1fr)}}
+/* Separate reading and registration actions in every catalog view. */
+#results .explore-project{display:inline-flex!important;align-items:center;justify-content:center;min-height:40px;padding:9px 12px;border:1px solid var(--line);border-radius:8px;color:var(--green);font-size:11px;white-space:nowrap}
+#results .register-project{display:inline-flex;align-items:center;justify-content:space-between;gap:12px;min-height:40px;font-size:11px;padding:9px 13px;white-space:nowrap}
+#results.cards .card-actions{display:flex;flex-wrap:wrap}
+#results.cards .card-actions .explore-project,#results.cards .card-actions .register-project{flex:1}
+#results.list .project-cta{grid-column:1/-1;display:flex;justify-content:flex-end;gap:8px;padding-top:12px;border-top:1px solid var(--line)}
+@media(max-width:420px){#results.list .project-cta>*{flex:1}#results .explore-project,#results .register-project{font-size:10px;padding:9px 10px}}
+
