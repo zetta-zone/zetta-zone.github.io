@@ -30,3 +30,6 @@ html[data-theme=dark] #results .tone-0{color:#c39aff}html[data-theme=dark] #resu
 @media(max-width:700px){.mobile-action-dock{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:25;gap:10px;padding:10px max(12px,env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom));background:var(--paper);border-top:1px solid var(--line)}.mobile-action-dock button{min-height:46px;border:1px solid var(--line);border-radius:10px;background:var(--soft);color:var(--green);width:48px;font-size:26px}.mobile-action-dock .primary{flex:1;width:auto;font-size:14px;background:var(--green);color:var(--paper)}body,body.embedded{padding-bottom:calc(82px + env(safe-area-inset-bottom))}.section-mode .sticky-actions{visibility:hidden}.rating-emblem,.rating-graphic{display:none}#compare-tray{bottom:calc(78px + env(safe-area-inset-bottom))}#toast{bottom:calc(86px + env(safe-area-inset-bottom))}}
 
 @media(min-width:701px){.hero-grid>.project-header>.identity{grid-row:1;grid-column:1}.hero-grid>.project-header>.header-tools{grid-row:1;grid-column:2}.hero-grid>.project-header>.overview-metrics{grid-row:2}}
+
+/* Empty preview-only labels must not reserve space. */
+.ratings small:empty,.coin-selection:empty{display:none}.catalog-footer:empty{display:none}
