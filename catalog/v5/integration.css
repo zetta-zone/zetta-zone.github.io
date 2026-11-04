@@ -1,0 +1,38 @@
+/* Connect the unchanged V4.2 project views to the catalog-lab shell. */
+.lab-catalog{font:15px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif}
+.lab-catalog .shell{max-width:1320px}
+.lab-catalog .top-actions{margin:0;gap:8px}
+.lab-catalog .top-inner .brand{letter-spacing:.6px;font-size:18px}
+.lab-catalog .intro h1{letter-spacing:normal;margin:0}
+.prototype-version{display:inline-block;font-size:11px;font-weight:500;color:var(--muted);margin-left:8px}
+.lab-catalog .search{color:var(--txt);border-radius:11px}
+.lab-catalog .view button[aria-pressed=true]{color:var(--mint);background:var(--panel2)}
+.lab-catalog .chip[aria-pressed=true],.lab-catalog #favorites[aria-pressed=true]{color:var(--mint);border-color:var(--mint);background:var(--panel2)}
+.lab-catalog .iconbtn{position:relative}
+.lab-catalog #filter-count{font-size:9px;position:absolute;right:-2px;top:-3px;border-radius:20px;padding:2px 5px;background:var(--blue);color:var(--bg)}
+.lab-catalog .active-filters:not(:empty){margin:8px 0 0}
+.lab-catalog #results{padding-bottom:16px}
+.lab-catalog .demo-note{padding:8px 0 110px}
+.lab-catalog .demo-note .text-button{font-size:11px;padding:0 5px;color:var(--mint);border:0;background:none}
+.lab-catalog .filter-dialog{position:fixed;inset:0 0 0 auto;margin:0;width:min(360px,92vw);max-width:92vw;height:100dvh;max-height:100dvh;border-radius:0;border:0;border-left:1px solid var(--line);padding:calc(18px + env(safe-area-inset-top)) 18px calc(18px + env(safe-area-inset-bottom));overflow:auto}
+.lab-catalog .filter-dialog .dialog-head h2{font-size:20px}
+.lab-catalog .filter-dialog select{font-size:15px;padding:12px;background:var(--bg);color:var(--ink)}
+.lab-catalog .filter-dialog .filter-hint{font-size:12px}
+@media(max-width:600px){
+ .lab-catalog .top{height:auto;min-height:calc(49px + env(safe-area-inset-top));padding-top:env(safe-area-inset-top)}
+ .lab-catalog .top-inner{min-height:49px}
+ .lab-catalog .top-inner .brand{font-size:15px}
+ .lab-catalog .shell{padding-left:max(10px,env(safe-area-inset-left));padding-right:max(10px,env(safe-area-inset-right))}
+ .lab-catalog .intro h1{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:15px}
+ .lab-catalog .prototype-version{margin:0}
+ .lab-catalog .search{font-size:16px}
+ .lab-catalog .view button{font-size:11px;padding:6px 5px}
+ .lab-catalog .view button::first-letter{font-size:11px}
+ .lab-catalog .toolbar .iconbtn{padding:5px;min-width:32px}
+ .lab-catalog .filterchips{width:100%;overflow-x:auto!important}
+}
+@media(max-width:350px){.lab-catalog .view button{font-size:10px;padding:6px 3px}}
+
+.lab-catalog #top-filter{display:inline-flex;align-items:center;justify-content:center}
+
+@media(max-width:350px){.lab-catalog .compare-tray{gap:6px;padding:8px}.lab-catalog .tray-title{min-width:0}.lab-catalog .tray-title small{white-space:normal}.lab-catalog .compare-tray>.clear-button{font-size:9px;padding:4px}.lab-catalog .compare-tray>.primary{font-size:10px;padding:7px;gap:5px}.lab-catalog #compare-chips{min-width:0}}

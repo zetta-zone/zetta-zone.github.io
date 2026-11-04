@@ -1,0 +1,16 @@
+/* The shared V5 interface uses the catalog-lab navy, blue and mint palette. */
+:root{--txt:#172c36;--panel:#fff;--panel2:#f4f8fb;--border:#dce5e8;--mint:#287caf;--blue:#287caf;--gold:#ad731d;--r:15px}
+html[data-theme=dark]{color-scheme:dark;--bg:#080f1b;--panel:#14233a;--panel2:#1b304c;--border:#2d4860;--txt:#e7f2ff;--muted:#99b2c9;--mint:#67e3c6;--blue:#6fb8fa;--gold:#f5c46a;--ink:#e7f2ff;--green:#67e3c6;--line:#2d4860;--paper:#14233a;--soft:#1b304c;--chip:#1a3549;--shadow:0 10px 35px #0002}
+html[data-theme=dark] :is(.primary,.registration){background:linear-gradient(100deg,#55d5ba,#77aef9);color:#061421}
+html[data-theme=dark] :is(.project-logo,.feature[aria-expanded=true],.coin-button[aria-pressed=true],.verification,.verdict){background:#1b304c;color:#9de5e5}
+html[data-theme=dark] .project-tags span{color:#9de5e5}
+html[data-theme=dark] .tone-3,html[data-theme=dark] #results .tone-3{color:#6fb8fa}
+html[data-theme=dark] .backdrop-grid{opacity:.2}
+html[data-theme=dark] .mobile-detail-controls button[aria-pressed=true]{background:#1a3549;color:#6fb8fa;border-color:#6fb8fa}
+html[data-theme=dark] .top{background:#08121e}
+html[data-theme=dark] .toolbar{background:rgba(7,17,29,.97)}
+html[data-theme=dark] .search,html[data-theme=dark] .view{background:#0c1b2c}
+html[data-theme=light] .top,html[data-theme=light] .toolbar{background:var(--paper)}
+html[data-theme=light] .search,html[data-theme=light] .view{background:var(--soft)}
+html[data-theme=light] .lab-catalog :is(.chip,.iconbtn){background:var(--paper)}
+html[data-theme=light] .brand,html[data-theme=light] .search{color:var(--ink)}
