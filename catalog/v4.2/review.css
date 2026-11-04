@@ -53,3 +53,27 @@ html[data-theme=dark] #results .tone-0{color:#c39aff}html[data-theme=dark] #resu
  #compare-tray{bottom:calc(var(--mobile-bar-height,76px) + 8px)}
  #toast{bottom:calc(var(--mobile-bar-height,76px) + 14px)}
 }
+
+/* V4.2 mobile header: description, one statistics row, separate close control. */
+@media(max-width:700px){
+ .hero-grid>.project-header{grid-template-columns:minmax(0,1fr);padding-top:20px;padding-right:16px;gap:10px}
+ .hero-grid>.project-header>.identity{grid-column:1;grid-row:1}
+ .hero-grid>.project-header .identity .eyebrow{max-width:calc(100% - 16px)}
+ .hero-grid>.project-header>.header-tools{display:none}
+ .identity #essence{display:block;font-size:11px;line-height:1.5;font-weight:400;color:var(--muted);margin:5px 0 7px;letter-spacing:normal;overflow-wrap:anywhere}
+ .hero-grid>.project-header>.overview-metrics,
+ .section-mode .reading-project>.overview-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-column:1/-1;grid-row:2;flex:none;width:100%;max-width:none;margin:0;padding:0;gap:8px;background:transparent;border:0}
+ .hero-grid>.project-header>.overview-metrics>div,
+ .section-mode .reading-project>.overview-metrics>div{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:2px;min-width:0;text-align:left;white-space:normal}
+ .hero-grid>.project-header>.overview-metrics strong,
+ .section-mode .reading-project>.overview-metrics strong{font-size:11px;line-height:1.25;white-space:nowrap}
+ .hero-grid>.project-header>.overview-metrics span,
+ .section-mode .reading-project>.overview-metrics span{font-size:8px;line-height:1.3;max-width:none;letter-spacing:0}
+ .section-mode .reading-project-wrap{padding-right:24px}
+ .section-mode .reading-project{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;padding:6px}
+ .section-mode .reading-project>.identity{grid-column:1;grid-row:1;min-width:0}
+ .section-mode .reading-project #essence{font-size:10px;line-height:1.4;margin:5px 0 0}
+ .section-mode .reading-project>.theme-control{grid-column:2;grid-row:1;align-self:start;order:initial}
+ .section-mode .reading-project>.header-tools{display:none}
+ .close-card.mobile-header-close{position:fixed;inset:auto;top:max(2px,env(safe-area-inset-top));right:max(2px,env(safe-area-inset-right));z-index:30;display:grid;place-items:center;width:28px;height:28px;min-width:28px;min-height:28px;margin:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;color:var(--ink);font-size:25px;line-height:1;font-weight:400}
+}
