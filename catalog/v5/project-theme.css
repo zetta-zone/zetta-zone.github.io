@@ -10,7 +10,7 @@ html[data-theme=light] [data-project="nocid"] .primary,html[data-theme=light] bo
 .project-status{display:block;color:var(--muted);font-size:10px;line-height:1.45;white-space:normal}
 body.nocid-project .project-status{padding:8px 0}
 body.nocid-project .gallery-stage,body.nocid-project .gallery-track img{background:var(--soft);object-fit:contain}
-body.nocid-project .gallery-topline{color:var(--ink)}
+body.nocid-project .gallery-topline{color:#f4ece2}
 body.nocid-project .ratings .rating-graphic{display:none}
 body.nocid-project .overview-metrics strong{font-size:clamp(10px,1.5vw,22px)!important;overflow-wrap:anywhere;white-space:normal!important}
 body.nocid-project .overview-metrics span{overflow-wrap:anywhere}
