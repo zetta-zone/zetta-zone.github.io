@@ -1,0 +1,24 @@
+/* Desktop placement has one owner: layout-editor.js and this grid contract.
+   Existing component styles remain responsible for typography and project colours. */
+.lab-close.close-card{position:fixed!important;top:calc(env(safe-area-inset-top,0px) + 10px)!important;right:calc(env(safe-area-inset-right,0px) + 12px)!important;left:auto!important;z-index:90!important}
+.lab-launch{position:fixed;bottom:18px;right:18px;z-index:80;padding:12px 20px;border-radius:10px;background:#1590c0;color:white;border:1px solid #83d6ff;font:600 14px system-ui;text-decoration:none}
+@media(min-width:1001px){
+ body.lab-layout:not(.section-mode) #hero,body.lab-layout:not(.section-mode) .main-content{display:grid!important;grid-template-columns:repeat(12,minmax(0,1fr))!important;gap:var(--lab-gap,18px)!important;align-items:start!important}
+ body.lab-layout:not(.section-mode) #hero>.project-header,body.lab-layout:not(.section-mode) #hero>.passport{display:contents!important}
+ body.lab-layout:not(.section-mode) [data-lab-block]{grid-column:var(--lab-col) / span var(--lab-span)!important;grid-row:var(--lab-row) / span var(--lab-rows,1)!important;min-width:0!important;max-width:100%!important;width:var(--lab-width,100%)!important;min-height:var(--lab-height,0px)!important;margin:0!important;padding:var(--lab-pad,12px)!important;box-sizing:border-box!important;align-self:var(--lab-align,start)!important;justify-self:var(--lab-justify,stretch)!important;translate:var(--lab-x,0px) var(--lab-y,0px);overflow-wrap:anywhere}
+ body.lab-layout:not(.section-mode) .overview-metrics{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important}
+ body.lab-layout:not(.section-mode) .identity{display:flex!important}
+ body.lab-layout:not(.section-mode) .header-tools{display:flex!important}
+ body.lab-layout:not(.section-mode) .main-content{background:transparent}
+ body.lab-editing .dossier{margin-right:334px!important;width:auto!important;max-width:none!important}
+ body.lab-editing [data-lab-zone]{outline:1px dashed #65bce5;background-image:linear-gradient(90deg,#44bfff0a 1px,transparent 1px);background-size:calc(100% / 12) 100%;padding-top:26px!important}
+ body.lab-editing [data-lab-block]{outline:1px dashed #62b4dd;position:relative;cursor:grab}
+ body.lab-editing [data-lab-block].lab-selected{outline:3px solid #48cfff;outline-offset:-3px}
+ body.lab-editing [data-lab-block].lab-drop{outline:4px solid #f4bb55;background-color:#f4bb5522}
+ body.lab-editing [data-lab-block]::after{content:attr(data-lab-label);position:absolute;top:0;left:0;background:#12384b;color:#e4f8ff;font:10px system-ui;padding:2px 5px;pointer-events:none;z-index:5}
+ body.lab-editing .section-nav{position:static!important}
+}
+.lab-panel{position:fixed;right:10px;top:58px;bottom:10px;width:304px;z-index:85;overflow:auto;box-sizing:border-box;padding:16px;border:1px solid #4085a5;border-radius:14px;background:#0c1c2b;color:#e4f1fa;box-shadow:0 8px 28px #0007;font:13px/1.5 system-ui}
+.lab-panel h2{font-size:19px;margin:0 0 8px}.lab-panel p{color:#b4cad8;font-size:12px}.lab-panel label{display:flex;justify-content:space-between;align-items:center;margin:7px 0;gap:8px}.lab-panel input,.lab-panel select{width:115px;min-width:0;background:#152e42;color:#fff;border:1px solid #47708a;border-radius:5px;padding:5px}.lab-panel button{border:1px solid #477c97;border-radius:6px;padding:7px 9px;background:#193b52;color:#eefaff;font:inherit;cursor:pointer}.lab-panel button:disabled{opacity:.4}.lab-panel .lab-actions{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}.lab-panel .lab-status{color:#80e4b8;white-space:pre-line}.lab-panel [hidden]{display:none}.lab-panel hr{border:0;border-top:1px solid #345267;margin:14px 0}
+
+body.lab-layout [data-lab-block][hidden]{display:none!important}
