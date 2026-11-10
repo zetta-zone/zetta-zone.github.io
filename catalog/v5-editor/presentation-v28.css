@@ -1,0 +1,56 @@
+/* V28 presentation is isolated from project cards and the visual editor. */
+.v28-presentation{--v28-accent:#8b7cff;--v28-cyan:#56d8e8;--v28-line:#2a3248;color:var(--txt);font:15px/1.5 system-ui,Arial}
+.v28-presentation .wrap{width:min(1150px,calc(100% - 28px));margin:auto}
+.v28-top{border-bottom:1px solid var(--border);background:var(--bg)}
+.v28-presentation .nav{min-height:65px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.v28-presentation a{text-decoration:none;color:inherit}
+.v28-presentation .brand{display:flex;gap:10px;font-weight:900;letter-spacing:2px}
+.v28-presentation .brand-mark{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--v28-accent),var(--v28-cyan));color:white;font-size:23px;font-weight:900}
+.v28-presentation .brand-copy{display:grid;gap:4px;font-size:15px;font-weight:900;letter-spacing:1px}
+.v28-presentation .brand-copy small{font-size:9px;letter-spacing:2px;color:var(--muted)}
+.v28-presentation .navlinks{display:flex;align-items:center;gap:20px;font-size:13px;color:var(--muted)}
+.v28-presentation .navlinks button,#site-menu button{font:inherit;color:inherit;background:none;border:0;padding:0;text-align:left;cursor:pointer}
+.v28-presentation .hero{padding:48px 0 22px}
+.v28-presentation .eyebrow{color:var(--v28-cyan);text-transform:uppercase;letter-spacing:2px;font-size:11px;font-weight:800}
+.v28-presentation h1{font-size:clamp(34px,5vw,54px);line-height:1.05;letter-spacing:-2px;margin:12px 0}
+.v28-presentation h1 span{color:#a89dff}
+.v28-presentation .hero p{color:var(--muted);max-width:650px;font-size:16px}
+.v28-presentation .actions{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}
+.v28-presentation .btn{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--border);border-radius:11px;padding:10px 14px;background:var(--panel);color:var(--txt);font-weight:750;font-size:14px;cursor:pointer}
+.v28-presentation .btn.primary{background:linear-gradient(120deg,#786bff,#448de9);color:white;border:0}
+.v28-presentation .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:22px 0}
+.v28-presentation .stat,.v28-presentation .trust{border:1px solid var(--border);border-radius:15px;padding:14px;background:var(--panel)}
+.v28-presentation .stat b{display:block;font-size:22px}
+.v28-presentation .stat span{color:var(--muted);font-size:12px}
+.v28-presentation .head h2{margin:0 0 5px;font-size:24px}
+.v28-presentation .head p{color:var(--muted);margin:0}
+.v28-bottom .note{color:var(--muted);font-size:12px;margin:12px 0 30px}
+.v28-bottom .trustrow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:22px 0 30px}
+.v28-bottom .trust h3{font-size:15px;margin:7px 0}
+.v28-bottom .trust p{color:var(--muted);font-size:12px;margin:0}
+.v28-bottom .cta{margin:30px 0 45px;padding:24px;border:1px solid #504a8a;border-radius:20px;background:radial-gradient(ellipse at right top,#413c804a,transparent 50%),var(--panel);display:flex;justify-content:space-between;align-items:center;gap:18px}
+.v28-bottom .cta h2{margin:0 0 5px;font-size:24px}
+.v28-bottom .cta p{color:var(--muted);font-size:13px;margin:0;max-width:650px}
+.v28-bottom .cta .btn{flex-shrink:0}
+.v28-footer{border-top:1px solid var(--border);padding:22px 0 35px;color:var(--muted);font-size:12px}
+.lab-catalog .demo-note{padding-bottom:12px}
+.lab-catalog .toolbar-inner{flex-wrap:nowrap}
+.toolbar-site-actions{display:flex;gap:6px;margin-left:auto;flex-shrink:0}
+.lab-catalog .toolbar-options{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:6px}
+.quick-filters,.view-reset{display:flex;align-items:center;gap:6px;min-width:0}
+.lab-catalog .toolbar-options .chip{height:32px;padding:4px 11px;line-height:20px}
+.lab-catalog .toolbar-options .view{height:32px;padding:2px}
+.lab-catalog .toolbar-options .view button{padding:3px 9px;font-size:12px}
+.lab-catalog .toolbar-options .view button::first-letter{font-size:12px}
+.lab-catalog .toolbar-options .chip[aria-pressed=true]{color:var(--mint);border-color:var(--mint);background:var(--panel2)}
+.toolbar{scroll-margin-top:0}
+#guide,#community{scroll-margin-top:calc(var(--catalog-toolbar-height,140px) + 18px)}
+#site-menu{position:absolute;right:14px;top:48px;width:230px;padding:16px;border:1px solid var(--border);border-radius:12px;background:var(--panel);box-shadow:0 12px 40px #0007;z-index:50}
+#site-menu:not([hidden]){display:grid;gap:16px}
+#site-menu a{color:var(--txt);text-decoration:none}
+#site-menu button{color:var(--txt)}
+.lab-catalog .toolbar:has(#site-menu:not([hidden])){z-index:45}
+@media(max-width:700px){.v28-presentation .nav{min-height:64px;flex-wrap:wrap;padding:12px 0;gap:14px}.v28-presentation .navlinks{gap:14px;flex-wrap:wrap;font-size:12px}.v28-presentation .hero{padding:30px 0 10px}.v28-presentation h1{font-size:40px}.v28-presentation .hero p{font-size:14px}.v28-bottom .trustrow{grid-template-columns:1fr}.v28-bottom .cta{align-items:flex-start;flex-direction:column;padding:20px}.v28-presentation .stat{padding:12px 10px}.v28-presentation .stat span{font-size:11px}.lab-catalog .toolbar-options{gap:8px;overflow-x:auto;scrollbar-width:thin}.quick-filters,.view-reset{flex-shrink:0}.lab-catalog .toolbar-options .chip{font-size:11px;padding:3px 8px;height:30px}.lab-catalog .toolbar-options .view{height:30px}.lab-catalog .toolbar-options .view button{font-size:11px;padding:3px 6px}.lab-catalog .toolbar-inner .search{flex:1;min-width:0}.lab-catalog .toolbar-site-actions .iconbtn{min-height:35px;padding:5px 8px}.v28-bottom .head h2,.v28-bottom .cta h2{font-size:22px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.lab-catalog .filterchips .chip,.lab-catalog #toolbar-reset{height:34px;box-sizing:border-box}
+@media(max-width:700px){.lab-catalog .filterchips .chip,.lab-catalog #toolbar-reset{height:30px}.lab-catalog .toolbar-options{gap:5px}.quick-filters,.view-reset{gap:4px}.lab-catalog .toolbar-options .chip{font-size:10px;padding:3px 6px}.lab-catalog .toolbar-options .view button{font-size:0;padding:3px 7px;min-width:23px}.lab-catalog .toolbar-options .view button::first-letter{font-size:14px}.lab-catalog .toolbar-options .view{gap:0}.lab-catalog .toolbar-options{scrollbar-width:none}}
