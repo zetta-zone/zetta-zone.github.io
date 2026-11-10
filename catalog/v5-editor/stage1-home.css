@@ -1,0 +1,35 @@
+/* Stage 1: home controls only. No project-card or lower-section rules. */
+.v28-scope .hero h1{max-width:1120px;font-size:clamp(34px,4vw,58px)}
+.v28-scope .hero>p{max-width:980px}.v28-scope .hero>p+p{margin-top:10px}
+.lab-catalog .toolbar-inner{grid-template-columns:minmax(32px,1fr) auto auto auto!important;gap:8px}
+#quick-filters,.lab-catalog .compact-tools{display:flex;gap:6px;flex:none}#quick-filters:empty{display:none}
+.quick-icon,.lab-catalog .compact-tools .iconbtn,.lab-catalog #filter-open{width:38px;min-width:38px;height:38px;min-height:38px;padding:0;display:inline-grid;place-items:center;position:relative;font-size:18px;line-height:1;flex:none;border:1px solid var(--border);border-radius:10px;background:var(--panel);color:var(--txt)}
+.quick-icon[data-active=true]{border-color:var(--mint);color:var(--mint);box-shadow:inset 0 -3px var(--mint)}
+.quick-icon:hover,.compact-tools .iconbtn:hover{border-color:var(--mint)}
+.lab-catalog .compact-tools[hidden]{display:none}.lab-catalog #top-filter{display:inline-grid}.lab-catalog #filter-count{position:absolute;top:-5px;right:-5px}
+.filter-row{padding:12px 0;border-bottom:1px solid var(--border)}.filter-row .filter-field{margin:0 0 5px}.quick-pin{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)}.quick-pin input{width:16px;height:16px;accent-color:var(--mint)}#quick-pin-status{font-size:12px;color:var(--muted)}
+#quick-filter-dialog{position:fixed;inset:var(--quick-top,80px) auto auto var(--quick-left,10px);margin:0;width:310px;max-width:calc(100vw - 20px);max-height:calc(100dvh - 30px);padding:16px;background:var(--paper);color:var(--txt);border:1px solid var(--border);border-radius:12px;box-shadow:0 12px 36px #0003}
+#quick-filter-dialog::backdrop{background:transparent}#quick-filter-dialog h2{font-size:16px;margin:0}#quick-filter-dialog .filter-row{padding:0;border:0}#quick-filter-dialog .quick-pin{display:none}#quick-filter-dialog select{width:100%;padding:10px;color:var(--txt);background:var(--soft);border:1px solid var(--border)}
+.stage-stats>.stat{height:86px;min-height:86px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;gap:5px;overflow:hidden;padding:12px 14px}
+.stage-stats .tile-top{display:flex;align-items:center;gap:8px;min-width:0;white-space:nowrap}.stage-stats .tile-top b{display:inline;line-height:1.15;flex:none;font-size:22px}.stage-stats .tile-icon{font-size:21px;line-height:1;flex:none}.stage-stats .tile-label{overflow:hidden;text-overflow:ellipsis;font-size:12px}.stage-stats .tile-info{margin-left:auto;padding:0;width:20px;height:24px;flex:none;border:0;background:transparent;color:var(--mint);font-size:17px;line-height:1}
+.stage-stats .tile-bottom{display:flex;align-items:center;gap:10px;min-width:0;height:22px;line-height:22px;font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden}.stage-stats .tile-bottom>span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.stage-stats .tile-link{display:flex;align-items:center;gap:6px;background:none;color:inherit;border:0;padding:0;min-width:0;white-space:nowrap}.stage-stats .tile-link:hover{color:var(--mint)}
+.stage-stats .summary-project{display:inline-flex;gap:3px;align-items:center;min-width:0;font-size:10px}.stage-stats .summary-project>span{min-width:0;overflow:hidden;text-overflow:ellipsis}.stage-stats .summary-project button{flex:none;padding:0;width:17px;height:20px;line-height:1;background:transparent;border:0;color:var(--muted)}
+.upper-compare-visible #compare-tray{display:none!important}
+#summary-dialog{width:530px;max-width:calc(100vw - 24px);background:var(--paper);color:var(--txt);border:1px solid var(--border);border-radius:16px;padding:22px}#summary-dialog h2{font-size:20px;margin:0}#summary-content li{margin:8px 0}#summary-content p{color:var(--muted)}
+/* Cooler, quieter light shell; individual project palettes remain untouched. */
+html[data-theme=light] .lab-catalog{background:#e0e8f2}
+html[data-theme=light] #site-header{background:linear-gradient(115deg,#eaf0f8,#e2eaf5)}
+html[data-theme=light] .v28-scope header{background:#ecf1f8}
+html[data-theme=light] .stage-stats>.stat{background:#eaf0f8;border-color:#aebfd6;box-shadow:0 2px 6px #23476c0a}
+html[data-theme=light] .lab-catalog>.toolbar{background:#e8eff8;border-color:#a9bdd8}
+html[data-theme=light] .lab-catalog .toolbar .search{background:#e3ecf7;border-color:#9eb5d3}
+html[data-theme=light] .lab-catalog .chip{background:#e4ecf7;border-color:#a6bbd8}
+html[data-theme=light] .lab-catalog .chip[aria-pressed=true]{background:#245fb4;color:white;border-color:#245fb4}
+html[data-theme=light] .lab-catalog .view{background:#dce7f5}
+html[data-theme=light] .quick-icon,html[data-theme=light] .lab-catalog .compact-tools .iconbtn,html[data-theme=light] .lab-catalog #filter-open{background:#e0eafa;border-color:#9fb7d8;color:#254e82}
+html[data-theme=light] .quick-icon[data-active=true]{background:#cddff7;border-color:#467bbd;color:#174c91}
+html[data-theme=light] .lab-catalog #filter-dialog,html[data-theme=light] #quick-filter-dialog,html[data-theme=light] #summary-dialog{background:#eaf0f8}
+html[data-theme=light] .lab-catalog .filter-dialog select{background:#e0e9f6;color:#18334e}
+@media(max-width:1100px){.stage-stats .tile-label{font-size:11px}.stage-stats .hot-slot{display:none}.stage-stats .summary-project{max-width:100px}}
+@media(max-width:800px){.stage-stats .tile-top{gap:5px}.stage-stats .tile-top>.tile-label,.stage-stats .tile-link>.tile-label{display:none}.stage-stats #upper-compare-projects{font-size:10px}.stage-stats .summary-project>span{display:none}.stage-stats .summary-project::before{content:'●';color:var(--mint)}.stage-stats .tile-info{width:16px;font-size:15px}.stage-stats .tile-bottom{gap:4px;font-size:10px}}
+@media(max-width:600px){.lab-catalog .toolbar-inner{gap:3px!important}.quick-icon,.lab-catalog .compact-tools .iconbtn,.lab-catalog #filter-open{width:30px;min-width:30px;height:35px;min-height:35px;border-radius:8px;font-size:16px}#quick-filters,.lab-catalog .compact-tools{gap:2px}.v28-scope .hero{display:block}.v28-scope .hero .stage-stats{display:grid}.stage-stats>.stat{padding:10px 8px}.stage-stats .tile-icon{font-size:18px}.stage-stats .tile-top b{font-size:19px}.stage-stats .tile-top{gap:4px}.stage-stats .tile-bottom span{font-size:10px}.stage-stats .summary-project button{width:15px}.stage-stats .summary-project{gap:0}}
