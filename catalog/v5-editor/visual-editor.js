@@ -2,12 +2,12 @@
 (()=>{'use strict';
 addEventListener('load',()=>{
 const params=new URLSearchParams(location.search),S=window.V5EditorSupport,host=params.has('ve-preview')&&parent!==window?parent.V5EditorHost:null;
-if(params.get('editor')==='1'&&!params.has('ve-preview')){(parent!==window?parent:window).location.replace('editor.html?project='+encodeURIComponent(params.get('project')||'hashgarden-demo'));return}
+if(params.get('editor')==='1'&&!params.has('ve-preview')){(parent!==window?parent:window).location.replace('editor.html?project='+encodeURIComponent(params.get('project')||'hashgarden-demo')+'&release='+encodeURIComponent(S.build));return}
 const view=['cards','list'].includes(params.get('ve-view'))?params.get('ve-view'):'detail',device=S.devices.includes(params.get('ve-device'))?params.get('ve-device'):S.device();
 let root=document.querySelector('.dossier');
 if(host&&view!=='detail'){window.V5Catalog?.prepareEditorPreview(params.get('project'),view);root=document.querySelector('#results .project-item');const results=document.querySelector('#results'),width=root.getBoundingClientRect().width;const canvas=document.createElement('div');canvas.className='ve-compact-canvas';document.body.classList.add('ve-preview-compact');canvas.append(results);document.body.append(canvas);results.style.setProperty('display','block','important');results.style.width=width+'px';results.style.margin='20px auto'}
 if(host)document.body.classList.add('ve-preview');
-if(!root){const a=document.createElement('a');a.href='editor.html?project=hashgarden-demo';a.className='ve-launch';a.textContent='Визуальный редактор';document.body.append(a);return}
+if(!root){const a=document.createElement('a');a.href='editor.html?project=hashgarden-demo&release='+encodeURIComponent(S.build);a.className='ve-launch';a.textContent='Визуальный редактор';document.body.append(a);return}
 const close=document.querySelector('.close-card');if(close)document.body.append(close);
 const project=new URLSearchParams(location.search).get('project')||'hashgarden-demo',key=S.key(view,device,project);
 const nodes=new Map(),ids=new WeakMap(),original=new Map();
@@ -61,7 +61,7 @@ $('#ve-import').onchange=async e=>{try{const file=e.target.files[0];if(!file)ret
 function parseKey(k){for(const p of V4_PROJECTS)for(const v of S.views)for(const d of S.devices)if(S.key(v,d,p.id)===k)return [v,d,p.id];return ['detail','desktop',project]}
 $('#ve-image').onchange=async e=>{const file=e.target.files[0];if(!file)return;if(file.size>1500000||!/^image\/(png|jpeg|webp|gif|svg\+xml)$/.test(file.type)){status('Выберите PNG, JPEG, SVG, WebP или GIF до 1,5 МБ');return}const node=assetNode();if(!node){status('Выберите изображение или иконку');return}const id=ids.get(node),r=new FileReader();r.onload=()=>change(s=>{s.content[project]||={};s.content[project][id]||={};s.content[project][id].src=r.result});r.readAsDataURL(file)};
 function toggle(v){editing=v;panel.hidden=!v;launch.textContent=v?'Свернуть редактор':'Редактор V5';select(selected)}
-const launch=document.createElement('button');launch.className='ve-launch';launch.onclick=()=>{if(host)toggle(!editing);else (parent!==window?parent:window).location.href='editor.html?project='+encodeURIComponent(project)+'&view='+view+'&device='+device};document.body.append(launch);
+const launch=document.createElement('button');launch.className='ve-launch';launch.onclick=()=>{if(host)toggle(!editing);else (parent!==window?parent:window).location.href='editor.html?project='+encodeURIComponent(project)+'&view='+view+'&device='+device+'&release='+encodeURIComponent(S.build)};document.body.append(launch);
 root.addEventListener('click',e=>{if(!editing||e.target.closest('.close-card'))return;e.preventDefault();e.stopImmediatePropagation();let n=e.target;while(n&&!ids.has(n))n=n.parentElement;if(n)select(ids.get(n))},true);
 try{const draft=host?.getDraft(key),raw=draft?.state||S.read(view,device,project);if(raw){state=valid(raw);if(draft){past=draft.past||[];future=draft.future||[];historyNames=draft.historyNames||[];futureNames=draft.futureNames||[]}if(state.themeStyles){state.palette=state.themeStyles[activeTheme].palette;state.styles=clone(state.themeStyles[activeTheme].styles)}apply()}}catch(e){state=empty();restore();status('Сохранённые настройки не загружены: '+e.message)}saved=host?.getDraft(key)?.saved||JSON.stringify(state);toggle(!!host);
 
