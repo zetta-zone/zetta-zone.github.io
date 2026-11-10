@@ -1,0 +1,22 @@
+/* One binding adapter for all laboratory records; no per-project markup. */
+(()=>{'use strict';if(!p.labPreview)return;document.body.dataset.preserveContent='';
+function theme(){document.body.style.cssText=V5ProjectStyle(p)}theme();new MutationObserver(theme).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+const set=(s,v)=>document.querySelectorAll(s).forEach(n=>n.textContent=v);
+const logo=document.querySelector('.identity .project-logo');logo.removeAttribute('aria-hidden');logo.innerHTML='<img src="'+esc(p.logo)+'" alt="Редакционная монограмма '+esc(p.name)+'; не официальный логотип">';
+document.querySelector('.identity h1 .demo-tag')?.remove();const status=document.createElement('small');status.className='project-status';status.textContent='Лабораторная карточка · сведения требуют проверки';document.querySelector('.identity h1').after(status);
+set('.passport>.eyebrow',p.features.slice(0,3).map(f=>f[1]).join(' · '));
+const facts=document.querySelectorAll('.quick-facts dd');facts[0].textContent=p.freeStart===true?'Заявлен бесплатный старт':'Требует проверки';facts[1].textContent='Условия не проверены';facts[2].textContent='Условия не проверены';
+set('.verification b','Выплаты не проверены');set('.verification small','Публичные источники · 10.11.2026');set('.verification .status-symbol','?');
+const labels=document.querySelectorAll('#verification .verification-grid>div>b');['Публичные источники','Не проверено','Не оценён','Не проверено'].forEach((s,i)=>{if(labels[i])labels[i].textContent=s});
+const notice=document.querySelector('#verification .demo-notice');if(notice){notice.className='draft-notice';notice.innerHTML='<b>Предварительная карточка '+esc(p.name)+'</b><p>Фактические выплаты, аккаунт и финансовые условия не проверены.</p>'}
+set('.gallery-topline>span:nth-child(2)','СХЕМА · НЕ СКРИНШОТ ИГРЫ');document.querySelectorAll('.gallery-track img,.thumbnail img').forEach(n=>n.alt=p.name+' · редакционная схема, не скриншот');
+set('.card-footer>span:first-child','Подготовлено: 10.11.2026');set('#reopen','Открыть '+p.name);set('#verdict>.eyebrow','ZETTA-ZONE · ПРЕДВАРИТЕЛЬНО');document.querySelectorAll('.verdict-tags span').forEach((n,i)=>n.textContent=['Виртуальный майнинг','Общий шаблон V5','Условия требуют проверки'][i]);
+set('.aside-index a[href="#features"]',p.features.length+' возможности ↗');set('.aside-index a[href="#finance"]',p.coins.length+' обозначения ↗');set('.aside-index [data-dialog="editorial"]','Оценка не выставлена ↗');
+function sources(){return '<p>Дата подготовки: 10.11.2026. Описание проекта не является независимой проверкой выплат.</p><ul>'+Object.values(p.sources).map(s=>'<li><a href="'+esc(s.url)+'" target="_blank" rel="noopener noreferrer">'+esc(s.note)+'</a></li>').join('')+'</ul><p>Числа и оценки HashGarden не перенесены. Галерея содержит редакционные схемы для проверки редактора.</p>'}
+for(const key of ['proof','service'])document.querySelectorAll('[data-dialog="'+key+'"]').forEach(b=>{b.textContent='Источники и статус проверки ↗';b.onclick=()=>openDialog('Источники · '+p.name,sources())});
+for(const key of ['editorial','external'])document.querySelectorAll('[data-dialog="'+key+'"]').forEach(b=>{b.querySelector('strong')?.replaceChildren(document.createTextNode('—'));b.querySelector('small:last-of-type')?.replaceChildren(document.createTextNode('Оценка не выставлена'));b.querySelector('.rating-graphic')?.remove();b.onclick=()=>openDialog('Оценка не выставлена','<p>Для '+esc(p.name)+' нет подтверждённой оценки ZETTA-ZONE.</p>'+sources())});
+set('[data-mobile-editorial] strong,[data-reading-editorial] strong','—');
+for(const [key,title]of [['faucetpay','Условия пополнения'],['wallet','Условия вывода']])document.querySelectorAll('[data-dialog="'+key+'"]').forEach(b=>{b.textContent=title+' ↗';b.onclick=()=>openDialog(title,'<p>Способы, минимумы, комиссии и сроки требуют проверки.</p>'+sources())});
+document.querySelectorAll('.registration').forEach(b=>{b.textContent='Официальный сайт ↗';b.onclick=()=>window.open(p.officialUrl,'_blank','noopener,noreferrer')});
+function coinStatus(){set('#coin-detail .demo-tag','УСЛОВИЯ НЕ ПРОВЕРЕНЫ')}coinStatus();new MutationObserver(coinStatus).observe(document.querySelector('#coin-detail'),{childList:true});
+})();

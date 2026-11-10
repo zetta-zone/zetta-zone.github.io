@@ -1,5 +1,5 @@
 /* Private visual preview: remove editorial scaffolding without changing source data. */
-(()=>{'use strict';if(window.DEMO_PROJECT?.id==='nocid')return;
+(()=>{'use strict';if(window.DEMO_PROJECT?.id==='nocid'||window.DEMO_PROJECT?.labPreview)return;
 const remove='.demo-pill,.test-note,.demo-banner,.demo-tag,.test-instance-caption,.action-note,.demo-notice,.demo-aside,.compare-note,.dialog-notice,.gallery-topline>span:nth-child(2),.card-footer [data-dialog="service"],#footer-info,.catalog-brand>small';
 const replacements=new Map([
 ['Проверка показана как пример','Проверка проекта'],['Выплаты и дата проверки — DEMO','Проверено 01.11.2026'],['Изучен основной сценарий · DEMO','Изучен основной сценарий'],['Пример записи о проверке · DEMO','Проверка выплаты'],['Посмотреть пример материала ↗','Материал проверки ↗'],['Подробная карточка · V5','ZETTA-ZONE'],['Тестовый набор, условия вывода не подтверждены',''],['Нет оценки','10 критериев'],['DEMO · пример',''],['Пример оценки · DEMO','Оценка проекта'],['ПЗС','ПТС']
