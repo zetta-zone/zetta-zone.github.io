@@ -23,3 +23,54 @@ html[data-theme=light] .v28-scope p{color:var(--muted)}
 #results .project-item[data-card-theme]{background:var(--paper);color:var(--txt);border-color:var(--border)}
 #results .project-item[data-card-theme] .tone-3{color:var(--mint)}
 .v28-scope .hero h1 span{font-weight:inherit}.v28-scope .actions .btn,.v28-scope .cta .btn{font-family:inherit;font-size:inherit;line-height:inherit}
+
+/* Compact presentation spacing, requested after the V28 review. */
+.v28-scope .hero{padding-top:22px;padding-bottom:8px}
+.v28-scope .hero .stats{margin-bottom:0}
+.v28-scope #catalog.head{margin-top:12px;margin-bottom:10px}
+
+/* Light catalogue: clear surfaces, readable labels and coloured controls. */
+html[data-theme=light] .lab-catalog{--bg:#e7eef7;--paper:#fff;--panel:#fff;--soft:#edf3fb;--panel2:#e1ecfb;--txt:#18334e;--ink:#18334e;--muted:#4d647e;--border:#b9cce2;--line:#b9cce2;--mint:#245fb4;--blue:#347cd3;background:#e7eef7;color:#18334e}
+html[data-theme=light] #site-header{background:linear-gradient(115deg,#f8fbff,#edf3ff)}
+html[data-theme=light] .v28-scope header{background:#fff;border-bottom:1px solid #c4d3e5}
+html[data-theme=light] .v28-scope .navlinks{color:#3e5673}
+html[data-theme=light] .v28-scope .navlinks a:hover{color:#174e9a;text-decoration:underline}
+html[data-theme=light] .v28-scope .brand-copy small{color:#4d6580}
+html[data-theme=light] .v28-scope .hero h1{color:#153149}
+html[data-theme=light] .v28-scope .hero h1 span{background-image:linear-gradient(100deg,#6450c9,#176bc3)}
+html[data-theme=light] .v28-scope .hero .eyebrow{color:#15647c}
+html[data-theme=light] .v28-scope .hero .eyebrow::before{background:#4269cf}
+html[data-theme=light] .v28-scope p,html[data-theme=light] .v28-scope .stat span{color:#4b627d}
+html[data-theme=light] .v28-scope .stat{background:#fff;border-color:#b8cce4;box-shadow:0 2px 7px #264e7a08}
+html[data-theme=light] .v28-scope .stat b{color:#173b61}
+html[data-theme=light] .v28-scope .btn{background:#eaf1ff;color:#244e8b;border:1px solid #a7bfe3}
+html[data-theme=light] .v28-scope .btn:hover{background:#dce8fc;border-color:#6e99d4}
+html[data-theme=light] .v28-scope .btn.primary{background:linear-gradient(110deg,#6255d9,#226cba);border-color:transparent;color:#fff}
+html[data-theme=light] .v28-scope:has(>#catalog),html[data-theme=light] .v28-scope:has(#catalog.head){background:#e7eef7}
+html[data-theme=light] .lab-catalog>.toolbar{background:#f8fbff;border-top:1px solid #bccfe5;border-bottom:1px solid #a9c0dd;box-shadow:0 4px 12px #264c7514}
+html[data-theme=light] .lab-catalog .toolbar .search,html[data-theme=light] .lab-catalog .toolbar .field{background:#fff;border-color:#a9bfdc;color:#1d3856}
+html[data-theme=light] .lab-catalog .toolbar .search::placeholder{color:#5a708b;opacity:1}
+html[data-theme=light] .lab-catalog .toolbar .iconbtn{background:#e8f0fc;color:#24558d;border-color:#9fbadc}
+html[data-theme=light] .lab-catalog .toolbar .iconbtn[aria-pressed=true]{background:#245fb4;color:#fff;border-color:#245fb4}
+html[data-theme=light] .lab-catalog .chip{background:#fff;color:#355674;border-color:#aabfda}
+html[data-theme=light] .lab-catalog .chip[aria-pressed=true]{background:#245fb4;color:#fff;border-color:#245fb4}
+html[data-theme=light] .lab-catalog .view{background:#e4edfa;border-color:#a8bedb}
+html[data-theme=light] .lab-catalog .view button{color:#3b5879}
+html[data-theme=light] .lab-catalog .view button[aria-pressed=true]{background:#cddff8;color:#164c91;box-shadow:inset 0 0 0 1px #98b6de}
+html[data-theme=light] .lab-catalog .v28-reset{background:#245fb4;color:#fff;border-color:#245fb4}
+html[data-theme=light] .lab-catalog .v28-reset:hover{background:#174f9d}
+html[data-theme=light] .lab-catalog .active-filters button{background:#dce9fc;color:#234d88;border-color:#9cb8e0}
+html[data-theme=light] .lab-catalog .result{color:#46617e}
+html[data-theme=light] #results .project-item[data-card-theme=light]{border-color:#b5c8df;box-shadow:0 3px 12px #1d426914}
+html[data-theme=light] #results .project-item[data-card-theme=light] .project-title{color:#173752}
+html[data-theme=light] #results .project-item[data-card-theme=light] :is(.preview-description,.project-meta,.project-status,.compact-ratings span){color:#485f79}
+html[data-theme=light] #results .project-item[data-card-theme=light] .compact-ratings strong{color:#204b79}
+html[data-theme=light] #results .project-item[data-card-theme=light] :is(.icon-action,.detail-link){background:#f3f7ff;border-color:#a4bcdb;color:#24578f}
+html[data-theme=light] #results .project-item[data-card-theme=light] .primary{color:#fff}
+html[data-theme=light] .lab-catalog :is(.filter-dialog,#site-menu,#notice-dialog,#compare-dialog){background:#fff;color:#18334e;border-color:#afc5e0}
+html[data-theme=light] .lab-catalog :is(.close-dialog,.clear-button){background:#edf3fc;border-color:#afc5e0;color:#24558d}
+html[data-theme=light] .lab-catalog .filter-dialog select{background:#f7faff;border-color:#a6bddc;color:#18334e}
+html[data-theme=light] #site-menu nav a{background:#f0f5fd;color:#244c7d;border-color:#b6c9e3}
+html[data-theme=light] .v28-scope .trust{background:#fff;border-color:#b9cce2}
+html[data-theme=light] .v28-scope .cta{background:#dce9fc;border-color:#a7c0e3;color:#1d3e64}
+html[data-theme=light] .v28-scope footer{background:#dce6f3;color:#3e5978;border-color:#b9cce2}
