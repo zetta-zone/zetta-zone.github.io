@@ -1,7 +1,7 @@
 /* Bind Nocid-specific facts after the inherited V5 layout has initialized. */
 (()=>{'use strict';if(p.id!=='nocid')return;
 document.body.classList.add('nocid-project');
-function theme(){document.body.style.cssText=V5ProjectStyle(p)}theme();new MutationObserver(theme).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+function theme(){V5Appearance.applyDetail()}theme();new MutationObserver(theme).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
 const logo=document.querySelector('.identity .project-logo');logo.removeAttribute('aria-hidden');logo.innerHTML=`<img src="${esc(p.logo)}" alt="Логотип Nocid">`;
 const heading=document.querySelector('.identity h1');heading.querySelector('.demo-tag')?.remove();
 const status=document.createElement('small');status.className='project-status';status.textContent='Тестовая карточка · DEMO — требует проверки';heading.after(status);

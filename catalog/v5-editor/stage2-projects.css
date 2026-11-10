@@ -12,17 +12,22 @@ html[data-theme] #results .project-item[data-project-visual]:not([data-project-v
 .score-strip{--star:#e2aa38;display:inline-block;background:linear-gradient(90deg,var(--star) var(--score),color-mix(in srgb,var(--muted) 35%,transparent) var(--score));color:transparent;background-clip:text;-webkit-background-clip:text;letter-spacing:1px;font-size:12px;line-height:14px;white-space:nowrap}.score-strip.external{--star:#31b8be}.score-strip.editorial{--star:#b480ef}
 [data-score-kind=audience]{color:#e6a622!important}[data-score-kind=external]{color:#2dabb3!important}[data-score-kind=editorial]{color:#a46fe5!important}
 body.stage2-project .dossier{background:linear-gradient(140deg,var(--paper),var(--bg));border-color:var(--line)}
-body.stage2-project :is(.project-logo,.ratings>button,.quick-facts,.feature,.coin-detail,.verification-grid>div,.aside-note,.aside-index){border-color:var(--line)}
-body.stage2-project .gallery-track img{object-fit:contain;background:var(--soft)}
-body.stage2-project :is(.gallery-stage,.project-logo){background:var(--soft)}
-body.stage2-project .primary{background:linear-gradient(110deg,var(--green),var(--project-secondary));border-color:transparent}
-body.stage2-project .feature-icon{background:transparent}body.stage2-project .feature-icon img{width:100%;height:100%;object-fit:contain}
-body.stage2-project .coin-icon .currency-art{width:100%;height:100%}
-html[data-theme=light] body.stage2-project .primary{color:white}
+body.stage2-project .dossier :is(.project-logo,.ratings>button,.quick-facts,.feature,.coin-detail,.verification-grid>div,.aside-note,.aside-index){border-color:var(--line)}
+body.stage2-project .dossier .gallery-track img{object-fit:contain;background:var(--soft)}
+body.stage2-project .dossier :is(.gallery-stage,.project-logo){background:var(--soft)}
+body.stage2-project .dossier .primary{background:linear-gradient(110deg,var(--green),var(--project-secondary));border-color:transparent}
+body.stage2-project .dossier .feature-icon{background:transparent}body.stage2-project .dossier .feature-icon img{width:100%;height:100%;object-fit:contain}
+body.stage2-project .dossier .coin-icon .currency-art{width:100%;height:100%}
+html[data-theme=light] body.stage2-project .dossier .primary{color:white}
 .ve-rating-tools{margin-top:14px;border:1px solid #47708a}.ve-rating-tools legend{font-weight:700}.ve-rating-tools details{padding-top:8px}
 /* The sole catalogue-shell change: a soft dark transition behind the cards. */
 html[data-theme=dark] .lab-catalog{background-color:#080f1b;background-image:radial-gradient(ellipse 1100px 800px at 50% 500px,#17263d 0%,#0f1b2d 48%,transparent 100%);background-repeat:no-repeat}
 html[data-theme=dark] #site-header{background:linear-gradient(180deg,#0e1625,#102035)}
 html[data-theme=dark] .lab-catalog>.toolbar{background:rgba(14,27,45,.96);border-top-color:#8ba6d512;border-bottom-color:#8ba6d50b;box-shadow:0 10px 26px #07111f30}
-body.stage2-project .gallery-topline{color:var(--ink)} body.stage2-project .gallery-topline>span{background:color-mix(in srgb,var(--paper) 90%,transparent)}
-#results .project-item[data-project-visual="mining-blocks"] .project-logo,body[data-project-skin="mining-blocks"] .project-logo{background:#eadff4}
+body.stage2-project .dossier .gallery-topline{color:var(--ink)} body.stage2-project .dossier .gallery-topline>span{background:color-mix(in srgb,var(--paper) 90%,transparent)}
+#results .project-item[data-project-visual="mining-blocks"] .project-logo,body[data-project-skin="mining-blocks"] .dossier .project-logo{background:#eadff4}
+
+/* Project paint stays inside the detail-card boundary; outer chrome follows the catalogue. */
+.dossier[data-card-theme="light"] .primary{color:#fff}
+.dossier[data-card-theme="dark"] .primary{color:#061421}
+.dossier[data-card-theme]{color:var(--ink)}

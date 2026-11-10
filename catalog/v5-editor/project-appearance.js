@@ -4,10 +4,12 @@ function config(p){const s=settings[p.id]||{};return {mode:s.mode==='single'?'si
 function effective(p,global=V4Theme.current()){const c=config(p);return c.mode==='single'?c.singleTheme:global}
 function tokens(p,theme){const override=config(p).themes[theme],source=override||p.theme?.[theme]||p.theme||defaults[theme];return Object.fromEntries(Object.keys(defaults[theme]).map(k=>[k,/^#[0-9a-f]{3,8}$/i.test(source[k]||'')?source[k]:(k==='secondary'&&source.accent?source.accent:defaults[theme][k])]))}
 function style(p){const t=tokens(p,effective(p));return Object.entries({green:t.accent,mint:t.accent,blue:t.secondary||t.accent,'project-secondary':t.secondary||t.accent,accent:t.accent,soft:t.soft,paper:t.paper,panel:t.paper,panel2:t.soft,bg:t.bg,ink:t.ink,txt:t.ink,muted:t.muted,line:t.line,border:t.line}).map(([k,v])=>'--'+k+':'+v).join(';')}
-function refresh(){V4Theme.refresh();if(document.querySelector('.dossier'))document.body.style.cssText=style(DEMO_PROJECT);window.V5Catalog?.refresh();dispatchEvent(new Event('v5:appearance'));if(parent!==window)parent.postMessage({type:'v5-editor:appearance'},location.origin)}
+function applyDetail(){const card=document.querySelector(".dossier");if(!card)return;const mode=effective(DEMO_PROJECT);for(const declaration of style(DEMO_PROJECT).split(";")){const [name,value]=declaration.split(":");card.style.setProperty(name,value)}card.dataset.cardTheme=mode;card.style.colorScheme=mode}
+function refresh(){V4Theme.refresh();applyDetail();window.V5Catalog?.refresh();dispatchEvent(new Event('v5:appearance'));if(parent!==window)parent.postMessage({type:'v5-editor:appearance'},location.origin)}
 function save(){localStorage.setItem(key,JSON.stringify(settings));refresh()}
-window.V5Appearance={config,effective,tokens,setMode(p,mode){const c=config(p);c.mode=mode==='single'?'single':'dual';c.singleTheme=effective(p);settings[p.id]=c;save()},setSingle(p,theme){const c=config(p);c.singleTheme=theme==='light'?'light':'dark';settings[p.id]=c;save()},copy(p,from,to){const c=config(p);c.themes[to]=structuredClone(tokens(p,from));settings[p.id]=c;save()},refresh};window.V5ProjectStyle=style;
+window.V5Appearance={config,effective,tokens,applyDetail,setMode(p,mode){const c=config(p);c.mode=mode==='single'?'single':'dual';c.singleTheme=effective(p);settings[p.id]=c;save()},setSingle(p,theme){const c=config(p);c.singleTheme=theme==='light'?'light':'dark';settings[p.id]=c;save()},copy(p,from,to){const c=config(p);c.themes[to]=structuredClone(tokens(p,from));settings[p.id]=c;save()},refresh};window.V5ProjectStyle=style;
 addEventListener('storage',e=>{if(e.key===key){read();refresh()}});addEventListener('message',e=>{if(e.origin===location.origin&&e.data?.type==='v5-editor:appearance'&&e.source===document.querySelector('#detail-frame')?.contentWindow){read();V4Theme.refresh();window.V5Catalog?.refresh()}});
-addEventListener('v5:theme',()=>{if(document.querySelector('.dossier'))document.body.style.cssText=style(DEMO_PROJECT);window.V5Catalog?.refresh()});
-addEventListener('load',()=>{V4Theme.refresh();if(document.querySelector('.dossier'))document.body.style.cssText=style(DEMO_PROJECT)});
+addEventListener('v5:theme',()=>{applyDetail();window.V5Catalog?.refresh()});
+addEventListener('v5:editor-apply',applyDetail);
+addEventListener('load',()=>{V4Theme.refresh();applyDetail()});
 })();

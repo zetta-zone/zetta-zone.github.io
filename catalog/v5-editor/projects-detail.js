@@ -1,6 +1,6 @@
 /* One binding adapter for all laboratory records; no per-project markup. */
 (()=>{'use strict';if(!p.labPreview)return;document.body.dataset.preserveContent='';
-function theme(){document.body.style.cssText=V5ProjectStyle(p)}theme();new MutationObserver(theme).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+function theme(){V5Appearance.applyDetail()}theme();new MutationObserver(theme).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
 const set=(s,v)=>document.querySelectorAll(s).forEach(n=>n.textContent=v);
 const logo=document.querySelector('.identity .project-logo');logo.removeAttribute('aria-hidden');logo.innerHTML='<img src="'+esc(p.logo)+'" alt="Редакционная монограмма '+esc(p.name)+'; не официальный логотип">';
 document.querySelector('.identity h1 .demo-tag')?.remove();const status=document.createElement('small');status.className='project-status';status.textContent='Лабораторная карточка · сведения требуют проверки';document.querySelector('.identity h1').after(status);

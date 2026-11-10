@@ -1,25 +1,25 @@
 /* Project tokens reuse existing V5 components; no alternate layout. */
 [data-project="nocid"]{background:var(--paper);color:var(--ink);border-color:var(--line)}
-[data-project="nocid"] .primary,body.nocid-project .primary{background:var(--green);color:var(--bg)}
-html[data-theme] [data-project="nocid"] .primary,html[data-theme] body.nocid-project .primary{background:var(--green);color:var(--bg)}
-html[data-theme=light] [data-project="nocid"] .primary,html[data-theme=light] body.nocid-project .primary{color:#fff}
+[data-project="nocid"] .primary,body.nocid-project .dossier .primary{background:var(--green);color:var(--bg)}
+html[data-theme] [data-project="nocid"] .primary,html[data-theme] body.nocid-project .dossier .primary{background:var(--green);color:var(--bg)}
+html[data-theme=light] [data-project="nocid"] .primary,html[data-theme=light] body.nocid-project .dossier .primary{color:#fff}
 #results [data-project="nocid"] .feature-tile b{white-space:normal;overflow-wrap:anywhere;max-width:100%}
 #results [data-project="nocid"] .benefit-art{background:var(--soft);color:var(--green)}
 .project-logo img{display:block;width:100%;height:100%;object-fit:contain}
-[data-project="nocid"] .project-logo,body.nocid-project .project-logo{background:var(--soft)}
-html[data-theme] body.nocid-project :is(.project-logo,.feature[aria-expanded=true],.coin-button[aria-pressed=true],.verification,.verdict){background:var(--soft);color:var(--ink)}
+[data-project="nocid"] .project-logo,body.nocid-project .dossier .project-logo{background:var(--soft)}
+html[data-theme] body.nocid-project .dossier :is(.project-logo,.feature[aria-expanded=true],.coin-button[aria-pressed=true],.verification,.verdict){background:var(--soft);color:var(--ink)}
 .project-status{display:block;color:var(--muted);font-size:10px;line-height:1.45;white-space:normal}
-body.nocid-project .project-status{padding:8px 0}
-body.nocid-project .gallery-stage,body.nocid-project .gallery-track img{background:var(--soft);object-fit:contain}
-body.nocid-project .gallery-topline{color:#f4ece2}
-body.nocid-project .ratings .rating-graphic{display:none}
-body.nocid-project .overview-metrics strong{font-size:clamp(10px,1.5vw,22px)!important;overflow-wrap:anywhere;white-space:normal!important}
-body.nocid-project .overview-metrics span{overflow-wrap:anywhere}
-body.nocid-project .verification{background:var(--soft);color:var(--ink)}
-body.nocid-project .verification b,body.nocid-project .verification small{color:inherit}
-body.nocid-project .draft-notice{display:block!important;color:var(--ink);background:var(--soft);border:1px solid var(--line);padding:12px;border-radius:8px;font-size:12px;line-height:1.6}
-body.nocid-project .draft-notice a{color:var(--green);text-decoration:underline}
-body.nocid-project .coin-facts strong{overflow-wrap:anywhere}
-body.nocid-project .source-list{padding-left:18px;font-size:12px;overflow-wrap:anywhere}
-body.nocid-project .source-list a{color:var(--green);text-decoration:underline}
-body.nocid-project .draft-details pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:11px;max-height:45vh;overflow:auto}
+body.nocid-project .dossier .project-status{padding:8px 0}
+body.nocid-project .dossier .gallery-stage,body.nocid-project .dossier .gallery-track img{background:var(--soft);object-fit:contain}
+body.nocid-project .dossier .gallery-topline{color:#f4ece2}
+body.nocid-project .dossier .ratings .rating-graphic{display:none}
+body.nocid-project .dossier .overview-metrics strong{font-size:clamp(10px,1.5vw,22px)!important;overflow-wrap:anywhere;white-space:normal!important}
+body.nocid-project .dossier .overview-metrics span{overflow-wrap:anywhere}
+body.nocid-project .dossier .verification{background:var(--soft);color:var(--ink)}
+body.nocid-project .dossier .verification b,body.nocid-project .dossier .verification small{color:inherit}
+body.nocid-project .dossier .draft-notice{display:block!important;color:var(--ink);background:var(--soft);border:1px solid var(--line);padding:12px;border-radius:8px;font-size:12px;line-height:1.6}
+body.nocid-project .dossier .draft-notice a{color:var(--green);text-decoration:underline}
+body.nocid-project .dossier .coin-facts strong{overflow-wrap:anywhere}
+body.nocid-project .dossier .source-list{padding-left:18px;font-size:12px;overflow-wrap:anywhere}
+body.nocid-project .dossier .source-list a{color:var(--green);text-decoration:underline}
+body.nocid-project .dossier .draft-details pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:11px;max-height:45vh;overflow:auto}
