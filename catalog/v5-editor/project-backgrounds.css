@@ -1,0 +1,13 @@
+/* The same photo surface is shared by detailed, card and list renderers. */
+:is(.dossier,.project-item)[data-ve-photo]{color:var(--photo-ink,#fff0d9);--ink:var(--photo-ink,#fff0d9)!important;--txt:var(--photo-ink,#fff0d9)!important;--muted:#e2cab1!important;--paper:#161719df!important;--panel:#161719df!important;--soft:#25201bd9!important;--panel2:#25201bd9!important;--line:#a88d6c80!important;--border:#a88d6c80!important}
+.dossier[data-ve-photo] :is(.hero-grid,.project-header,.passport,.content-layout,.main-content,.content-section,.reading-aside,.section-shell,.section-nav,.card-footer){background-color:transparent!important;background-image:none!important}
+.dossier[data-ve-photo] :is(.overview-metrics>div,.ratings>button,.quick-facts,.feature,.coin-detail,.rhythm,.verification,.verification-grid>div,.aside-note,.aside-index,.balance-item,.verdict){background-color:#0d1115b8;background-image:none;color:var(--ink);border-color:var(--line)}
+:is(.dossier,.project-item)[data-ve-photo] :is(h1,h2,h3,h4,p,small,strong,dt,dd,.project-title,.project-meta,.project-status,.preview-description,.unique){color:var(--ink)!important}
+.dossier[data-ve-photo] :is(.eyebrow,.gallery-caption p,.overview-metrics span,.coin-facts span){color:var(--muted)}
+.dossier[data-ve-photo] :is(.eyebrow.green,.overview-metrics i,.feature-icon){color:#ffd399}
+:is(.dossier,.project-item)[data-ve-photo] :is(button:not(.primary):not(.registration),.icon-action,.detail-link,.balance-item){background-color:#111820d9!important;color:var(--ink);border-color:var(--line)}
+.dossier[data-ve-photo] .platform-label{background:#111820d9;color:var(--ink);border-color:var(--line)}
+.dossier[data-ve-photo] .platform-label.available{background:#50391ed9;color:#ffda9c;border-color:#ba8b4c}
+#results .project-item[data-ve-photo] :is(.card-body,.project-main,.row-bottom,.description-wrap){background:transparent!important}
+:is(.dossier,.project-item)[data-ve-photo] a:not(.primary){color:#9ddcfb}
+.dossier[data-ve-photo] .thumbnail[aria-pressed=true],.dossier[data-ve-photo] .coin-button[aria-pressed=true]{border-color:#f3c477!important}.dossier[data-ve-photo] .mechanic-tabs button[aria-selected=true]{background-color:#68451fd9!important;color:#fff0d9}
