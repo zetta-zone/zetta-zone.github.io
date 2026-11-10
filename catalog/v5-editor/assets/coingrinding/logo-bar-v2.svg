@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 80" aria-label="Coingrinding">
+  <defs>
+    <linearGradient id="cg-gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFD68A"/>
+      <stop offset="0.45" stop-color="#FFA94D"/>
+      <stop offset="1" stop-color="#C2410C"/>
+    </linearGradient>
+    <linearGradient id="cg-shine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.65"/>
+      <stop offset="0.65" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Back coin (subtle, behind) -->
+  <g>
+    <circle cx="62" cy="48" r="18" fill="url(#cg-gold)" opacity="0.88"/>
+    <circle cx="62" cy="48" r="18" fill="none" stroke="#ffffff" stroke-width="0.8" opacity="0.32"/>
+    <circle cx="62" cy="48" r="13" fill="none" stroke="#ffffff" stroke-width="0.7" opacity="0.35"/>
+  </g>
+
+  <!-- Front coin with 10 gear teeth (grinding motif) -->
+  <g transform="translate(38,38)">
+    <g fill="url(#cg-gold)">
+      <rect x="-3.2" y="-32" width="6.4" height="8" rx="1.2"/>
+      <g transform="rotate(36)"><rect x="-3.2" y="-32" width="6.4" height="8" rx="1.2"/></g>
+      <g transform="rotate(72)"><rect x="-3.2" y="-32" width="6.4" height="8" rx="1.2"/></g>
+      <g transform="rotate(108)"><rect x="-3.2" y="-32" width="6.4" height="8" rx="1.2"/></g>
+      <g transform="rotate(144)"><rect x="-3.2" y="-32" width="6.4" height="8" rx="1.2"/></g>
+      <g transform="rotate(180)"><rect x="-3.2" y="-32" width="6.4" height="8" rx="1.2"/></g>
+      <g transform="rotate(216)"><rect x="-3.2" y="-32" width="6.4" height="8" rx="1.2"/></g>
+      <g transform="rotate(252)"><rect x="-3.2" y="-32" width="6.4" height="8" rx="1.2"/></g>
+      <g transform="rotate(288)"><rect x="-3.2" y="-32" width="6.4" height="8" rx="1.2"/></g>
+      <g transform="rotate(324)"><rect x="-3.2" y="-32" width="6.4" height="8" rx="1.2"/></g>
+    </g>
+    <circle r="25" fill="url(#cg-gold)"/>
+    <circle r="25" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.4"/>
+    <circle r="20" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.5"/>
+    <ellipse cx="0" cy="-15" rx="13" ry="5" fill="url(#cg-shine)"/>
+    <text x="0" y="9" font-family="Inter, system-ui, Arial, sans-serif" font-weight="900" font-size="25" text-anchor="middle" fill="#ffffff">$</text>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="98" y="54" font-family="Inter, system-ui, Arial, sans-serif" font-weight="800" font-size="40" letter-spacing="-1.2" fill="#ffffff">Coingrinding</text>
+</svg>
