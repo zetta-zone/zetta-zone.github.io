@@ -31,3 +31,4 @@ This directory extends the existing V5 HashGarden template and original Nocid da
 Publication is for evaluation only; live directories remain untouched.
 
 - Dynamic Litecoin panel: select nested bold text and edit after switching the native currency tab passed, no captured JavaScript errors.
+- Cross-project persistence: edited HashGarden heading, saved in Nocid, returned to HashGarden; Nocid stayed unchanged and the HashGarden heading persisted.
