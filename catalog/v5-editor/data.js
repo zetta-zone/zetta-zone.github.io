@@ -33,7 +33,7 @@ Object.assign(window.DEMO_PROJECT,{
  overview:{lead:'Симулятор майнинга, где развитие фермы — часть игры.',text:'Собирайте оборудование из деталей, размещайте его в теплице и распределяйте мощность между пулами. Активные занятия помогают развиваться, а установленные майнеры продолжают работать при наличии энергии.'}
 });
 window.V4_CONFIG={version:'V5',comparison:{available:window.DEMO_PROJECT.comparison.available,defaults:window.DEMO_PROJECT.comparison.defaults},maxCompare:3};
-window.V4_PROJECTS=Array.from({length:5},(_,i)=>({...window.DEMO_PROJECT,
+window.V4_PROJECTS=[0,4].map(i=>({...window.DEMO_PROJECT,
  id:i?'hashgarden-test-'+String(i+1).padStart(2,'0'):'hashgarden-demo',
  name:i?'HashGarden · тест '+String(i+1).padStart(2,'0'):'HashGarden',
  testInstance:i>0,cover:i%3
