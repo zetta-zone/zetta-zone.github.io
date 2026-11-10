@@ -31,3 +31,6 @@ body.stage2-project .dossier .gallery-topline{color:var(--ink)} body.stage2-proj
 .dossier[data-card-theme="light"] .primary{color:#fff}
 .dossier[data-card-theme="dark"] .primary{color:#061421}
 .dossier[data-card-theme]{color:var(--ink)}
+
+/* All platform slots stay visible in detail; only declared platforms are highlighted. */
+.platform-options{display:inline-flex;align-items:center;flex-wrap:wrap;gap:8px;max-width:100%}.platform-options .unavailable{opacity:.45}.platform-options .available{color:var(--green)}.platform-label b{display:inline-flex;width:20px;height:20px;flex:none}.platform-label b svg{width:100%;height:100%;stroke:currentColor;stroke-width:1.5}.platform-icons.platform-options{gap:4px;flex-wrap:nowrap}
