@@ -43,3 +43,10 @@
 .ve-host .ve-panel-controls .ve-panel-expand,.ve-host .ve-panel-controls .ve-panel-dock{order:6}
 .ve-host .ve-panel-controls>button:last-child{order:7}
 @media (max-width:650px){.ve-host-top{height:auto!important;min-height:38px!important}.ve-host .ve-panel-controls .ve-panel-context{flex-basis:110px}.ve-host .ve-panel-controls .ve-panel-context select{font-size:12px}}
+
+/* No separate page toolbar: navigation and context selectors are inside the editor. */
+.ve-host:not(.ve-panel-hidden)>.ve-host-top{display:none}
+.ve-host.ve-panel-hidden>.ve-host-top{display:flex;min-height:48px!important}
+.ve-host .ve-panel-controls .ve-panel-back{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;padding:6px 9px;text-decoration:none;white-space:nowrap;font-size:12px;min-height:36px;border:1px solid #52778e;border-radius:6px;background:#214153;color:#eaf7ff}
+.ve-host .ve-panel-controls .ve-panel-back:focus-visible{outline:2px solid #67d7cf;outline-offset:2px}
+.ve-host.ve-panel-bottom .ve-panel-controls{padding:5px 8px;gap:5px}
