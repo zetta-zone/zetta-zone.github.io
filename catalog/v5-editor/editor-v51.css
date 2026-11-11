@@ -48,3 +48,17 @@ body.ve-preview-compact #results.cards>.compact-card{display:block;grid-template
 .ve-host .ve-data-dialog #v51-field-body textarea,.ve-host .ve-data-dialog #v51-field-body input,.ve-host .ve-data-dialog #v51-field-body select{width:100%;max-width:100%;min-height:44px;font-size:16px}
 .ve-host .ve-data-dialog #v51-field-body button,.ve-host .ve-data-dialog .v51-shared button{min-height:40px;font-size:13px;padding:7px 12px;margin:5px 0}
 @media(max-width:650px){.ve-host .ve-tabs button{font-size:11px;padding:6px 1px}.ve-host .ve-data-dialog{width:98vw;max-width:98vw!important;max-height:93dvh;padding-inline:12px}.ve-host .ve-data-head h2{font-size:18px}.ve-host .ve-data-topics{gap:4px}.ve-host .ve-data-topics button{font-size:12px;padding:5px 7px}}
+
+/* V5.2: searchable field directory, with an independently scrolling edit form. */
+.ve-host .ve-data-body{display:grid;grid-template-columns:minmax(190px,245px) minmax(0,1fr);gap:14px;min-height:250px;align-items:start}
+.ve-host .ve-data-finder{position:sticky;top:76px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.ve-host .ve-data-search{display:block;width:100%;min-height:44px;padding:9px 12px;border:1px solid #719bb0;border-radius:8px;background:#edf5fa;color:#142e40;font-size:15px}
+.ve-host .ve-data-field-list{display:flex;flex-direction:column;gap:3px;max-height:53dvh;overflow-y:auto;overscroll-behavior:contain;padding:3px}
+.ve-host .ve-data-field-list .ve-data-field{display:block;width:100%;min-height:38px;padding:8px 10px;margin:0;text-align:left;border:1px solid transparent;border-radius:7px;color:#d3e8f3;background:#193548;font-size:13px;overflow-wrap:anywhere;cursor:pointer}
+.ve-host .ve-data-field-list .ve-data-field[aria-selected=true]{background:#235c65;border-color:#71d9c5;color:white;font-weight:650}
+.ve-host .ve-data-field-list .ve-data-field[hidden]{display:none}
+.ve-host .ve-data-form{min-width:0}.ve-host .ve-data-form .v51-shared{min-width:0}
+.ve-host .ve-data-dialog #v51-field{display:none}
+.ve-host .ve-data-dialog #v51-field-body{max-width:none}
+.ve-host .ve-data-dialog #v51-field-body label{overflow-wrap:anywhere}
+@media(max-width:650px){.ve-host .ve-data-body{display:block}.ve-host .ve-data-finder{position:static}.ve-host .ve-data-field-list{flex-direction:row;flex-wrap:nowrap;max-height:none;overflow-x:auto;overflow-y:hidden;padding:4px 1px 10px;gap:6px}.ve-host .ve-data-field-list .ve-data-field{flex:0 0 auto;width:auto;max-width:190px;white-space:normal;min-height:44px}.ve-host .ve-data-search{min-height:44px}.ve-host .ve-data-topics{margin-bottom:8px}.ve-host .ve-data-form{margin-top:6px}}
