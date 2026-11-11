@@ -22,3 +22,29 @@ body.ve-preview-compact #results.cards>.compact-card{display:block;grid-template
 .v51-drag-handle,.v51-selection-handle{touch-action:none}
 #results.cards>.compact-card:has([data-ve-added],[data-v51-custom]){display:block;grid-template-rows:none;grid-row:auto}#results.cards>.compact-card:has([data-ve-added],[data-v51-custom])>.card-body{display:block}
 #results .feature-tile{min-width:0}#results .feature-tile b{white-space:normal!important;overflow-wrap:anywhere;line-height:1.3;min-width:0;max-width:100%}
+
+
+/* V5.2 editor ergonomics: one common-data dialog, short tabbed control panel. */
+.ve-host .ve-sticky-head>.ve-open-data{display:block;width:100%;margin:8px 0 6px;padding:11px;border:1px solid #68cfbd;background:#176e65;color:#fff;font-size:14px;font-weight:700;border-radius:8px;cursor:pointer;min-height:44px}
+.ve-host .ve-sticky-head>.ve-open-data:focus-visible,.ve-host .ve-data-dialog button:focus-visible{outline:3px solid #67d7cf;outline-offset:2px}
+.ve-host .ve-tabs{gap:3px;padding-block:6px}
+.ve-host .ve-tabs button{font-size:12px;padding:8px 4px;min-width:0;min-height:40px}
+.ve-host .ve-pane[data-pane="tools"] .ve-toolbar-actions{display:block;margin-top:4px;padding-top:0}
+.ve-host .ve-pane[data-pane="tools"] .ve-toolbar-actions>.ve-history{max-height:220px}
+.ve-host .ve-data-dialog{box-sizing:border-box;position:fixed;width:min(900px,95vw);max-width:min(900px,95vw)!important;max-height:88dvh;height:auto;margin:auto;padding:0 16px 18px;color:#eaf5ff;background:#102334;border:1px solid #6a9bb1;border-radius:14px;box-shadow:0 16px 65px #0009;overflow-y:auto;overscroll-behavior:contain}
+.ve-host .ve-data-dialog::backdrop{background:rgba(0,9,20,.76);backdrop-filter:blur(3px)}
+.ve-host .ve-data-head{position:sticky;top:0;z-index:2;background:#102334;border-bottom:1px solid #4a7187;padding:14px 0 10px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.ve-host .ve-data-head h2{font-size:20px;margin:0}
+.ve-host .ve-data-head button{flex:none;background:#24475a;border:1px solid #6a9bb1;color:#fff;border-radius:7px;padding:8px 12px;min-height:40px}
+.ve-host .ve-data-hint{margin:12px 0;font-size:13px;line-height:1.5;color:#bfd6e5}
+.ve-host .ve-data-topics{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:15px}
+.ve-host .ve-data-topics button{background:#1b4053;color:#e7f4ff;border:1px solid #4d7a94;border-radius:7px;min-height:40px;padding:6px 10px;font-size:13px}
+.ve-host .ve-data-topics button:hover{background:#236577}
+.ve-host .ve-data-dialog .v51-shared{display:block!important;margin:0;padding:14px;border-radius:10px;background:#142f40;max-width:none!important}
+.ve-host .ve-data-dialog .v51-shared>summary{font-size:13px;color:#d4e8f5;margin-bottom:9px}
+.ve-host .ve-data-dialog #v51-field{display:block;width:100%;max-width:100%;font-size:15px;min-height:44px;background:#e4edf4;color:#14283b}
+.ve-host .ve-data-dialog #v51-field-body{margin:12px 0;max-width:none!important}
+.ve-host .ve-data-dialog #v51-field-body label{display:block;margin:14px 0;max-width:none!important;font-size:14px}
+.ve-host .ve-data-dialog #v51-field-body textarea,.ve-host .ve-data-dialog #v51-field-body input,.ve-host .ve-data-dialog #v51-field-body select{width:100%;max-width:100%;min-height:44px;font-size:16px}
+.ve-host .ve-data-dialog #v51-field-body button,.ve-host .ve-data-dialog .v51-shared button{min-height:40px;font-size:13px;padding:7px 12px;margin:5px 0}
+@media(max-width:650px){.ve-host .ve-tabs button{font-size:11px;padding:6px 1px}.ve-host .ve-data-dialog{width:98vw;max-width:98vw!important;max-height:93dvh;padding-inline:12px}.ve-host .ve-data-head h2{font-size:18px}.ve-host .ve-data-topics{gap:4px}.ve-host .ve-data-topics button{font-size:12px;padding:5px 7px}}
