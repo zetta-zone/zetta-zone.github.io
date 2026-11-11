@@ -31,3 +31,15 @@
 }
 .ve-host.ve-panel-bottom .ve-host-layout>#host-side{flex-basis:var(--panel-height,25%);width:100%;max-width:none;min-width:0}
 .ve-host.ve-panel-bottom .ve-host-layout{flex-direction:column}
+
+/* View/device selectors live in the editor's compact control strip, not above the canvas. */
+.ve-host-top{min-height:38px!important;padding-block:4px!important;gap:8px!important}
+.ve-host-top>.host-zoom{display:none}
+.ve-host .ve-panel-controls{min-height:50px;flex-wrap:wrap;padding:5px 7px;gap:5px}
+.ve-host .ve-panel-controls .ve-panel-context{display:flex;align-items:center;gap:4px;flex:1 1 105px;width:auto;min-width:0;max-width:none;margin:0;color:#deeffa;font-size:11px;white-space:nowrap}
+.ve-host .ve-panel-controls .ve-panel-context select{width:100%;min-width:0;min-height:36px;height:36px;background:#213e51;color:#e6f4ff;border:1px solid #5b7b92;border-radius:6px;padding:4px;font-size:12px}
+.ve-host .ve-panel-controls .ve-panel-fit{min-height:36px;min-width:58px;padding:5px 7px;border:1px solid #5b7b92;background:#213e51;color:#e6f4ff;border-radius:6px;font-size:11px}
+.ve-host .ve-panel-controls .ve-panel-grip{flex:1 1 38px;min-width:38px;order:5}
+.ve-host .ve-panel-controls .ve-panel-expand,.ve-host .ve-panel-controls .ve-panel-dock{order:6}
+.ve-host .ve-panel-controls>button:last-child{order:7}
+@media (max-width:650px){.ve-host-top{height:auto!important;min-height:38px!important}.ve-host .ve-panel-controls .ve-panel-context{flex-basis:110px}.ve-host .ve-panel-controls .ve-panel-context select{font-size:12px}}
