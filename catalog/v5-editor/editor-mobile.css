@@ -50,3 +50,12 @@
 .ve-host .ve-panel-controls .ve-panel-back{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;padding:6px 9px;text-decoration:none;white-space:nowrap;font-size:12px;min-height:36px;border:1px solid #52778e;border-radius:6px;background:#214153;color:#eaf7ff}
 .ve-host .ve-panel-controls .ve-panel-back:focus-visible{outline:2px solid #67d7cf;outline-offset:2px}
 .ve-host.ve-panel-bottom .ve-panel-controls{padding:5px 8px;gap:5px}
+
+/* Space-first landscape iPad: keep canvas dominant. */
+@media (pointer:coarse) and (orientation:landscape){
+ .ve-host:not(.ve-panel-bottom) .ve-host-layout>#host-side{flex:0 0 clamp(205px,22%,255px);width:clamp(205px,22%,255px);min-width:205px;max-width:255px}
+ .ve-host:not(.ve-panel-bottom) .ve-panel-controls{gap:3px;padding:4px}
+ .ve-host:not(.ve-panel-bottom) .ve-panel-controls .ve-panel-context{flex-basis:90px;font-size:10px}
+ .ve-host:not(.ve-panel-bottom) .ve-panel-controls .ve-panel-back{font-size:11px}
+ .ve-host:not(.ve-panel-bottom) #host-side>.ve-panel{padding:7px}
+}
