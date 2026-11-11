@@ -1,4 +1,4 @@
-(()=>{'use strict';const embedded=parent!==window&&new URLSearchParams(location.search).get('embedded')==='1';if(embedded)document.body.classList.add('embedded');const originalName='HashGarden';document.querySelectorAll('[data-project-copy]').forEach(n=>n.innerHTML=p.detailCopy[n.dataset.projectCopy]||'');
+(()=>{'use strict';const embedded=parent!==window&&new URLSearchParams(location.search).get('embedded')==='1';if(embedded)document.body.classList.add('embedded');const originalName='HashGarden';document.querySelectorAll('[data-project-copy]').forEach(n=>{const fields=window.V51Model?.data()?.[p.id]?.fields||{},key=n.dataset.projectCopy;if(Object.hasOwn(fields,'detailCopy')||Object.hasOwn(fields,'detailCopy.'+key))n.textContent=p.detailCopy[key]||'';else n.innerHTML=p.detailCopy[key]||''});
 const heading=document.querySelector('.identity h1');heading.replaceChildren(document.createTextNode(p.name));const badge=document.createElement('span');badge.className='demo-tag';badge.textContent='DEMO';heading.append(badge);if(p.testInstance){const c=document.createElement('div');c.className='test-instance-caption';c.textContent='Тестовый экземпляр · данные HashGarden';heading.after(c)}
 function bindText(selector,value){const node=document.querySelector(selector);if(node)node.textContent=value}
 bindText('#overview>.lead',p.overview.lead);bindText('#overview>.lead+p',p.overview.text);
@@ -19,3 +19,4 @@ addEventListener('keydown',e=>{if(e.key==='Escape'&&!document.querySelector('dia
 document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(a&&!e.defaultPrevented){const target=document.getElementById(a.getAttribute('href').slice(1));if(target){e.preventDefault();target.scrollIntoView({behavior:'instant',block:'start'})}}});
 showSlide(slide);sync();
 })();
+
