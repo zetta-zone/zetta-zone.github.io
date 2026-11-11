@@ -7,3 +7,6 @@
 body.ve-preview .prototype-bar,body.ve-preview>.close-card,body.ve-preview>.ve-launch,body.ve-preview #compare-tray,body.ve-preview .mobile-detail-bar{display:none!important}
 body.ve-preview-compact>*:not(.ve-compact-canvas){display:none!important}body.ve-preview-compact>.ve-compact-canvas{display:block!important;min-height:100vh;padding:1px 0}.ve-compact-canvas #results{max-width:100%}
 .ve-component{padding:14px;border:1px solid var(--line);border-radius:10px;margin:10px 0;color:var(--ink);background:var(--soft)}.ve-component h3,.ve-component p{margin:6px 0}.ve-component-feature{display:flex;align-items:center;gap:12px}.ve-component-icon{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;font-size:26px;color:var(--green)}[data-ve-image]{background-size:contain!important;background-position:center!important;background-repeat:no-repeat!important;color:transparent!important}[data-ve-image]>*{visibility:hidden!important}
+
+/* Host preview must never display its own editor UI over the card. */
+body.ve-preview>.ve-panel,body.ve-preview>.ve-launch{display:none!important}
