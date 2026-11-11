@@ -24,3 +24,10 @@
 .ve-panel-hidden .ve-host-top{padding-right:calc(60px + env(safe-area-inset-right,0px))}
 #host-panel-open{position:absolute;right:max(8px,env(safe-area-inset-right));top:calc(8px + env(safe-area-inset-top,0px));z-index:20}
 .ve-host .ve-panel-head button{display:none}
+
+/* iPad: device orientation controls panel position; preview mode selection remains independent. */
+@media (pointer:coarse) and (orientation:landscape){
+ .ve-host:not(.ve-panel-bottom) .ve-host-layout>#host-side{flex-basis:clamp(235px,var(--panel-width,26%),310px);width:clamp(235px,var(--panel-width,26%),310px);min-width:235px;max-width:310px}
+}
+.ve-host.ve-panel-bottom .ve-host-layout>#host-side{flex-basis:var(--panel-height,25%);width:100%;max-width:none;min-width:0}
+.ve-host.ve-panel-bottom .ve-host-layout{flex-direction:column}
