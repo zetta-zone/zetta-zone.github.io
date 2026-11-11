@@ -1,0 +1,26 @@
+/* Editor UI only; the card remains inside its independent target-width iframe. */
+.ve-host{position:fixed;inset:auto 0;top:var(--editor-top,0px);height:var(--editor-height,100dvh);display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px)}
+.ve-host-top{flex:none;min-width:0;min-height:62px;padding-left:max(8px,env(safe-area-inset-left));padding-right:max(8px,env(safe-area-inset-right))}
+.ve-host-layout{flex:1;height:auto;overflow:hidden;min-height:0}
+.ve-host-layout>#host-side{display:flex;flex-direction:column;flex:0 0 var(--panel-width,30%);width:var(--panel-width,30%);min-width:280px;max-width:65%;padding-bottom:env(safe-area-inset-bottom,0px)}
+.ve-host #host-side>.ve-panel{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;scroll-padding-block:110px 24px;padding:10px;touch-action:pan-y}
+.ve-host .ve-panel *{min-width:0;max-width:100%}
+.ve-host .ve-panel input,.ve-host .ve-panel select,.ve-host .ve-panel textarea{font-size:16px;min-height:44px}
+.ve-host .ve-panel button,.ve-panel-controls button{min-height:44px;min-width:44px;padding:5px 8px;touch-action:manipulation}
+.ve-host .ve-panel h2{font-size:14px}.ve-host .ve-panel h3{font-size:13px;margin:10px 0 6px}.ve-host .ve-panel label{margin:7px 0;gap:3px}
+.ve-sticky-head{top:-10px;padding-top:0}.ve-quick-actions{margin:5px 0 0}.ve-sticky-head .ve-tabs{padding:4px 0}.ve-tabs button{font-size:11px}.ve-panel-head button{font-size:11px}
+.ve-panel-controls{display:flex;flex:none;align-items:center;gap:4px;padding:0 8px;background:#102334;border-bottom:1px solid #40617a;color:#fff}
+.ve-panel-controls button{border:0;border-radius:5px;background:#19374a;color:inherit;font-size:20px;cursor:pointer}.ve-panel-controls .ve-panel-grip{flex:1;cursor:ew-resize;touch-action:none}.ve-panel-expand{display:none}
+#host-panel-open{flex:none;width:44px;height:44px;padding:0;font-size:24px;box-shadow:0 2px 6px #0003}#host-panel-open[hidden]{display:none}
+.ve-panel-hidden .ve-host-layout>#host-side{display:none}.ve-panel-resizing iframe{pointer-events:none}.ve-panel-resizing{user-select:none}
+.ve-host-workspace{overscroll-behavior:contain;padding-bottom:max(8px,env(safe-area-inset-bottom))}
+.ve-host .ve-node-row>button{width:44px;margin-bottom:7px}.ve-host .ve-control-pair{grid-template-columns:minmax(0,1fr) 72px}.ve-host .ve-panel input[type=range]{min-height:44px}
+@media(max-width:1050px){.ve-host-top{gap:5px;padding-block:4px;min-height:52px}.ve-host-top strong{display:none}.ve-host-top label{font-size:11px;gap:3px}.ve-host-top select,.ve-host-top button,.ve-host-top a{min-height:44px}.ve-host-top a{display:flex;align-items:center;font-size:12px}.ve-host-layout>#host-side{min-width:260px}.ve-panel-head{display:none}}
+@media(max-width:650px){.ve-host-top{height:auto;flex-wrap:nowrap;align-content:normal}.ve-host-top label{flex:1;min-width:0;flex-direction:column;align-items:stretch;font-size:10px;gap:0}.ve-host-top select{width:100%;font-size:12px;padding:3px}.ve-host-top a{font-size:0;width:44px;flex:none;justify-content:center}.ve-host-top a:before{content:'←';font-size:20px}.ve-host-top #host-fit{font-size:11px;padding:4px}.ve-host-workspace{padding:8px}}
+.ve-panel-bottom .ve-host-layout{flex-direction:column}.ve-panel-bottom .ve-host-layout>#host-side{order:2;flex:0 0 var(--panel-height,25%);height:var(--panel-height,25%);width:100%;max-width:none;min-width:0;min-height:150px;border:0;border-top:1px solid #4b687c;padding-inline:env(safe-area-inset-left) env(safe-area-inset-right)}
+.ve-panel-bottom .ve-panel-controls .ve-panel-grip{cursor:ns-resize}.ve-panel-bottom .ve-panel-expand{display:block}.ve-panel-bottom .ve-panel-dock{display:none}.ve-panel-bottom .ve-host-workspace{width:100%;min-height:0}.ve-panel-bottom.ve-keyboard .ve-host-layout>#host-side{flex-basis:80%;height:80%;min-height:0}
+@media(pointer:coarse){.ve-host-layout>#host-side{padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}}
+/* Reserve a toolbar corner so the floating reopen button never covers the card. */
+.ve-panel-hidden .ve-host-top{padding-right:calc(60px + env(safe-area-inset-right,0px))}
+#host-panel-open{position:absolute;right:max(8px,env(safe-area-inset-right));top:calc(8px + env(safe-area-inset-top,0px));z-index:20}
+.ve-host .ve-panel-head button{display:none}
