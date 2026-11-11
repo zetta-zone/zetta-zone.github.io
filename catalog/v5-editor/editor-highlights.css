@@ -4,3 +4,30 @@
 .ve-highlight-gutter{position:absolute;background:#e8eff5;pointer-events:none}html[data-theme=dark] .ve-highlight-gutter{background:#112238}
 
 .ve-panel .ve-parent-toggle{display:flex;flex-direction:row;align-items:center;gap:6px;color:#e7f2ff;font-size:13px}.ve-panel .ve-parent-toggle input{width:18px;min-height:18px;height:18px;flex:none}
+.ve-highlight-box{border-style:dashed;border-radius:4px}.ve-highlight-label{background:var(--mark);color:#102334;border-color:var(--mark);box-shadow:0 2px 5px #0004}.ve-highlight-label::before{display:none}.ve-highlight-label:hover,.ve-highlight-label:focus-visible{background:var(--mark);filter:brightness(1.1)}
+.ve-element-tools{display:none}.ve-essential-properties>summary{color:#8fe3d4}.ve-essential-properties{border:1px solid #416e80;border-radius:7px;padding:7px!important}
+@media (hover:hover) and (pointer:fine) and (min-width:900px){
+ .ve-host #host-side>.ve-panel{padding:8px;scroll-padding-top:170px}
+ .ve-host #host-side .ve-panel button{min-height:28px;min-width:0;padding:4px 7px;font-size:12px}
+ .ve-host #host-side .ve-panel :is(input:not([type=checkbox]):not([type=color]),select,textarea){font-size:13px;min-height:30px}
+ .ve-host #host-side .ve-panel input[type=range]{min-height:28px}
+ .ve-host #host-side .ve-panel input[type=color]{height:30px;min-height:30px}
+ .ve-host #host-side .ve-panel label{font-size:12px;margin:6px 0;gap:2px}
+ .ve-host #host-side .ve-control-pair{grid-template-columns:minmax(0,1fr) 64px;gap:6px}
+ .ve-host #host-side .ve-sticky-head{top:-8px;display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:3px 0 5px}
+ .ve-host #host-side .ve-panel-head{grid-column:1;grid-row:1;display:flex}
+ .ve-host #host-side .ve-panel-head h2{font-size:12px}
+ .ve-host #host-side .ve-open-data{grid-column:2;grid-row:1;margin:0;padding:4px;font-size:12px;min-height:28px}
+ .ve-host #host-side :is(.ve-quick-actions,.ve-tabs,.ve-parent-toggle,.ve-element-tools){grid-column:1/-1;margin:0}
+ .ve-host #host-side .ve-quick-actions{gap:4px}
+ .ve-host #host-side .ve-tabs{padding:2px 0}
+ .ve-host #host-side .ve-element-tools{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:3px}
+ .ve-host #host-side .ve-element-tools button{font-size:11px;padding:4px 2px}
+ .ve-host #host-side .ve-parent-toggle{font-size:12px;margin:0}
+ .ve-host #host-side .ve-panel-controls{min-height:36px;gap:3px;padding:4px 6px}
+ .ve-host #host-side .ve-panel-controls :is(button,a,select){min-height:28px;height:28px;font-size:12px}
+ .ve-host #host-side .ve-panel-controls .ve-panel-context{flex-basis:90px}
+ .ve-host #host-side .ve-pane details{margin:5px 0;padding:5px 0}
+ .ve-host #host-side .ve-essential-properties>label{margin:4px 0}
+}
+@media (pointer:coarse){.ve-host #host-side .ve-panel :is(button,input:not([type=checkbox]),select){min-height:44px}.ve-host #host-side .ve-panel input[type=checkbox]{min-width:22px;min-height:22px}}
