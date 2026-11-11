@@ -7,6 +7,8 @@ const storage='zz-v5-editor-panel-v1';let state={hidden:false,height:.25,width:.
 try{Object.assign(state,JSON.parse(localStorage.getItem(storage)||'{}'))}catch{}
 state.height=Math.min(.85,Math.max(.2,Number(state.height)||.25));state.width=Math.min(.36,Math.max(.22,Number(state.width)||.26));
 const bar=document.createElement('div');bar.className='ve-panel-controls';bar.setAttribute('aria-label','Положение и размер панели');
+const catalogLink=document.querySelector('.ve-host-top>a');
+if(catalogLink){catalogLink.classList.add('ve-panel-back');catalogLink.textContent='← Каталог';bar.append(catalogLink)}
 const viewLabel=document.querySelector('#host-view')?.closest('label');
 const deviceLabel=document.querySelector('#host-device')?.closest('label');
 if(viewLabel){viewLabel.classList.add('ve-panel-context');bar.append(viewLabel)}
