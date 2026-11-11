@@ -184,7 +184,18 @@ const dataHint=document.createElement('p');dataHint.className='ve-data-hint';dat
 const dataTopics=document.createElement('nav');dataTopics.className='ve-data-topics';dataTopics.setAttribute('aria-label','Разделы данных');
 for(const [name,field]of [['Основное','name'],['Описания','description'],['Финансы','coins'],['Оценки','ratings'],['Возможности','features'],['Галерея','slides'],['Ссылки','registrationUrl']]){const b=document.createElement('button');b.type='button';b.textContent=name;b.onclick=()=>{const f=shared.querySelector('#v51-field');if(f){f.value=field;f.dispatchEvent(new Event('change'));}};dataTopics.append(b)}
 shared.open=true;shared.querySelector('summary').textContent='Поле для редактирования';
-dataDialog.append(dataHead,dataHint,dataTopics,shared);dataDialog.addEventListener('click',e=>{if(e.target===dataDialog)dataDialog.close()});
+const dataFinder=document.createElement('div');dataFinder.className='ve-data-finder';
+const dataSearch=document.createElement('input');dataSearch.type='search';dataSearch.className='ve-data-search';dataSearch.placeholder='Найти поле: название, описание, вывод…';dataSearch.setAttribute('aria-label','Поиск по полям проекта');
+const dataFieldList=document.createElement('div');dataFieldList.className='ve-data-field-list';dataFieldList.setAttribute('role','listbox');dataFieldList.setAttribute('aria-label','Все поля проекта');
+const dataForm=document.createElement('section');dataForm.className='ve-data-form';dataForm.append(shared);
+const dataFieldButtons=new Map();
+for(const option of fieldSelect.options){const key=option.value,b=document.createElement('button');b.type='button';b.className='ve-data-field';b.dataset.field=key;b.setAttribute('role','option');b.textContent=option.textContent;b.onclick=()=>{fieldSelect.value=key;fieldSelect.dispatchEvent(new Event('change'));dataSearch.blur();};dataFieldButtons.set(key,b);dataFieldList.append(b)}
+function syncDataFields(){const q=dataSearch.value.trim().toLocaleLowerCase('ru');let count=0;for(const [key,b]of dataFieldButtons){const found=(b.textContent+' '+key).toLocaleLowerCase('ru').includes(q);b.hidden=!found;b.setAttribute('aria-selected',String(fieldSelect.value===key));if(found)count++}dataFieldList.setAttribute('aria-label','Поля проекта, найдено: '+count)}
+dataSearch.addEventListener('input',syncDataFields);fieldSelect.addEventListener('change',syncDataFields);
+dataTopics.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{dataSearch.value='';syncDataFields()}));
+dataFinder.append(dataSearch,dataFieldList);
+const dataBody=document.createElement('div');dataBody.className='ve-data-body';dataBody.append(dataFinder,dataForm);
+dataDialog.append(dataHead,dataHint,dataTopics,dataBody);syncDataFields();dataDialog.addEventListener('click',e=>{if(e.target===dataDialog)dataDialog.close()});
 const openData=document.createElement('button');openData.type='button';openData.className='ve-open-data';openData.textContent='✎ Данные проекта';openData.title='Заполнить тексты, логотип, изображения, ссылки и другую общую информацию';openData.onclick=()=>{if(!dataDialog.open)dataDialog.showModal()};
 sticky.insertBefore(openData,tabs);
 panel.replaceChildren(sticky,projectLabel,nodeRow,selection,content,design,blockPane,toolsPane,dataDialog);
