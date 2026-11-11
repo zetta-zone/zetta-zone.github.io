@@ -180,6 +180,14 @@ const intro=document.createElement('p');intro.textContent='Выберите це
 const tabs=document.createElement('nav');tabs.className='ve-tabs';tabs.setAttribute('role','tablist');tabs.setAttribute('aria-label','Разделы управления');for(const [id,name]of [['content','Элемент'],['design','Оформление'],['blocks','Структура'],['tools','Файлы']]){const b=document.createElement('button');b.textContent=name;b.dataset.paneTab=id;b.setAttribute('role','tab');b.setAttribute('aria-controls','ve-pane-'+id);b.onclick=()=>showPane(id);tabs.append(b)}const selection=document.createElement('div');selection.className='ve-selection';const history=document.createElement('details');const summary=document.createElement('summary');summary.textContent='История изменений';const list=document.createElement('ol');list.className='ve-history';list.id='ve-history';history.append(summary,list);footer.prepend(history);const sticky=document.createElement('div');sticky.className='ve-sticky-head';const head=document.createElement('div');head.className='ve-panel-head';dock.textContent='⇆ Панель';dock.setAttribute('aria-label','Панель слева / справа');dock.title='Перенести боковую панель слева направо или обратно';head.append(title,dock);const quick=document.createElement('div');quick.className='ve-quick-actions';for(const action of ['save','undo','redo'])quick.append(footer.querySelector('[data-action="'+action+'"]'));sticky.append(head,quick,tabs);const nodeRow=document.createElement('div');nodeRow.className='ve-node-row';parent.setAttribute('aria-label','Родитель ↑');parent.textContent='↑';nodeRow.append(nodeLabel,parent);const toolsPane=document.createElement('section');toolsPane.className='ve-pane';toolsPane.dataset.pane='tools';toolsPane.id='ve-pane-tools';toolsPane.setAttribute('role','tabpanel');toolsPane.append(footer);
 const dataDialog=document.createElement('dialog');dataDialog.className='ve-data-dialog';dataDialog.setAttribute('aria-label','Данные проекта');
 const dataHead=document.createElement('div');dataHead.className='ve-data-head';const dataTitle=document.createElement('h2');dataTitle.textContent='Данные проекта';const closeData=document.createElement('button');closeData.type='button';closeData.textContent='✕ Закрыть';closeData.onclick=()=>dataDialog.close();dataHead.append(dataTitle,closeData);
+// Build the project-data modal only after installV51() has inserted
+// its shared field editor into the rebuilt panel. Before this fix,
+// shared/fieldSelect belonged to installV51() and were not in scope here;
+// the ReferenceError prevented V5EditorHost.mount(), triggering the 4.5s fallback.
+queueMicrotask(()=>{
+const shared=panel.querySelector('.v51-shared');
+const fieldSelect=shared?.querySelector('#v51-field');
+if(!shared||!fieldSelect){console.error('[V5 editor] Shared project data controls were not initialized');return}
 const dataHint=document.createElement('p');dataHint.className='ve-data-hint';dataHint.textContent='Изменения общие для всех 9 представлений. После редактирования нажмите «Сохранить» в панели.';
 const dataTopics=document.createElement('nav');dataTopics.className='ve-data-topics';dataTopics.setAttribute('aria-label','Разделы данных');
 for(const [name,field]of [['Основное','name'],['Описания','description'],['Финансы','coins'],['Оценки','ratings'],['Возможности','features'],['Галерея','slides'],['Ссылки','registrationUrl']]){const b=document.createElement('button');b.type='button';b.textContent=name;b.onclick=()=>{const f=shared.querySelector('#v51-field');if(f){f.value=field;f.dispatchEvent(new Event('change'));}};dataTopics.append(b)}
@@ -196,6 +204,7 @@ dataTopics.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>
 dataFinder.append(dataSearch,dataFieldList);
 const dataBody=document.createElement('div');dataBody.className='ve-data-body';dataBody.append(dataFinder,dataForm);
 dataDialog.append(dataHead,dataHint,dataTopics,dataBody);syncDataFields();dataDialog.addEventListener('click',e=>{if(e.target===dataDialog)dataDialog.close()});
+});
 const openData=document.createElement('button');openData.type='button';openData.className='ve-open-data';openData.textContent='✎ Данные проекта';openData.title='Заполнить тексты, логотип, изображения, ссылки и другую общую информацию';openData.onclick=()=>{if(!dataDialog.open)dataDialog.showModal()};
 sticky.insertBefore(openData,tabs);
 panel.replaceChildren(sticky,projectLabel,nodeRow,selection,content,design,blockPane,toolsPane,dataDialog);
