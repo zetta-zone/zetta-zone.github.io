@@ -59,3 +59,10 @@
  .ve-host:not(.ve-panel-bottom) .ve-panel-controls .ve-panel-back{font-size:11px}
  .ve-host:not(.ve-panel-bottom) #host-side>.ve-panel{padding:7px}
 }
+
+/* V5.1: the preview zoom slider is part of the visible editor bar. */
+.ve-host .ve-panel-controls .ve-panel-zoom{display:flex!important;order:4;align-items:center;flex:1 1 165px;min-width:140px;gap:7px;margin:0;font-size:0;color:#e6f4ff}
+.ve-host .ve-panel-controls .ve-panel-zoom::before{content:'Масштаб';font-size:12px;white-space:nowrap}
+.ve-host .ve-panel-controls .ve-panel-zoom input[type=range]{flex:1;min-width:70px;width:auto;min-height:36px;touch-action:pan-x;accent-color:#67d7cf}
+.ve-host .ve-panel-controls .ve-panel-zoom output{flex:none;min-width:38px;font-size:12px;font-variant-numeric:tabular-nums}
+@media(max-width:650px){.ve-host .ve-panel-controls .ve-panel-zoom{flex:1 1 100%;min-width:0}}
