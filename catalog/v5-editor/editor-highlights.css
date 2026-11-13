@@ -31,3 +31,7 @@
  .ve-host #host-side .ve-essential-properties>label{margin:4px 0}
 }
 @media (pointer:coarse){.ve-host #host-side .ve-panel :is(button,input:not([type=checkbox]),select){min-height:44px}.ve-host #host-side .ve-panel input[type=checkbox]{min-width:22px;min-height:22px}}
+
+/* Non-interactive, temporary full-name hint for touch and keyboard users. */
+.ve-highlight-info{position:fixed;right:max(10px,env(safe-area-inset-right,10px));bottom:max(10px,env(safe-area-inset-bottom,10px));max-width:min(85vw,420px);padding:8px 11px;border:1px solid #79bbd6;background:#102334f5;color:#fff;border-radius:7px;box-shadow:0 2px 12px #0008;font:500 14px/1.4 system-ui,sans-serif;white-space:normal;overflow-wrap:anywhere;pointer-events:none;z-index:2}
+.ve-highlight-info[hidden]{display:none!important}
