@@ -81,3 +81,15 @@ body.ve-preview-compact #results.cards>.compact-card{display:block;grid-template
 .dossier>.close-card:hover{background:rgba(130,160,185,.14)!important}
 .dossier>.close-card:focus-visible{outline:2px solid var(--green,#55c7bc)!important;outline-offset:-2px}
 @media(max-width:480px){.dossier>.close-card{top:7px!important;right:7px!important;width:32px!important;height:32px!important;min-width:32px!important;min-height:32px!important}}
+
+/* Owner-defined currency rows; long captions wrap, currencies scroll as one row. */
+.currency-groups{min-width:0;max-width:100%;grid-column:1/-1}
+.currency-group{min-width:0;max-width:100%;margin:12px 0}
+.currency-group[aria-label="Внутриигровые валюты"]{border-top:1px solid var(--border,#64748b40);padding-top:10px}
+.currency-caption{margin:0 0 8px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:inherit;color:inherit}
+.currency-row{display:flex!important;flex-flow:row nowrap!important;gap:10px;overflow-x:auto;max-width:100%;padding:2px 1px 6px;overscroll-behavior-x:contain}
+.currency-item{display:inline-flex!important;flex:0 0 auto;align-items:center;gap:6px;white-space:nowrap;font-size:13px}
+.currency-item .coin-icon{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;flex:0 0 28px}
+.currency-item .coin-icon img,.currency-item .coin-icon svg{width:100%;height:100%;object-fit:contain}
+.currency-groups[hidden],#coins[hidden],#coin-detail[hidden],.coin-heading[hidden],[data-project-copy="copy15"][hidden]{display:none!important}
+.project-row .row-bottom{min-width:0}.project-row .currency-groups{flex-basis:100%;width:100%}

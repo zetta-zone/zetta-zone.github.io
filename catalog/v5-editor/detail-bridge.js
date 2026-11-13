@@ -17,6 +17,6 @@ addEventListener('v5-lab:state',sync);addEventListener('message',e=>{if(e.origin
 addEventListener('keydown',e=>{if(e.key==='Escape'&&!document.querySelector('dialog[open]')&&embedded){e.preventDefault();close()}});
 // Same-page reading links must not insert iframe entries into catalogue history.
 document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(a&&!e.defaultPrevented){const target=document.getElementById(a.getAttribute('href').slice(1));if(target){e.preventDefault();target.scrollIntoView({behavior:'instant',block:'start'})}}});
-showSlide(slide);sync();
+V5Currencies.paint(document.querySelector('.dossier'),p,'detail');showSlide(slide);sync();
 })();
 
