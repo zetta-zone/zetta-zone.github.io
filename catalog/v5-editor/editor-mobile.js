@@ -15,6 +15,8 @@ if(viewLabel){viewLabel.classList.add('ve-panel-context');bar.append(viewLabel)}
 if(deviceLabel){deviceLabel.classList.add('ve-panel-context');bar.append(deviceLabel)}
 const fitButton=document.querySelector('#host-fit');
 if(fitButton){fitButton.classList.add('ve-panel-fit');bar.append(fitButton)}
+const zoomLabel=document.querySelector('#host-zoom')?.closest('label');
+if(zoomLabel){zoomLabel.classList.add('ve-panel-zoom');bar.append(zoomLabel)}
 
 function button(text,label,action){const b=document.createElement('button');b.type='button';b.textContent=text;b.title=label;b.setAttribute('aria-label',label);b.onclick=action;bar.append(b);return b}
 const grip=button('⠿','Изменить размер панели: перетащите или используйте стрелки',()=>{});grip.className='ve-panel-grip';
