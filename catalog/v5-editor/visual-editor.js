@@ -9,7 +9,7 @@ let root=document.querySelector('.dossier');
 if((host||params.has('ve-template-render'))&&renderView!=='detail'){window.V5Catalog?.prepareEditorPreview(params.get('project'),renderView);root=document.querySelector('#results .project-item');const results=document.querySelector('#results'),width=root.getBoundingClientRect().width;const canvas=document.createElement('div');canvas.className='ve-compact-canvas';document.body.classList.add('ve-preview-compact');canvas.append(results);document.body.append(canvas);results.style.setProperty('display','block','important');results.style.width=width+'px';results.style.margin='20px auto'}
 if(host||params.has('ve-template-render'))document.body.classList.add('ve-preview');
 if(!root){const a=document.createElement('a');a.href='editor.html?project=hashgarden-demo&release='+encodeURIComponent(S.build);a.className='ve-launch';a.textContent='Визуальный редактор';document.body.append(a);return}
-const close=document.querySelector('.close-card');if(close)document.body.append(close);
+const close=document.querySelector('.close-card');if(close)(host||params.has('ve-template-render')?document.body:root).append(close);
 const project=new URLSearchParams(location.search).get('project')||'hashgarden-demo',key=S.key(view,device,project);
 const M=window.V51Model;
 const nodes=new Map(),ids=new WeakMap(),original=new Map();
