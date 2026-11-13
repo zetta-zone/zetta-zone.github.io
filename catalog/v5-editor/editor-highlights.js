@@ -11,7 +11,9 @@ function mountToggle(){document.querySelector('#host-side .ve-sticky-head')?.app
 addEventListener('ve:panel-mounted',mountToggle);mountToggle();
 input.onchange=()=>{parents=input.checked;try{localStorage.setItem(setting,String(parents))}catch{}};
 const roles=['Выбрано','Родитель','Уровень выше'];
-const items=roles.map((role,i)=>{const box=document.createElement('div'),tag=document.createElement('button');box.className='ve-highlight-box';tag.className='ve-highlight-label';box.dataset.level=tag.dataset.level=i;tag.type='button';tag.title=i?'Выбрать этот родительский блок':'Текущий выбранный элемент';tag.onclick=()=>window.V5EditorHost.select(tag.dataset.node);layer.append(box,tag);return {box,tag}});
+const info=document.createElement('div');info.className='ve-highlight-info';info.setAttribute('role','status');info.setAttribute('aria-live','polite');info.hidden=true;layer.append(info);let infoTimer;
+function showFullName(name){info.textContent=name;info.hidden=false;clearTimeout(infoTimer);infoTimer=setTimeout(()=>{info.hidden=true},3500)}
+const items=roles.map((role,i)=>{const box=document.createElement('div'),tag=document.createElement('button');box.className='ve-highlight-box';tag.className='ve-highlight-label';box.dataset.level=tag.dataset.level=i;tag.type='button';tag.title=i?'Выбрать этот родительский блок':'Текущий выбранный элемент';tag.onclick=()=>{showFullName(tag.dataset.fullLabel||tag.title);window.V5EditorHost.select(tag.dataset.node)};tag.onfocus=()=>{if(innerWidth<=650)showFullName(tag.dataset.fullLabel||tag.title)};layer.append(box,tag);return {box,tag}});
 const clamp=(n,a,b)=>Math.max(a,Math.min(n,Math.max(a,b)));
 const intersects=(a,b)=>a.x<b.x+b.w+3&&a.x+a.w+3>b.x&&a.y<b.y+b.h+3&&a.y+a.h+3>b.y;
 // Text fragments and controls are protected, including text within large containers.
@@ -31,7 +33,7 @@ Object.assign(gutter.style,{left:a.left+'px',top:a.top+'px',width:a.width+'px',h
 const protectedRects=contentRects(chain,f,sx,sy,clip),placed=[];
 for(const i of [2,1,0]){const {box,tag}=items[i],d=data[i];const visible=clip.right>clip.left&&clip.bottom>clip.top&&d&&d.w>0&&d.h>0&&d.x<clip.right&&d.x+d.w>clip.left&&d.y<clip.bottom&&d.y+d.h>clip.top;box.hidden=tag.hidden=!visible;if(!visible)continue;
 Object.assign(box.style,{left:d.x+'px',top:d.y+'px',width:d.w+'px',height:d.h+'px',clipPath:`inset(${Math.max(0,clip.top-d.y)}px ${Math.max(0,d.x+d.w-clip.right)}px ${Math.max(0,d.y+d.h-clip.bottom)}px ${Math.max(0,clip.left-d.x)}px)`});
-tag.textContent=roles[i]+': '+d.name;tag.dataset.node=d.id;tag.title=(d.fullName||d.name)+(i?' — нажмите, чтобы выбрать':' — текущий элемент');tag.setAttribute('aria-label',roles[i]+': '+(d.fullName||d.name));tag.style.maxWidth=Math.max(1,Math.min(340,bounds.right-bounds.left))+'px';
+tag.textContent=(innerWidth<=650?['Выбор','Родитель','Контейнер'][i]:roles[i])+': '+d.name;tag.dataset.fullLabel=roles[i]+': '+(d.fullName||d.name);tag.dataset.node=d.id;tag.title=(d.fullName||d.name)+(i?' — нажмите, чтобы выбрать':' — текущий элемент');tag.setAttribute('aria-label',roles[i]+': '+(d.fullName||d.name));tag.style.maxWidth=Math.max(1,Math.min(340,bounds.right-bounds.left))+'px';
 if(i===0)window.V5EditorHost.bindHighlightHandle(tag,d.id);
 const w=tag.offsetWidth,h=tag.offsetHeight;
 const candidates=[{x:d.x,y:d.y-h-4},{x:d.x+d.w-w,y:d.y-h-4},{x:d.x,y:d.y+d.h+4},{x:d.x+d.w-w,y:d.y+d.h+4},{x:d.x-w-4,y:d.y},{x:d.x+d.w+4,y:d.y}].map(p=>({...p,w,h}));
