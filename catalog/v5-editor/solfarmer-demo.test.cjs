@@ -17,4 +17,8 @@ test('separate SolFarmer preserves every existing record and browser save',()=>{
  assert.equal(p.name,'Edited SolFarmer');assert.equal(JSON.stringify(c.V4GetProject('mining-blocks')),other);
  assert.equal(model.data()[p.id].fields.name,'Edited SolFarmer');
 });
-
+test('record participates in initial shared ratings registration',()=>{
+ const c={window:null,location:{search:'?project=solfarmer-official-demo'},URLSearchParams,structuredClone,localStorage:{getItem:()=>null,setItem(){}},addEventListener(){},dispatchEvent(){},Event};c.window=c;vm.createContext(c);
+ for(const f of ['data.js','nocid.js','projects-preview.js','legacy-records.js','solfarmer-demo.js','stage2-data.js'])vm.runInContext(fs.readFileSync(__dirname+'/'+f,'utf8'),c);
+ assert.equal(c.DEMO_PROJECT.id,'solfarmer-official-demo');c.V5ProjectRatings.set('solfarmer-official-demo',{editorial:{average:3}});assert.equal(c.DEMO_PROJECT.editorial.overall,3);
+});

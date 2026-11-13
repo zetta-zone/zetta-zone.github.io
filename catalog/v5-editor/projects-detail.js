@@ -6,7 +6,7 @@ const logo=document.querySelector('.identity .project-logo');logo.removeAttribut
 document.querySelector('.identity h1 .demo-tag')?.remove();const status=document.createElement('small');status.className='project-status';status.textContent='Лабораторная карточка · сведения требуют проверки';document.querySelector('.identity h1').after(status);
 set('.passport>.eyebrow',p.features.slice(0,3).map(f=>f[1]).join(' · '));
 const facts=document.querySelectorAll('.quick-facts dd');facts[0].textContent=p.freeStart===true?'Заявлен бесплатный старт':'Требует проверки';facts[1].textContent='Условия не проверены';facts[2].textContent='Условия не проверены';
-set('.verification b','Выплаты не проверены');set('.verification small','Публичные источники · '+prepared+'');set('.verification .status-symbol','?');
+set('.verification b','Выплаты не проверены');set('.verification small','Публичные источники · '+prepared);set('.verification .status-symbol','?');
 const labels=document.querySelectorAll('#verification .verification-grid>div>b');['Публичные источники','Не проверено','Не оценён','Не проверено'].forEach((s,i)=>{if(labels[i])labels[i].textContent=s});
 const notice=document.querySelector('#verification .demo-notice');if(notice){notice.className='draft-notice';notice.innerHTML='<b>Предварительная карточка '+esc(p.name)+'</b><p>Фактические выплаты, аккаунт и финансовые условия не проверены.</p>'}
 set('.gallery-topline>span:nth-child(2)','СХЕМА · НЕ СКРИНШОТ ИГРЫ');document.querySelectorAll('.gallery-track img,.thumbnail img').forEach(n=>n.alt=p.name+' · редакционная схема, не скриншот');
