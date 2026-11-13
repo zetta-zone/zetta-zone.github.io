@@ -62,3 +62,22 @@ body.ve-preview-compact #results.cards>.compact-card{display:block;grid-template
 .ve-host .ve-data-dialog #v51-field-body{max-width:none}
 .ve-host .ve-data-dialog #v51-field-body label{overflow-wrap:anywhere}
 @media(max-width:650px){.ve-host .ve-data-body{display:block}.ve-host .ve-data-finder{position:static}.ve-host .ve-data-field-list{flex-direction:row;flex-wrap:nowrap;max-height:none;overflow-x:auto;overflow-y:hidden;padding:4px 1px 10px;gap:6px}.ve-host .ve-data-field-list .ve-data-field{flex:0 0 auto;width:auto;max-width:190px;white-space:normal;min-height:44px}.ve-host .ve-data-search{min-height:44px}.ve-host .ve-data-topics{margin-bottom:8px}.ve-host .ve-data-form{margin-top:6px}}
+
+/* V5.1 detailed card: the close control belongs to the card, not the site toolbar. */
+.dossier{position:relative}
+.dossier>.close-card,body .dossier[data-ve-photo]>button.close-card.icon-button{
+ position:absolute!important;top:10px!important;right:10px!important;left:auto!important;
+ z-index:30!important;display:grid!important;place-items:center!important;
+ width:34px!important;height:34px!important;min-width:34px!important;min-height:34px!important;
+ margin:0!important;padding:0!important;border:0!important;border-radius:8px!important;
+ background:transparent!important;background-color:transparent!important;box-shadow:none!important;
+ color:var(--ink,#dcebf5)!important;font-size:0!important;cursor:pointer;
+}
+.dossier>.close-card::before,.dossier>.close-card::after{
+ content:'';position:absolute;left:50%;top:50%;width:17px;height:2px;
+ background:currentColor;border-radius:2px;transform:translate(-50%,-50%) rotate(45deg);pointer-events:none;
+}
+.dossier>.close-card::after{transform:translate(-50%,-50%) rotate(-45deg)}
+.dossier>.close-card:hover{background:rgba(130,160,185,.14)!important}
+.dossier>.close-card:focus-visible{outline:2px solid var(--green,#55c7bc)!important;outline-offset:-2px}
+@media(max-width:480px){.dossier>.close-card{top:7px!important;right:7px!important;width:32px!important;height:32px!important;min-width:32px!important;min-height:32px!important}}
