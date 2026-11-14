@@ -49,7 +49,7 @@ const candidates=[
  {x:d.x-w-3,y:d.y+3}
 ];
 const safe=candidates.find(p=>p.x>=bounds.left&&p.x+w<=bounds.right&&p.y>=bounds.top&&p.y+h<=bounds.bottom&&!placed.some(v=>intersects({...p,w,h},v))&&!protectedRects.some(v=>intersects({...p,w,h},v)));
-const fallback={x:clamp(d.x+3,bounds.left,bounds.right-w),y:clamp(d.y+3+i*3,bounds.top,bounds.bottom-h)};
+const fallback={x:clamp(d.x+3,bounds.left,bounds.right-w),y:clamp(d.y+d.h+4+i*(h+3),bounds.top,bounds.bottom-h)};
 const p=safe||fallback;
 placed.push({...p,w,h});tag.dataset.placement=safe?'near':'edge';
 Object.assign(tag.style,{left:p.x+'px',top:p.y+'px'});
