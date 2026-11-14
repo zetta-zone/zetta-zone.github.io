@@ -93,3 +93,15 @@ body.ve-preview-compact #results.cards>.compact-card{display:block;grid-template
 .currency-item .coin-icon img,.currency-item .coin-icon svg{width:100%;height:100%;object-fit:contain}
 .currency-groups[hidden],#coins[hidden],#coin-detail[hidden],.coin-heading[hidden],[data-project-copy="copy15"][hidden]{display:none!important}
 .project-row .row-bottom{min-width:0}.project-row .currency-groups{flex-basis:100%;width:100%}
+
+/* Tablet portrait editor controls: keep touch targets while removing stretched full-width bars. */
+@media (pointer:coarse) and (orientation:portrait) and (min-width:651px){
+ .ve-host #host-side .ve-sticky-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px;align-items:center;padding:5px 0 7px}
+ .ve-host #host-side .ve-sticky-head>.ve-panel-head{grid-column:1/-1;display:none}
+ .ve-host #host-side .ve-sticky-head>.ve-quick-actions{grid-column:1;grid-row:1;display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:5px;margin:0;min-width:0}
+ .ve-host #host-side .ve-sticky-head>.ve-quick-actions button{width:100%;min-width:0;min-height:44px;height:44px;padding:5px 7px;font-size:13px;line-height:1.1;border-radius:6px}
+ .ve-host #host-side .ve-sticky-head>.ve-open-data{grid-column:2;grid-row:1;display:block;width:auto;min-width:130px;margin:0;padding:6px 9px;min-height:44px;height:44px;font-size:12px;white-space:nowrap;line-height:1.2}
+ .ve-host #host-side .ve-sticky-head>.ve-tabs{grid-column:1/-1;grid-row:2;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;margin:0;padding:3px 0 0}
+ .ve-host #host-side .ve-sticky-head>.ve-tabs button{min-width:0;min-height:42px;padding:6px 5px;font-size:13px;line-height:1.1}
+ .ve-host #host-side .ve-node-row{gap:5px}
+}
