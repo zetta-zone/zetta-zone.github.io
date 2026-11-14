@@ -143,7 +143,7 @@ body.ve-preview-compact #results.cards>.compact-card{display:block;grid-template
  .ve-host:not(.ve-panel-bottom) #host-side>.ve-panel{padding:7px}
  .ve-host:not(.ve-panel-bottom) #host-side .ve-sticky-head{padding:2px 0 5px}
  .ve-host:not(.ve-panel-bottom) #host-side .ve-quick-actions{margin:2px 0;gap:3px;grid-template-columns:1fr 43px 43px}
- .ve-host:not(.ve-panel-bottom) #host-side .ve-quick-actions button{width:100%;min-width:0;max-width:none;min-height:36px;padding:5px 3px;font-size:11px}
+ .ve-host:not(.ve-panel-bottom) #host-side .ve-quick-actions button{width:100%;min-width:0;max-width:none;min-height:36px;padding:1px 3px;font-size:11px}
  .ve-host:not(.ve-panel-bottom) #host-side .ve-quick-actions [data-action=undo]{font-size:0}
  .ve-host:not(.ve-panel-bottom) #host-side .ve-quick-actions [data-action=undo]::after{content:'↶';font-size:20px}
  .ve-host:not(.ve-panel-bottom) #host-side .ve-quick-actions [data-action=redo]{font-size:0}
@@ -328,3 +328,31 @@ body.ve-host #host-side .ve-panel .ve-move-options label{display:flex;flex-direc
 body.ve-host #host-side .ve-panel .ve-move-options select{width:64px;max-width:100%}
 body.ve-host #host-side .ve-panel .ve-dpad{grid-column:2;grid-row:1}
 body.ve-host #host-side .ve-panel .ve-move-panel>.ve-touch-scale{grid-column:3;grid-row:1;grid-template-columns:34px 34px;gap:3px}
+/* RollerCoin game skin; dimensions, editor storage and other projects are untouched. */
+#results .project-item[data-project="rollercoin"]{background:var(--paper);border-color:var(--line);box-shadow:inset 0 1px #7e7da155,0 4px 0 #181825;color:var(--ink)}
+#results .project-item[data-project="rollercoin"] :is(.feature-tile,.compact-ratings>div,.icon-action){background:var(--soft);border:1px solid var(--line);border-radius:4px;box-shadow:inset 0 1px #ffffff12}
+#results .project-item[data-project="rollercoin"] .feature-tile{padding:1px 3px}
+#results .project-item[data-project="rollercoin"] .project-logo{background:var(--bg);border-radius:4px}
+#results .project-item[data-project="rollercoin"] .primary{background:var(--mint);color:#1f1f2d;border:1px solid #9fffff;border-radius:4px;box-shadow:0 3px 0 #087b83,inset 0 2px #ffffff66}
+#results .project-item[data-project="rollercoin"] .detail-link{background:var(--project-secondary);color:#1f1f2d;border:1px solid #fff69b;border-radius:4px;box-shadow:0 3px 0 #9b771c,inset 0 2px #ffffff66}
+#results .project-item[data-project="rollercoin"] :is(.detail-link,.primary):active{box-shadow:inset 0 2px #0003}
+[data-project="rollercoin"] .currency-groups{container-type:inline-size}
+[data-project="rollercoin"] .rc-withdrawal{display:grid;grid-template-columns:1fr;gap:1px;padding:5px 8px;border:1px solid var(--line);border-radius:4px;background:var(--soft);font-size:11px;line-height:14px}
+[data-project="rollercoin"] .rc-withdrawal strong{color:var(--mint);font-size:12px}
+[data-project="rollercoin"] .rc-currency-group{margin:2px 0;padding:0;border:0}
+[data-project="rollercoin"] .rc-currency-group[data-currency-group="internalCurrencies"]{display:flex;align-items:center;gap:8px}
+[data-project="rollercoin"] .rc-currency-group .currency-caption{margin:0;flex:0 1 45%;font-size:12px;line-height:15px}
+[data-project="rollercoin"] .rc-currency-group .currency-row{--rc-gap:clamp(3px,.8cqi,7px);gap:var(--rc-gap);min-width:0;width:100%;height:34px;align-items:center;padding:0 1px;scrollbar-width:thin;scrollbar-color:var(--line) transparent;box-sizing:border-box}
+[data-project="rollercoin"] .rc-currency-group .rc-currency{--rc-size:clamp(18px,calc((100cqi - (var(--rc-count) - 1)*var(--rc-gap))/var(--rc-count)),28px);position:relative;display:inline-flex;flex:0 0 var(--rc-size);width:var(--rc-size);height:28px;min-width:0;min-height:0;justify-content:center;padding:0;border:0;border-radius:3px;background:transparent;color:var(--ink);cursor:help;box-shadow:none}
+[data-project="rollercoin"] .rc-currency-group[data-currency-group="internalCurrencies"] .rc-currency{--rc-size:clamp(18px,5cqi,26px)}
+[data-project="rollercoin"] .rc-currency-group .coin-icon{width:100%;height:100%;flex:1 1 auto}
+[data-project="rollercoin"] .rc-currency[data-no-withdraw]::after{content:'';position:absolute;right:0;bottom:1px;width:5px;height:5px;border-radius:50%;background:#ffe647;box-shadow:0 0 0 1px #1f1f2d}
+[data-project="rollercoin"] .rc-currency:focus-visible{outline:2px solid var(--mint);outline-offset:-1px}
+.rc-currency-tooltip{position:fixed;z-index:10000;max-width:min(290px,calc(100vw - 16px));padding:8px 10px;box-sizing:border-box;border:1px solid #03e1e4;border-radius:4px;background:#1f1f2d;color:#fff;font:12px/1.4 system-ui;box-shadow:0 4px 12px #0006;pointer-events:none}
+[data-project="rollercoin"] .rc-withdrawal{font-size:10px;line-height:12px;gap:0;padding-block:3px}
+html[data-theme] #results .project-item[data-project-visual="rollercoin"][data-project] .primary{background:var(--mint);color:#1f1f2d;border-color:#9fffff}
+html[data-theme] #results .project-item[data-project-visual="rollercoin"][data-project] .detail-link{background:var(--project-secondary);color:#1f1f2d;border-color:#fff69b}
+[data-project="rollercoin"] .rc-currency-group[data-currency-group="internalCurrencies"] .currency-caption{flex:0 0 auto;max-width:50%;font-size:11px}
+[data-project="rollercoin"] .rc-currency-group[data-currency-group="internalCurrencies"] .currency-row{flex:1;width:auto}
+@media(max-width:600px){[data-project="rollercoin"] .currency-groups{padding-bottom:16px}}
+@media(max-width:600px){[data-project="rollercoin"].project-row .currency-groups{padding-bottom:18px}}

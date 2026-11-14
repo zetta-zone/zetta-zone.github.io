@@ -1,7 +1,7 @@
 /* Stage 2 shared project data. Existing IDs, sources and browser settings are retained. */
 (()=>{'use strict';const unknown='Требует проверки',names={BTC:'Bitcoin',LTC:'Litecoin',DOGE:'Dogecoin',ETH:'Ethereum',USDT:'Tether',XRP:'XRP',TRX:'Tron',BNB:'BNB',SOL:'Solana',ETC:'Ethereum Classic',BCH:'Bitcoin Cash',ZEC:'Zcash',ADA:'Cardano',XMR:'Monero',TON:'Toncoin',XTZ:'Tezos',POL:'Polygon',ALGO:'Algorand',BUSD:'BUSD',WFLOKI:'Wrapped FLOKI',WPEPE:'Wrapped PEPE',WSHIB:'Wrapped SHIB'};
 const palettes={
-rollercoin:{light:['#087787','#276a9e','#eff9f8','#d3eeef','#e2f2f2','#12323d','#456b72','#8dbec6'],dark:['#44d4df','#f4ba67','#142e3b','#1c4352','#0d202b','#e3faff','#9acbd0','#357083']},
+rollercoin:{light:['#03e1e4','#ffe647','#2f3045','#3c3a57','#1f1f2d','#ffffff','#c3b0d0','#514e72'],dark:['#03e1e4','#ffe647','#2f3045','#3c3a57','#1f1f2d','#ffffff','#c3b0d0','#514e72']},
 limercoin:{light:['#527314','#507724','#f2f8df','#dcecb4','#e5efd0','#2a3b18','#5e7047','#afc477'],dark:['#b9ed42','#71bf62','#23301c','#344b25','#182514','#f0f8d8','#bfce91','#647e3c']},
 'mining-blocks':{light:['#8545a8','#9b4e94','#f8edff','#e9d2f3','#eee0f5','#402353','#7a5687','#ceb1df'],dark:['#c698ef','#f2a1d8','#362348','#513263','#24192f','#fae9ff','#c8a5d7','#89609e']},
 coingrinding:{light:['#2b7856','#916716','#f3f8e9','#dbead6','#e3eedc','#263f2a','#5c755b','#a9c4a1'],dark:['#73dbab','#ebc16b','#173b33','#245744','#102b25','#edf9de','#a9cda8','#4c8a6c']},
