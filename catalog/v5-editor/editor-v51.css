@@ -292,3 +292,17 @@ body .ve-panel .ve-tooltip-tools label:has(input[type=checkbox]){display:flex!im
 .ve-host #host-side .ve-touch-scale>button{min-height:36px;font-size:22px;font-weight:700;padding:2px}
 .ve-host #host-side .ve-quick-position .ve-advanced-size{margin:2px 0}
 @media(pointer:coarse){.ve-host #host-side .ve-touch-scale>button{min-height:40px}.ve-host #host-side .ve-inspector-group>summary{line-height:24px}}
+
+/* All inspector tabs share the same framed disclosure groups. */
+body.ve-host #host-side .ve-panel .ve-pane details{
+ display:block;border:1px solid #4b7f90;border-radius:7px;
+ padding:0 6px 5px!important;margin:10px 0 5px!important;min-width:0;
+}
+body.ve-host #host-side .ve-panel .ve-pane details>summary{
+ width:fit-content;max-width:100%;margin:-9px 0 0;padding:0 5px;
+ background:var(--panel,#142333);font-size:12px;line-height:18px;cursor:pointer;
+}
+body.ve-host #host-side .ve-panel .ve-pane details:not([open]){padding-bottom:0!important}
+body.ve-host #host-side .ve-panel .ve-pane details:not([open])>:not(summary){display:none!important}
+body.ve-host #host-side .ve-panel .ve-tooltip-tools[open]{display:grid;gap:5px}
+@media(pointer:coarse){body.ve-host #host-side .ve-panel .ve-pane details>summary{line-height:24px}}
