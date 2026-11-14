@@ -82,3 +82,22 @@
 .ve-host.ve-panel-bottom .ve-panel-divider::before{left:calc(50% - 30px);top:5px;width:60px;height:4px}
 @media(max-width:650px){#host-panel-open{width:44px;min-width:44px;font-size:0;padding:0}#host-panel-open::before{content:'☷';font-size:24px}.ve-panel-hidden .ve-host-top{padding-right:calc(60px + env(safe-area-inset-right,0px))}}
 @media(pointer:coarse) and (orientation:landscape){.ve-host:not(.ve-panel-bottom) .ve-host-layout>#host-side{flex:0 0 clamp(220px,var(--panel-width,26%),55%);width:clamp(220px,var(--panel-width,26%),55%);min-width:220px;max-width:55%}}
+
+/* Touch layout: viewing options collapse to one row and stay accessible on demand. */
+@media(pointer:coarse){
+ .ve-host.ve-controls-compact .ve-panel-controls .ve-panel-context,
+ .ve-host.ve-controls-compact .ve-panel-controls .ve-panel-fit,
+ .ve-host.ve-controls-compact .ve-panel-controls .ve-panel-zoom,
+ .ve-host.ve-controls-compact .ve-panel-controls .ve-panel-grip,
+ .ve-host.ve-controls-compact .ve-panel-controls .ve-panel-dock{display:none!important}
+ .ve-host.ve-controls-compact .ve-panel-controls{display:flex!important;flex-wrap:nowrap!important;align-items:center;gap:5px;min-height:40px!important;padding:3px 6px!important}
+ .ve-host.ve-controls-compact .ve-panel-controls .ve-panel-settings{display:block!important;order:1!important;flex:1 1 auto;min-width:100px!important;min-height:34px!important;font-size:12px!important;padding:4px 8px!important}
+ .ve-host.ve-controls-compact .ve-panel-controls .ve-panel-back{order:0!important;flex:0 1 auto;min-width:58px!important;min-height:34px!important;font-size:11px!important}
+ .ve-host.ve-controls-compact .ve-panel-controls .ve-panel-expand,
+ .ve-host.ve-controls-compact .ve-panel-controls .ve-panel-hide{order:2!important;flex:0 0 auto;min-width:34px!important;min-height:34px!important;font-size:12px!important}
+ .ve-host.ve-controls-compact:not(.ve-panel-bottom) .ve-panel-controls .ve-panel-expand{display:none!important}
+ .ve-host.ve-controls-compact #host-side .ve-quick-actions{margin:2px 0!important}
+ .ve-host.ve-controls-compact #host-side .ve-sticky-head{padding:2px 0 4px!important}
+ .ve-host.ve-controls-compact #host-side .ve-tabs{padding:2px 0!important}
+ .ve-host.ve-controls-compact #host-side .ve-sticky-head>.ve-open-data{margin:3px 0!important;min-height:35px!important;padding:4px!important}
+}
