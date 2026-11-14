@@ -306,3 +306,14 @@ body.ve-host #host-side .ve-panel .ve-pane details:not([open]){padding-bottom:0!
 body.ve-host #host-side .ve-panel .ve-pane details:not([open])>:not(summary){display:none!important}
 body.ve-host #host-side .ve-panel .ve-tooltip-tools[open]{display:grid;gap:5px}
 @media(pointer:coarse){body.ve-host #host-side .ve-panel .ve-pane details>summary{line-height:24px}}
+
+/* Breadcrumb path remains readable without horizontal scrolling. */
+body.ve-host #host-side .ve-panel .v51-breadcrumb{
+ display:flex;flex-direction:column;align-items:stretch;gap:3px;
+ white-space:normal;overflow:visible;max-height:none;min-width:0;
+}
+body.ve-host #host-side .ve-panel .v51-breadcrumb button{
+ width:100%;max-width:100%;min-width:0;flex:0 0 auto;
+ white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere;
+ text-align:left;line-height:1.35;height:auto;
+}
