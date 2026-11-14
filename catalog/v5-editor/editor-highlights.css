@@ -40,3 +40,11 @@
 .ve-highlight-gutter{height:42px!important;background:transparent!important;border-bottom:1px solid #37546a30}
 .ve-highlight-label{min-width:0!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-height:28px;font-size:clamp(10px,1.5vw,13px);padding:3px 5px}
 @media(pointer:coarse){.ve-highlight-label{min-height:30px;touch-action:manipulation}}
+
+/* Quiet block-attached labels, not an extra title strip. */
+.ve-host-workspace{padding-top:8px!important}
+.ve-highlight-gutter{display:none!important}
+.ve-highlight-label{background:rgba(16,35,52,.88)!important;color:#eef5fa!important;border:1px solid var(--mark)!important;box-shadow:0 1px 4px #0005!important;font-size:11px!important;line-height:16px!important;min-height:23px!important;padding:2px 6px!important;font-weight:500!important}
+.ve-highlight-label::before{display:inline-block!important;width:7px!important;height:7px!important;margin-right:5px!important;background:var(--mark)!important}
+.ve-highlight-label:hover,.ve-highlight-label:focus-visible{background:#1b3448!important;color:#fff!important;filter:none!important}
+@media(pointer:coarse){.ve-highlight-label{min-height:28px!important;padding:4px 6px!important}}
