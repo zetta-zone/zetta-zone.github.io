@@ -1,6 +1,6 @@
 .ve-highlights{position:fixed;inset:0;z-index:40;pointer-events:none;overflow:hidden}.ve-highlights[hidden],.ve-highlights [hidden]{display:none!important}.ve-highlight-box,.ve-highlight-label{position:absolute;--mark:#29baff}.ve-highlights [data-level="1"]{--mark:#ff9d35}.ve-highlights [data-level="2"]{--mark:#b88aff}.ve-highlight-box{border:2px solid var(--mark);pointer-events:none;background:transparent}.ve-highlight-label{pointer-events:auto;border:1px solid var(--mark);border-radius:4px;background:#102334f2;color:#fff;font:600 14px/20px system-ui,sans-serif;padding:2px 7px;min-height:26px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 1px 4px #0008;cursor:pointer;text-align:left}.ve-highlight-label::before{content:'';display:inline-block;width:8px;height:8px;border-radius:2px;background:var(--mark);margin-right:6px}.ve-highlight-label:hover,.ve-highlight-label:focus-visible{background:#26465c;outline:2px solid var(--mark);outline-offset:1px} .ve-parent-toggle{white-space:nowrap;font-size:12px;gap:4px}.ve-parent-toggle input{accent-color:#9c6ce2;margin:0;width:16px;height:16px}
 
-.ve-host-workspace{padding-top:108px}@media(max-width:650px){.ve-host-workspace{padding-top:98px}}
+.ve-host-workspace{padding-top:48px}@media(max-width:650px){.ve-host-workspace{padding-top:46px}}
 .ve-highlight-gutter{position:absolute;background:#e8eff5;pointer-events:none}html[data-theme=dark] .ve-highlight-gutter{background:#112238}
 
 .ve-panel .ve-parent-toggle{display:flex;flex-direction:row;align-items:center;gap:6px;color:#e7f2ff;font-size:13px}.ve-panel .ve-parent-toggle input{width:18px;min-height:18px;height:18px;flex:none}
@@ -35,3 +35,8 @@
 /* Non-interactive, temporary full-name hint for touch and keyboard users. */
 .ve-highlight-info{position:fixed;right:max(10px,env(safe-area-inset-right,10px));bottom:max(10px,env(safe-area-inset-bottom,10px));max-width:min(85vw,420px);padding:8px 11px;border:1px solid #79bbd6;background:#102334f5;color:#fff;border-radius:7px;box-shadow:0 2px 12px #0008;font:500 14px/1.4 system-ui,sans-serif;white-space:normal;overflow-wrap:anywhere;pointer-events:none;z-index:2}
 .ve-highlight-info[hidden]{display:none!important}
+
+/* Tablet portrait and other editors: one horizontal hierarchy row, no 90px dead strip. */
+.ve-highlight-gutter{height:42px!important;background:transparent!important;border-bottom:1px solid #37546a30}
+.ve-highlight-label{min-width:0!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-height:28px;font-size:clamp(10px,1.5vw,13px);padding:3px 5px}
+@media(pointer:coarse){.ve-highlight-label{min-height:30px;touch-action:manipulation}}
