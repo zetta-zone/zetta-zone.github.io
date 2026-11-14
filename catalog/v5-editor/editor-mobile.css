@@ -138,3 +138,12 @@
  .ve-host #host-side .ve-sticky-head>.ve-open-data{min-height:30px;padding:3px}
  .ve-host #host-side .ve-tabs button{min-height:34px}
 }
+
+/* Width-based responsive tabs do not wrap into extra rows. */
+.ve-host #host-side.ve-narrow .ve-tabs [data-pane-tab]{font-size:0!important;min-height:36px!important}
+.ve-host #host-side.ve-narrow .ve-tabs [data-pane-tab]::before{font-size:18px;line-height:1;display:inline-block}
+.ve-host #host-side.ve-narrow .ve-tabs [data-pane-tab="content"]::before{content:"✎"}
+.ve-host #host-side.ve-narrow .ve-tabs [data-pane-tab="design"]::before{content:"◈"}
+.ve-host #host-side.ve-narrow .ve-tabs [data-pane-tab="blocks"]::before{content:"▦"}
+.ve-host #host-side.ve-narrow .ve-tabs [data-pane-tab="tools"]::before{content:"⇩"}
+.ve-host #host-side.ve-narrow .ve-sticky-head .ve-quick-actions button{padding-inline:2px!important}
