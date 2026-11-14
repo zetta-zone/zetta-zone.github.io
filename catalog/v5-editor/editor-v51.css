@@ -120,3 +120,39 @@ body.ve-preview-compact #results.cards>.compact-card{display:block;grid-template
  .ve-host #host-side .ve-pane[data-pane="design"] #ve-styles .ve-control-pair{grid-template-columns:minmax(65px,1fr) 62px;width:100%;max-width:100%}
  .ve-host #host-side .ve-pane[data-pane="design"] #ve-styles .ve-control-pair input[type="number"]{width:62px;max-width:62px}
 }
+
+/* Quick size/offset settings, same saved per-device V5 configuration. */
+.ve-host #host-side .ve-quick-position{padding:9px;border:1px solid #4b7f90;background:#142e41;border-radius:8px;margin:5px 0 10px}
+.ve-host #host-side .ve-quick-position>strong{font-size:13px;display:block}
+.ve-host #host-side .ve-quick-position>p{font-size:11px;line-height:1.35;color:#b6d5df;margin:3px 0 9px}
+.ve-host #host-side .ve-quick-position-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 12px}
+.ve-host #host-side .ve-quick-position-field{display:flex;flex-direction:column;gap:5px;width:100%;min-width:0;margin:0;font-size:12px}
+.ve-host #host-side .ve-quick-position-field .ve-control-pair{display:grid;width:100%;max-width:none;grid-template-columns:minmax(0,1fr) 58px;gap:5px;align-items:center}
+.ve-host #host-side .ve-quick-position-field .ve-control-pair input[type=number]{width:58px;max-width:58px;min-width:0;text-align:center;padding:5px}
+.ve-host #host-side .ve-quick-position-field .ve-control-pair input[type=range]{width:100%;min-width:0}
+.ve-host #host-side .ve-position-reset{font-size:12px;min-height:36px;margin-top:8px;padding:5px 9px;border:1px solid #537e91;border-radius:6px;background:#1d4458;color:#e8f6ff}
+@media(pointer:coarse) and (orientation:landscape){
+ .ve-host:not(.ve-panel-bottom) .ve-panel-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;padding:5px}
+ .ve-host:not(.ve-panel-bottom) .ve-panel-controls .ve-panel-context{flex:initial;min-width:0;max-width:none;font-size:0}
+ .ve-host:not(.ve-panel-bottom) .ve-panel-controls .ve-panel-context select{font-size:12px;min-height:36px;height:36px}
+ .ve-host:not(.ve-panel-bottom) .ve-panel-controls .ve-panel-back{font-size:11px;min-width:0;min-height:36px}
+ .ve-host:not(.ve-panel-bottom) .ve-panel-controls .ve-panel-fit{min-width:0;width:100%;min-height:36px}
+ .ve-host:not(.ve-panel-bottom) .ve-panel-controls .ve-panel-zoom{grid-column:1/-1;min-width:0!important;width:100%;flex:none!important}
+ .ve-host:not(.ve-panel-bottom) .ve-panel-controls .ve-panel-grip{display:none}
+ .ve-host:not(.ve-panel-bottom) .ve-panel-controls .ve-panel-hide{min-width:0;width:100%}
+ .ve-host:not(.ve-panel-bottom) #host-side>.ve-panel{padding:7px}
+ .ve-host:not(.ve-panel-bottom) #host-side .ve-sticky-head{padding:2px 0 5px}
+ .ve-host:not(.ve-panel-bottom) #host-side .ve-quick-actions{margin:2px 0;gap:3px;grid-template-columns:1fr 43px 43px}
+ .ve-host:not(.ve-panel-bottom) #host-side .ve-quick-actions button{width:100%;min-width:0;max-width:none;min-height:36px;padding:5px 3px;font-size:11px}
+ .ve-host:not(.ve-panel-bottom) #host-side .ve-quick-actions [data-action=undo]{font-size:0}
+ .ve-host:not(.ve-panel-bottom) #host-side .ve-quick-actions [data-action=undo]::after{content:'↶';font-size:20px}
+ .ve-host:not(.ve-panel-bottom) #host-side .ve-quick-actions [data-action=redo]{font-size:0}
+ .ve-host:not(.ve-panel-bottom) #host-side .ve-quick-actions [data-action=redo]::after{content:'↷';font-size:20px}
+ .ve-host:not(.ve-panel-bottom) #host-side .ve-sticky-head>.ve-open-data{min-height:36px;padding:5px 7px;margin:4px 0;font-size:12px}
+ .ve-host:not(.ve-panel-bottom) #host-side .ve-tabs{padding:3px 0;gap:2px}
+ .ve-host:not(.ve-panel-bottom) #host-side .ve-tabs button{min-height:36px;padding:5px 2px;font-size:11px}
+ .ve-host:not(.ve-panel-bottom) #host-side .ve-quick-position{padding:6px;margin:4px 0}
+ .ve-host:not(.ve-panel-bottom) #host-side .ve-quick-position-controls{grid-template-columns:1fr;gap:5px}
+ .ve-host:not(.ve-panel-bottom) #host-side .ve-quick-position>p{display:none}
+ .ve-host:not(.ve-panel-bottom) #host-side .ve-quick-position-field::after{display:none}
+}
