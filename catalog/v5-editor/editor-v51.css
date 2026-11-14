@@ -212,3 +212,27 @@ body.ve-preview-compact #results.cards>.compact-card{display:block;grid-template
  .ve-host:not(.ve-panel-bottom) #host-side .ve-quick-position-controls>label:first-child{grid-column:1/-1}
  .ve-host:not(.ve-panel-bottom) #host-side .ve-dpad{grid-template-columns:repeat(3,40px)}
 }
+
+/* Phone: three compact tools; full sliders stay below the disclosure. */
+.ve-host #host-side .ve-touch-actions{display:none}
+@media (pointer:coarse) and (max-width:650px), (pointer:coarse) and (max-height:520px) {
+ .ve-host #host-side .ve-touch-actions{display:grid;grid-template-columns:minmax(80px,1fr) minmax(124px,1.2fr) minmax(70px,.8fr);align-items:center;gap:5px;padding:6px 4px;border:1px solid #42697a;border-radius:8px;background:#142e41}
+ .ve-host #host-side .ve-touch-actions :is(.ve-touch-color,.ve-touch-moves,.ve-touch-scale){min-width:0;display:flex;flex-direction:column;gap:5px;align-items:center}
+ .ve-host #host-side .ve-touch-actions span{font-size:10px;line-height:12px;color:#bdd9e0}
+ .ve-host #host-side .ve-touch-color select{width:100%;max-width:110px;min-width:0;min-height:32px;font-size:12px;padding:2px}
+ .ve-host #host-side .ve-touch-color input[type=color]{width:55px;height:37px;min-height:37px;padding:2px;border:1px solid #5b8495;border-radius:6px}
+ .ve-host #host-side .ve-touch-dpad{display:grid;grid-template-columns:repeat(3,36px);grid-template-rows:repeat(3,34px);gap:2px;justify-content:center}
+ .ve-host #host-side .ve-touch-dpad button{width:36px;min-width:36px!important;height:34px;min-height:34px!important;padding:0!important;border:1px solid #598194;border-radius:6px;background:#264b5a;color:#f0ffff;font-size:21px;line-height:1}
+ .ve-host #host-side .ve-touch-dpad .ve-touch-up{grid-area:1/2}
+ .ve-host #host-side .ve-touch-dpad .ve-touch-left{grid-area:2/1}
+ .ve-host #host-side .ve-touch-dpad .ve-touch-center{grid-area:2/2}
+ .ve-host #host-side .ve-touch-dpad .ve-touch-right{grid-area:2/3}
+ .ve-host #host-side .ve-touch-dpad .ve-touch-down{grid-area:3/2}
+ .ve-host #host-side .ve-touch-scale button{width:43px;min-width:43px!important;height:37px;min-height:37px!important;padding:0!important;border:1px solid #598194;border-radius:6px;background:#264b5a;color:#f0ffff;font-size:25px;line-height:1}
+ .ve-host #host-side .ve-touch-scale-value{font-size:11px;font-variant-numeric:tabular-nums}
+ .ve-host #host-side .ve-quick-position{padding:5px 7px;margin:0}
+ .ve-host #host-side .ve-quick-position>strong,.ve-host #host-side .ve-quick-position>p{display:none}
+ .ve-host #host-side .ve-quick-position-controls,.ve-host #host-side .ve-move-panel,.ve-host #host-side .ve-position-reset{display:none}
+ .ve-host #host-side .ve-quick-position .ve-advanced-size{margin:2px}
+ .ve-host #host-side .ve-quick-colors{display:none}
+}
