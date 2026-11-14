@@ -48,3 +48,6 @@
 .ve-highlight-label::before{display:inline-block!important;width:7px!important;height:7px!important;margin-right:5px!important;background:var(--mark)!important}
 .ve-highlight-label:hover,.ve-highlight-label:focus-visible{background:#1b3448!important;color:#fff!important;filter:none!important}
 @media(pointer:coarse){.ve-highlight-label{min-height:28px!important;padding:4px 6px!important}}
+
+/* Selection names stay below the card, in reserved workspace space. */
+.ve-host-workspace{padding-bottom:44px!important}

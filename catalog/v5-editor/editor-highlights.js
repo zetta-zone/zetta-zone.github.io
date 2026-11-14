@@ -37,22 +37,12 @@ tag.textContent=d.name;tag.dataset.fullLabel=roles[i]+': '+(d.fullName||d.name);
 tag.dataset.node=d.id;tag.title=roles[i]+': '+(d.fullName||d.name)+(i?' — нажмите для выбора':' — текущий элемент');
 tag.setAttribute('aria-label',tag.title);
 if(i===0)window.V5EditorHost.bindHighlightHandle(tag,d.id);
-// Labels travel with their own outlines; prefer outside or below whenever space allows.
-const maxW=Math.min(i===0?170:135,Math.max(74,d.w));
-tag.style.width='auto';tag.style.maxWidth=maxW+'px';
-const w=Math.min(maxW,tag.offsetWidth),h=tag.offsetHeight;
-const candidates=[
- {x:d.x+3,y:d.y+d.h+3},
- {x:d.x+3,y:d.y-h-3},
- {x:d.x+d.w-w-3,y:d.y+d.h+3},
- {x:d.x+d.w+3,y:d.y+3},
- {x:d.x-w-3,y:d.y+3}
-];
-const safe=candidates.find(p=>p.x>=bounds.left&&p.x+w<=bounds.right&&p.y>=bounds.top&&p.y+h<=bounds.bottom&&!placed.some(v=>intersects({...p,w,h},v))&&!protectedRects.some(v=>intersects({...p,w,h},v)));
-const fallback={x:clamp(d.x+3,bounds.left,bounds.right-w),y:clamp(d.y+d.h+4+i*(h+3),bounds.top,bounds.bottom-h)};
-const p=safe||fallback;
-placed.push({...p,w,h});tag.dataset.placement=safe?'near':'edge';
-Object.assign(tag.style,{left:p.x+'px',top:p.y+'px'});
+// Keep names in a reserved bottom strip, outside the editable card.
+const slot=Math.max(1,(bounds.right-bounds.left-8)/3);
+tag.style.width=Math.min(220,slot)+'px';tag.style.maxWidth=Math.min(220,slot)+'px';
+tag.dataset.placement='bottom';
+Object.assign(tag.style,{left:(bounds.left+i*(Math.min(220,slot)+4))+'px',top:(bounds.bottom-32)+'px'});
+
 }
 }
 requestAnimationFrame(draw);
