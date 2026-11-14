@@ -317,3 +317,14 @@ body.ve-host #host-side .ve-panel .v51-breadcrumb button{
  white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere;
  text-align:left;line-height:1.35;height:auto;
 }
+
+/* Step, direction pad and scale share one compact horizontal row. */
+body.ve-host #host-side .ve-panel .ve-move-panel{
+ display:grid;grid-template-columns:auto auto auto;
+ justify-content:center;align-items:center;gap:10px;margin:4px 0 0;padding:0;
+}
+body.ve-host #host-side .ve-panel .ve-move-options{grid-column:1;grid-row:1;width:auto}
+body.ve-host #host-side .ve-panel .ve-move-options label{display:flex;flex-direction:column;gap:3px;text-align:center;min-width:0}
+body.ve-host #host-side .ve-panel .ve-move-options select{width:64px;max-width:100%}
+body.ve-host #host-side .ve-panel .ve-dpad{grid-column:2;grid-row:1}
+body.ve-host #host-side .ve-panel .ve-move-panel>.ve-touch-scale{grid-column:3;grid-row:1;grid-template-columns:34px 34px;gap:3px}
