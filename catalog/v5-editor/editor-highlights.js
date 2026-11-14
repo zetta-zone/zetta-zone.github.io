@@ -41,7 +41,7 @@ if(i===0)window.V5EditorHost.bindHighlightHandle(tag,d.id);
 const slot=Math.max(1,(bounds.right-bounds.left-8)/3);
 tag.style.width=Math.min(220,slot)+'px';tag.style.maxWidth=Math.min(220,slot)+'px';
 tag.dataset.placement='bottom';
-Object.assign(tag.style,{left:(bounds.left+i*(Math.min(220,slot)+4))+'px',top:(bounds.bottom-32)+'px'});
+Object.assign(tag.style,{left:(bounds.left+(data.length-1-i)*(Math.min(220,slot)+4))+'px',top:(bounds.bottom-32)+'px'});
 
 }
 }
