@@ -101,3 +101,40 @@
  .ve-host.ve-controls-compact #host-side .ve-tabs{padding:2px 0!important}
  .ve-host.ve-controls-compact #host-side .ve-sticky-head>.ve-open-data{margin:3px 0!important;min-height:35px!important;padding:4px!important}
 }
+
+
+/* V5.1 adaptive editor controls; preview/card styles are untouched. */
+.ve-host #host-side .ve-tabs{display:flex;flex-wrap:nowrap;gap:3px;min-width:0;overflow:hidden;container-type:normal}
+.ve-host #host-side .ve-tabs button{flex:1 1 0;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-inline:2px}
+.ve-host #host-side .ve-quick-actions{display:flex;flex-wrap:nowrap;gap:3px}
+.ve-host #host-side .ve-quick-actions button{flex:1 1 0;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@container (max-width:350px){
+ .ve-tabs [data-pane-tab="content"]{font-size:0!important}
+ .ve-tabs [data-pane-tab="content"]::before{content:"✎";font-size:18px}
+ .ve-tabs [data-pane-tab="design"]{font-size:0!important}
+ .ve-tabs [data-pane-tab="design"]::before{content:"◈";font-size:18px}
+ .ve-tabs [data-pane-tab="blocks"]{font-size:0!important}
+ .ve-tabs [data-pane-tab="blocks"]::before{content:"▦";font-size:18px}
+ .ve-tabs [data-pane-tab="tools"]{font-size:0!important}
+ .ve-tabs [data-pane-tab="tools"]::before{content:"⇩";font-size:18px}
+}
+/* Tablet portrait: action rail and the selected tool sit side by side. */
+@media (pointer:coarse) and (orientation:portrait) and (min-width:700px){
+ .ve-host.ve-panel-bottom #host-side>.ve-panel{display:grid;grid-template-columns:minmax(180px,29%) minmax(0,1fr);grid-template-rows:auto auto auto minmax(0,1fr);column-gap:10px;align-content:start;overflow:auto}
+ .ve-host.ve-panel-bottom #host-side .ve-sticky-head{grid-column:1;grid-row:1 / span 4;position:sticky;top:0;align-self:start;min-width:0;z-index:3}
+ .ve-host.ve-panel-bottom #host-side .ve-sticky-head .ve-tabs{display:flex;flex-direction:column;align-items:stretch;gap:4px;overflow:visible}
+ .ve-host.ve-panel-bottom #host-side .ve-sticky-head .ve-tabs button{width:100%;flex:none;text-align:left;min-height:36px}
+ .ve-host.ve-panel-bottom #host-side .ve-sticky-head .ve-quick-actions{display:flex;flex-wrap:nowrap}
+ .ve-host.ve-panel-bottom #host-side .ve-panel>.ve-pane{grid-column:2;grid-row:4;min-width:0;margin-top:0}
+ .ve-host.ve-panel-bottom #host-side .ve-panel>.ve-selection{grid-column:2;grid-row:3}
+ .ve-host.ve-panel-bottom #host-side .ve-panel>.ve-node-row{grid-column:2;grid-row:2}
+ .ve-host.ve-panel-bottom #host-side .ve-panel>label{grid-column:2;grid-row:1}
+ .ve-host.ve-panel-bottom #host-side .ve-panel>.ve-data-dialog{grid-column:1 / -1}
+}
+/* Phone landscape uses the same top-action/bottom-tool structure as tablet landscape. */
+@media(pointer:coarse) and (orientation:landscape) and (max-height:550px){
+ .ve-host:not(.ve-panel-bottom) .ve-host-layout>#host-side{min-width:185px;max-width:65%;flex-basis:var(--panel-width,40%);width:var(--panel-width,40%)}
+ .ve-host #host-side>.ve-panel{padding:5px}
+ .ve-host #host-side .ve-sticky-head>.ve-open-data{min-height:30px;padding:3px}
+ .ve-host #host-side .ve-tabs button{min-height:34px}
+}
