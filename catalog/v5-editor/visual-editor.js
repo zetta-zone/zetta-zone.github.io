@@ -60,6 +60,9 @@ $('#ve-hidden').replaceChildren();for(const [id,v]of Object.entries(state.hidden
 const textTools=panel.querySelector('.ve-content-text');if(textTools)textTools.hidden=!ts.length&&!n.matches('p,h1,h2,h3,h4,span,small,b,strong,dt,dd,button');
 const linkTools=panel.querySelector('.ve-content-link');if(linkTools)linkTools.hidden=!n.matches('a');
 const activeName=panel.querySelector('.ve-active-object');if(activeName)activeName.textContent='Выбрано: '+label(n);
+const touchChoice=panel.querySelector('.ve-touch-color select'),touchPaint=panel.querySelector('.ve-touch-color input[type=color]');
+if(touchChoice&&touchPaint){const currentColor=panel.querySelector('[data-style="'+touchChoice.value+'"]');if(currentColor&&currentColor.value)touchPaint.value=currentColor.value}
+const touchZoom=panel.querySelector('.ve-touch-scale-value');if(touchZoom){const currentZoom=Number(state.styles[selected]?.zoom)||Number.parseFloat(getComputedStyle(n).zoom)||1;touchZoom.textContent=Math.round(currentZoom*100)+'%'}
 const href=$('#ve-href');if(href){href.disabled=!n.matches('a');href.value=n.getAttribute('href')||''}const history=$('#ve-history');if(history){history.replaceChildren();historyNames.forEach((name,i)=>{const li=document.createElement('li'),b=document.createElement('button');b.textContent=(i+1)+'. '+name;b.title='Вернуться к состоянию до этого изменения';b.onclick=()=>{while(past.length>i)actions.undo()};li.append(b);history.append(li)})}v51?.refresh();host?.decorate()}
 $('#ve-fragment').onchange=()=>{$('#ve-text').value=[...nodes.get(selected).childNodes].filter(n=>n.nodeType===3)[+$('#ve-fragment').value]?.textContent||''};
 function select(id,inspect=false){if(!nodes.has(id))return;selected=id;v51?.reveal();for(const [k,n]of nodes)n.classList.toggle('ve-selected',editing&&!host&&k===id);refresh();if(editing&&host){host.elementSelected?.();if(inspect)showPane('content');else showPane(pane);panel.querySelector('[data-pane="'+pane+'"]')?.scrollIntoView({block:'nearest'});}}
@@ -223,6 +226,36 @@ const colorTitle=document.createElement('strong');colorTitle.textContent='Цве
 quickColor.append(colorTitle);
 for(const k of ['color','backgroundColor','borderColor']){const l=controls.get(k);if(l){l.classList.add('ve-main-color');quickColor.append(l)}}
 content.prepend(activeName,quickPosition,quickColor);
+// Compact touch-first inspector: color on the left, move in the middle, zoom +/- on the right.
+const touchBar=document.createElement('div');touchBar.className='ve-touch-actions';
+const touchColor=document.createElement('div');touchColor.className='ve-touch-color';
+const touchColorType=document.createElement('select');touchColorType.setAttribute('aria-label','Что перекрасить');
+for(const [key,name]of [['backgroundColor','Фон'],['borderColor','Рамка'],['color','Текст']])touchColorType.add(new Option(name,key));
+const touchColorInput=document.createElement('input');touchColorInput.type='color';touchColorInput.setAttribute('aria-label','Выбрать цвет');
+touchColorInput.title='Цвет выбранного элемента';
+touchColorInput.oninput=()=>{const original=controls.get(touchColorType.value)?.querySelector('[data-style]');if(!original)return;original.value=touchColorInput.value;original.dispatchEvent(new Event('input',{bubbles:true}))};
+touchColorType.onchange=()=>{const original=controls.get(touchColorType.value)?.querySelector('[data-style]');if(original)touchColorInput.value=original.value};
+const touchColorTitle=document.createElement('span');touchColorTitle.textContent='Цвет';
+touchColor.append(touchColorTitle,touchColorType,touchColorInput);
+const touchMoves=document.createElement('div');touchMoves.className='ve-touch-moves';
+const touchMovesTitle=document.createElement('span');touchMovesTitle.textContent='Двигать';
+const touchGrid=document.createElement('div');touchGrid.className='ve-touch-dpad';
+for(const [symbol,caption,dx,dy,pos]of [['↑','Вверх',0,-1,'up'],['←','Влево',-1,0,'left'],['⊙','Сбросить положение',0,0,'center'],['→','Вправо',1,0,'right'],['↓','Вниз',0,1,'down']]){
+const b=document.createElement('button');b.type='button';b.className='ve-touch-'+pos;b.textContent=symbol;b.title=caption;b.setAttribute('aria-label',caption);
+b.onclick=pos==='center'?()=>resetPosition.click():()=>nudge(dx,dy);touchGrid.append(b)}
+touchMoves.append(touchMovesTitle,touchGrid);
+const touchScale=document.createElement('div');touchScale.className='ve-touch-scale';
+const touchScaleTitle=document.createElement('span');touchScaleTitle.textContent='Масштаб';
+const touchScaleValue=document.createElement('output');touchScaleValue.className='ve-touch-scale-value';touchScaleValue.textContent='100%';
+function changeScale(dir){const current=Number(state.styles[selected]?.zoom)||Number.parseFloat(getComputedStyle(nodes.get(selected)).zoom)||1;
+const next=Math.max(.25,Math.min(3,Math.round((current+dir*.1)*100)/100));
+change(s=>{s.styles[selected]||={};s.styles[selected].zoom=next},'quick-zoom:'+selected,'Масштаб выбранного элемента')}
+for(const [caption,symbol,dir]of [['Увеличить пропорционально','+',1],['Уменьшить пропорционально','−',-1]]){
+const b=document.createElement('button');b.type='button';b.textContent=symbol;b.title=caption;b.setAttribute('aria-label',caption);b.onclick=()=>changeScale(dir);
+touchScale.append(b)}
+touchScale.prepend(touchScaleTitle);touchScale.append(touchScaleValue);
+touchBar.append(touchColor,touchMoves,touchScale);content.insertBefore(touchBar,quickPosition);
+
 scaleLabel.title='Увеличить или уменьшить выбранный элемент целиком, сохраняя пропорции';
 const intro=document.createElement('p');intro.textContent='Выберите цель и место вставки, затем добавьте готовый компонент.';const libraryLabel=document.createElement('label');libraryLabel.textContent='Библиотека компонентов';const library=document.createElement('select');library.id='ve-library';for(const [id,v]of Object.entries(S.library))library.add(new Option(v.name,id));libraryLabel.append(library);const add=document.createElement('button');add.textContent='＋ Добавить блок';add.onclick=actions.add;const duplicate=document.createElement('button');duplicate.textContent='Дублировать выбранное';duplicate.onclick=actions.duplicate;blocks.open=true;blocks.querySelector('summary')?.remove();take('[data-action="hide"]').textContent='Скрыть / показать выбранное';take('[data-action="recover"]').textContent='Восстановить из скрытых';take('[data-action="move"]').textContent='Переместить к цели';blockPane.append(intro,libraryLabel,add,duplicate,blocks);
 const tabs=document.createElement('nav');tabs.className='ve-tabs';tabs.setAttribute('role','tablist');tabs.setAttribute('aria-label','Разделы управления');for(const [id,name]of [['content','Элемент'],['design','Оформление'],['blocks','Структура'],['tools','Файлы']]){const b=document.createElement('button');b.textContent=name;b.dataset.paneTab=id;b.setAttribute('role','tab');b.setAttribute('aria-controls','ve-pane-'+id);b.onclick=()=>showPane(id);b.title=({content:'Выбранный элемент: текст, изображение, логотип',design:'Размеры, отступы, цвета и оформление выбранного элемента',blocks:'Добавление, перемещение, скрытие и порядок блоков',tools:'Импорт, экспорт, история и восстановление'})[id];tabs.append(b)}const selection=document.createElement('div');selection.className='ve-selection';const history=document.createElement('details');const summary=document.createElement('summary');summary.textContent='История изменений';const list=document.createElement('ol');list.className='ve-history';list.id='ve-history';history.append(summary,list);footer.prepend(history);const sticky=document.createElement('div');sticky.className='ve-sticky-head';const head=document.createElement('div');head.className='ve-panel-head';dock.textContent='⇆ Панель';dock.setAttribute('aria-label','Панель слева / справа');dock.title='Перенести боковую панель слева направо или обратно';head.append(title,dock);const quick=document.createElement('div');quick.className='ve-quick-actions';for(const action of ['save','undo','redo'])quick.append(footer.querySelector('[data-action="'+action+'"]'));sticky.append(head,quick,tabs);const nodeRow=document.createElement('div');nodeRow.className='ve-node-row';parent.setAttribute('aria-label','Родитель ↑');parent.textContent='↑';nodeRow.append(nodeLabel,parent);const toolsPane=document.createElement('section');toolsPane.className='ve-pane';toolsPane.dataset.pane='tools';toolsPane.id='ve-pane-tools';toolsPane.setAttribute('role','tabpanel');toolsPane.append(footer);
