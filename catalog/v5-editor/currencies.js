@@ -11,13 +11,13 @@ function group(p,key,view,layout){
  const items=(window.V51Model?V51Model.visibleItems(p,key,view,undefined,layout):p[key]||[]).filter(c=>c&&(c.ticker||c.name));
  if(!items.length)return '';
  const internal=key==='internalCurrencies',caption=p[key+'Caption']??(internal?'Внутриигровые валюты':'');
- return '<section class="currency-group" data-currency-group="'+key+'" aria-label="'+(internal?'Внутриигровые валюты':'Валюты проекта')+'" data-preserve-content>'+ (caption.trim()?'<p class="currency-caption" data-v51-field="'+key+'Caption">'+E(caption)+'</p>':'')+'<div class="currency-row" tabindex="0" aria-label="'+(internal?'Внутриигровые валюты':'Валюты проекта')+'">'+items.map(c=>'<span class="currency-item" title="'+E(c.name||c.ticker)+'"><span class="coin-icon">'+V5ProjectVisual.coin(c)+'</span><span>'+E(c.ticker||c.name)+'</span></span>').join('')+'</div></section>';
+ return '<section class="currency-group" data-currency-group="'+key+'" aria-label="'+(internal?'Внутриигровые валюты':'Валюты проекта')+'" data-preserve-content>'+ (caption.trim()?'<p class="currency-caption" data-v51-field="'+key+'Caption">'+E(caption)+'</p>':'')+'<div class="currency-row" tabindex="0" aria-label="'+(internal?'Внутриигровые валюты':'Валюты проекта')+'">'+items.map(c=>'<span class="currency-item" tabindex="0" data-rc-tip="'+E((c.ticker?c.ticker+' · ':'')+(c.name||''))+'" aria-label="'+E((c.ticker?c.ticker+' · ':'')+(c.name||''))+'" title="'+E(c.name||c.ticker)+'"><span class="coin-icon">'+V5ProjectVisual.coin(c)+'</span><span>'+E(c.ticker||c.name)+'</span></span>').join('')+'</div></section>';
 }
 function rollerGroup(p,key,view,layout){
  const internal=key==='internalCurrencies',items=(window.V51Model?V51Model.visibleItems(p,key,view,undefined,layout):p[key]||[]).filter(c=>c&&(c.ticker||c.name));
  if(!items.length)return '';
  const caption=p[key+'Caption']??(internal?'Внутриигровые валюты':'');
- return '<section class="currency-group rc-currency-group" data-currency-group="'+key+'" data-preserve-content aria-label="'+(internal?'Внутриигровые валюты':'Криптовалюты')+'">'+(caption.trim()?'<p class="currency-caption" data-v51-field="'+key+'Caption">'+E(caption)+'</p>':'')+'<div class="currency-row" style="--rc-count:'+items.length+'" tabindex="0" aria-label="'+(internal?'Внутриигровые валюты':'Криптовалюты — прокрутите по горизонтали')+'">'+items.map(c=>{const restricted=!internal&&['ALGO','USDT'].includes(c.ticker),tip=(c.ticker?c.ticker+' · ':'')+(c.name||'')+(restricted?' — майнинг, депозит и реинвестирование доступны; вывод недоступен.':internal?' — внутриигровая валюта.':' — условия вывода зависят от валюты и сети.');return '<button type="button" class="currency-item rc-currency" data-rc-tip="'+E(tip)+'" aria-label="'+E(tip)+'"'+(restricted?' data-no-withdraw="true"':'')+'><span class="coin-icon">'+V5ProjectVisual.coin(c)+'</span></button>'}).join('')+'</div></section>';
+ return '<section class="currency-group rc-currency-group" data-currency-group="'+key+'" data-preserve-content aria-label="'+(internal?'Внутриигровые валюты':'Криптовалюты')+'">'+(caption.trim()?'<p class="currency-caption" data-v51-field="'+key+'Caption">'+E(caption)+'</p>':'')+'<div class="currency-row" style="--rc-count:'+items.length+'" tabindex="0" aria-label="'+(internal?'Внутриигровые валюты':'Криптовалюты')+'">'+items.map(c=>{const restricted=!internal&&['ALGO','USDT'].includes(c.ticker),tip=(c.ticker?c.ticker+' · ':'')+(c.name||'')+(restricted?' — майнинг, депозит и реинвестирование доступны; вывод недоступен.':internal?' — внутриигровая валюта.':' — условия вывода зависят от валюты и сети.');return '<button type="button" class="currency-item rc-currency" data-rc-tip="'+E(tip)+'" aria-label="'+E(tip)+'"'+(restricted?' data-no-withdraw="true"':'')+'><span class="coin-icon">'+V5ProjectVisual.coin(c)+'</span></button>'}).join('')+'</div></section>';
 }
 function rollerWithdrawal(p){const l=p.legacy||{},yes=v=>v===true?'Да':v===false?'Нет':'Уточнить';return '<section class="rc-withdrawal" data-preserve-content aria-label="Вывод средств"><strong>Вывод средств</strong><span>Минимум: '+E(l.minWithdraw||p.withdrawalLabel||'зависит от валюты и сети')+'</span><span>FaucetPay: '+yes(l.faucetpaySupported)+' · Direct Wallet: '+yes(l.directWalletSupported)+'</span><span>Способ: внешний криптокошелёк</span></section>';}
 function html(p,view='cards',layout){if(p.id==='rollercoin')return (view==='detail'?'':rollerWithdrawal(p))+rollerGroup(p,'internalCurrencies',view,layout)+rollerGroup(p,'coins',view,layout);return group(p,'coins',view,layout)+group(p,'internalCurrencies',view,layout)}
@@ -39,5 +39,16 @@ document.addEventListener('focusout',close);
 document.addEventListener('click',e=>{const t=e.target.closest('[data-rc-tip]');if(t){show(t)}else close()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
 addEventListener('scroll',close,true);addEventListener('resize',close);
-window.V5Currencies={html,paint};
+// Fit icons by overlapping neighbours instead of scrolling or clipping currencies.
+const observed=new Set();let queued=false;
+function fitRows(){queued=false;for(const row of observed)if(!row.isConnected){rowObserver.unobserve(row);observed.delete(row)}
+for(const row of document.querySelectorAll('.currency-row')){if(!observed.has(row)){observed.add(row);rowObserver.observe(row)}
+const items=[...row.children].filter(n=>n.matches('.currency-item')&&!n.hidden);const count=items.length;if(!count)continue;
+const available=Math.max(0,row.clientWidth-4),size=Math.min(28,available),step=count>1?Math.min(size+6,Math.max(0,(available-size)/(count-1))):0;
+row.style.setProperty('--currency-size',size+'px');row.style.setProperty('--currency-step',step+'px');
+}}
+function queueFit(){if(!queued){queued=true;requestAnimationFrame(fitRows)}}
+const rowObserver=new ResizeObserver(queueFit);new MutationObserver(queueFit).observe(document.body,{childList:true,subtree:true});
+addEventListener('resize',queueFit);addEventListener('v5:editor-apply',queueFit);addEventListener('v5:catalog-render',queueFit);queueFit();
+window.V5Currencies={html,paint,fit:queueFit};
 })();
