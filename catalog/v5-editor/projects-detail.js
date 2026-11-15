@@ -18,5 +18,5 @@ for(const key of ['editorial','external'])document.querySelectorAll('[data-dialo
 set('[data-mobile-editorial] strong,[data-reading-editorial] strong','—');
 for(const [key,title]of [['faucetpay','Условия пополнения'],['wallet','Условия вывода']])document.querySelectorAll('[data-dialog="'+key+'"]').forEach(b=>{b.textContent=title+' ↗';b.onclick=()=>openDialog(title,'<p>Способы, минимумы, комиссии и сроки требуют проверки.</p>'+sources())});
 document.querySelectorAll('.registration').forEach(b=>{b.textContent='Официальный сайт ↗';b.onclick=()=>window.open(p.officialUrl,'_blank','noopener,noreferrer')});
-function coinStatus(){set('#coin-detail .demo-tag','УСЛОВИЯ НЕ ПРОВЕРЕНЫ')}coinStatus();new MutationObserver(coinStatus).observe(document.querySelector('#coin-detail'),{childList:true});
+function coinStatus(){set('#coin-detail .demo-tag','УСЛОВИЯ НЕ ПРОВЕРЕНЫ')}coinStatus();const coinDetail=document.querySelector('#coin-detail');if(coinDetail)new MutationObserver(coinStatus).observe(coinDetail,{childList:true});
 })();
