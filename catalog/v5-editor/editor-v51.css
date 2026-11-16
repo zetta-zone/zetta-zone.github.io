@@ -381,24 +381,18 @@ body.ve-host #host-side #v5-geometry-copy>select{width:100%;margin:4px 0;min-hei
 body.ve-host #host-side #v5-geometry-copy>button{display:block;width:100%;margin:6px 0;font-size:12px}
 body.ve-host #host-side #v5-geometry-copy pre{font:11px/1.5 system-ui;white-space:pre-wrap;overflow-wrap:anywhere;color:#bdebdc}
 
-/* V5-Editor only: consistent geometry for HashGarden test 02/03/04 cards. */
-#results.cards>.demo-layout>.card-body{display:flex;flex-direction:column;gap:14px;height:620px;padding:18px;box-sizing:border-box}
-#results.cards>.demo-layout .demo-header{flex:0 0 170px;min-width:0;display:flex;flex-direction:column;gap:10px}
-#results.cards>.demo-layout .demo-category{font-size:10px;line-height:16px;color:var(--muted);height:16px}
-#results.cards>.demo-layout .project-main{display:flex;align-items:flex-start;gap:10px;margin:0}
-#results.cards>.demo-layout .project-copy{flex:1;min-width:0}
-#results.cards>.demo-layout .project-title{margin:0;line-height:24px;font-size:17px}
-#results.cards>.demo-layout .demo-short{font-size:11px;line-height:17px;height:51px;margin:4px 0 6px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-#results.cards>.demo-layout .demo-platforms{height:22px;display:flex;align-items:center}
-#results.cards>.demo-layout .demo-tools{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto}
-#results.cards>.demo-layout .demo-tools .compact-ratings{padding:0;border:0;gap:12px}
-#results.cards>.demo-layout .feature-grid{height:84px;flex:0 0 84px;margin:0}
-#results.cards>.demo-layout .currency-groups{display:flex;flex-direction:column;gap:8px;margin:0;min-height:130px}
-#results.cards>.demo-layout .currency-caption{font-size:10px;line-height:14px;font-weight:400;color:var(--muted);margin:0 0 4px}
-#results.cards>.demo-layout .currency-group{margin:0}
+/* Only the requested demo cards: retain the standard CoinGrinding card flow. */
+#results.cards>.demo-layout>.card-body{display:flex;flex-direction:column;gap:0;height:auto;padding:12px}
+#results.cards>.demo-layout .demo-category{font-size:9px;line-height:14px;color:var(--muted);margin-bottom:4px}
+#results.cards>.demo-layout .project-main{align-items:flex-start;min-height:80px;margin-bottom:8px;padding-bottom:8px}
+#results.cards>.demo-layout .project-copy{min-width:0}
+#results.cards>.demo-layout .demo-short{font-size:9px;line-height:14px;margin:2px 0;min-height:28px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+#results.cards>.demo-layout .demo-platforms{display:flex;align-items:center;min-height:14px}
+#results.cards>.demo-layout .description-wrap{min-height:80px;margin-bottom:4px}
+#results.cards>.demo-layout .feature-grid{min-height:84px;flex-shrink:0}
+#results.cards>.demo-layout .currency-groups{display:flex;flex-direction:column;gap:5px;margin:0 0 8px;min-height:118px}
+#results.cards>.demo-layout .currency-group{margin:0;padding:0;border:0}
+#results.cards>.demo-layout .currency-caption{font-size:10px;line-height:14px;font-weight:400;color:var(--muted);margin:0 0 2px}
 #results.cards>.demo-layout .demo-currency-note{font-size:9px;line-height:13px;color:var(--muted)}
-#results.cards>.demo-layout .card-actions{display:flex;margin: auto 0 0;gap:8px;flex-shrink:0}
-#results.cards>.demo-layout:has(.benefit-explanation:not([hidden]))>.card-body{height:auto;min-height:620px}
-@media(max-width:700px){#results.cards>.demo-layout>.card-body{padding:14px;height:620px}}
-
-#results.cards>.demo-layout .currency-group{border:0;padding:0}
+#results.cards>.demo-layout .card-actions{margin-top:auto;flex-shrink:0}
+@media(max-width:600px){#results.cards>.demo-layout .project-main{min-height:86px}}
