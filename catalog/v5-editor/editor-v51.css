@@ -396,3 +396,6 @@ body.ve-host #host-side #v5-geometry-copy pre{font:11px/1.5 system-ui;white-spac
 #results.cards>.demo-layout .demo-currency-note{font-size:9px;line-height:13px;color:var(--muted)}
 #results.cards>.demo-layout .card-actions{margin-top:auto;flex-shrink:0}
 @media(max-width:600px){#results.cards>.demo-layout .project-main{min-height:86px}}
+
+/* Explicit editor height takes precedence over the default two-line slot. */
+#results.cards>.demo-layout .demo-short[style*="height:"]{min-height:0}
