@@ -20,7 +20,13 @@ function rollerGroup(p,key,view,layout){
  return '<section class="currency-group rc-currency-group" data-currency-group="'+key+'" data-preserve-content aria-label="'+(internal?'Внутриигровые валюты':'Криптовалюты')+'">'+(caption.trim()?'<p class="currency-caption" data-v51-field="'+key+'Caption">'+E(caption)+'</p>':'')+'<div class="currency-row" style="--rc-count:'+items.length+'" tabindex="0" aria-label="'+(internal?'Внутриигровые валюты':'Криптовалюты')+'">'+items.map(c=>{const restricted=!internal&&['ALGO','USDT'].includes(c.ticker),tip=(c.ticker?c.ticker+' · ':'')+(c.name||'')+(restricted?' — майнинг, депозит и реинвестирование доступны; вывод недоступен.':internal?' — внутриигровая валюта.':' — условия вывода зависят от валюты и сети.');return '<button type="button" class="currency-item rc-currency" data-rc-tip="'+E(tip)+'" aria-label="'+E(tip)+'"'+(restricted?' data-no-withdraw="true"':'')+'><span class="coin-icon">'+V5ProjectVisual.coin(c)+'</span></button>'}).join('')+'</div></section>';
 }
 function rollerWithdrawal(p){const l=p.legacy||{},yes=v=>v===true?'Да':v===false?'Нет':'Уточнить';return '<section class="rc-withdrawal" data-preserve-content aria-label="Вывод средств"><strong>Вывод средств</strong><span>Минимум: '+E(l.minWithdraw||p.withdrawalLabel||'зависит от валюты и сети')+'</span><span>FaucetPay: '+yes(l.faucetpaySupported)+' · Direct Wallet: '+yes(l.directWalletSupported)+'</span><span>Способ: внешний криптокошелёк</span></section>';}
-function html(p,view='cards',layout){if(p.id==='rollercoin')return (view==='detail'?'':rollerWithdrawal(p))+rollerGroup(p,'internalCurrencies',view,layout)+rollerGroup(p,'coins',view,layout);return group(p,'coins',view,layout)+group(p,'internalCurrencies',view,layout)}
+function html(p,view='cards',layout){
+ if(view==='cards'&&p.demo===true&&/^hashgarden-test-0[234]$/.test(p.id)){
+ // Display-only examples: never persist or replace the project's financial data.
+ const sample={...p,internalCurrencies:[{ticker:'SEED',name:'Игровые семена',icon:'assets/demo-seed.svg'}],coins:[{ticker:'BTC',name:'Bitcoin'},{ticker:'LTC',name:'Litecoin'},{ticker:'USDT',name:'Tether'}],internalCurrenciesCaption:'Внутриигровые валюты',coinsCaption:'Пополнение и вывод'};
+ return group(sample,'internalCurrencies',view)+group(sample,'coins',view)+'<div class="demo-currency-note" data-preserve-content>Условные валюты · пример интерфейса. Выплаты не подтверждены.</div>';
+ }
+if(p.id==='rollercoin')return (view==='detail'?'':rollerWithdrawal(p))+rollerGroup(p,'internalCurrencies',view,layout)+rollerGroup(p,'coins',view,layout);return group(p,'coins',view,layout)+group(p,'internalCurrencies',view,layout)}
 function paint(root,p,view,layout){
  if(p.id==='rollercoin')root.dataset.project='rollercoin';
  const detail=root.matches('.dossier');let host=root.querySelector('[data-currency-groups]');
