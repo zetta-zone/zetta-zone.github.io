@@ -83,7 +83,9 @@ const semanticRoles=[
  ['.card-footer','Блок · Служебные сведения'],['.section-no,.caption-number','Метка · Раздел'],
  ['.demo-tag,.demo-notice','Метка · Демонстрация'],['.section-heading','Группа · Заголовок раздела']
 ];
-function semanticLabel(n){
+const semanticNames=new WeakMap();
+function semanticLabel(n){if(!semanticNames.has(n))semanticNames.set(n,deriveSemanticLabel(n));return semanticNames.get(n)}
+function deriveSemanticLabel(n){
  if(n===root)return 'Карточка целиком';
  for(const [selector,name] of semanticRoles)if(n.matches(selector))return name;
  const b=bindings.get(n),field=b?.path?.split('.')[0];
