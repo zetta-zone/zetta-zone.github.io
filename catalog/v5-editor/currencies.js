@@ -24,7 +24,7 @@ function html(p,view='cards',layout){
  if(view==='cards'&&p.demo===true&&/^hashgarden-test-0[234]$/.test(p.id)){
  // Display-only examples: never persist or replace the project's financial data.
  const sample={...p,internalCurrencies:[{ticker:'SEED',name:'Игровые семена',icon:'assets/demo-seed.svg'}],coins:[{ticker:'BTC',name:'Bitcoin'},{ticker:'LTC',name:'Litecoin'},{ticker:'USDT',name:'Tether'}],internalCurrenciesCaption:'Внутриигровые валюты',coinsCaption:'Пополнение и вывод'};
- return group(sample,'internalCurrencies',view)+group(sample,'coins',view)+'<div class="demo-currency-note" data-preserve-content data-v51-field="currencyNote">'+E(p.currencyNote??'Условные валюты · пример интерфейса. Выплаты не подтверждены.')+'</div>';
+ return group(sample,'internalCurrencies',view)+group(sample,'coins',view);
  }
 if(p.id==='rollercoin')return (view==='detail'?'':rollerWithdrawal(p))+rollerGroup(p,'internalCurrencies',view,layout)+rollerGroup(p,'coins',view,layout);return group(p,'coins',view,layout)+group(p,'internalCurrencies',view,layout)}
 function paint(root,p,view,layout){
