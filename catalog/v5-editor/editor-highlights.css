@@ -51,3 +51,7 @@
 
 /* Selection names stay below the card, in reserved workspace space. */
 .ve-host-workspace{padding-bottom:44px!important}
+
+/* Workspace-only selection fill: never written into project styles. */
+.ve-highlight-box{box-sizing:border-box}
+.ve-highlight-box[data-level="0"]{background:rgba(41,186,255,.18);border-color:#009eea}

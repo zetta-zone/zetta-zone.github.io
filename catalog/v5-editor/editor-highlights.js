@@ -27,11 +27,14 @@ if(!frame||!chain.length){layer.hidden=true;return}
 const a=area.getBoundingClientRect(),f=frame.getBoundingClientRect(),canvas=document.querySelector('#host-canvas').getBoundingClientRect(),sx=f.width/frame.clientWidth,sy=f.height/frame.clientHeight;
 const clip={left:Math.max(0,a.left,f.left,canvas.left),top:Math.max(0,a.top,f.top,canvas.top),right:Math.min(innerWidth,a.right,f.right,canvas.right),bottom:Math.min(innerHeight,a.bottom,f.bottom,canvas.bottom)};
 const bounds={left:Math.max(0,a.left)+3,top:Math.max(0,a.top)+3,right:Math.min(innerWidth,a.right)-3,bottom:Math.min(innerHeight,a.bottom)-3};
-const data=chain.slice(0,parents?3:1).map((c,i)=>{const r=c.node.getBoundingClientRect();return {...c,i,x:f.left+r.left*sx,y:f.top+r.top*sy,w:r.width*sx,h:r.height*sy}});
+const data=chain.slice(0,parents?3:1).map((c,i)=>{const r=c.node.getBoundingClientRect(),visibleClip={...clip};
+// Respect actual clipping ancestors, including small scrolled/hidden groups.
+for(let n=c.node.parentElement;n;n=n.parentElement){const style=n.ownerDocument.defaultView.getComputedStyle(n),b=n.getBoundingClientRect(),nx=b.width/(n.offsetWidth||b.width||1),ny=b.height/(n.offsetHeight||b.height||1);if(style.overflowX!=='visible'){visibleClip.left=Math.max(visibleClip.left,f.left+(b.left+n.clientLeft*nx)*sx);visibleClip.right=Math.min(visibleClip.right,f.left+(b.left+(n.clientLeft+n.clientWidth)*nx)*sx)}if(style.overflowY!=='visible'){visibleClip.top=Math.max(visibleClip.top,f.top+(b.top+n.clientTop*ny)*sy);visibleClip.bottom=Math.min(visibleClip.bottom,f.top+(b.top+(n.clientTop+n.clientHeight)*ny)*sy)}}
+return {...c,i,visibleClip,x:f.left+r.left*sx,y:f.top+r.top*sy,w:r.width*sx,h:r.height*sy}});
 const signature=JSON.stringify([clip,bounds,data.map(({node,...d})=>d)]);layer.hidden=false;if(signature===previous)return;previous=signature;
 gutter.hidden=true;
 const protectedRects=contentRects(chain,f,sx,sy,clip),placed=[];
-for(const i of [2,1,0]){const {box,tag}=items[i],d=data[i];const visible=clip.right>clip.left&&clip.bottom>clip.top&&d&&d.w>0&&d.h>0&&d.x<clip.right&&d.x+d.w>clip.left&&d.y<clip.bottom&&d.y+d.h>clip.top;box.hidden=tag.hidden=!visible;if(!visible)continue;
+for(const i of [2,1,0]){const {box,tag}=items[i],d=data[i],clip=d?.visibleClip;const visible=d&&clip.right>clip.left&&clip.bottom>clip.top&&d.w>0&&d.h>0&&d.x<clip.right&&d.x+d.w>clip.left&&d.y<clip.bottom&&d.y+d.h>clip.top;box.hidden=tag.hidden=!visible;if(!visible)continue;
 Object.assign(box.style,{left:d.x+'px',top:d.y+'px',width:d.w+'px',height:d.h+'px',clipPath:`inset(${Math.max(0,clip.top-d.y)}px ${Math.max(0,d.x+d.w-clip.right)}px ${Math.max(0,d.y+d.h-clip.bottom)}px ${Math.max(0,clip.left-d.x)}px)`});
 tag.textContent=d.name;tag.dataset.fullLabel=roles[i]+': '+(d.fullName||d.name);
 tag.dataset.node=d.id;tag.title=roles[i]+': '+(d.fullName||d.name)+(i?' — нажмите для выбора':' — текущий элемент');
