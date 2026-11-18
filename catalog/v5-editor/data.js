@@ -48,3 +48,21 @@ window.V4_PROJECTS.forEach(p=>p.detailCopy=detailCopy);
 
 // V5: section-linked DEMO gallery illustrations.
 for(const [key,title] of [['finance','Финансы'],['balance','Плюсы и минусы'],['verification','Проверка'],['verdict','Итог']])DEMO_PROJECT.slides.push({image:'assets/'+key+'.svg',title,text:'Раздел «'+title+'» — информация о проекте.',tag:title.toUpperCase()+' · DEMO'});
+
+// Subterra presentation replaces only test 02. Keep its ID and unknown DEMO fields.
+(()=>{const p=V4GetProject('hashgarden-test-02');
+if(new URLSearchParams(location.search).get('project')===p.id){const card=document.querySelector('.dossier');if(card)card.dataset.project=p.id}
+Object.assign(p,{name:'Subterra',logo:'assets/subterra/logo.svg',officialUrl:'https://subterra.run/',registrationUrl:'https://subterra.run/',
+short:'Общая 3D-шахта, руда и создание виртуальных майнеров.',
+essence:'Добывайте руду в общей шахте, создавайте майнеры и развивайте свою игровую систему.',
+description:'Subterra — браузерная игра с общей 3D-шахтой, добычей руды и созданием виртуальных майнеров. На официальном сайте представлены мини-игры, кран, задания и рынок. Доступность функций и действующие условия проверяйте на сайте проекта. Финансовые поля, оценки и неподтверждённые разделы этой демо-карточки сохранены из HashGarden и не являются сведениями о Subterra.',
+overview:{lead:'Добыча руды и создание майнеров в браузере.',text:'Исследуйте общую 3D-шахту, собирайте руду и создавайте игровое оборудование. Мини-игры, кран и задания дополняют развитие. Источник: subterra.run; выплаты независимо не проверялись.'},
+features:[['⛏','Общая 3D-шахта','Официальный сайт описывает совместную шахту, которая обновляется каждый час.'],['◇','Руда и находки','В шахте можно собирать руду и игровые предметы.'],['⚒','Создание майнеров','В Forge руда используется для создания виртуальных майнеров.'],['⌘','Мини-игры','На скриншотах показаны Reflex Tap, Ore Match и Quick Math.'],['◷','Кран','Кран позволяет получать внутреннюю валюту SUBT.'],['⇄','Рынок','Marketplace и Trading представлены в навигации Subterra.'],['✦','Сезонные задания','Season Pass содержит задания и игровые награды.'],['▦','Пулы','Созданные майнеры можно использовать в игровых пулах.']],
+previewFeatures:['Общая 3D-шахта','Создание майнеров','Мини-игры','Рынок'],highlights:[{icon:'⛏',title:'Общая 3D-шахта'},{icon:'⚒',title:'Из руды — в майнеры'}],
+theme:{secondary:'#22c55e',accent:'#f7a928',soft:'#231e17',paper:'#14110d',bg:'#0a0806',ink:'#ffffff',muted:'#c8bdad',line:'#44392b'}});
+p.detailCopy={...p.detailCopy,copy0:'Добывайте руду.<br>Создавайте майнеры.',copy2:p.overview.lead,copy3:p.description,copy31:'Оформление и описание — Subterra. Неподтверждённые поля, финансовые условия и оценки сохранены из DEMO HashGarden; они не описывают условия Subterra.'};
+p.slides=p.slides.map((s,i)=>i===0?{image:'assets/subterra/mine-cavern.jpg',title:'Общая шахта Subterra',text:'Официальное изображение с subterra.run. Остальные демонстрационные разделы сохранены для ручной правки.',tag:'01 / SUBTERRA'}:{...s});p.cover=0;
+})();
+
+// Keep retained DEMO values visibly identified even in the clean preview renderer.
+addEventListener('load',()=>{if(!document.querySelector('.dossier[data-project="hashgarden-test-02"]'))return;const project=V4GetProject('hashgarden-test-02'),heading=document.querySelector('.identity h1');const note=document.createElement('p');note.dataset.preserveContent='';note.className='subterra-demo-notice';note.textContent='Subterra · демонстрационное оформление. Финансовые поля, статистика, оценки и неподтверждённые разделы сохранены из HashGarden; это не условия и не проверка выплат Subterra.';heading?.closest('.project-header')?.after(note);const logo=document.querySelector('.identity .project-logo');if(logo&&!logo.querySelector('img')){const img=document.createElement('img');img.src=project.logo;img.alt='Логотип Subterra';logo.replaceChildren(img);logo.removeAttribute('aria-hidden')}});

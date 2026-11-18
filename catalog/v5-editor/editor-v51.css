@@ -453,3 +453,19 @@ body.ve-host .v51-structure-column .v51-persistent-tree>button{min-height:28px;p
 #host-side .ve-tree-disclosure[hidden]{display:none!important}
 #host-side .ve-tree-disclosure .v51-persistent-tree>h3{display:none}
 #host-side .ve-pane>[hidden]{display:none!important}
+
+/* Original Subterra contour asset; scoped to the retained test-02 identity. */
+:is(html[data-theme] #results .project-item,.dossier)[data-project="hashgarden-test-02"]{
+ background-color:var(--bg);background-image:radial-gradient(ellipse at 70% 0%,#f7a92812,transparent 65%),url('assets/subterra/contours.svg');background-size:100% 100%,950px 950px;background-position:center,right -240px top -160px;background-repeat:no-repeat;color:var(--ink);border-color:var(--line)
+}
+.dossier[data-project="hashgarden-test-02"] :is(.hero-grid,.passport,.project-header,.content-layout,.main-content,.content-section,.reading-aside,.section-shell,.section-nav,.card-footer){background-color:transparent}
+:is(html[data-theme] #results .project-item,.dossier)[data-project="hashgarden-test-02"] :is(h1,h2,h3,h4,.project-title a){color:var(--ink)}
+:is(html[data-theme] #results .project-item,.dossier)[data-project="hashgarden-test-02"] :is(.detail-link,.compare-button){background:var(--project-secondary);color:#071d0e;border:1px solid #54d97c;box-shadow:0 3px 0 #12632d,inset 0 1px #ffffff40}
+.dossier[data-project="hashgarden-test-02"] :is(.feature,.coin-detail,.rhythm,.verification-grid>div,.aside-note,.aside-index,.balance-item,.verdict,.overview-metrics>div){background-color:#19150fdf;border-color:var(--line)}
+:is(html[data-theme] #results .project-item,.dossier)[data-project="hashgarden-test-02"] .project-logo{background:#0a0806;border:1px solid var(--line)}
+.dossier[data-project="hashgarden-test-02"] .gallery-track img{object-fit:cover}
+
+:is(html[data-theme] #results .project-item,.dossier)[data-project="hashgarden-test-02"] :is(.primary,.registration,[data-register]){background:var(--green);color:#241800}
+:is(html[data-theme] #results .project-item,.dossier)[data-project="hashgarden-test-02"] :is(.card-actions,.project-cta) .detail-link{background:var(--project-secondary);color:#071d0e;border-color:#54d97c}
+
+.dossier[data-project="hashgarden-test-02"] .subterra-demo-notice{padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#211a10;color:#f5dfb7;font-size:12px;line-height:1.5}
