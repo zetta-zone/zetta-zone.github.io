@@ -7,7 +7,11 @@ const setting='zz-v5-editor-parent-outlines';let parents=true;try{parents=localS
 const toggle=document.createElement('label');toggle.className='ve-parent-toggle';
 const input=document.createElement('input');input.type='checkbox';input.checked=parents;input.setAttribute('aria-label','Показывать родительские контуры');input.title='Оранжевый — родитель, фиолетовый — следующий уровень';
 toggle.append(input,document.createTextNode('Контуры родителей'));
-function mountToggle(){document.querySelector('#host-side .ve-sticky-head')?.append(toggle)}
+function mountToggle(){
+ const panel=document.querySelector('#host-side .ve-panel');
+ const target=panel?.querySelector(document.body.classList.contains('ve-phone')?'#ve-phone-view-settings':'.ve-sticky-head');
+ target?.append(toggle);
+}
 addEventListener('ve:panel-mounted',mountToggle);mountToggle();
 input.onchange=()=>{parents=input.checked;try{localStorage.setItem(setting,String(parents))}catch{}};
 const roles=['Выбрано','Родитель','Уровень выше'];

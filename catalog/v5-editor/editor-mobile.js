@@ -102,6 +102,8 @@ function mountPhoneToolbar(panel){
  commands.tabIndex=0;
  commands.setAttribute('role','region');
  commands.setAttribute('aria-label','Команды редактора, прокрутка влево и вправо');
+ const project=panel.querySelector('.ve-open-data');
+ if(project)commands.append(project);
  commands.append(tabs,quick,...phoneCommands);
  row.append(save,commands);
  panel.prepend(row,phoneSettings);

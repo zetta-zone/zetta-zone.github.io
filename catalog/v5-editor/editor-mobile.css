@@ -196,7 +196,7 @@ body.ve-host.ve-phone.ve-panel-hidden>.ve-host-top{padding-right:max(8px,env(saf
 body.ve-host.ve-phone #host-panel-open{position:static;width:auto;min-width:0;padding:0 12px;font-size:14px;margin-left:auto}
 body.ve-host.ve-phone #host-panel-open::before{content:none}
 body.ve-host.ve-phone.ve-phone-view-open #host-side>.ve-panel-controls{flex:1;min-height:0;align-content:start;flex-wrap:wrap!important;overflow:auto;overscroll-behavior:contain}
-body.ve-host.ve-phone.ve-phone-view-open #host-side>.ve-panel>:not(.ve-phone-toolbar,#ve-phone-view-settings){display:none!important}
+body.ve-host.ve-phone.ve-phone-view-open #host-side>.ve-panel>:not(.ve-phone-toolbar,#ve-phone-view-settings,.ve-data-dialog){display:none!important}
 #ve-phone-view-settings{
  order:8;flex:0 0 100%;min-width:0;display:grid;gap:5px;padding:5px 0;
  grid-template-columns:repeat(auto-fit,minmax(min(115px,100%),1fr))
@@ -218,3 +218,7 @@ body.ve-host.ve-phone #host-side #ve-phone-view-settings>button{
  order:1;min-width:0;min-height:38px;font-size:12px
 }
 #ve-phone-view-settings>button[hidden]{display:none!important}
+
+#ve-phone-view-settings>.ve-parent-toggle{grid-column:1/-1;order:2}
+body.ve-host.ve-phone #host-side .ve-sticky-head:not(:has(> :not(.ve-panel-head))){display:none}
+.ve-phone-toolbar .ve-open-data{background:#176e65;border-color:#68cfbd}

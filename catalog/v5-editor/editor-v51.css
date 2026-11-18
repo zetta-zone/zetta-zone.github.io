@@ -445,3 +445,11 @@ body.ve-host .v51-structure-column .v51-persistent-tree>button{min-height:28px;p
 :is(html[data-theme] #results .project-item,.dossier)[data-project="hashgarden-test-02"] :is(.project-logo,.benefit-art,.feature-icon){color:var(--green);background-color:var(--soft)}
 :is(html[data-theme] #results .project-item,.dossier)[data-project="hashgarden-test-02"] :is(.primary,.registration,[data-register]){background-color:var(--green);color:#241800;border-color:#ffbd50;box-shadow:0 4px 0 #a86700,inset 0 2px 0 #ffffff66}
 :is(html[data-theme] #results .project-item,.dossier)[data-project="hashgarden-test-02"] :is(.primary,.registration,[data-register]):hover{filter:brightness(1.06)}
+
+/* Keep project controls together and give narrow inspectors one tree. */
+.ve-host .ve-data-dialog>.ve-project-picker{margin:10px 0;max-width:100%}
+.ve-host .ve-data-dialog>details{border:1px solid #4b788e;border-radius:7px;padding:5px 8px}
+.ve-host .ve-data-dialog summary{cursor:pointer;min-height:30px;line-height:30px}
+#host-side .ve-tree-disclosure[hidden]{display:none!important}
+#host-side .ve-tree-disclosure .v51-persistent-tree>h3{display:none}
+#host-side .ve-pane>[hidden]{display:none!important}
