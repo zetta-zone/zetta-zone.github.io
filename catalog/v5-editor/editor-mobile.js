@@ -2,11 +2,18 @@
 (()=>{'use strict';
 const body=document.body,side=document.querySelector('#host-side'),layout=document.querySelector('.ve-host-layout');
 const portrait=matchMedia('(orientation:portrait)'),touch=matchMedia('(pointer:coarse)');
-function tablet(){return (touch.matches||navigator.maxTouchPoints>0)&&innerWidth>=700}
-function bottom(){return (touch.matches||navigator.maxTouchPoints>0)&&portrait.matches&&!tablet()}
+const hasTouch=()=>touch.matches||navigator.maxTouchPoints>0;
+const phone=()=>hasTouch()&&Math.min(screen.width,screen.height)<600;
+const tablet=()=>hasTouch()&&!phone()&&innerWidth>=700;
+const bottom=()=>hasTouch()&&portrait.matches&&!tablet();
 const storage='zz-v5-editor-panel-v1';let state={hidden:false,height:.25,width:.26,expanded:false,compactControls:true};
-try{const saved=localStorage.getItem(storage);if(saved)Object.assign(state,JSON.parse(saved));else if((touch.matches||navigator.maxTouchPoints>0)&&Math.min(screen.width,screen.height)<600)state.hidden=true}catch{}
+try{const saved=localStorage.getItem(storage);if(saved)Object.assign(state,JSON.parse(saved));}catch{}
 state.height=Math.min(.85,Math.max(.2,Number(state.height)||.25));state.width=Math.min(.58,Math.max(.15,Number(state.width)||.26));
+let phoneSettingsOpen=false;
+const phoneSettings=document.createElement('section');
+phoneSettings.id='ve-phone-view-settings';
+phoneSettings.setAttribute('aria-label','Вид и масштаб карточки');
+phoneSettings.hidden=true;
 const bar=document.createElement('div');bar.className='ve-panel-controls';bar.setAttribute('aria-label','Положение и размер панели');
 const catalogLink=document.querySelector('.ve-host-top>a');
 if(catalogLink){catalogLink.classList.add('ve-panel-back');catalogLink.textContent='← Каталог';bar.append(catalogLink)}
@@ -20,19 +27,81 @@ const zoomLabel=document.querySelector('#host-zoom')?.closest('label');
 if(zoomLabel){zoomLabel.classList.add('ve-panel-zoom');bar.append(zoomLabel)}
 
 function button(text,label,action){const b=document.createElement('button');b.type='button';b.textContent=text;b.title=label;b.setAttribute('aria-label',label);b.onclick=action;bar.append(b);return b}
-const settings=button('Вид / масштаб','Показать или скрыть выбор режима, устройства и масштаб просмотра',()=>{state.compactControls=!state.compactControls;apply()});settings.className='ve-panel-settings';settings.setAttribute('aria-expanded',String(!state.compactControls));
+const settings=button('Вид / масштаб','Показать или скрыть выбор вида, устройства и масштаба',()=>{
+ if(phone())phoneSettingsOpen=!phoneSettingsOpen;
+ else state.compactControls=!state.compactControls;
+ apply();
+});
+settings.className='ve-panel-settings';
 const grip=button('⠿','Изменить размер панели: перетащите или используйте стрелки',()=>{});grip.className='ve-panel-grip';
 const expand=button('↕','Развернуть / свернуть панель',()=>{state.expanded=!state.expanded;apply()});expand.className='ve-panel-expand';
 const dock=button('⇆','Перенести панель слева / справа',()=>window.V5EditorHost.dock());dock.className='ve-panel-dock';
-const hideButton=button('Скрыть','Скрыть панель редактора',()=>{state.hidden=true;apply();open.focus()});hideButton.className='ve-panel-hide';
-const open=document.createElement('button');open.id='host-panel-open';open.textContent='✎ Редактировать';open.title='Открыть панель редактора';open.setAttribute('aria-label',open.title);open.setAttribute('aria-controls','host-side');open.onclick=()=>{state.hidden=false;apply();bar.querySelector('button').focus()};document.querySelector('.ve-host-top').append(open);
+const phoneDock=document.createElement('button');
+phoneDock.type='button';
+phoneDock.onclick=()=>{window.V5EditorHost.dock();updatePhoneDock()};
+function updatePhoneDock(){phoneDock.textContent=window.V5EditorHost.currentDock()==='right'?'Панель слева':'Панель справа'}
+const contextControls=[viewLabel,deviceLabel,fitButton,zoomLabel].filter(Boolean);
+phoneSettings.append(phoneDock);
+bar.append(phoneSettings);
+const hideButton=button('Скрыть','Скрыть панель редактора',()=>{state.hidden=true;phoneSettingsOpen=false;apply();open.focus()});hideButton.className='ve-panel-hide';
+const open=document.createElement('button');open.id='host-panel-open';open.textContent='✎ Редактировать';open.title='Открыть панель редактора';open.setAttribute('aria-label',open.title);open.setAttribute('aria-controls','host-side');open.onclick=()=>{state.hidden=false;apply();(phone()?settings:bar.querySelector('button')).focus()};document.querySelector('.ve-host-top').append(open);
 const splitter=document.createElement('div');splitter.className='ve-panel-divider';splitter.setAttribute('role','separator');splitter.tabIndex=0;splitter.title='Потяните границу, чтобы изменить размер панели';splitter.setAttribute('aria-label','Изменить ширину или высоту панели редактора');
 function minWidth(){return Math.min(.55,Math.max(.15,245/Math.max(1,layout.clientWidth)))}
 function persist(){try{localStorage.setItem(storage,JSON.stringify(state))}catch{}}
-function apply(){body.classList.toggle('ve-tablet',tablet());if(tablet())state.width=Math.min(.38,Math.max(minWidth(),state.width));body.classList.toggle('ve-panel-hidden',!!state.hidden);body.classList.toggle('ve-panel-bottom',bottom());body.classList.toggle('ve-controls-compact',!!state.compactControls);settings.setAttribute('aria-expanded',String(!state.compactControls));body.classList.toggle('ve-panel-expanded',!!state.expanded);side.inert=!!state.hidden;side.setAttribute('aria-hidden',String(!!state.hidden));open.hidden=!state.hidden;open.setAttribute('aria-expanded',String(!state.hidden));expand.setAttribute('aria-expanded',String(!!state.expanded));const vertical=bottom();splitter.hidden=!!state.hidden;splitter.setAttribute('aria-orientation',vertical?'horizontal':'vertical');splitter.setAttribute('aria-valuemin',String(vertical?20:Math.round(minWidth()*100)));splitter.setAttribute('aria-valuemax',String(vertical?85:tablet()?38:58));splitter.setAttribute('aria-valuenow',String(Math.round((vertical?state.height:state.width)*100)));const h=state.expanded?.72:state.height;layout.style.setProperty('--panel-height',h*100+'%');layout.style.setProperty('--panel-width',state.width*100+'%');persist()}
-function mount(){if(!side.contains(bar))side.prepend(bar);if(!side.contains(splitter))side.append(splitter);apply()}
+function apply(){
+ const isPhone=phone(),isTablet=tablet(),vertical=bottom(),showSettings=isPhone&&phoneSettingsOpen&&!state.hidden;
+ body.classList.toggle('ve-phone',isPhone);
+ body.classList.toggle('ve-tablet',isTablet);
+ if(isTablet)state.width=Math.min(.38,Math.max(minWidth(),state.width));
+ body.classList.toggle('ve-panel-hidden',!!state.hidden);
+ body.classList.toggle('ve-panel-bottom',vertical);
+ body.classList.toggle('ve-controls-compact',isPhone||!!state.compactControls);
+ body.classList.toggle('ve-phone-view-open',showSettings);
+ if(isPhone&&contextControls[0]?.parentNode!==phoneSettings)phoneSettings.prepend(...contextControls);
+ if(!isPhone&&contextControls[0]?.parentNode!==bar)settings.before(...contextControls);
+ phoneSettings.hidden=!showSettings;
+ phoneDock.hidden=vertical;
+ if(isPhone){
+  settings.setAttribute('aria-controls',phoneSettings.id);
+  updatePhoneDock();
+ }else settings.removeAttribute('aria-controls');
+ settings.textContent=showSettings?'К редактированию':'Вид / масштаб';
+ settings.setAttribute('aria-label',showSettings?'К редактированию':'Вид и масштаб карточки');
+ settings.setAttribute('aria-expanded',String(isPhone?showSettings:!state.compactControls));
+ side.inert=!!state.hidden;
+ side.setAttribute('aria-hidden',String(!!state.hidden));
+ open.hidden=!state.hidden;
+ open.setAttribute('aria-expanded',String(!state.hidden));
+ expand.setAttribute('aria-expanded',String(!!state.expanded));
+ splitter.hidden=!!state.hidden;
+ splitter.setAttribute('aria-orientation',vertical?'horizontal':'vertical');
+ splitter.setAttribute('aria-valuemin',String(vertical?20:Math.round(minWidth()*100)));
+ splitter.setAttribute('aria-valuemax',String(vertical?85:isTablet?38:58));
+ splitter.setAttribute('aria-valuenow',String(Math.round((vertical?state.height:state.width)*100)));
+ const height=state.expanded?(isPhone?.60:.72):state.height;
+ layout.style.setProperty('--panel-height',height*100+'%');
+ layout.style.setProperty('--panel-width',state.width*100+'%');
+ persist();
+}
+function mount(){
+ if(!side.contains(bar))side.prepend(bar);
+ if(!side.contains(splitter))side.append(splitter);
+ const panel=side.querySelector('.ve-panel'),tabs=panel?.querySelector('.ve-tabs');
+ if(phone()&&tabs&&tabs.parentNode!==panel){
+  panel.prepend(tabs);
+  tabs.addEventListener('click',event=>{
+   const tab=event.target.closest('[data-pane-tab]');
+   if(!tab)return;
+   const pane=panel.querySelector('#'+tab.getAttribute('aria-controls'));
+   if(pane&&!pane.hidden)panel.scrollTop+=pane.getBoundingClientRect().top-tabs.getBoundingClientRect().bottom;
+  });
+ }
+ apply();
+}
 addEventListener('ve:panel-mounted',mount);mount();
-window.V5EditorHost.elementSelected=()=>{ /* Selection must not reopen a hidden phone panel. */ };
+window.V5EditorHost.elementSelected=()=>{
+ if(phoneSettingsOpen){phoneSettingsOpen=false;apply()}
+};
 let drag=null;
 function startDrag(e){if(e.button!==0)return;const handle=e.currentTarget;drag={handle,x:e.clientX,y:e.clientY,h:side.offsetHeight,w:side.offsetWidth,bottom:bottom(),right:body.classList.contains('ve-dock-right')};handle.setPointerCapture(e.pointerId);body.classList.add('ve-panel-resizing');e.preventDefault()}
 function moveDrag(e){if(!drag||drag.handle!==e.currentTarget)return;if(drag.bottom){state.expanded=false;state.height=Math.min(.85,Math.max(.2,(drag.h+drag.y-e.clientY)/Math.max(1,layout.clientHeight)))}else state.width=Math.min(.58,Math.max(minWidth(),(drag.w+(e.clientX-drag.x)*(drag.right?-1:1))/Math.max(1,layout.clientWidth)));apply()}
