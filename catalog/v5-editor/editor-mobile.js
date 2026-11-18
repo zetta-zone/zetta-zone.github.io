@@ -9,7 +9,7 @@ const bottom=()=>hasTouch()&&portrait.matches&&!tablet();
 const storage='zz-v5-editor-panel-v1';let state={hidden:false,height:.25,width:.26,expanded:false,compactControls:true};
 try{const saved=localStorage.getItem(storage);if(saved)Object.assign(state,JSON.parse(saved));}catch{}
 state.height=Math.min(.85,Math.max(.2,Number(state.height)||.25));state.width=Math.min(.58,Math.max(.15,Number(state.width)||.26));
-let phoneSettingsOpen=false;
+let phoneSettingsOpen=false,phoneToolbarScroll=0;
 const phoneSettings=document.createElement('section');
 phoneSettings.id='ve-phone-view-settings';
 phoneSettings.setAttribute('aria-label','Вид и масштаб карточки');
@@ -28,7 +28,13 @@ if(zoomLabel){zoomLabel.classList.add('ve-panel-zoom');bar.append(zoomLabel)}
 
 function button(text,label,action){const b=document.createElement('button');b.type='button';b.textContent=text;b.title=label;b.setAttribute('aria-label',label);b.onclick=action;bar.append(b);return b}
 const settings=button('Вид / масштаб','Показать или скрыть выбор вида, устройства и масштаба',()=>{
- if(phone())phoneSettingsOpen=!phoneSettingsOpen;
+ if(phone()){
+  phoneSettingsOpen=!phoneSettingsOpen;
+  if(phoneSettingsOpen){
+   const panel=settings.closest('.ve-panel');
+   if(panel)panel.scrollTop=0;
+  }
+ }
  else state.compactControls=!state.compactControls;
  apply();
 });
@@ -44,7 +50,8 @@ const contextControls=[viewLabel,deviceLabel,fitButton,zoomLabel].filter(Boolean
 phoneSettings.append(phoneDock);
 bar.append(phoneSettings);
 const hideButton=button('Скрыть','Скрыть панель редактора',()=>{state.hidden=true;phoneSettingsOpen=false;apply();open.focus()});hideButton.className='ve-panel-hide';
-const open=document.createElement('button');open.id='host-panel-open';open.textContent='✎ Редактировать';open.title='Открыть панель редактора';open.setAttribute('aria-label',open.title);open.setAttribute('aria-controls','host-side');open.onclick=()=>{state.hidden=false;apply();(phone()?settings:bar.querySelector('button')).focus()};document.querySelector('.ve-host-top').append(open);
+const phoneCommands=[settings,expand,hideButton,catalogLink].filter(Boolean);
+const open=document.createElement('button');open.id='host-panel-open';open.textContent='✎ Редактировать';open.title='Открыть панель редактора';open.setAttribute('aria-label',open.title);open.setAttribute('aria-controls','host-side');open.onclick=()=>{state.hidden=false;apply();(side.querySelector('.ve-phone-toolbar>[data-action=save]')||bar.querySelector('button')).focus({preventScroll:true})};document.querySelector('.ve-host-top').append(open);
 const splitter=document.createElement('div');splitter.className='ve-panel-divider';splitter.setAttribute('role','separator');splitter.tabIndex=0;splitter.title='Потяните границу, чтобы изменить размер панели';splitter.setAttribute('aria-label','Изменить ширину или высоту панели редактора');
 function minWidth(){return Math.min(.55,Math.max(.15,245/Math.max(1,layout.clientWidth)))}
 function persist(){try{localStorage.setItem(storage,JSON.stringify(state))}catch{}}
@@ -83,19 +90,41 @@ function apply(){
  layout.style.setProperty('--panel-width',state.width*100+'%');
  persist();
 }
+function mountPhoneToolbar(panel){
+ if(panel.querySelector('.ve-phone-toolbar'))return;
+ const tabs=panel.querySelector('.ve-tabs'),quick=panel.querySelector('.ve-quick-actions');
+ const save=quick?.querySelector('[data-action=save]');
+ if(!tabs||!save)return;
+ const row=document.createElement('div');
+ row.className='ve-phone-toolbar';
+ const commands=document.createElement('div');
+ commands.className='ve-phone-toolbar-scroll';
+ commands.tabIndex=0;
+ commands.setAttribute('role','region');
+ commands.setAttribute('aria-label','Команды редактора, прокрутка влево и вправо');
+ commands.append(tabs,quick,...phoneCommands);
+ row.append(save,commands);
+ panel.prepend(row,phoneSettings);
+ commands.scrollLeft=phoneToolbarScroll;
+ commands.addEventListener('click',event=>{
+  const tab=event.target.closest('[data-pane-tab]');
+  if(!tab)return;
+  if(phoneSettingsOpen){phoneSettingsOpen=false;apply()}
+  const pane=panel.querySelector('#'+tab.getAttribute('aria-controls'));
+  if(pane&&!pane.hidden)panel.scrollTop+=pane.getBoundingClientRect().top-row.getBoundingClientRect().bottom;
+ });
+}
+window.V5EditorHost.unmountPhoneToolbar=()=>{
+ const commands=side.querySelector('.ve-phone-toolbar-scroll');
+ if(!commands)return;
+ phoneToolbarScroll=commands.scrollLeft;
+ bar.append(catalogLink,settings,expand,phoneSettings,hideButton);
+};
 function mount(){
  if(!side.contains(bar))side.prepend(bar);
  if(!side.contains(splitter))side.append(splitter);
- const panel=side.querySelector('.ve-panel'),tabs=panel?.querySelector('.ve-tabs');
- if(phone()&&tabs&&tabs.parentNode!==panel){
-  panel.prepend(tabs);
-  tabs.addEventListener('click',event=>{
-   const tab=event.target.closest('[data-pane-tab]');
-   if(!tab)return;
-   const pane=panel.querySelector('#'+tab.getAttribute('aria-controls'));
-   if(pane&&!pane.hidden)panel.scrollTop+=pane.getBoundingClientRect().top-tabs.getBoundingClientRect().bottom;
-  });
- }
+ const panel=side.querySelector('.ve-panel');
+ if(phone()&&panel)mountPhoneToolbar(panel);
  apply();
 }
 addEventListener('ve:panel-mounted',mount);mount();
