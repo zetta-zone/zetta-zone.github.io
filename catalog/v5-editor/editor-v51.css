@@ -485,3 +485,6 @@ body.ve-host .v51-structure-column .v51-persistent-tree>button{min-height:28px;p
 .ve-section-heading-editor .ve-heading-visible input{flex:0 0 18px;width:18px!important;height:18px;min-height:18px;margin:0}
 .ve-section-heading-editor>button{margin:4px 5px 4px 0}
 [data-section-heading]{white-space:pre-line}
+
+#results.list>.project-item[data-project="hashgarden-test-02"]>.row-bottom{flex-wrap:wrap}
+#results.list>.project-item[data-project="hashgarden-test-02"] .description-wrap{flex:1 1 160px}
