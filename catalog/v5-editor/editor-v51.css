@@ -474,3 +474,14 @@ body.ve-host .v51-structure-column .v51-persistent-tree>button{min-height:28px;p
 :is(html[data-theme] #results .project-item,.dossier)[data-project="hashgarden-test-02"][data-card-theme="light"]{background-image:radial-gradient(ellipse at 55% 0%,#f7a92829,transparent 65%);background-color:var(--bg)}
 .dossier[data-project="hashgarden-test-02"][data-card-theme="light"] :is(.feature,.coin-detail,.rhythm,.verification-grid>div,.aside-note,.aside-index,.balance-item,.verdict,.overview-metrics>div){background-color:var(--paper);border-color:var(--line)}
 .dossier[data-project="hashgarden-test-02"][data-card-theme="light"] .subterra-demo-notice{background:var(--soft);color:var(--ink)}
+
+/* Subterra follows its content instead of stretching to taller neighbouring cards. */
+#results.cards>.project-item[data-project="hashgarden-test-02"]{align-self:start}
+#results.cards>.project-item[data-project="hashgarden-test-02"]>.card-body{height:auto}
+#results.cards>.project-item[data-project="hashgarden-test-02"] :is(.project-main,.demo-short,.description-wrap,.feature-grid,.currency-groups){min-height:0}
+#results.cards>.project-item[data-project="hashgarden-test-02"] .card-actions{margin-top:10px}
+.ve-section-heading-editor>label{display:flex;flex-direction:column;gap:5px}
+.ve-section-heading-editor .ve-heading-visible{display:flex!important;flex-direction:row!important;align-items:center;gap:8px}
+.ve-section-heading-editor .ve-heading-visible input{flex:0 0 18px;width:18px!important;height:18px;min-height:18px;margin:0}
+.ve-section-heading-editor>button{margin:4px 5px 4px 0}
+[data-section-heading]{white-space:pre-line}
