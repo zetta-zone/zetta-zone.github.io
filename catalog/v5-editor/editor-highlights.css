@@ -54,4 +54,4 @@
 
 /* Workspace-only selection fill: never written into project styles. */
 .ve-highlight-box{box-sizing:border-box}
-.ve-highlight-box[data-level="0"]{background:rgba(41,186,255,.18);border-color:#009eea}
+.ve-highlight-box[data-level="0"]{background:transparent;border-color:#009eea}
