@@ -12,4 +12,8 @@ addEventListener('storage',e=>{if(e.key===key){read();refresh()}});addEventListe
 addEventListener('v5:theme',()=>{applyDetail();window.V5Catalog?.refresh()});
 addEventListener('v5:editor-apply',applyDetail);
 addEventListener('load',()=>{V4Theme.refresh();applyDetail()});
+// The gallery lives outside .dossier, so inherit the actual card colours on open.
+function syncGallery(){const card=document.querySelector('.dossier'),gallery=document.querySelector('#lightbox');if(!card||!gallery)return;const css=getComputedStyle(card);for(const [target,source]of Object.entries({'--gallery-bg':'--bg','--gallery-ink':'--ink','--gallery-muted':'--muted','--gallery-accent':'--green'})){gallery.style.setProperty(target,css.getPropertyValue(source).trim())}gallery.style.colorScheme=card.dataset.cardTheme||effective(DEMO_PROJECT)}
+addEventListener('load',()=>{const gallery=document.querySelector('#lightbox'),card=document.querySelector('.dossier');if(!gallery||!card)return;syncGallery();new MutationObserver(syncGallery).observe(gallery,{attributes:true,attributeFilter:['open']});new MutationObserver(syncGallery).observe(card,{attributes:true,attributeFilter:['style','data-card-theme']})});
+
 })();
