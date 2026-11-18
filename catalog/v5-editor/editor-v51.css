@@ -469,3 +469,8 @@ body.ve-host .v51-structure-column .v51-persistent-tree>button{min-height:28px;p
 :is(html[data-theme] #results .project-item,.dossier)[data-project="hashgarden-test-02"] :is(.card-actions,.project-cta) .detail-link{background:var(--project-secondary);color:#071d0e;border-color:#54d97c}
 
 .dossier[data-project="hashgarden-test-02"] .subterra-demo-notice{padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#211a10;color:#f5dfb7;font-size:12px;line-height:1.5}
+
+/* Subterra's official light palette (subterra.run); dark preset stays unchanged. */
+:is(html[data-theme] #results .project-item,.dossier)[data-project="hashgarden-test-02"][data-card-theme="light"]{background-image:radial-gradient(ellipse at 55% 0%,#f7a92829,transparent 65%);background-color:var(--bg)}
+.dossier[data-project="hashgarden-test-02"][data-card-theme="light"] :is(.feature,.coin-detail,.rhythm,.verification-grid>div,.aside-note,.aside-index,.balance-item,.verdict,.overview-metrics>div){background-color:var(--paper);border-color:var(--line)}
+.dossier[data-project="hashgarden-test-02"][data-card-theme="light"] .subterra-demo-notice{background:var(--soft);color:var(--ink)}
