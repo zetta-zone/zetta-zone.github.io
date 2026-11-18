@@ -437,3 +437,11 @@ body.ve-host .v51-structure-column .v51-tree-row>input{width:14px;min-width:14px
 body.ve-host .v51-structure-column .v51-tree-children{padding-left:7px;margin-left:3px}
 body.ve-host .v51-structure-column .v51-drag-handle{flex:0 0 12px}
 body.ve-host .v51-structure-column .v51-persistent-tree>button{min-height:28px;padding:4px 8px;margin:0;font-size:11px}
+
+/* Subterra-inspired gold surfaces: HashGarden test 02 only, no layout changes. */
+:is(html[data-theme] #results .project-item,.dossier)[data-project="hashgarden-test-02"]{background-color:var(--paper);color:var(--ink);border-color:var(--line)}
+:is(html[data-theme] #results .project-item,.dossier)[data-project="hashgarden-test-02"] :is(.card-body,.project-main,.row-bottom,.description-wrap){background-color:transparent}
+:is(html[data-theme] #results .project-item,.dossier)[data-project="hashgarden-test-02"] :is(.feature-tile,.ratings>button,.compact-ratings>button,.icon-action,.preview-tools>button,.card-actions .detail-link,.project-cta .detail-link,.platform-label){background-color:var(--soft);color:var(--ink);border-color:var(--line)}
+:is(html[data-theme] #results .project-item,.dossier)[data-project="hashgarden-test-02"] :is(.project-logo,.benefit-art,.feature-icon){color:var(--green);background-color:var(--soft)}
+:is(html[data-theme] #results .project-item,.dossier)[data-project="hashgarden-test-02"] :is(.primary,.registration,[data-register]){background-color:var(--green);color:#241800;border-color:#ffbd50;box-shadow:0 4px 0 #a86700,inset 0 2px 0 #ffffff66}
+:is(html[data-theme] #results .project-item,.dossier)[data-project="hashgarden-test-02"] :is(.primary,.registration,[data-register]):hover{filter:brightness(1.06)}
