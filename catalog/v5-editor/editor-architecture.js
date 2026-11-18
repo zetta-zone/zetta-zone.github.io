@@ -53,11 +53,22 @@ const legacy=raw.legacySnapshot||raw;
 for(const [id,entry]of Object.entries(legacy.content?.[project]||{})){const mapped=legacyField(id,entry);if(mapped)put(project,...mapped,key)}
 for(const theme of ['dark','light']){const branch=legacy.themeStyles?.[theme]||legacy;
 for(const [id,styles]of Object.entries(branch.styles||{})){const shared=pick(styles,appearanceKeys),role=legacy.nodeRoles?.[id]||inferRole(id);if(!role||!Object.keys(shared).length)continue;
-for(const [property,value]of Object.entries(shared))put(project,'appearance.'+theme+'.'+role+'.'+property,value,key);
+for(const [property,value]of Object.entries(shared)){if(project==='hashgarden-test-02'&&((role==='card'&&property==='backgroundColor'&&value==='#102334')||(role==='card'&&property==='color'&&value==='#e5f2ff')||(role==='actions'&&property==='backgroundColor'&&value==='#4397bf')))continue;put(project,'appearance.'+theme+'.'+role+'.'+property,value,key);}
 }
-if(branch.palette){const palettes={ocean:['#102334','#e5f2ff','#4397bf'],forest:['#142820','#e8fff0','#59b78c'],light:['#f4f7fa','#172c3d','#537b96']},p=palettes[branch.palette];if(p)for(const [role,property,value]of [['card','backgroundColor',p[0]],['card','color',p[1]],['actions','backgroundColor',p[2]]])put(project,'appearance.'+theme+'.'+role+'.'+property,value,key)}
+if(branch.palette&&!(project==='hashgarden-test-02'&&branch.palette==='ocean')){const palettes={ocean:['#102334','#e5f2ff','#4397bf'],forest:['#142820','#e8fff0','#59b78c'],light:['#f4f7fa','#172c3d','#537b96']},p=palettes[branch.palette];if(p)for(const [role,property,value]of [['card','backgroundColor',p[0]],['card','color',p[1]],['actions','backgroundColor',p[2]]])put(project,'appearance.'+theme+'.'+role+'.'+property,value,key)}
 }
 }
+
+// Retire only the complete old Ocean palette that masked the Subterra preset.
+// The source configurations/legacySnapshot remain intact for recovery.
+const fields=data['hashgarden-test-02']?.fields;
+if(fields&&!fields['appearance.subterraPresetRepair']){
+const locate=path=>{if(own(fields,path))return {owner:fields,key:path};for(const prefix of Object.keys(fields).sort((a,b)=>b.length-a.length))if(path.startsWith(prefix+'.')){const parts=path.slice(prefix.length+1).split('.');let owner=fields[prefix];for(const key of parts.slice(0,-1))owner=owner?.[key];if(owner&&typeof owner==='object'&&own(owner,parts.at(-1)))return {owner,key:parts.at(-1)}}return null};
+let repaired=false;
+for(const theme of ['dark','light']){const entries=[['card.backgroundColor','#102334'],['card.color','#e5f2ff'],['actions.backgroundColor','#4397bf']].map(([suffix,value])=>({slot:locate('appearance.'+theme+'.'+suffix),value}));if(entries.every(({slot,value})=>slot&&slot.owner[slot.key]===value)){for(const {slot}of entries)delete slot.owner[slot.key];repaired=true}}
+if(repaired)fields['appearance.subterraPresetRepair']=1;
+}
+
 return {configs:result,sharedData:data,conflicts};
 }
 function copyGeometry(source,target,selectedGroups){
