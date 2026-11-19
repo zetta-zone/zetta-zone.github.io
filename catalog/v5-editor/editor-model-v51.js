@@ -91,7 +91,7 @@ else {const cs=getComputedStyle(n),previous=separatorSpacing.get(n),before=previ
 set('border-bottom',(s.separatorWidth??1)+'px '+(s.separatorStyle||'solid')+' '+(s.separatorColor||'#558cbd'));
 set('padding-bottom',(before+(s.separatorBefore??8))+'px');set('margin-bottom',(after+(s.separatorAfter??8))+'px');
 separatorSpacing.set(n,{before,after,padding:n.style.paddingBottom,margin:n.style.marginBottom});if(cs.display==='inline')set('display','inline-block');
-if(s.height!==undefined||cs.boxSizing==='border-box'){set('height','auto');set('min-height',cs.height)}
+if(s.height!==undefined){set('height','auto');set('min-height',typeof s.height==='number'?s.height+'px':s.height)}
 }}
 };
 api.style=function(n,s){for(const [key,color,alphaKey]of [['background-color','backgroundColor','backgroundAlpha'],['border-color','borderColor','borderAlpha'],['color','color','textAlpha']])if(s[alphaKey]!==undefined){let value=s[color]||getComputedStyle(n).getPropertyValue(key);const rgb=value.match(/[\d.]+/g);if(!value.startsWith('#')&&rgb?.length>=3)value='#'+rgb.slice(0,3).map(x=>(+x).toString(16).padStart(2,'0')).join('');n.style.setProperty(key,alpha(value,s[alphaKey]),'important');if(key==='color'&&n.matches('svg'))n.style.setProperty('fill',alpha(value,s[alphaKey]),'important')}
