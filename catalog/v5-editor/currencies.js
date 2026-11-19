@@ -26,7 +26,7 @@ function html(p,view='cards',layout){
  const sample={...p,internalCurrencies:[{ticker:'SEED',name:'Игровые семена',icon:'assets/demo-seed.svg'}],coins:[{ticker:'BTC',name:'Bitcoin'},{ticker:'LTC',name:'Litecoin'},{ticker:'USDT',name:'Tether'}],internalCurrenciesCaption:'Внутриигровые валюты',coinsCaption:'Пополнение и вывод'};
  return group(sample,'internalCurrencies',view)+group(sample,'coins',view);
  }
-if(p.id==='rollercoin')return (view==='detail'?'':rollerWithdrawal(p))+rollerGroup(p,'internalCurrencies',view,layout)+rollerGroup(p,'coins',view,layout);return group(p,'coins',view,layout)+group(p,'internalCurrencies',view,layout)}
+if(p.id==='rollercoin')return (view==='detail'||view==='cards'?'':rollerWithdrawal(p))+rollerGroup(p,'internalCurrencies',view,layout)+rollerGroup(p,'coins',view,layout);return group(p,'coins',view,layout)+group(p,'internalCurrencies',view,layout)}
 function paint(root,p,view,layout){
  if(p.id==='rollercoin')root.dataset.project='rollercoin';
  const detail=root.matches('.dossier');let host=root.querySelector('[data-currency-groups]');
