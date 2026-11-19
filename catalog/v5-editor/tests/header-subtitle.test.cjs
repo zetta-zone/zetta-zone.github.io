@@ -1,0 +1,5 @@
+const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
+const source=fs.readFileSync(__dirname+'/../catalog.js','utf8'),intro=source.split('\n').find(s=>s.startsWith('function demoIntro('));
+function render(p){return vm.runInNewContext(intro+';demoIntro(p)',{p,E:s=>s})}
+test('Subterra header uses its independent subtitle, without hiding duplicate text',()=>{const p={id:'hashgarden-test-02',essence:'Header subtitle',short:'Short card text',overview:{text:'Overview text'},description:'Full description'};const html=render(p);assert.ok(html.includes('Header subtitle'));assert.ok(!html.includes('Short card text'));assert.ok(!html.includes('hidden'));assert.ok(!render({...p,short:p.essence}).includes('hidden'));assert.ok(!render({...p,essence:''}).includes(p.short))});
+test('other demo cards retain their existing header source',()=>assert.ok(render({id:'hashgarden-test-03',essence:'Old essence',short:'Original short'}).includes('Original short')));
