@@ -21,7 +21,7 @@ function rollerGroup(p,key,view,layout){
 }
 function rollerWithdrawal(p){const l=p.legacy||{},yes=v=>v===true?'Да':v===false?'Нет':'Уточнить';return '<section class="rc-withdrawal" data-preserve-content aria-label="Вывод средств"><strong>Вывод средств</strong><span>Минимум: '+E(l.minWithdraw||p.withdrawalLabel||'зависит от валюты и сети')+'</span><span>FaucetPay: '+yes(l.faucetpaySupported)+' · Direct Wallet: '+yes(l.directWalletSupported)+'</span><span>Способ: внешний криптокошелёк</span></section>';}
 function html(p,view='cards',layout){
- if(view==='cards'&&p.demo===true&&/^hashgarden-test-0[234]$/.test(p.id)){
+ if(view==='cards'&&p.demo===true&&/^hashgarden-test-0[34]$/.test(p.id)){
  // Display-only examples: never persist or replace the project's financial data.
  const sample={...p,internalCurrencies:[{ticker:'SEED',name:'Игровые семена',icon:'assets/demo-seed.svg'}],coins:[{ticker:'BTC',name:'Bitcoin'},{ticker:'LTC',name:'Litecoin'},{ticker:'USDT',name:'Tether'}],internalCurrenciesCaption:'Внутриигровые валюты',coinsCaption:'Пополнение и вывод'};
  return group(sample,'internalCurrencies',view)+group(sample,'coins',view);
