@@ -489,3 +489,10 @@ body.ve-host .v51-structure-column .v51-persistent-tree>button{min-height:28px;p
 #results.list>.project-item[data-project="hashgarden-test-02"]>.row-bottom{flex-wrap:wrap}
 #results.list>.project-item[data-project="hashgarden-test-02"] .description-wrap{flex:1 1 160px}
 
+
+/* Compact Subterra catalogue tiles, currencies and actions; keep four text lines. */
+#results.cards>.project-item[data-project="hashgarden-test-02"] .feature-tile{min-height:68px;gap:4px}
+#results.cards>.project-item[data-project="hashgarden-test-02"] .benefit-art{width:34px;height:34px;padding:5px}
+#results.cards>.project-item[data-project="hashgarden-test-02"] .currency-row{min-height:26px;--currency-size:22px!important;--currency-step:27px!important}
+#results.cards>.project-item[data-project="hashgarden-test-02"] .currency-row>.currency-item{height:22px!important}
+#results.cards>.project-item[data-project="hashgarden-test-02"] .card-actions>button{min-height:30px;height:30px;padding:4px 12px}
