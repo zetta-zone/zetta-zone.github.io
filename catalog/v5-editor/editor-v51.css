@@ -496,3 +496,21 @@ body.ve-host .v51-structure-column .v51-persistent-tree>button{min-height:28px;p
 #results.cards>.project-item[data-project="hashgarden-test-02"] .currency-row{min-height:26px;--currency-size:22px!important;--currency-step:27px!important}
 #results.cards>.project-item[data-project="hashgarden-test-02"] .currency-row>.currency-item{height:22px!important}
 #results.cards>.project-item[data-project="hashgarden-test-02"] .card-actions>button{min-height:30px;height:30px;padding:4px 12px}
+
+/* List owns its outer grid; the homepage card grid must not split rows. */
+#results.list{grid-template-columns:minmax(0,1fr);align-items:start}
+#results.list>.project-row{height:auto;min-height:0;align-self:start}
+#results.list>.project-row>.project-main{flex-wrap:wrap}
+#results.list>.project-row .project-copy{flex:1 1 160px}
+#results.list>.project-row>.row-bottom{flex-wrap:wrap}
+#results.list>.project-row .description-wrap{flex:1 1 240px}
+#results.list>.project-row .currency-groups{min-width:0;max-width:100%}
+.ve-card-limits{margin:12px 0;padding:10px 0;border-bottom:1px solid var(--line)}
+.ve-card-limits>label{display:block;margin:8px 0}
+
+@media(min-width:1001px){
+#results.list>.project-row>.row-bottom{display:grid;grid-template-columns:minmax(0,1fr) 92px;align-items:start}
+#results.list>.project-row>.row-bottom>.description-wrap{grid-column:1;grid-row:1}
+#results.list>.project-row>.row-bottom>.currency-groups{grid-column:1;grid-row:2;width:100%}
+#results.list>.project-row>.row-bottom>.project-cta{grid-column:2;grid-row:1/3;margin-left:0;align-self:end}
+}
