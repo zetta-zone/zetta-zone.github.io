@@ -90,6 +90,16 @@ if(requested.has('visibility'))for(const k of ['hidden','removed'])if(own(from[k
 if(requested.has('order')){const moves=[];for(const m of from.moves||[]){const id=mapping.get(m.id),target=mapping.get(m.target);if(id&&target)moves.push({...m,id,target});else unmatched.push(m.id)}next.moves=moves}
 return {state:next,unmatched:[...new Set(unmatched)]};
 }
+function copyProperties(source,target,id,properties){
+const next=clone(target),role=source.nodeRoles?.[id]||inferRole(id),same=source.templateView===target.templateView;
+const matches=Object.entries(target.nodeRoles||{}).filter(([,r])=>r===role).map(([id])=>id);
+const dest=role==='card'?(target.templateView==='detail'?'id:top':'id:ve-card'):matches.length===1?matches[0]:same?id:null;
+if(!dest)throw Error('Нет однозначного соответствия выбранного элемента в получателе');
+next.styles||={};next.styles[dest]||={};
+for(const k of properties){if(!geometryKeys.has(k))throw Error('Неизвестный параметр геометрии');if(own(source.styles?.[id],k))next.styles[dest][k]=source.styles[id][k];else delete next.styles[dest][k];if(role&&next.geometryRoles?.[role])delete next.geometryRoles[role][k]}
+for(const [min,max]of [['minWidth','maxWidth'],['minHeight','maxHeight']]){const s=next.styles[dest];if(s[max]>0&&s[min]>s[max])throw Error('Минимальный размер получателя больше максимального')}
+return next;
+}
 function transaction(storage,entries,reason='Сохранение архитектуры V5'){
 const before={};for(const [key,value]of Object.entries(entries)){if(value!==null&&typeof value!=='string')throw Error('Запись должна быть сериализована заранее');before[key]=storage.getItem(key)}
 const backup='zz-v5-editor-architecture-backup-'+Date.now()+'-'+Math.random().toString(36).slice(2,8);
@@ -99,7 +109,7 @@ try{for(const [key,value]of Object.entries(entries)){if(value===null)storage.rem
 return backup;
 }
 function latestBackup(storage){let found=null,time=-1;for(let i=0;i<storage.length;i++){const key=storage.key(i);if(!key.startsWith('zz-v5-editor-architecture-backup-'))continue;try{const item=JSON.parse(storage.getItem(key));const created=Number(key.split('backup-')[1].split('-')[0]);if(item?.entries&&created>=time){found=item;time=created}}catch{}}return found}
-const api={appearanceKeys,geometryKeys,groups,pick,styleMap,inferRole,legacyField,normalize,migrate,copyGeometry,transaction,latestBackup};
+const api={appearanceKeys,geometryKeys,groups,pick,styleMap,inferRole,legacyField,normalize,migrate,copyGeometry,copyProperties,transaction,latestBackup};
 if(typeof module!=='undefined')module.exports=api;scope.V5Architecture=api;
 if(typeof window==='undefined')return;
 let cache=null;

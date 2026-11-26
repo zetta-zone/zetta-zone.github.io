@@ -10,3 +10,4 @@ body.ve-preview-compact>*:not(.ve-compact-canvas){display:none!important}body.ve
 
 /* Host preview must never display its own editor UI over the card. */
 body.ve-preview>.ve-panel,body.ve-preview>.ve-launch{display:none!important}
+.ve-apply-dialog{box-sizing:border-box;width:min(640px,94vw);max-height:90vh;overflow:auto;padding:24px;background:#152332;color:#eef5fc;border:1px solid #63839c;border-radius:12px;font:16px system-ui,sans-serif}.ve-apply-dialog::backdrop{background:#0009}.ve-apply-dialog label{display:block;margin:8px 0}.ve-apply-dialog select{display:block;width:100%;padding:8px;font:inherit}.ve-apply-dialog fieldset{margin:12px 0;padding:12px}.ve-apply-dialog input[type=checkbox]{margin-right:8px}.ve-apply-dialog button{padding:10px 16px;margin:6px;font:inherit}.ve-apply-dialog [hidden]{display:none}
