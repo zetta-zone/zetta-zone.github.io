@@ -148,45 +148,61 @@
 .ve-host #host-side.ve-narrow .ve-tabs [data-pane-tab="tools"]::before{content:"⇩"}
 .ve-host #host-side.ve-narrow .ve-sticky-head .ve-quick-actions button{padding-inline:2px!important}
 
-/* Phone: view settings and the inspector share the same panel space. */
-#ve-phone-view-settings[hidden]{display:none}
-body.ve-host.ve-phone #host-side>.ve-panel-controls{
- display:flex!important;flex:0 0 auto;flex-wrap:nowrap!important;min-height:0;
- padding:3px 6px!important;gap:4px;position:relative
-}
-body.ve-host.ve-phone #host-side .ve-panel-controls>:is(button,a){
- min-height:44px!important;height:auto;width:auto;padding:4px 6px!important;font-size:12px!important
-}
-body.ve-host.ve-phone #host-side .ve-panel-controls>.ve-panel-settings{flex:1;min-width:0!important;line-height:1.15}
-body.ve-host.ve-phone #host-side .ve-panel-controls>.ve-panel-back{min-width:0!important}
-body.ve-host.ve-phone #host-side .ve-panel-controls>.ve-panel-hide{min-width:44px!important}
-body.ve-host.ve-phone #host-side>.ve-panel{padding:0 6px 8px;scroll-padding-top:50px;touch-action:auto}
+
+/* Phone menus and the scrolling inspector use separate space. */
 body.ve-host.ve-phone #host-side:has(.ve-phone-toolbar)>.ve-panel-controls{display:none!important}
+body.ve-host.ve-phone #host-side>.ve-panel:has(.ve-phone-toolbar){
+ display:flex;flex-direction:column;padding:0;overflow:hidden;touch-action:auto
+}
+.ve-phone-inspector{
+ flex:1;min-height:0;padding:0 6px 8px;overflow:auto;overscroll-behavior:contain;
+ scroll-padding-block:4px
+}
 body.ve-host.ve-phone #host-side .ve-sticky-head{position:static;display:block}
 .ve-phone-toolbar{
- position:sticky;top:0;z-index:7;display:flex;align-items:center;gap:5px;
- margin-inline:-6px;padding:3px 6px;background:#102334;border-bottom:1px solid #40617a
+ flex:none;padding:3px 6px;background:#102334;border-bottom:1px solid #40617a
 }
-.ve-phone-toolbar-scroll{
- display:flex;align-items:center;gap:4px;min-width:0;flex:1;
- overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;touch-action:pan-x;scrollbar-width:thin
+.ve-phone-primary,.ve-phone-context,.ve-phone-scroll{
+ display:flex;align-items:center;gap:4px;min-width:0
 }
-body.ve-host.ve-phone #host-side .ve-phone-toolbar :is(.ve-tabs,.ve-quick-actions){
- flex:none;display:flex;max-width:none;overflow:visible;margin:0!important;padding:0!important;gap:4px
+.ve-phone-context{margin-top:3px}
+.ve-phone-scroll{
+ flex:1;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;scrollbar-width:thin
 }
-body.ve-host.ve-phone #host-side .ve-phone-toolbar :is(button,a){
- flex:none;width:auto;min-width:44px;min-height:44px!important;padding:4px 9px;
- font-size:12px!important;white-space:nowrap
+.ve-phone-toolbar [hidden],#ve-phone-view-settings[hidden]{display:none!important}
+body.ve-host.ve-phone #host-side .ve-phone-toolbar button{
+ flex:none;min-width:40px;min-height:40px;padding:3px 7px;font-size:12px;white-space:nowrap
 }
-body.ve-host.ve-phone #host-side .ve-phone-toolbar [data-pane-tab]::before,
-body.ve-host.ve-phone #host-side .ve-phone-toolbar :is([data-action=undo],[data-action=redo])::after{content:none}
-.ve-phone-toolbar-scroll>.ve-panel-back{
- display:inline-flex;align-items:center;color:#eaf7ff;text-decoration:none;
- border:1px solid #52778e;border-radius:6px;background:#214153
+body.ve-host.ve-phone #host-side .ve-phone-toolbar [data-action=save]{font-weight:700}
+body.ve-host.ve-phone #host-side .ve-phone-toolbar [aria-pressed=true],
+body.ve-host.ve-phone #host-side .ve-phone-toolbar .ve-panel-settings[aria-expanded=true]{
+ background:#5fd6c1;color:#102334
 }
-.ve-phone-toolbar-scroll>.ve-panel-expand{display:none}
-.ve-panel-bottom .ve-phone-toolbar-scroll>.ve-panel-expand{display:block}
-body.ve-host.ve-phone.ve-panel-bottom .ve-host-layout>#host-side{min-height:132px}
+body.ve-host.ve-phone #host-side .ve-phone-toolbar :is(.ve-panel-settings,[data-touch-help],[data-structure-help]){
+ font-size:17px
+}
+body.ve-host.ve-phone #host-side .ve-phone-toolbar :is([data-action=undo],[data-action=redo]){
+ font-size:0
+}
+.ve-phone-toolbar [data-action=undo]::after{content:'↶';font-size:20px}
+.ve-phone-toolbar [data-action=redo]::after{content:'↷';font-size:20px}
+body.ve-host.ve-phone #host-side .ve-phone-toolbar .ve-panel-context{
+ flex:none;flex-direction:row;align-items:center;gap:3px;margin:0;
+ font-size:0;white-space:nowrap
+}
+body.ve-host.ve-phone #host-side .ve-phone-toolbar select{
+ width:auto;min-height:40px;padding:3px;font-size:16px
+}
+body.ve-host.ve-phone #host-side .ve-phone-toolbar .ve-panel-zoom{
+ display:flex!important;flex:0 0 162px;flex-direction:row;align-items:center;gap:5px;margin:0;font-size:0
+}
+.ve-phone-toolbar .ve-panel-zoom::before{content:'Масштаб';font-size:11px}
+body.ve-host.ve-phone #host-side .ve-phone-toolbar .ve-panel-zoom input{
+ flex:1;min-width:60px;min-height:40px;touch-action:none
+}
+.ve-phone-toolbar .ve-panel-zoom output{flex:none;font-size:11px}
+.ve-phone-toolbar .ve-open-data{background:#176e65;border-color:#68cfbd}
+body.ve-host.ve-phone.ve-panel-bottom .ve-host-layout>#host-side{min-height:min(172px,48%)}
 body.ve-host.ve-phone.ve-panel-bottom.ve-keyboard .ve-host-layout>#host-side{min-height:0}
 body.ve-host.ve-phone:not(.ve-panel-bottom) .ve-host-layout>#host-side{
  flex-basis:clamp(230px,var(--panel-width,26%),58%);width:clamp(230px,var(--panel-width,26%),58%);
@@ -195,30 +211,36 @@ body.ve-host.ve-phone:not(.ve-panel-bottom) .ve-host-layout>#host-side{
 body.ve-host.ve-phone.ve-panel-hidden>.ve-host-top{padding-right:max(8px,env(safe-area-inset-right))}
 body.ve-host.ve-phone #host-panel-open{position:static;width:auto;min-width:0;padding:0 12px;font-size:14px;margin-left:auto}
 body.ve-host.ve-phone #host-panel-open::before{content:none}
-body.ve-host.ve-phone.ve-phone-view-open #host-side>.ve-panel-controls{flex:1;min-height:0;align-content:start;flex-wrap:wrap!important;overflow:auto;overscroll-behavior:contain}
-body.ve-host.ve-phone.ve-phone-view-open #host-side>.ve-panel>:not(.ve-phone-toolbar,#ve-phone-view-settings,.ve-data-dialog){display:none!important}
+body.ve-host.ve-phone.ve-phone-view-open #host-side .ve-phone-inspector>:not(#ve-phone-view-settings,.ve-data-dialog){display:none!important}
 #ve-phone-view-settings{
- order:8;flex:0 0 100%;min-width:0;display:grid;gap:5px;padding:5px 0;
- grid-template-columns:repeat(auto-fit,minmax(min(115px,100%),1fr))
+ display:grid;gap:5px;padding:5px 0;
+ grid-template-columns:repeat(auto-fit,minmax(min(100px,100%),1fr))
 }
-body.ve-host.ve-phone #host-side #ve-phone-view-settings .ve-panel-context{
- display:grid!important;gap:3px;font-size:11px;min-width:0;margin:0;color:#deeffa
+body.ve-host.ve-phone #host-side #ve-phone-view-settings :is(button,a){
+ min-width:0;min-height:40px;padding:4px;font-size:12px;line-height:1.2
 }
-body.ve-host.ve-phone #host-side #ve-phone-view-settings select{font-size:16px;min-height:38px}
-body.ve-host.ve-phone #host-side #ve-phone-view-settings .ve-panel-zoom{
- display:flex!important;grid-column:1/-1;order:0;min-width:0!important;align-items:center;gap:7px;margin:0;font-size:0
+body.ve-host.ve-phone #host-side #ve-phone-view-settings .ve-panel-expand{display:none}
+body.ve-host.ve-phone.ve-panel-bottom #host-side #ve-phone-view-settings .ve-panel-expand{display:block}
+.ve-phone-inspector #ve-phone-view-settings>button[hidden]{display:none}
+.ve-phone-inspector #ve-phone-view-settings>a{
+ display:grid;place-items:center;color:#eaf7ff;text-decoration:none;border:1px solid #52778e;
+ border-radius:6px;background:#214153
 }
-#ve-phone-view-settings .ve-panel-zoom::before{content:'Масштаб';font-size:12px}
-#ve-phone-view-settings .ve-panel-zoom input{flex:1;min-width:0;width:auto;accent-color:#67d7cf}
-#ve-phone-view-settings .ve-panel-zoom output{flex:none;font-size:12px}
-body.ve-host.ve-phone #host-side #ve-phone-view-settings .ve-panel-fit{
- display:block!important;order:1;min-width:0;align-self:end
-}
-body.ve-host.ve-phone #host-side #ve-phone-view-settings>button{
- order:1;min-width:0;min-height:38px;font-size:12px
-}
-#ve-phone-view-settings>button[hidden]{display:none!important}
+#ve-phone-view-settings>.ve-parent-toggle{grid-column:1/-1}
 
-#ve-phone-view-settings>.ve-parent-toggle{grid-column:1/-1;order:2}
-body.ve-host.ve-phone #host-side .ve-sticky-head:not(:has(> :not(.ve-panel-head))){display:none}
-.ve-phone-toolbar .ve-open-data{background:#176e65;border-color:#68cfbd}
+/* Keep the resize handle inside the panel edge, clear of card and menu targets. */
+body.ve-host.ve-phone.ve-panel-bottom .ve-host-layout>#host-side{padding-top:8px}
+body.ve-host.ve-phone.ve-panel-bottom .ve-panel-divider{top:0;height:8px}
+body.ve-host.ve-phone.ve-panel-bottom .ve-panel-divider::before{top:2px}
+body.ve-host.ve-phone:not(.ve-panel-bottom) .ve-panel-divider{width:8px}
+body.ve-host.ve-phone:not(.ve-panel-bottom) .ve-panel-divider::before{left:2px}
+body.ve-host.ve-phone.ve-dock-right:not(.ve-panel-bottom) .ve-host-layout>#host-side{padding-left:max(8px,env(safe-area-inset-left))}
+body.ve-host.ve-phone.ve-dock-right:not(.ve-panel-bottom) .ve-panel-divider{left:0}
+body.ve-host.ve-phone:not(.ve-panel-bottom,.ve-dock-right) .ve-host-layout>#host-side{padding-right:max(8px,env(safe-area-inset-right))}
+body.ve-host.ve-phone:not(.ve-panel-bottom,.ve-dock-right) .ve-panel-divider{right:0}
+body.ve-host.ve-phone .ve-help-tip{pointer-events:none}
+@media(max-width:360px){
+ body.ve-host.ve-phone #host-side .ve-phone-primary,
+ body.ve-host.ve-phone #host-side .ve-phone-commands{gap:3px}
+ body.ve-host.ve-phone #host-side .ve-phone-primary button{min-width:36px;padding-inline:5px}
+}
