@@ -100,16 +100,32 @@ for(const k of properties){if(!geometryKeys.has(k))throw Error('Неизвест
 for(const [min,max]of [['minWidth','maxWidth'],['minHeight','maxHeight']]){const s=next.styles[dest];if(s[max]>0&&s[min]>s[max])throw Error('Минимальный размер получателя больше максимального')}
 return next;
 }
-function transaction(storage,entries,reason='Сохранение архитектуры V5'){
+function transaction(storage,entries,reason='Сохранение архитектуры V5',durableBackup=null){
 const before={};for(const [key,value]of Object.entries(entries)){if(value!==null&&typeof value!=='string')throw Error('Запись должна быть сериализована заранее');before[key]=storage.getItem(key)}
 const backup='zz-v5-editor-architecture-backup-'+Date.now()+'-'+Math.random().toString(36).slice(2,8);
 // If making the backup fails, do not begin writing any user settings.
-storage.setItem(backup,JSON.stringify({version:1,created:new Date().toISOString(),reason,entries:before}));
-try{for(const [key,value]of Object.entries(entries)){if(value===null)storage.removeItem(key);else storage.setItem(key,value)}}catch(error){for(const [key,value]of Object.entries(before)){if(value===null)storage.removeItem(key);else storage.setItem(key,value)}throw error}
-return backup;
+if(!durableBackup)storage.setItem(backup,JSON.stringify({version:1,created:new Date().toISOString(),reason,entries:before}));
+try{for(const [key,value]of Object.entries(entries)){if(value===null)storage.removeItem(key);else storage.setItem(key,value)}}catch(error){for(const key of Object.keys(before))if(storage.getItem(key)!==before[key])storage.removeItem(key);for(const [key,value]of Object.entries(before)){if(value===null)storage.removeItem(key);else storage.setItem(key,value)}throw error}
+return durableBackup||backup;
 }
+// Backups have their own database: saving must not duplicate a workspace inside
+// localStorage's small quota. Existing local backups are never removed.
+function backupDatabase(){return new Promise((resolve,reject)=>{const request=scope.indexedDB.open('zetta-v5-editor-recovery',1);request.onupgradeneeded=()=>request.result.createObjectStore('backups',{keyPath:'id',autoIncrement:true});request.onsuccess=()=>resolve(request.result);request.onerror=()=>reject(request.error)})}
+async function archive(snapshot){const db=await backupDatabase();try{return await new Promise((resolve,reject)=>{const tx=db.transaction('backups','readwrite'),request=tx.objectStore('backups').add(snapshot);tx.oncomplete=()=>resolve(request.result);tx.onabort=()=>reject(tx.error||Error('Не удалось создать резервную копию'));tx.onerror=()=>{}})}finally{db.close()}}
+let saving=false;
+async function saveTransaction(storage,entries,reason='Сохранение архитектуры V5'){
+if(saving)throw Error('Сохранение уже выполняется');saving=true;
+try{const before={};for(const [key,value]of Object.entries(entries)){if(value!==null&&typeof value!=='string')throw Error('Запись должна быть сериализована заранее');before[key]=storage.getItem(key)}
+const snapshot={schema:'zetta-zone/editor-backup',version:1,created:new Date().toISOString(),reason,entries:before};
+const id=await archive(snapshot);
+// Do not overwrite a change made by another tab while the backup was written.
+for(const [key,value]of Object.entries(before))if(storage.getItem(key)!==value)throw Error('Настройки изменены в другой вкладке. Экспортируйте текущие изменения перед повторным сохранением');
+return transaction(storage,entries,reason,'indexeddb:'+id);
+}finally{saving=false}}
+async function recoveryBackup(storage){let durable=null;try{const db=await backupDatabase();try{durable=await new Promise((resolve,reject)=>{const tx=db.transaction('backups'),request=tx.objectStore('backups').openCursor(null,'prev');request.onsuccess=()=>resolve(request.result?.value||null);request.onerror=()=>reject(request.error)})}finally{db.close()}}catch{}
+const local=latestBackup(storage);return !local||durable&&durable.created>=local.created?durable:local}
 function latestBackup(storage){let found=null,time=-1;for(let i=0;i<storage.length;i++){const key=storage.key(i);if(!key.startsWith('zz-v5-editor-architecture-backup-'))continue;try{const item=JSON.parse(storage.getItem(key));const created=Number(key.split('backup-')[1].split('-')[0]);if(item?.entries&&created>=time){found=item;time=created}}catch{}}return found}
-const api={appearanceKeys,geometryKeys,groups,pick,styleMap,inferRole,legacyField,normalize,migrate,copyGeometry,copyProperties,transaction,latestBackup};
+const api={appearanceKeys,geometryKeys,groups,pick,styleMap,inferRole,legacyField,normalize,migrate,copyGeometry,copyProperties,transaction,latestBackup,saveTransaction,recoveryBackup,archive};
 if(typeof module!=='undefined')module.exports=api;scope.V5Architecture=api;
 if(typeof window==='undefined')return;
 let cache=null;
